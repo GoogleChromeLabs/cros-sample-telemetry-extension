@@ -1,0 +1,56 @@
+/*
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.app-routine-card {
+  padding: 2rem;
+  border-radius: 3px;
+  background-color: var(--app-dashboard-card-background);
+  border: 1px solid var(--app-dashboard-card-border-color);
+  font-size: 18px;
+  transition: all 200ms ease-in-out;
+}
+
+.app-routine-card .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-routine-card header {
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.app-routine-card .actions {
+  display: flex;
+}
+
+.app-routine-card .actions button:not(:last-child) {
+  margin-right: 1rem;
+}
+
+.routine-action-btn {
+  padding-left: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.routine-action-btn mat-icon {
+  margin-right: 0.5rem;
+}
+
+.app-routine-card .routine-details {
+  margin-top: 2rem;
+}
+
+.app-routine-card .routine-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.app-routine-card .routine-details ul li {
+  margin-bottom: 1rem;
+}

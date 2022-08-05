@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+cd diagnostics-app
+npm run script:ci
+cd ..
+
+cd diagnostics-extension
+npm run script:ci
+cd ..

@@ -1,0 +1,46 @@
+/*
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+mat-sidenav.mat-drawer {
+  background-color: var(--app-sidenav-background);
+  color: var(--app-sidenav-color);
+}
+
+mat-sidenav.mat-drawer-side {
+  border-right: 1px solid var(--app-header-border-bottom-color);
+}
+
+.sidenav .mat-toolbar {
+  background-color: var(--app-sidenav-background);
+  color: var(--app-sidenav-color);
+}
+
+.sidenav .mat-list-base .mat-list-item {
+  color: var(--app-sidenav-color);
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-drawer-content {
+  background-color: var(--app-content-background);
+  color: var(--app-content-color);
+}
+
+.app-content-container {
+  padding: 2rem 3rem;
+}

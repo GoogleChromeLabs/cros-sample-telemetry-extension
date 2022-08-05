@@ -1,0 +1,27 @@
+/*
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.device-list {
+  list-style: none;
+  padding: 0;
+}
+
+.device-list:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.device-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.device-list-item:last-child {
+  margin: 0;
+}
+
+.device-list-item span {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
