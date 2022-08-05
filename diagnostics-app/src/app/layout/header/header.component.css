@@ -1,0 +1,18 @@
+/*
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.nav-spacer {
+  flex: 1 1 auto;
+}
+
+.app-header {
+  background-color: var(--app-header-background);
+  border-bottom: 1px solid var(--app-header-border-bottom-color);
+  color: var(--app-header-color);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}

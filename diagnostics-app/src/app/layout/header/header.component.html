@@ -1,0 +1,17 @@
+<!--
+ Copyright 2021 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<mat-toolbar color="primary" class="app-header">
+  <button id="btnToggleDrawer" mat-icon-button (click)="onToggleDrawer()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>ChromeOS Diagnostics</span>
+  <span class="nav-spacer"></span>
+  <button id="btnToggleTheme" mat-icon-button (click)="onToggleTheme()">
+    <mat-icon id="iconTheme" *ngIf="isDarkModeActivated()">light_mode</mat-icon>
+    <mat-icon id="iconTheme" *ngIf="!isDarkModeActivated()">dark_mode</mat-icon>
+  </button>
+</mat-toolbar>

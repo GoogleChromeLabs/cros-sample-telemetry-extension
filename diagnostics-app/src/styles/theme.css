@@ -1,0 +1,69 @@
+/*
+ * Copyright 2021 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+.light {
+  --color-black: #000;
+  --color-dark-grey: #1c1c1c;
+  --color-light-grey: #2c2c2c;
+  --color-lighter-grey: #d3d3d3;
+  --color-white: #fff;
+  --color-fc: #f7f7f7;
+  --color-blue: #4c8bf5;
+
+  --app-background: var(--color-white);
+
+  --app-header-background: var(--color-white);
+  --app-header-border-bottom-color: var(--color-lighter-grey);
+  --app-header-color: var(--color-light-grey);
+
+  --app-sidenav-background: var(--color-white);
+  --app-sidenav-border-right-color: var(--color-lighter-grey);
+  --app-sidenav-icon-color: var(--color-darker-white);
+  --app-sidenav-item-active-icon-color: var(--color-blue);
+  --app-sidenav-item-active-color: var(--color-black);
+
+  --app-content-background: var(--color-white);
+  --app-content-color: var(--color-dark-grey);
+
+  --app-dashboard-card-background: var(--color-white);
+  --app-dashboard-card-color: var(--color-black);
+  --app-dashboard-card-border-color: #ccc;
+}
+
+.dark {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-dark: #121212;
+  --color-dark-grey: #1c1c1c;
+  --color-light-grey: #292929;
+  --color-lighter-grey: #cbcaca;
+  --color-darker-white: #989898;
+  --color-dark-white: #e3e3e3;
+  --color-blue: #4c8bf5;
+
+  --color-white: #fff;
+
+  --color-blue: rgb(76, 139, 245);
+
+  --app-header-background: var(--color-light-grey);
+  --app-header-border-bottom-color: var(--color-dark-grey);
+  --app-header-color: var(--color-white);
+
+  --app-sidenav-background: var(--color-light-grey);
+  --app-sidenav-color: var(--color-dark-white);
+  --app-sidenav-subheader-color: var(--color-lighter-grey);
+  --app-sidenav-icon-color: var(--color-darker-white);
+  --app-sidenav-item-active-color: var(--color-white);
+  --app-sidenav-item-active-icon-color: var(--color-blue);
+  --app-sidenav-item-active-color: var(--color-white);
+
+  --app-content-background: var(--color-dark);
+  --app-content-color: var(--color-white);
+
+  --app-dashboard-card-background: var(--color-dark-grey);
+  --app-dashboard-card-color: var(--color-white);
+  --app-dashboard-card-border-color: #333;
+}
