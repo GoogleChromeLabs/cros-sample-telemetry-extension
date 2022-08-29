@@ -23,6 +23,14 @@ chrome.runtime.onInstalled.addListener(
 );
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
+  // check if the senders origin contains the `cros-sample-telemetry-extension`
+  // path and block the request if not.
+  const path = "googlechromelabs.github.io/cros-sample-telemetry-extension";
+  if (!sender.url?.startsWith(path)) {
+    console.log("This PWA is not allowed to access the extension");
+    return;
+  }
+
   console.log(req, sender);
   switch (req.type) {
     case RequestType.TELEMETRY:
