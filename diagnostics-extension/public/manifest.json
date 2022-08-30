@@ -1,6 +1,6 @@
 {
   "name": "Chrome OS Diagnostics Companion Extension",
-  "version": "0.1",
+  "version": "1.8.0",
   "description": "The companion extension for the ChromeOS Diagnostics App.",
   "manifest_version": 3,
   "icons": {
@@ -14,6 +14,6 @@
     "service_worker": "sw.js"
   },
   "externally_connectable": {
-    "matches": ["*://localhost/*"]
+    "matches": ["*://googlechromelabs.github.io/*"]
   }
 }
