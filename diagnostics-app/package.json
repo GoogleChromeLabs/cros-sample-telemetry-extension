@@ -64,7 +64,7 @@
     "typescript": "Core typescript library"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.18",
+    "@angular-devkit/build-angular": "~14.2.1",
     "@angular/cli": "~12.0.2",
     "@angular/compiler-cli": "~12.0.2",
     "@types/chrome": "^0.0.148",
