@@ -1,8 +1,9 @@
 {
   "name": "Chrome OS Diagnostics Companion Extension",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "The companion extension for the ChromeOS Diagnostics App.",
   "manifest_version": 3,
+  "chromeos_system_extension": {},
   "icons": {
     "16": "images/favicon-16x16.png",
     "32": "images/favicon-32x32.png",
@@ -10,6 +11,11 @@
     "128": "images/favicon-120x120.png",
     "192": "images/favicon-192x192.png"
   },
+  "permissions": [
+    "os.diagnostics",
+    "os.telemetry",
+    "os.telemetry.serial_number"
+  ],
   "background": {
     "service_worker": "sw.js"
   },
