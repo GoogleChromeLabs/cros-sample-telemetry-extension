@@ -1,4 +1,4 @@
-# ChromeOS Diagnotics Companion Extension
+# ChromeOS Diagnostics Companion Extension
 
 ## Development Instructions
 
