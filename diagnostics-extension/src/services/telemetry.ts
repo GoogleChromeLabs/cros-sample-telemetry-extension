@@ -76,6 +76,9 @@ export class TelemetryServiceImpl extends TelemetryService {
   async getOemData(): Promise<OemData> {
     return dpsl.telemetry.getOemData();
   }
+  async getCpuInfo(): Promise<CpuInfo> {
+    return dpsl.telemetry.getCpuInfo();
+  }
 }
 
 /**
