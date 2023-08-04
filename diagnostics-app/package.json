@@ -31,22 +31,22 @@
     "zone.js": "zone.js is essential to Angular for handling change detections. It allows Angular to know when the UI needs to be refreshed"
   },
   "dependencies": {
-    "@angular/animations": "^15.2.9",
-    "@angular/cdk": "^15.2.9",
-    "@angular/common": "^15.2.9",
-    "@angular/compiler": "^15.2.9",
-    "@angular/core": "^15.2.9",
-    "@angular/forms": "^15.2.9",
-    "@angular/material": "^15.2.9",
-    "@angular/platform-browser": "^15.2.9",
-    "@angular/platform-browser-dynamic": "^15.2.9",
-    "@angular/router": "^15.2.9",
-    "@angular/service-worker": "^15.2.9",
+    "@angular/animations": "^16.1.8",
+    "@angular/cdk": "^16.1.7",
+    "@angular/common": "^16.1.8",
+    "@angular/compiler": "^16.1.8",
+    "@angular/core": "^16.1.8",
+    "@angular/forms": "^16.1.8",
+    "@angular/material": "^16.1.7",
+    "@angular/platform-browser": "^16.1.8",
+    "@angular/platform-browser-dynamic": "^16.1.8",
+    "@angular/router": "^16.1.8",
+    "@angular/service-worker": "^16.1.8",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "lit": "^2.3.1",
     "rxjs": "~7.5.6",
     "tslib": "^2.4.0",
-    "zone.js": "~0.11.8"
+    "zone.js": "~0.13.1"
   },
   "//devDependencies": {
     "@angular-devkit/build-angular": "This package contains Architect builders used to build and test Angular applications and libraries",
@@ -63,9 +63,9 @@
     "typescript": "Core typescript library"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^15.2.9",
-    "@angular/cli": "^15.2.9",
-    "@angular/compiler-cli": "^15.2.9",
+    "@angular-devkit/build-angular": "^16.1.7",
+    "@angular/cli": "^16.1.7",
+    "@angular/compiler-cli": "^16.1.8",
     "@types/chrome": "^0.0.148",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^18.10.0",
