@@ -41,6 +41,9 @@
 */testem.log
 */typings
 
+# Cache
+*/.angular
+
 # System Files
 */.DS_Store
 */Thumbs.db
