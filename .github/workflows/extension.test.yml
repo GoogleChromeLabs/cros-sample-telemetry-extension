@@ -16,7 +16,7 @@ jobs:
         working-directory: diagnostics-extension
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [18.14]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
