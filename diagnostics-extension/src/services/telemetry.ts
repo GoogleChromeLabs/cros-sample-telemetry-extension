@@ -6,8 +6,6 @@
  * @fileoverview Classes related to telemetry
  */
 
-import { dpsl } from 'cros-dpsl-js';
-
 import {
   BacklightInfo,
   BatteryInfo,
@@ -70,11 +68,26 @@ export abstract class TelemetryService {
  * @extends TelemetryService
  */
 export class TelemetryServiceImpl extends TelemetryService {
+  async getBatteryInfo(): Promise<BatteryInfo> {
+    return (chrome as any).os.telemetry.getBatteryInfo();
+  }
   async getCachedVpdInfo(): Promise<VpdInfo> {
-    return dpsl.telemetry.getVpdInfo();
+    return (chrome as any).os.telemetry.getVpdInfo();
+  }
+  async getCpuInfo(): Promise<CpuInfo> {
+    return (chrome as any).os.telemetry.getCpuInfo();
+  }
+  async getMemoryInfo(): Promise<MemoryInfo> {
+    return (chrome as any).os.telemetry.getMemoryInfo();
+  }
+  async getNonRemovableBlockDevicesInfo(): Promise<BlockDeviceInfo> {
+    return (chrome as any).os.telemetry.getNonRemovableBlockDevicesInfo();
   }
   async getOemData(): Promise<OemData> {
-    return dpsl.telemetry.getOemData();
+    return (chrome as any).os.telemetry.getOemData();
+  }
+  async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
+    return (chrome as any).os.telemetry.getStatefulPartitionInfo();
   }
 }
 
