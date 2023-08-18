@@ -13,6 +13,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "npm": ">=9.2.0",
+    "node": ">=18.14.0"
+  },
   "_devDependencies": {
     "@typescript-eslint/eslint-plugin": "TypeScript plugin for eslint",
     "@typescript-eslint/parser": "^Typescript parser for eslint",
