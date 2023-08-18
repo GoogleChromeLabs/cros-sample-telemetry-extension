@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.145",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.5.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "cros-dpsl-js": "^1.3.1",
