@@ -11,6 +11,10 @@
     "script:ci": "sh ./scripts/ci.sh"
   },
   "private": true,
+  "engines": {
+    "npm": ">=9.2.0",
+    "node": ">=18.14.0"
+  },
   "//dependencies": {
     "@angular/animations": "One of the main modules required for animations in Angular, widely used by @angular/material",
     "@angular/cdk": "The Component Dev Kit (CDK) is a set of behavior primitives for building UI components",
