@@ -1,0 +1,16 @@
+{
+  "name": "Diagnostics App IWA", // Displayed name instead of isolated-app://gibberish URL
+  "id": "/",            // Must be "/"
+  "scope": "/",         // Must be "/"
+  "start_url": "/",     // Must be non-empty and refer to a resource in the bundle
+  "version": "0.1.0",   // Compulsory to be non-null.
+  "display": "standalone", // Should be one of the windowed ones
+  "icons": [               // Must have at least one valid entry
+    {
+      "src": "/icon.png", // Note, this file should also exist.
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ]
+}
