@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview DashboardModule defines module for the dashboard feature.
+ * @fileoverview TelemetryModule defines module for the telemetry feature.
  * Imported by app.module.ts
  */
 
@@ -25,4 +25,4 @@ import { CpuComponent } from './cards/cpu/cpu.component';
   imports: [CommonModule, SharedModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class DashboardModule {}
+export class TelemetryModule {}

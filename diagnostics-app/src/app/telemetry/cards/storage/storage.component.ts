@@ -3,8 +3,8 @@
 // found in the LICENSE file.
 
 /**
- * @fileoverview Defines the storage card component for dashboard.
- * Imported by dashboard.module.ts
+ * @fileoverview Defines the storage card component for telemetry.
+ * Imported by telemetry.module.ts
  */
 
 import { Component, OnInit } from '@angular/core';

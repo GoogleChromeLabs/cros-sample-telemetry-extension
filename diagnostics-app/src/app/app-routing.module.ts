@@ -9,14 +9,14 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
+import { DashboardComponent } from './telemetry/dashboard/dashboard.component';
 import { BatteryComponent } from './diagnostics/battery/battery.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', redirectTo: '/telemetry', pathMatch: 'full' },
+  { path: 'telemetry', component: DashboardComponent },
   { path: 'diagnostics/battery', component: BatteryComponent },
-  { path: '**', redirectTo: '/dashboard' },
+  { path: '**', redirectTo: '/telemetry' },
 ];
 
 @NgModule({
