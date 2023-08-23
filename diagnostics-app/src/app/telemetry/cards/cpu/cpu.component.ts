@@ -8,9 +8,29 @@
  */
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CpuInfo, LogicalCpuInfo } from '@common/dpsl';
+import { CpuInfo, LogicalCpuInfo, CpuArchitectureEnum } from '@common/dpsl';
 import { TelemetryService } from 'src/app/core/services/telemetry.service';
 import refreshIntervals from '../../../core/config/data-refresh-intervals';
+
+const defaultCpuInfo: CpuInfo = {
+  numTotalThreads: 0,
+  architecture: CpuArchitectureEnum.unknown,
+  physicalCpus: [
+    {
+      modelName: 'unknown',
+      logicalCpus: [
+        {
+          maxClockSpeedKhz: 0,
+          scalingMaxFrequencyKhz: 0,
+          scalingCurrentFrequencyKhz: 0,
+          idleTimeMs: 0,
+          cStates: [],
+          coreId: 0,
+        }
+      ]
+    }
+  ],
+}
 
 @Component({
   selector: 'app-cpu-card',
@@ -20,7 +40,7 @@ import refreshIntervals from '../../../core/config/data-refresh-intervals';
 export class CpuComponent implements OnInit, OnDestroy {
   private _refreshIntervalMs: number = refreshIntervals.Cpu;
   private _intervalId!: number;
-  private _cpuData!: CpuInfo;
+  private _cpuData: CpuInfo = defaultCpuInfo;
 
   private _updateData() {
     this.telemetryService.fetchCpuInfo().then((value: CpuInfo) => {
