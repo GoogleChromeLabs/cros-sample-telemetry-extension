@@ -13,12 +13,11 @@ import { TelemetryService } from 'src/app/core/services/telemetry.service';
 import refreshIntervals from '../../../core/config/data-refresh-intervals';
 
 const defaultMemoryData: MemoryInfo = {
-  availableMemoryKib: 0,
-  freeMemoryKib: 0,
+  totalMemoryKiB: 0,
+  freeMemoryKiB: 0,
+  availableMemoryKiB: 0,
   pageFaultsSinceLastBoot: '0',
-  totalMemoryKib: 0,
 };
-
 @Component({
   selector: 'app-memory-card',
   templateUrl: './memory.component.html',
@@ -54,12 +53,12 @@ export class MemoryComponent implements OnInit, OnDestroy {
   }
 
   get totalMemoryGiB(): number {
-    return this._convertKiBtoGiB(this.memoryData.totalMemoryKib);
+    return this._convertKiBtoGiB(this.memoryData.totalMemoryKiB);
   }
 
   get usedMemoryGiB(): number {
     return this._convertKiBtoGiB(
-      this.memoryData.totalMemoryKib - this.memoryData.freeMemoryKib
+      this.memoryData.totalMemoryKiB - this.memoryData.freeMemoryKiB
     );
   }
 

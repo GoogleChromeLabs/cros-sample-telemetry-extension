@@ -59,9 +59,9 @@ export const fanInfo = (): FanInfo => [
 ];
 
 export const memoryInfo = (): MemoryInfo => ({
-  totalMemoryKib: 16270856,
-  freeMemoryKib: 13067496,
-  availableMemoryKib: 14810656,
+  totalMemoryKiB: 16270856,
+  freeMemoryKiB: 13067496,
+  availableMemoryKiB: 14810656,
   pageFaultsSinceLastBoot: '62076622',
 });
 
