@@ -13,17 +13,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { SideNavItemComponent } from './layout/side-nav/side-nav-item/side-nav-item.component';
-import { SideNavComponent } from './layout/side-nav/side-nav.component';
+import { CoreModule } from './core/core.module';
 import { DiagnosticsModule } from './diagnostics/diagnostics.module';
+import { HeaderComponent } from './layout/header/header.component';
+import { SharedModule } from './shared/shared.module';
+import { SideNavComponent } from './layout/side-nav/side-nav.component';
+import { SideNavItemComponent } from './layout/side-nav/side-nav-item/side-nav-item.component';
+import { TelemetryModule } from './telemetry/telemetry.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +43,7 @@ import { DiagnosticsModule } from './diagnostics/diagnostics.module';
     }),
     CoreModule,
     SharedModule,
-    DashboardModule,
+    TelemetryModule,
     DiagnosticsModule
   ],
   providers: [],
