@@ -65,6 +65,16 @@ export interface VpdInfo {
 }
 
 /**
+ * Types of CPU architecture
+ */
+export const enum CpuArchitectureEnum {
+  unknown,
+  x86_64,
+  aarch64,
+  armv7l
+};
+
+/**
  * Information about a CPU's C-states
  */
 export interface CpuCStateInfo {
@@ -80,7 +90,8 @@ export interface LogicalCpuInfo {
   scalingMaxFrequencyKhz: number;
   scalingCurrentFrequencyKhz: number;
   idleTimeMs: number;
-  acStates: CpuCStateInfo[];
+  cStates: CpuCStateInfo[];
+  coreId: number;
 }
 
 /**
@@ -96,8 +107,8 @@ export interface PhysicalCpuInfo {
  */
 export interface CpuInfo {
   numTotalThreads: number;
-  architecture: string;
-  physicalCpus: Array<PhysicalCpuInfo>;
+  architecture: CpuArchitectureEnum;
+  physicalCpus: PhysicalCpuInfo[];
 }
 
 /**
