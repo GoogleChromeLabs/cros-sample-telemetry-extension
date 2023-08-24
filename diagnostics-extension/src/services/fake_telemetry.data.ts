@@ -11,6 +11,7 @@ import {
   BatteryInfo,
   BlockDeviceInfo,
   BluetoothInfo,
+  CpuArchitectureEnum,
   CpuInfo,
   FanInfo,
   MemoryInfo,
@@ -115,13 +116,14 @@ export const batteryInfo = (): BatteryInfo => ({
 
 export const cpuInfo = (): CpuInfo => ({
   numTotalThreads: 8,
-  architecture: 'x86_64',
+  architecture: CpuArchitectureEnum.x86_64,
   physicalCpus: [
     {
       modelName: 'Intel(R) Core(TM) i7-10610U CPU @ 1.80GHz',
       logicalCpus: [
         {
-          acStates: [
+          coreId: 0,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -165,7 +167,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 1,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -209,7 +212,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 2,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -253,7 +257,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 3,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -297,7 +302,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 4,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -341,7 +347,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 5,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -385,7 +392,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 6,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
@@ -429,7 +437,8 @@ export const cpuInfo = (): CpuInfo => ({
           maxClockSpeedKhz: 4900000,
         },
         {
-          acStates: [
+          coreId: 7,
+          cStates: [
             {
               name: 'C7s',
               timeInStateSinceLastBootUs: 390138,
