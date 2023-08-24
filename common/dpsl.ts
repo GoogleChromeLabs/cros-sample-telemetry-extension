@@ -116,9 +116,9 @@ export type FanInfo = FanInfoObject[];
  * Response message containing Memory Info
  */
 export interface MemoryInfo {
-  totalMemoryKib: number;
-  freeMemoryKib: number;
-  availableMemoryKib: number;
+  totalMemoryKiB: number;
+  freeMemoryKiB: number;
+  availableMemoryKiB: number;
   pageFaultsSinceLastBoot: string;
 }
 
