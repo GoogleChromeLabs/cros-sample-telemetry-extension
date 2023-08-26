@@ -13,6 +13,7 @@ import {
   NavigationItem,
   TELEMETRY_NAV_DATA,
   DIAGNOSTICS_NAV_DATA,
+  EVENTS_NAV_DATA,
 } from './side-nav.data';
 
 @Component({
@@ -23,7 +24,8 @@ import {
 export class SideNavComponent implements OnInit {
   private _navLists: NavigationItem[] = [
     TELEMETRY_NAV_DATA,
-    DIAGNOSTICS_NAV_DATA
+    DIAGNOSTICS_NAV_DATA,
+    EVENTS_NAV_DATA,
   ];
 
   get navLists() {

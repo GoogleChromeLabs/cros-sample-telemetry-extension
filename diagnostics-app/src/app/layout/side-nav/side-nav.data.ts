@@ -21,3 +21,8 @@ export const DIAGNOSTICS_NAV_DATA: NavigationItem = {
   name: 'Diagnostics',
   link: '/diagnostics'
 };
+
+export const EVENTS_NAV_DATA: NavigationItem = {
+  name: 'Events',
+  link: '/events'
+};
