@@ -15,7 +15,7 @@ import { BatteryComponent } from './diagnostics/battery/battery.component';
 const routes: Routes = [
   { path: '', redirectTo: '/telemetry', pathMatch: 'full' },
   { path: 'telemetry', component: DashboardComponent },
-  { path: 'diagnostics/battery', component: BatteryComponent },
+  { path: 'diagnostics', component: BatteryComponent },
   { path: '**', redirectTo: '/telemetry' },
 ];
 
