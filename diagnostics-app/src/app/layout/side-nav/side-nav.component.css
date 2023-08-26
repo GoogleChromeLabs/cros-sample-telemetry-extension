@@ -10,5 +10,22 @@
 
 .mat-subheader {
   color: var(--app-sidenav-subheader-color);
-  font-size: 16px;
+  font-size: 20px;
+}
+
+.menu-navigation-button {
+  height: 40px;
+  font-size: 18px;
+  font-weight: 400;
+  padding-left: 10px;
+}
+
+.menu-navigation-button:hover {
+  color: var(--app-sidenav-item-active-color);
+  cursor: pointer;
+}
+
+.active {
+  font-weight: 500;
+  color: var(--app-sidenav-item-active-color);
 }

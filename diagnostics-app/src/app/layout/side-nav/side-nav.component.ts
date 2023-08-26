@@ -10,8 +10,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
-  NavigationList,
-  DASHBOARD_NAV_DATA,
+  NavigationItem,
+  TELEMETRY_NAV_DATA,
   DIAGNOSTICS_NAV_DATA,
 } from './side-nav.data';
 
@@ -21,9 +21,9 @@ import {
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit {
-  private _navLists: NavigationList[] = [
-    DASHBOARD_NAV_DATA,
-    DIAGNOSTICS_NAV_DATA,
+  private _navLists: NavigationItem[] = [
+    TELEMETRY_NAV_DATA,
+    DIAGNOSTICS_NAV_DATA
   ];
 
   get navLists() {

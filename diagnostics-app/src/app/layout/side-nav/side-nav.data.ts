@@ -8,30 +8,16 @@
  */
 
 export interface NavigationItem {
-  icon: string;
-  link: string;
   name: string;
+  link: string;
 }
 
-export interface NavigationList {
-  header?: string;
-  items: NavigationItem[];
-  hasHeader: boolean;
-}
-
-export const DASHBOARD_NAV_DATA: NavigationList = {
-  hasHeader: false,
-  items: [{ icon: 'laptop_chromebook', link: '/dashboard', name: 'Dashboard' }],
+export const TELEMETRY_NAV_DATA: NavigationItem = {
+  name: 'Telemetry',
+  link: '/telemetry'
 };
 
-export const DIAGNOSTICS_NAV_DATA: NavigationList = {
-  hasHeader: true,
-  header: 'Diagnostics',
-  items: [
-    {
-      icon: 'battery_full',
-      link: '/diagnostics/battery',
-      name: 'Battery',
-    },
-  ],
+export const DIAGNOSTICS_NAV_DATA: NavigationItem = {
+  name: 'Diagnostics',
+  link: '/diagnostics'
 };

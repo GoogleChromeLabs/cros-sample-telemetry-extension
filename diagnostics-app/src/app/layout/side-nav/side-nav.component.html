@@ -5,13 +5,14 @@
 -->
 
 <div *ngFor="let navList of navLists">
-  <div *ngIf="navList.hasHeader" mat-subheader>{{ navList.header }}</div>
-  <mat-nav-list>
-    <app-side-nav-item
-      *ngFor="let navItem of navList.items"
-      [icon]="navItem.icon"
-      [link]="navItem.link"
-      [name]="navItem.name"
-    ></app-side-nav-item>
-  </mat-nav-list>
+  <div mat-subheader>
+    <div
+      class="menu-navigation-button"
+      routerLink={{navList.link}}
+      routerLinkActive="active">
+      {{ navList.name }}
+    </div>
+  </div>
 </div>
+<!-- code below is added for the style of sidebar -->
+<div><mat-nav-list></mat-nav-list></div> 
