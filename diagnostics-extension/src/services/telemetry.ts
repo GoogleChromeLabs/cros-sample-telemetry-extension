@@ -7,16 +7,12 @@
  */
 
 import {
-  BacklightInfo,
   BatteryInfo,
   BlockDeviceInfo,
-  BluetoothInfo,
   CpuInfo,
-  FanInfo,
   MemoryInfo,
   OemData,
   StatefulPartitionInfo,
-  TimezoneInfo,
   VpdInfo,
 } from '@common/dpsl';
 import * as fakeData from './fake_telemetry.data';
@@ -28,22 +24,13 @@ import { ResponseErrorInfoMessage } from '@common/message';
  * service to fetch system telemetry data
  */
 export abstract class TelemetryService {
-  getBacklightInfo(): Promise<BacklightInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
   getBatteryInfo(): Promise<BatteryInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getBluetoothInfo(): Promise<BluetoothInfo> {
     return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
   }
   getCachedVpdInfo(): Promise<VpdInfo> {
     return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
   }
   getCpuInfo(): Promise<CpuInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getFanInfo(): Promise<FanInfo> {
     return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
   }
   getMemoryInfo(): Promise<MemoryInfo> {
@@ -56,9 +43,6 @@ export abstract class TelemetryService {
     return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
   }
   getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getTimezoneInfo(): Promise<TimezoneInfo> {
     return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
   }
 }
@@ -96,23 +80,14 @@ export class TelemetryServiceImpl extends TelemetryService {
  * @extends TelemetryService
  */
 export class FakeTelemetryService extends TelemetryService {
-  async getBacklightInfo(): Promise<BacklightInfo> {
-    return fakeData.backlightInfo();
-  }
   async getBatteryInfo(): Promise<BatteryInfo> {
     return fakeData.batteryInfo();
-  }
-  async getBluetoothInfo(): Promise<BluetoothInfo> {
-    return fakeData.bluetoothInfo();
   }
   async getCachedVpdInfo(): Promise<VpdInfo> {
     return fakeData.vpdInfo();
   }
   async getCpuInfo(): Promise<CpuInfo> {
     return fakeData.cpuInfo();
-  }
-  async getFanInfo(): Promise<FanInfo> {
-    return fakeData.fanInfo();
   }
   async getMemoryInfo(): Promise<MemoryInfo> {
     return fakeData.memoryInfo();
@@ -125,9 +100,6 @@ export class FakeTelemetryService extends TelemetryService {
   }
   async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
     return fakeData.statefulPartitionInfo();
-  }
-  async getTimezoneInfo(): Promise<TimezoneInfo> {
-    return fakeData.timezoneInfo();
   }
 }
 

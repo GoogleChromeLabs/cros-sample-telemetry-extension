@@ -28,24 +28,16 @@ const telemetryService = TelemetryServiceProvider.getTelemetryService();
 
 const mapInfoTypeToMethod = (infoType: TelemetryInfoType) => {
   switch (infoType) {
-    case TelemetryInfoType.BACKLIGHT:
-      return telemetryService.getBacklightInfo;
     case TelemetryInfoType.BATTERY:
       return telemetryService.getBatteryInfo;
     case TelemetryInfoType.BLOCK_DEVICE:
       return telemetryService.getNonRemovableBlockDevicesInfo;
-    case TelemetryInfoType.BLUETOOTH:
-      return telemetryService.getBluetoothInfo;
     case TelemetryInfoType.CPU:
       return telemetryService.getCpuInfo;
-    case TelemetryInfoType.FAN:
-      return telemetryService.getFanInfo;
     case TelemetryInfoType.MEMORY:
       return telemetryService.getMemoryInfo;
     case TelemetryInfoType.STATEFUL_PARTITION:
       return telemetryService.getStatefulPartitionInfo;
-    case TelemetryInfoType.TIMEZONE:
-      return telemetryService.getTimezoneInfo;
     case TelemetryInfoType.VPD:
       return telemetryService.getCachedVpdInfo;
     default:

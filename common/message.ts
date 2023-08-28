@@ -16,15 +16,11 @@ export const enum RequestType {
 }
 
 export const enum TelemetryInfoType {
-  BACKLIGHT = 'backlight',
   BATTERY = 'battery',
   BLOCK_DEVICE = 'block-device',
-  BLUETOOTH = 'bluetooth',
   CPU = 'cpu',
-  FAN = 'fan',
   MEMORY = 'memory',
   STATEFUL_PARTITION = 'stateful-partition',
-  TIMEZONE = 'timezone',
   VPD = 'vpd',
 }
 

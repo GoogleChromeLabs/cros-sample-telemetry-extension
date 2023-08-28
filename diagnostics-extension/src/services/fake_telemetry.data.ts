@@ -7,57 +7,21 @@
  */
 
 import {
-  BacklightInfo,
   BatteryInfo,
   BlockDeviceInfo,
-  BluetoothInfo,
   CpuArchitectureEnum,
   CpuInfo,
-  FanInfo,
   MemoryInfo,
   OemData,
   StatefulPartitionInfo,
-  TimezoneInfo,
   VpdInfo,
 } from '@common/dpsl';
-
-export const backlightInfo = (): BacklightInfo => [
-  {
-    brightness: 76,
-    maxBrightness: 100,
-    path: 'unknown',
-  },
-];
-
-export const bluetoothInfo = (): BluetoothInfo => [
-  {
-    address: '94:DB:56:E6:AA:78',
-    name: 'Headphone',
-    numConnectedDevices: 1,
-    powered: true,
-  },
-];
 
 export const vpdInfo = (): VpdInfo => ({
   skuNumber: 'sku',
   serialNumber: 'serial-number',
   modelName: 'model',
 });
-
-export const fanInfo = (): FanInfo => [
-  {
-    speedRpm: 2345,
-  },
-  {
-    speedRpm: 3245,
-  },
-  {
-    speedRpm: 1345,
-  },
-  {
-    speedRpm: 1350,
-  },
-];
 
 export const memoryInfo = (): MemoryInfo => ({
   totalMemoryKiB: 16270856,
@@ -86,11 +50,6 @@ export const blockDeviceInfo = (): BlockDeviceInfo => [
     discardTimeSecondsSinceLastBoot: '0',
   },
 ];
-
-export const timezoneInfo = (): TimezoneInfo => ({
-  posix: 'IST-5:30',
-  region: 'India',
-});
 
 export const statefulPartitionInfo = (): StatefulPartitionInfo => ({
   availableSpace: '1340000',

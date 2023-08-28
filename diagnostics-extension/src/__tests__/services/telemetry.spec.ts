@@ -33,19 +33,9 @@ describe('should return instance of FakeTelemetryService', () => {
     expectedResult: DpslTypes;
   }[] = [
     {
-      name: `backlight`,
-      methodUnderTest: telemetryService.getBacklightInfo,
-      expectedResult: fakeData.backlightInfo(),
-    },
-    {
       name: `battery`,
       methodUnderTest: telemetryService.getBatteryInfo,
       expectedResult: fakeData.batteryInfo(),
-    },
-    {
-      name: `bluetooth`,
-      methodUnderTest: telemetryService.getBluetoothInfo,
-      expectedResult: fakeData.bluetoothInfo(),
     },
     {
       name: `vpd`,
@@ -56,11 +46,6 @@ describe('should return instance of FakeTelemetryService', () => {
       name: `cpu`,
       methodUnderTest: telemetryService.getCpuInfo,
       expectedResult: fakeData.cpuInfo(),
-    },
-    {
-      name: `fan`,
-      methodUnderTest: telemetryService.getFanInfo,
-      expectedResult: fakeData.fanInfo(),
     },
     {
       name: `memory`,
@@ -76,11 +61,6 @@ describe('should return instance of FakeTelemetryService', () => {
       name: `stateful partition`,
       methodUnderTest: telemetryService.getStatefulPartitionInfo,
       expectedResult: fakeData.statefulPartitionInfo(),
-    },
-    {
-      name: `timezone`,
-      methodUnderTest: telemetryService.getTimezoneInfo,
-      expectedResult: fakeData.timezoneInfo(),
     },
   ];
 

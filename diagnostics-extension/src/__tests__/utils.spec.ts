@@ -11,7 +11,7 @@ import {
   generateTelemetrySuccessResponse,
 } from '../utils';
 import { Response, TelemetryResponse } from '@common/message';
-import { backlightInfo } from '../services/fake_telemetry.data';
+import { batteryInfo } from '../services/fake_telemetry.data';
 
 describe('should generate correct response objects', () => {
   it('should generate correct error object', () => {
@@ -26,7 +26,7 @@ describe('should generate correct response objects', () => {
   });
 
   it('should generate correct telemetry response object', () => {
-    const payload: TelemetryResponse = { info: backlightInfo() };
+    const payload: TelemetryResponse = { info: batteryInfo() };
     const response: Response = generateTelemetrySuccessResponse(payload);
     expect(response).toEqual({
       success: true,
