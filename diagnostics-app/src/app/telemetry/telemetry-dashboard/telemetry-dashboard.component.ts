@@ -11,11 +11,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-telemetry-dashboard',
+  templateUrl: './telemetry-dashboard.component.html',
+  styleUrls: ['./telemetry-dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class TelemetryDashboardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
