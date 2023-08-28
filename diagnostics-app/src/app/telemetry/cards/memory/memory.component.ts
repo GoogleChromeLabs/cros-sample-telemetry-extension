@@ -10,7 +10,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MemoryInfo } from '@common/dpsl';
 import { TelemetryService } from 'src/app/core/services/telemetry.service';
-import refreshIntervals from '../../../core/config/data-refresh-intervals';
+import { refreshIntervals } from '../../../core/config/data-refresh-intervals';
 
 const defaultMemoryData: MemoryInfo = {
   totalMemoryKiB: 0,
@@ -24,7 +24,7 @@ const defaultMemoryData: MemoryInfo = {
   styleUrls: ['../card.css', './memory.component.css'],
 })
 export class MemoryComponent implements OnInit, OnDestroy {
-  private refreshIntervalMs: number = refreshIntervals.Memory;
+  private refreshIntervalMs: number | undefined = refreshIntervals.get('memory');
   private _intervalId!: number;
   private _memoryData: MemoryInfo = defaultMemoryData;
 

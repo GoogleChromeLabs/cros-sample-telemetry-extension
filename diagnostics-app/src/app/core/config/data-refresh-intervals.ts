@@ -1,5 +1,5 @@
-export default {
-    Memory: 1000,
-    Storage: 60000,
-    Cpu: 1000,
-};
+export const refreshIntervals = new Map<string, number> ([
+    ['memory', 1000],
+    ['storage', 60000],
+    ['cpu', 1000],
+])
