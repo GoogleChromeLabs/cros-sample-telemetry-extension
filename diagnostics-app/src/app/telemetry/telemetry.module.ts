@@ -9,7 +9,7 @@
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { TelemetryDashboardComponent } from './telemetry-dashboard/telemetry-dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { MemoryComponent } from './cards/memory/memory.component';
 import { StorageComponent } from './cards/storage/storage.component';
@@ -17,10 +17,10 @@ import { CpuComponent } from './cards/cpu/cpu.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
+    CpuComponent,
     MemoryComponent,
     StorageComponent,
-    CpuComponent,
+    TelemetryDashboardComponent,
   ],
   imports: [CommonModule, SharedModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
