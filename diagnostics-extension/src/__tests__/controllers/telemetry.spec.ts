@@ -80,19 +80,9 @@ describe('should return correct telemetry data', () => {
     expectedResult: DpslTypes;
   }[] = [
     {
-      name: `backlight`,
-      infoType: TelemetryInfoType.BACKLIGHT,
-      expectedResult: fakeData.backlightInfo(),
-    },
-    {
       name: `battery`,
       infoType: TelemetryInfoType.BATTERY,
       expectedResult: fakeData.batteryInfo(),
-    },
-    {
-      name: `bluetooth`,
-      infoType: TelemetryInfoType.BLUETOOTH,
-      expectedResult: fakeData.bluetoothInfo(),
     },
     {
       name: `vpd`,
@@ -103,11 +93,6 @@ describe('should return correct telemetry data', () => {
       name: `cpu`,
       infoType: TelemetryInfoType.CPU,
       expectedResult: fakeData.cpuInfo(),
-    },
-    {
-      name: `fan`,
-      infoType: TelemetryInfoType.FAN,
-      expectedResult: fakeData.fanInfo(),
     },
     {
       name: `memory`,
@@ -123,11 +108,6 @@ describe('should return correct telemetry data', () => {
       name: `stateful partition`,
       infoType: TelemetryInfoType.STATEFUL_PARTITION,
       expectedResult: fakeData.statefulPartitionInfo(),
-    },
-    {
-      name: `timezone`,
-      infoType: TelemetryInfoType.TIMEZONE,
-      expectedResult: fakeData.timezoneInfo(),
     },
   ];
 

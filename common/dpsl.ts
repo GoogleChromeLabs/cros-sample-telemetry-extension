@@ -7,20 +7,6 @@
  */
 
 /**
- * Response message containing Backlight Info
- */
-export interface BacklightInfoObject {
-  path: string;
-  maxBrightness: number;
-  brightness: number;
-}
-
-/**
- * Response message containing Backlight Info
- */
-export type BacklightInfo = BacklightInfoObject[];
-
-/**
  * Response message containing Battery Info
  */
 export interface BatteryInfo {
@@ -39,21 +25,6 @@ export interface BatteryInfo {
   manufactureDate: string;
   temperature: string;
 }
-
-/**
- * Response message containing Bluetooth Info
- */
-export interface BluetoothInfoObject {
-  name: string;
-  address: string;
-  powered: boolean;
-  numConnectedDevices: number;
-}
-
-/**
- * Response message containing Bluetooth Info
- */
-export type BluetoothInfo = BluetoothInfoObject[];
 
 /**
  * Response message containing VPD Info
@@ -112,18 +83,6 @@ export interface CpuInfo {
 }
 
 /**
- * Response message containing individual Fan Info
- */
-export interface FanInfoObject {
-  speedRpm: number;
-}
-
-/**
- * Response message containing individual Fan Info
- */
-export type FanInfo = FanInfoObject[];
-
-/**
  * Response message containing Memory Info
  */
 export interface MemoryInfo {
@@ -169,14 +128,6 @@ export type BlockDeviceInfo = BlockDeviceInfoObject[];
 export interface StatefulPartitionInfo {
   availableSpace: string;
   totalSpace: string;
-}
-
-/**
- * Response message containing Timezone Info
- */
-export interface TimezoneInfo {
-  posix: string;
-  region: string;
 }
 
 // dpsl.diagnostics.* type definitions
@@ -254,16 +205,12 @@ export interface DiskReadRoutineParams {
 }
 
 export type DpslTypes =
-  | BacklightInfo
   | BatteryInfo
-  | BluetoothInfo
   | VpdInfo
   | CpuInfo
-  | FanInfo
   | MemoryInfo
   | BlockDeviceInfo
   | StatefulPartitionInfo
-  | TimezoneInfo;
 
 export type DiagnosticsParams =
   | BatteryChargeRoutineParams
