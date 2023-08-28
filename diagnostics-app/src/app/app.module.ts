@@ -18,17 +18,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { CoreModule } from './core/core.module';
 import { DiagnosticsModule } from './diagnostics/diagnostics.module';
+import { EventsModule } from './events/events.module';
 import { HeaderComponent } from './layout/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { TelemetryModule } from './telemetry/telemetry.module';
-import { EventsComponent } from './events/events.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentLayoutComponent,
-    EventsComponent,
     HeaderComponent,
     SideNavComponent,
   ],
@@ -37,6 +36,7 @@ import { EventsComponent } from './events/events.component';
     BrowserModule,
     CoreModule,
     DiagnosticsModule,
+    EventsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
