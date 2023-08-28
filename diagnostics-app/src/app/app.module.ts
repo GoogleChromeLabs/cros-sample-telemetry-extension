@@ -21,7 +21,6 @@ import { DiagnosticsModule } from './diagnostics/diagnostics.module';
 import { HeaderComponent } from './layout/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
-import { SideNavItemComponent } from './layout/side-nav/side-nav-item/side-nav-item.component';
 import { TelemetryModule } from './telemetry/telemetry.module';
 import { EventsComponent } from './events/events.component';
 
@@ -32,7 +31,6 @@ import { EventsComponent } from './events/events.component';
     EventsComponent,
     HeaderComponent,
     SideNavComponent,
-    SideNavItemComponent,
   ],
   imports: [
     AppRoutingModule,
