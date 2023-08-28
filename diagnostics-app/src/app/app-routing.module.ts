@@ -10,13 +10,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TelemetryDashboardComponent } from './telemetry/telemetry-dashboard/telemetry-dashboard.component';
-import { BatteryComponent } from './diagnostics/battery/battery.component';
+import { DiagnosticsDashboardComponent } from './diagnostics/diagnostics-dashboard/diagnostics-dashboard.component';
 import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/telemetry', pathMatch: 'full' },
   { path: 'telemetry', component: TelemetryDashboardComponent },
-  { path: 'diagnostics', component: BatteryComponent },
+  { path: 'diagnostics', component: DiagnosticsDashboardComponent },
   { path: 'events', component: EventsComponent },
   { path: '**', redirectTo: '/telemetry' },
 ];
