@@ -10,7 +10,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CpuInfo, LogicalCpuInfo, CpuArchitectureEnum } from '@common/dpsl';
 import { TelemetryService } from 'src/app/core/services/telemetry.service';
-import refreshIntervals from '../../../core/config/data-refresh-intervals';
+import { refreshIntervals } from '../../../core/config/data-refresh-intervals';
 
 const defaultCpuInfo: CpuInfo = {
   numTotalThreads: 0,
@@ -38,7 +38,7 @@ const defaultCpuInfo: CpuInfo = {
   styleUrls: ['../card.css', './cpu.component.css'],
 })
 export class CpuComponent implements OnInit, OnDestroy {
-  private _refreshIntervalMs: number = refreshIntervals.Cpu;
+  private _refreshIntervalMs: number | undefined = refreshIntervals.get('cpu');
   private _intervalId!: number;
   private _cpuData: CpuInfo = defaultCpuInfo;
 

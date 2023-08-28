@@ -10,7 +10,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlockDeviceInfo } from '@common/dpsl';
 import { TelemetryService } from 'src/app/core/services/telemetry.service';
-import refreshIntervals from '../../../core/config/data-refresh-intervals';
+import { refreshIntervals } from '../../../core/config/data-refresh-intervals';
 
 const defaultBlockDeviceInfo: BlockDeviceInfo = [
   {
@@ -35,7 +35,7 @@ const defaultBlockDeviceInfo: BlockDeviceInfo = [
   styleUrls: ['../card.css', './storage.component.css'],
 })
 export class StorageComponent implements OnInit {
-  private _refreshIntervalMs: number = refreshIntervals.Storage;
+  private _refreshIntervalMs: number | undefined = refreshIntervals.get('storage');
   private _intervalId!: number;
   private _blockDeviceInfo: BlockDeviceInfo = defaultBlockDeviceInfo;
 
