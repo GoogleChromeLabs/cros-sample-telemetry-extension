@@ -9,13 +9,11 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BatteryComponent } from './battery/battery.component';
-import { CapacityComponent } from './battery/capacity/capacity.component';
 import { SharedModule } from '../shared/shared.module';
 import { DiagnosticsDashboardComponent } from './diagnostics-dashboard/diagnostics-dashboard.component';
 
 @NgModule({
-  declarations: [BatteryComponent, CapacityComponent, DiagnosticsDashboardComponent],
+  declarations: [DiagnosticsDashboardComponent],
   imports: [CommonModule, SharedModule],
 })
 export class DiagnosticsModule {}
