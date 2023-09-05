@@ -59,7 +59,13 @@ export const handleTelemetry: TelemetryController = async (req, res) => {
       generateErrorResponse(ResponseErrorInfoMessage.InvalidTelemetryInfoType)
     );
 
-  const data = await requiredMethod();
-  const payload: TelemetryResponse = { info: data };
-  return res(generateTelemetrySuccessResponse(payload));
+  try {
+    const data = await requiredMethod();
+    const payload: TelemetryResponse = { info: data };
+    return res(generateTelemetrySuccessResponse(payload));
+  } catch (err) {
+    return res(
+      generateErrorResponse(String(err))
+    );
+  }
 };

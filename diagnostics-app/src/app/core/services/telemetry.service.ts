@@ -8,15 +8,7 @@
 
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {
-  BatteryInfo,
-  BlockDeviceInfo,
-  CpuInfo,
-  DpslTypes,
-  MemoryInfo,
-  StatefulPartitionInfo,
-  VpdInfo,
-} from '@common/dpsl';
+import { DpslTypes } from '@common/dpsl';
 import {
   Request,
   Response,
@@ -24,19 +16,10 @@ import {
   TelemetryInfoType,
 } from '@common/message';
 
-export interface TelemetryInterface {
-  fetchBatteryInfo(): Promise<BatteryInfo>;
-  fetchBlockDeviceInfo(): Promise<BlockDeviceInfo>;
-  fetchCpuInfo(): Promise<CpuInfo>;
-  fetchMemoryInfo(): Promise<MemoryInfo>;
-  fetchStatefulPartitionInfo(): Promise<StatefulPartitionInfo>;
-  fetchVpdInfo(): Promise<VpdInfo>;
-}
-
 @Injectable({
   providedIn: 'root',
 })
-export class TelemetryService implements TelemetryInterface {
+export class TelemetryService {
   private extensionId!: string;
 
   private constructTelemetryRequest: (infoType: TelemetryInfoType) => Request =
@@ -44,7 +27,7 @@ export class TelemetryService implements TelemetryInterface {
       return { type: RequestType.TELEMETRY, telemetry: { infoType } };
     };
 
-  private fetchTelemetryData: (
+  public fetchTelemetryData: (
     infoType: TelemetryInfoType
   ) => Promise<DpslTypes> | undefined = (category) => {
     return new Promise((resolve, reject) => {
@@ -56,9 +39,8 @@ export class TelemetryService implements TelemetryInterface {
           request,
           (response: Response) => {
             if (!response.success) {
-              throw response.error;
-            }
-            if (!response.telemetry) {
+              reject(response.error);
+            } else if (!response.telemetry) {
               throw 'Invalid response';
             } else {
               resolve(response.telemetry.info);
@@ -73,37 +55,5 @@ export class TelemetryService implements TelemetryInterface {
 
   constructor() {
     this.extensionId = environment.extensionId;
-  }
-
-  fetchBatteryInfo() {
-    return <Promise<BatteryInfo>>(
-      this.fetchTelemetryData(TelemetryInfoType.BATTERY)
-    );
-  }
-
-  fetchBlockDeviceInfo() {
-    return <Promise<BlockDeviceInfo>>(
-      this.fetchTelemetryData(TelemetryInfoType.BLOCK_DEVICE)
-    );
-  }
-
-  fetchCpuInfo() {
-    return <Promise<CpuInfo>>this.fetchTelemetryData(TelemetryInfoType.CPU);
-  }
-
-  fetchMemoryInfo() {
-    return <Promise<MemoryInfo>>(
-      this.fetchTelemetryData(TelemetryInfoType.MEMORY)
-    );
-  }
-
-  fetchStatefulPartitionInfo() {
-    return <Promise<StatefulPartitionInfo>>(
-      this.fetchTelemetryData(TelemetryInfoType.STATEFUL_PARTITION)
-    );
-  }
-
-  fetchVpdInfo() {
-    return <Promise<VpdInfo>>this.fetchTelemetryData(TelemetryInfoType.VPD);
   }
 }
