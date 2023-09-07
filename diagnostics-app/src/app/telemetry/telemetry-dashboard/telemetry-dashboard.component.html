@@ -4,3 +4,8 @@
  found in the LICENSE file.
 -->
 
+<div class="telemetry-dashboard">
+  <div class="telemetry-card-container" *ngFor="let type of visibleTypes">
+    <app-telemetry-card [type]="type"></app-telemetry-card>
+  </div>
+</div>
