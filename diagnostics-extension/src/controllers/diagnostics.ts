@@ -6,11 +6,15 @@
  * @fileoverview Handle diagnostics requests
  */
 
-import { DiagnosticsParams, RoutineStatus } from '@common/dpsl';
+import {
+  DiagnosticsParams,
+  RoutineStatus,
+  RoutineType,
+  RunRoutineResponse,
+} from '@common/dpsl';
 import {
   DiagnosticsAction,
   DiagnosticsResponse,
-  DiagnosticsRoutineName,
   Request,
   Response,
   ResponseErrorInfoMessage,
@@ -28,8 +32,16 @@ type DiagnosticsController = (
 
 const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 
+const getAvailableRoutines = async (
+  res: (data: Response) => void
+) => {
+  const routines: RoutineType[] = await diagnosticsService.getAvailableRoutines();
+  const payload: DiagnosticsResponse = { routines };
+  return res(generateDiagnosticsSuccessResponse(payload));
+}
+
 const handleStartRoutine = async (
-  routineName: DiagnosticsRoutineName | undefined,
+  routineName: RoutineType | undefined,
   res: (data: Response) => void,
   params?: DiagnosticsParams
 ) => {
@@ -40,35 +52,55 @@ const handleStartRoutine = async (
       )
     );
   }
-  const routineId = await diagnosticsService.runRoutine(routineName, params);
-  return handleRoutineOperation(
-    routineId,
-    routineOperationMap[DiagnosticsAction.STATUS],
-    res
-  );
-};
-
-const routineOperationMap = {
-  [DiagnosticsAction.STATUS]: diagnosticsService.getRoutineStatus,
-  [DiagnosticsAction.RESUME]: diagnosticsService.resumeRoutine,
-  [DiagnosticsAction.STOP]: diagnosticsService.stopRoutine,
+  try {
+    const response: RunRoutineResponse = await diagnosticsService.startRoutine(routineName, params);
+    if (response.status === RoutineStatus.ready               ||
+        response.status === RoutineStatus.running             ||
+        response.status === RoutineStatus.waiting_user_action ||
+        response.status === RoutineStatus.passed) {
+      return handleRoutineOperation(
+        response.id,
+        DiagnosticsAction.STATUS,
+        res
+      );
+    } else {
+      return res(generateErrorResponse(ResponseErrorInfoMessage.InvalidDiagnosticsRoutineStatus));
+    }
+  } catch (err) {
+    return res(generateErrorResponse(String(err)))
+  }
 };
 
 const handleRoutineOperation = async (
-  routineId: number | undefined,
-  routineOperation: (id: number) => Promise<RoutineStatus>,
+  id: number | undefined,
+  command: DiagnosticsAction,
   res: (data: Response) => void
 ) => {
-  if (!routineId) {
+  if (!id) {
     return res(
       generateErrorResponse(
         ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId
       )
     );
   }
-  const routineStatus = await routineOperation(routineId);
-  const payload: DiagnosticsResponse = { routineId, routineStatus };
-  return res(generateDiagnosticsSuccessResponse(payload));
+  try {
+    let info;
+    switch (command) {
+      case DiagnosticsAction.STOP:
+        info = await diagnosticsService.stopRoutine(id);
+        break;
+      case DiagnosticsAction.RESUME:
+        info = await diagnosticsService.resumeRoutine(id);
+        break;
+      case DiagnosticsAction.STATUS:
+        info = await diagnosticsService.getRoutineStatus(id);
+        break;
+    }
+    const payload: DiagnosticsResponse = { id, info };
+    return res(generateDiagnosticsSuccessResponse(payload));
+  } catch (err) {
+    return res(generateErrorResponse(String(err)))
+  }
 };
 
 export const handleDiagnostics: DiagnosticsController = (req, res) => {
@@ -78,6 +110,8 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
     );
 
   switch (req.diagnostics.action) {
+    case DiagnosticsAction.GET_AVAILABLE_ROUTINE:
+      return getAvailableRoutines(res);
     case DiagnosticsAction.START:
       return handleStartRoutine(
         req.diagnostics.routineName,
@@ -85,16 +119,16 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
         req.diagnostics.params
       );
     case DiagnosticsAction.STATUS:
-    case DiagnosticsAction.RESUME:
     case DiagnosticsAction.STOP:
+    case DiagnosticsAction.RESUME:
       return handleRoutineOperation(
         req.diagnostics.routineId,
-        routineOperationMap[req.diagnostics.action],
+        req.diagnostics.action,
         res
       );
     default:
-      return res(
-        generateErrorResponse(ResponseErrorInfoMessage.InvalidDiagnosticsAction)
-      );
+    return res(
+      generateErrorResponse(ResponseErrorInfoMessage.InvalidDiagnosticsAction)
+    );
   }
 };

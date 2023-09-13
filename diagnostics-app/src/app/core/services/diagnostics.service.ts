@@ -8,10 +8,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { DiagnosticsParams, RoutineStatus } from '@common/dpsl';
+import { DiagnosticsParams, RoutineType } from '@common/dpsl';
 import {
   DiagnosticsRequest,
-  DiagnosticsRoutineName,
   RequestType,
   Request,
   Response,
@@ -21,13 +20,14 @@ import {
 import { environment } from 'src/environments/environment';
 
 export interface DiagnosticsInterface {
-  runRoutine(
-    name: DiagnosticsRoutineName,
+  startRoutine(
+    name: RoutineType,
     params?: DiagnosticsParams
   ): Promise<DiagnosticsResponse>;
   stopRoutine(id: number): Promise<DiagnosticsResponse>;
   resumeRoutine(id: number): Promise<DiagnosticsResponse>;
   getRoutineStatus(id: number): Promise<DiagnosticsResponse>;
+  getAvailableRoutines(): Promise<DiagnosticsResponse>;
 }
 
 @Injectable({
@@ -53,9 +53,8 @@ export class DiagnosticsService implements DiagnosticsInterface {
           request,
           (response: Response) => {
             if (!response.success) {
-              throw response.error;
-            }
-            if (!response.diagnostics) {
+              reject(response.error);
+            } else if (!response.diagnostics) {
               throw 'Invalid response';
             } else {
               resolve(response.diagnostics);
@@ -68,13 +67,21 @@ export class DiagnosticsService implements DiagnosticsInterface {
     });
   };
 
+  private _getAvailableRoutines: () => Promise<DiagnosticsResponse> = () => {
+    const payload: DiagnosticsRequest = {
+      action: DiagnosticsAction.GET_AVAILABLE_ROUTINE
+    };
+    const request = this._constructDiagnosticsRequest(payload);
+    return this._sendRequest(request);
+  }
+
   private _runDiagnosticsRoutine: (
-    routineName: DiagnosticsRoutineName,
+    routineName: RoutineType,
     params?: DiagnosticsParams
   ) => Promise<DiagnosticsResponse> = (routineName, params) => {
     const payload: DiagnosticsRequest = {
       action: DiagnosticsAction.START,
-      routineName: routineName,
+      routineName,
       params,
     };
     const request = this._constructDiagnosticsRequest(payload);
@@ -83,7 +90,7 @@ export class DiagnosticsService implements DiagnosticsInterface {
 
   private _manageDiagnosticsRoutine: (
     action: DiagnosticsAction,
-    routineId: number
+    routineId: number,
   ) => Promise<DiagnosticsResponse> = (action, routineId) => {
     const payload: DiagnosticsRequest = {
       action,
@@ -96,8 +103,8 @@ export class DiagnosticsService implements DiagnosticsInterface {
   constructor() {
     this.extensionId = environment.extensionId;
   }
-  runRoutine(
-    name: DiagnosticsRoutineName,
+  startRoutine(
+    name: RoutineType,
     params?: DiagnosticsParams
   ): Promise<DiagnosticsResponse> {
     return this._runDiagnosticsRoutine(name, params);
@@ -110,5 +117,8 @@ export class DiagnosticsService implements DiagnosticsInterface {
   }
   getRoutineStatus(id: number): Promise<DiagnosticsResponse> {
     return this._manageDiagnosticsRoutine(DiagnosticsAction.STATUS, id);
+  }
+  getAvailableRoutines(): Promise<DiagnosticsResponse> {
+    return this._getAvailableRoutines();
   }
 }
