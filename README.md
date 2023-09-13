@@ -14,17 +14,55 @@ header:
 
 ### Prerequisite Configuration
 
-- In the repository root, run   
+- In the repository root, run
 1. ```git config --unset-all core.hooksPath```
 2. ```git config --add core.hooksPath .githooks```
 
     This will set up `.githooks` as the default directory for git hooks in this repository.
 
-- In case git hooks don't work as intended, run this command to set necessary permissions:  
- `cd .githooks && chmod +x *`  
+- In case git hooks don't work as intended, run this command to set necessary permissions:
+ `cd .githooks && chmod +x *`
 
 ### Diagnostics App PWA
 
 1. ```cd diagnostics-app```
-2. ```npm install```
-3. ```ng serve```
+2. ```npm ci```
+3. ```npm run build```
+
+At this point, you should be able to see a folder with all the resources in `diagnostics-app/dist/diagnostics-app`. You can now open a server to serve these resources to the client.
+
+To develop against a real extension, you should make sure the URL is allowlisted and the url-scheme is secure (HTTPS).
+
+See the below link for more information on how to configure the PWA.
+https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
+
+### Diagnostics App IWA
+
+1. ```cd diagnostics-app```
+2. ```npm ci```
+3. ```npm run build```
+
+At this point, you should be able to see a `sample-iwa.swbn` file. This file is directly installable as an IWA image.
+
+### Diagnostics Extension
+
+1. ```cd diagnostics-extension```
+2. ```npm ci```
+3. ```npm run build```
+
+At this point, all the resources needed for the extension will be in `diagnostics-extension/build`.
+
+Copy the file into your chromeOS device, and try to load an unpacked extension from the `chrome://extension` page.
+
+See the below link for more information on how to configure the extension.
+https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
+
+### Common Issues
+If you are having trouble installing or accessing the correct API, below are some common issues.
+
+Check that each item is configured correctly.
+1. The extension ID is a allowlisted ID. You can view the extension ID on the `chrome://extension` page.
+2. The PWA/IWA origin is a allowlisted origin.
+3. The PWA origin is using a secure protocol (HTTPS).
+4. The file permissions are set to be `r+x` for the `chronos` user for all the build folders and files
+5. The `externally_connectable` attribute matches the PWA/IWA origin
