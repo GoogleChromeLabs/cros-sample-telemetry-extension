@@ -245,7 +245,6 @@ export class Routine {
       command: command,
       includeOutput: true,
     };
-    console.log('Constrcuted diagnostics command', message);
     const status: GetRoutineUpdateResponse = {
       progress_percent: 0,
       output: '',

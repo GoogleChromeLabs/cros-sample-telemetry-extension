@@ -29,7 +29,7 @@ export const enum TelemetryInfoType {
   VPD = 'vpd',
 }
 
-export const enum ResponseErrorInfoMessage { // not sure if each word should be connected with '-'
+export const enum ResponseErrorInfoMessage {
   InvalidRequestType = 'Invalid or missing request type.',
   InvalidTelemetryInfoType = 'The requested telemetry infoType is either invalid or missing.',
   InvalidDiagnosticsRoutineStatus = 'The diagnostics routine status is invalid.',
@@ -43,10 +43,10 @@ export const enum ResponseErrorInfoMessage { // not sure if each word should be 
 }
 
 export const enum DiagnosticsAction {
+  RESUME = 'resume',
   START = 'start',
   STATUS = 'status',
   STOP = 'stop',
-  RESUME = 'resume',
 }
 
 export interface TelemetryRequest {

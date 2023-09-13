@@ -19,10 +19,20 @@ import {
 } from '@common/message';
 import { environment } from 'src/environments/environment';
 
+export interface DiagnosticsInterface {
+  startRoutine(
+    name: RoutineType,
+    params?: DiagnosticsParams
+  ): Promise<DiagnosticsResponse>;
+  stopRoutine(id: number): Promise<DiagnosticsResponse>;
+  resumeRoutine(id: number): Promise<DiagnosticsResponse>;
+  getRoutineStatus(id: number): Promise<DiagnosticsResponse>;
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class DiagnosticsService {
+export class DiagnosticsService implements DiagnosticsInterface {
   private extensionId!: string;
 
   private _constructDiagnosticsRequest: (
@@ -56,7 +66,7 @@ export class DiagnosticsService {
     });
   };
 
-  public runDiagnosticsRoutine: (
+  private _runDiagnosticsRoutine: (
     routineName: RoutineType,
     params?: DiagnosticsParams
   ) => Promise<DiagnosticsResponse> = (routineName, params) => {
@@ -69,13 +79,13 @@ export class DiagnosticsService {
     return this._sendRequest(request);
   };
 
-  public manageDiagnosticsRoutine: (
-    routineId: number,
+  private _manageDiagnosticsRoutine: (
     action: DiagnosticsAction,
-  ) => Promise<DiagnosticsResponse> = (routineId, action) => {
+    routineId: number,
+  ) => Promise<DiagnosticsResponse> = (action, routineId) => {
     const payload: DiagnosticsRequest = {
-      routineId,
       action,
+      routineId,
     };
     const request = this._constructDiagnosticsRequest(payload);
     return this._sendRequest(request);
@@ -83,5 +93,20 @@ export class DiagnosticsService {
 
   constructor() {
     this.extensionId = environment.extensionId;
+  }
+  startRoutine(
+    name: RoutineType,
+    params?: DiagnosticsParams
+  ): Promise<DiagnosticsResponse> {
+    return this._runDiagnosticsRoutine(name, params);
+  }
+  stopRoutine(id: number): Promise<DiagnosticsResponse> {
+    return this._manageDiagnosticsRoutine(DiagnosticsAction.STOP, id);
+  }
+  resumeRoutine(id: number): Promise<DiagnosticsResponse> {
+    return this._manageDiagnosticsRoutine(DiagnosticsAction.RESUME, id);
+  }
+  getRoutineStatus(id: number): Promise<DiagnosticsResponse> {
+    return this._manageDiagnosticsRoutine(DiagnosticsAction.STATUS, id);
   }
 }

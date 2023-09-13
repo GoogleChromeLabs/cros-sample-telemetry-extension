@@ -242,10 +242,10 @@ export interface GetRoutineUpdateRequest {
  */
 export interface GetRoutineUpdateResponse {
   progress_percent: number;
-  output: string;
+  output?: string;
   status: RoutineStatus;
   status_message: string;
-  user_message: UserMessageType;
+  user_message?: UserMessageType;
 }
 
 /**
@@ -261,7 +261,7 @@ export const enum AcPowerStatus {
  */
 export interface RunAcPowerRoutineRequest {
   expected_status: AcPowerStatus;
-  expected_power_type: string;
+  expected_power_type?: string;
 }
 
 /**
@@ -281,14 +281,14 @@ export interface RunBatteryDischargeRoutineRequest {
 }
 
 /**
- * Params object of chrome.os.diagnostics.runnBluetoothPairingRoutine()
+ * Params object of chrome.os.diagnostics.runBluetoothPairingRoutine()
  */
 export interface RunBluetoothPairingRoutineRequest {
   peripheral_id: string;
 }
 
 /**
- * Params object of chrome.os.diagnostics.runnBluetoothScanningRoutine()
+ * Params object of chrome.os.diagnostics.runBluetoothScanningRoutine()
  */
 export interface RunBluetoothScanningRoutineRequest {
   length_seconds: number;
@@ -320,7 +320,7 @@ export interface RunDiskReadRequest {
 }
 
 /**
- * Types of nvme selftest types
+ * Types of nvme self test types
  */
 export const enum NvmeSelfTestType {
   short_test = 'short_test',
@@ -352,7 +352,7 @@ export interface RunPowerButtonRequest {
  * Params object of chrome.os.diagnostics.runSmartctlCheckRoutine()
  */
 export interface RunSmartctlCheckRequest {
-  percentage_used_threshold: number;
+  percentage_used_threshold?: number;
 }
 
 export type DpslTypes =

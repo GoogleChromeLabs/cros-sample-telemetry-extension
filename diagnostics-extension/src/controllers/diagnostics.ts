@@ -116,8 +116,8 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
           req.diagnostics.params
       )};
     case DiagnosticsAction.STATUS:
-    case DiagnosticsAction.RESUME:
     case DiagnosticsAction.STOP:
+    case DiagnosticsAction.RESUME:
       return handleRoutineOperation(
         req.diagnostics.routineId,
         req.diagnostics.action,

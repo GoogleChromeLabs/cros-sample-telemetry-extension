@@ -19,7 +19,6 @@ import {
 
 const defaultAcPowerRoutineRequest: RunAcPowerRoutineRequest = {
     expected_status: AcPowerStatus.connected,
-    expected_power_type: 'unknown',
 };
 
 const defaultBatteryChargeRoutineRequest: RunBatteryChargeRoutineRequest = {
@@ -62,7 +61,6 @@ const defaultPowerButtonRequest: RunPowerButtonRequest = {
 }
 
 const defaultSmartctlCheck: RunSmartctlCheckRequest = {
-    percentage_used_threshold: 50,
 };
 
 export const diagnosticsParams = new Map<string, DiagnosticsParams> ([
