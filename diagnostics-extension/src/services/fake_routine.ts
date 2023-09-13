@@ -7,7 +7,11 @@
  * To be replaced by Routine from dpsl package.
  */
 
-import { RoutineStatus } from '@common/dpsl';
+import {
+  GetRoutineUpdateResponse,
+  RoutineStatus,
+  UserMessageType
+} from '@common/dpsl';
 
 export class Routine {
   private _id: number;
@@ -20,19 +24,19 @@ export class Routine {
     return this._id;
   }
 
-  async _genericSendCommand(command: string): Promise<RoutineStatus> {
+  async _genericSendCommand(command: string): Promise<GetRoutineUpdateResponse> {
     const message = {
       routineId: this._id,
       command: command,
       includeOutput: true,
     };
     console.log('Constrcuted diagnostics command', message);
-    const status: RoutineStatus = {
-      progressPercent: 0,
+    const status: GetRoutineUpdateResponse = {
+      progress_percent: 0,
       output: '',
-      status: `ran command ${command}`,
-      statusMessage: '',
-      userMessage: '',
+      status: RoutineStatus.unknown,
+      status_message: '',
+      user_message: UserMessageType.unknown,
     };
     return status;
   }
@@ -40,14 +44,14 @@ export class Routine {
   /**
    * Returns current status of this routine.
    */
-  getStatus(): Promise<RoutineStatus> {
+  getStatus(): Promise<GetRoutineUpdateResponse> {
     return this._genericSendCommand('get-status');
   }
 
   /**
    * Resumes this routine, e.g. when user prompts to run a waiting routine.
    */
-  resume(): Promise<RoutineStatus> {
+  resume(): Promise<GetRoutineUpdateResponse> {
     return this._genericSendCommand('continue');
   }
 
@@ -55,7 +59,7 @@ export class Routine {
    * Stops this routine, if running, or remove otherwise.
    * Note: The routine cannot be restarted again.
    */
-  stop(): Promise<RoutineStatus> {
+  stop(): Promise<GetRoutineUpdateResponse> {
     this._genericSendCommand('cancel');
     return this._genericSendCommand('remove');
   }
