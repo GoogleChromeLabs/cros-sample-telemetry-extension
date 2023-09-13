@@ -10,6 +10,7 @@
 import {
   DpslTypes,
   DiagnosticsParams,
+  GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
   RoutineType,
 } from './dpsl';
@@ -43,6 +44,7 @@ export const enum ResponseErrorInfoMessage {
 }
 
 export const enum DiagnosticsAction {
+  GET_AVAILABLE_ROUTINE = 'get-available-routine',
   RESUME = 'resume',
   START = 'start',
   STATUS = 'status',
@@ -74,10 +76,14 @@ export interface TelemetryResponse {
   info: DpslTypes;
 }
 
-export interface DiagnosticsResponse {
+export interface RoutineUpdateResponse {
   id: number;
   info: GetRoutineUpdateResponse;
 }
+
+export type DiagnosticsResponse =
+  | GetAvailableRoutinesResponse
+  | RoutineUpdateResponse
 
 export interface Response {
   success: Boolean;

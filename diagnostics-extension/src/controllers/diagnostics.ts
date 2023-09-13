@@ -32,8 +32,12 @@ type DiagnosticsController = (
 
 const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 
-const getAvailableRoutines = async () => {
-  return diagnosticsService.getAvailableRoutines();
+const getAvailableRoutines = async (
+  res: (data: Response) => void
+) => {
+  const routines: RoutineType[] = await diagnosticsService.getAvailableRoutines();
+  const payload: DiagnosticsResponse = { routines };
+  return res(generateDiagnosticsSuccessResponse(payload));
 }
 
 const handleStartRoutine = async (
@@ -106,15 +110,14 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
     );
 
   switch (req.diagnostics.action) {
+    case DiagnosticsAction.GET_AVAILABLE_ROUTINE:
+      return getAvailableRoutines(res);
     case DiagnosticsAction.START:
-      if (req.diagnostics.routineName === RoutineType.available_routines) {
-        return getAvailableRoutines();
-      } else {
-        return handleStartRoutine(
-          req.diagnostics.routineName,
-          res,
-          req.diagnostics.params
-      )};
+      return handleStartRoutine(
+        req.diagnostics.routineName,
+        res,
+        req.diagnostics.params
+      );
     case DiagnosticsAction.STATUS:
     case DiagnosticsAction.STOP:
     case DiagnosticsAction.RESUME:

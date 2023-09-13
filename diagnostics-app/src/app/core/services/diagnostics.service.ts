@@ -27,6 +27,7 @@ export interface DiagnosticsInterface {
   stopRoutine(id: number): Promise<DiagnosticsResponse>;
   resumeRoutine(id: number): Promise<DiagnosticsResponse>;
   getRoutineStatus(id: number): Promise<DiagnosticsResponse>;
+  getAvailableRoutines(): Promise<DiagnosticsResponse>;
 }
 
 @Injectable({
@@ -65,6 +66,14 @@ export class DiagnosticsService implements DiagnosticsInterface {
       }
     });
   };
+
+  private _getAvailableRoutines: () => Promise<DiagnosticsResponse> = () => {
+    const payload: DiagnosticsRequest = {
+      action: DiagnosticsAction.GET_AVAILABLE_ROUTINE
+    };
+    const request = this._constructDiagnosticsRequest(payload);
+    return this._sendRequest(request);
+  }
 
   private _runDiagnosticsRoutine: (
     routineName: RoutineType,
@@ -108,5 +117,8 @@ export class DiagnosticsService implements DiagnosticsInterface {
   }
   getRoutineStatus(id: number): Promise<DiagnosticsResponse> {
     return this._manageDiagnosticsRoutine(DiagnosticsAction.STATUS, id);
+  }
+  getAvailableRoutines(): Promise<DiagnosticsResponse> {
+    return this._getAvailableRoutines();
   }
 }
