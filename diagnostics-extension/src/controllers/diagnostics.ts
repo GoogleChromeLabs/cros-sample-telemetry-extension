@@ -8,6 +8,7 @@
 
 import {
   DiagnosticsParams,
+  GetAvailableRoutinesResponse,
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
@@ -35,8 +36,7 @@ const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 const getAvailableRoutines = async (
   res: (data: Response) => void
 ) => {
-  const routines: RoutineType[] = await diagnosticsService.getAvailableRoutines();
-  const payload: DiagnosticsResponse = { routines };
+  const payload: GetAvailableRoutinesResponse = await diagnosticsService.getAvailableRoutines();
   return res(generateDiagnosticsSuccessResponse(payload));
 }
 
