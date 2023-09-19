@@ -11,13 +11,11 @@ import {
   RoutineCommandType,
   RoutineType,
   RunRoutineResponse,
+  GetAvailableRoutinesResponse,
   GetRoutineUpdateRequest,
   GetRoutineUpdateResponse,
 } from '@common/dpsl';
-import {
-  DiagnosticsAction,
-  ResponseErrorInfoMessage,
-} from '@common/message';
+import { ResponseErrorInfoMessage } from '@common/message';
 import * as fake_diagnostics from './fake_diagnostics.data';
 import { Routine } from './fake_diagnostics.data';
 import { environment } from '../environments/environment';
@@ -27,7 +25,7 @@ import { environment } from '../environments/environment';
  * service to run diagnostics routines
  */
 export abstract class DiagnosticsService {
-  abstract getAvailableRoutines(): Promise<RoutineType[]>;
+  abstract getAvailableRoutines(): Promise<GetAvailableRoutinesResponse>;
   abstract startRoutine(
     name: RoutineType,
     params?: DiagnosticsParams
@@ -43,7 +41,7 @@ export abstract class DiagnosticsService {
  */
 export class DiagnosticsServiceImpl extends DiagnosticsService {
 
-  getAvailableRoutines = async (): Promise<RoutineType[]> => {
+  getAvailableRoutines = async (): Promise<GetAvailableRoutinesResponse> => {
     return (chrome as any).os.diagnostics.getAvailableRoutines();
   }
 
@@ -160,7 +158,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
     return this._activeRoutines[id];
   };
 
-  getAvailableRoutines = async (): Promise<RoutineType[]> => {
+  getAvailableRoutines = async (): Promise<GetAvailableRoutinesResponse> => {
     return fake_diagnostics.fakeAvailableRoutines();
   }
 
