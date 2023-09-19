@@ -36,8 +36,12 @@ const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 const getAvailableRoutines = async (
   res: (data: Response) => void
 ) => {
-  const payload: GetAvailableRoutinesResponse = await diagnosticsService.getAvailableRoutines();
-  return res(generateDiagnosticsSuccessResponse(payload));
+  try {
+    const payload: GetAvailableRoutinesResponse = await diagnosticsService.getAvailableRoutines();
+    return res(generateDiagnosticsSuccessResponse(payload));
+  } catch (err) {
+    return res(generateErrorResponse(String(err)));
+  }
 }
 
 const handleStartRoutine = async (
