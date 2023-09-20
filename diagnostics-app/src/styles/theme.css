@@ -12,6 +12,7 @@
   --color-white: #fff;
   --color-fc: #f7f7f7;
   --color-blue: #4c8bf5;
+  --color-yellow: #e0b300;
 
   --app-background: var(--color-white);
 
@@ -31,6 +32,8 @@
   --app-dashboard-card-background: var(--color-white);
   --app-dashboard-card-color: var(--color-black);
   --app-dashboard-card-border-color: #ccc;
+
+  --app-error-message-color: var(--color-yellow)
 }
 
 .dark {
@@ -43,6 +46,7 @@
   --color-darker-white: #989898;
   --color-dark-white: #e3e3e3;
   --color-blue: #4c8bf5;
+  --color-yellow: #e0b300;
 
   --color-white: #fff;
 
@@ -66,4 +70,6 @@
   --app-dashboard-card-background: var(--color-dark-grey);
   --app-dashboard-card-color: var(--color-white);
   --app-dashboard-card-border-color: #333;
+
+  --app-error-message-color: var(--color-yellow)
 }
