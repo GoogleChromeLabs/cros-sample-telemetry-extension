@@ -1,0 +1,28 @@
+<!-- 
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<div class="telemetry-card">
+    <header>{{ type.toUpperCase() }}</header>
+    <ng-container *ngIf="info; then renderCardContent; else renderLoadingOrError"></ng-container>
+    <ng-template #renderCardContent>
+        <app-telemetry-card-content [info]="info!"></app-telemetry-card-content>
+    </ng-template>
+    <ng-template #renderLoadingOrError>
+        <ng-container *ngIf="error; then showError; else showLoading"></ng-container>
+        <ng-template #showError>
+            <div class="error-message">
+                <mat-icon mat-list-icon>warning</mat-icon>
+                {{ error }}
+            </div>
+        </ng-template>
+        <ng-template #showLoading>
+            <mat-spinner 
+                [diameter]="20"
+                class="loading-spinner">
+            </mat-spinner>
+        </ng-template>
+    </ng-template>
+</div>
