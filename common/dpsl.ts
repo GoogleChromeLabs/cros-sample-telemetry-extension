@@ -355,7 +355,7 @@ export interface RunSmartctlCheckRequest {
   percentage_used_threshold?: number;
 }
 
-export type DpslTypes =
+export type TelemetryInfoUnion =
   | BatteryInfo
   | VpdInfo
   | CpuInfo

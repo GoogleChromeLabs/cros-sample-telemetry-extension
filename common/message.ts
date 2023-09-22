@@ -8,7 +8,7 @@
  */
 
 import {
-  DpslTypes,
+  TelemetryInfoUnion,
   DiagnosticsParams,
   GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
@@ -73,7 +73,7 @@ export interface Error {
 }
 
 export interface TelemetryResponse {
-  info: DpslTypes;
+  info: TelemetryInfoUnion;
 }
 
 export interface RoutineUpdateResponse {

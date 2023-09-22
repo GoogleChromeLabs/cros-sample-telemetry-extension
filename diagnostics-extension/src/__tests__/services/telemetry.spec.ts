@@ -11,7 +11,7 @@ import {
   TelemetryServiceProvider,
 } from '../../services/telemetry';
 import * as fakeData from '../../services/fake_telemetry.data';
-import { DpslTypes } from '@common/dpsl';
+import { TelemetryInfoUnion } from '@common/dpsl';
 
 describe('should return instance of FakeTelemetryService', () => {
   const telemetryService: TelemetryService =
@@ -29,8 +29,8 @@ describe('should return instance of FakeTelemetryService', () => {
 
   const testCases: {
     name: string;
-    methodUnderTest: () => Promise<DpslTypes>;
-    expectedResult: DpslTypes;
+    methodUnderTest: () => Promise<TelemetryInfoUnion>;
+    expectedResult: TelemetryInfoUnion;
   }[] = [
     {
       name: `battery`,

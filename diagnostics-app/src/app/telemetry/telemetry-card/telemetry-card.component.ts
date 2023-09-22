@@ -9,7 +9,7 @@
 
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { DpslTypes } from '@common/dpsl';
+import { TelemetryInfoUnion } from '@common/dpsl';
 import { TelemetryService } from 'src/app/core/services/telemetry.service';
 import { TelemetryInfoType, ResponseErrorInfoMessage } from '@common/message';
 import { defaultTelemetryRefreshInterval, refreshIntervals } from '../../core/config/data-refresh-intervals';
@@ -24,14 +24,14 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
 
   private _error?: ResponseErrorInfoMessage; // the error message received, null if no error occurs
   private _intervalId!: number; // the interval id of this card component
-  private _info?: DpslTypes; // the telemetry info received by calling telemetry service
+  private _info?: TelemetryInfoUnion; // the telemetry info received by calling telemetry service
 
   get error() { return this._error; }
   get info() { return this._info; }
 
   private _updateData(type: TelemetryInfoType) {
-    let promise = <Promise<DpslTypes>>(this.telemetryService.fetchTelemetryData(type));
-    promise.then((value: DpslTypes) => {
+    let promise = <Promise<TelemetryInfoUnion>>(this.telemetryService.fetchTelemetryData(type));
+    promise.then((value: TelemetryInfoUnion) => {
       this._error = undefined;
       this._info = value;
     }).catch(e => {

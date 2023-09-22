@@ -15,7 +15,7 @@ import {
   TelemetryInfoType,
   ResponseErrorInfoMessage,
 } from '@common/message';
-import { DpslTypes } from '@common/dpsl';
+import { TelemetryInfoUnion } from '@common/dpsl';
 import { handleTelemetry } from '../../controllers/telemetry';
 import * as fakeData from '../../services/fake_telemetry.data';
 
@@ -77,7 +77,7 @@ describe('should return correct telemetry data', () => {
   const testCases: {
     name: string;
     infoType: TelemetryInfoType;
-    expectedResult: DpslTypes;
+    expectedResult: TelemetryInfoUnion;
   }[] = [
     {
       name: `battery`,
