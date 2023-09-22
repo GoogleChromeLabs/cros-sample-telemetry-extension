@@ -8,7 +8,7 @@
 
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { DpslTypes } from '@common/dpsl';
+import { TelemetryInfoUnion } from '@common/dpsl';
 import {
   Request,
   Response,
@@ -29,7 +29,7 @@ export class TelemetryService {
 
   public fetchTelemetryData: (
     infoType: TelemetryInfoType
-  ) => Promise<DpslTypes> | undefined = (category) => {
+  ) => Promise<TelemetryInfoUnion> | undefined = (category) => {
     return new Promise((resolve, reject) => {
       const request = this.constructTelemetryRequest(category);
       try {
