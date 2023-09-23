@@ -4,5 +4,6 @@
 
 export const environment = {
   production: true,
-  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc'
+  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc',
+  serviceWorker: false
 };
