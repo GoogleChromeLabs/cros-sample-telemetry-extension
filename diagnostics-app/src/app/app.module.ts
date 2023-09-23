@@ -8,6 +8,7 @@
  */
 
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -46,7 +47,7 @@ import { TelemetryModule } from './telemetry/telemetry.module';
     SharedModule,
     TelemetryModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
