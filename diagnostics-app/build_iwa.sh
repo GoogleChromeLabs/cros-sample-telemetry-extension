@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Build the angular project
-ng build
+ng build --configuration iwa
 
 # Create folders
 mkdir -p dist/iwa

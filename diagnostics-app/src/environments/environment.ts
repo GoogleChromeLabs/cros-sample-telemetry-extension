@@ -3,12 +3,14 @@
 // found in the LICENSE file.
 
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// `npm run build_pwa` replaces `environment.ts` with `environment.pwa.ts`.
+// `npm run build_iwa` replaces `environment.ts` with `environment.iwa.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
-  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc'
+  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc',
+  serviceWorker: false,
 };
 
 /*
