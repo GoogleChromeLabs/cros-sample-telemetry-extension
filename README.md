@@ -33,7 +33,7 @@ At this point, you should be able to see a folder with all the resources in `dia
 
 To develop against a real extension, you should make sure the URL is allowlisted and the url-scheme is secure (HTTPS).
 
-See the below link for more information on how to configure the PWA.
+See the link below for more information on how to configure the PWA.
 https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
 
 ### Diagnostics App IWA
@@ -52,17 +52,17 @@ At this point, you should be able to see a `sample-iwa.swbn` file. This file is 
 
 At this point, all the resources needed for the extension will be in `diagnostics-extension/build`.
 
-Copy the file into your chromeOS device, and try to load an unpacked extension from the `chrome://extension` page.
+Copy the files into your chromeOS device, and try to load an unpacked extension from the `chrome://extensions` page.
 
-See the below link for more information on how to configure the extension.
+See the link below for more information on how to configure the extension.
 https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
 
 ### Common Issues
 If you are having trouble installing or accessing the correct API, below are some common issues.
 
 Check that each item is configured correctly.
-1. The extension ID is a allowlisted ID. You can view the extension ID on the `chrome://extension` page.
-2. The PWA/IWA origin is a allowlisted origin.
+1. The extension ID is an allowlisted ID. You can view the extension ID on the `chrome://extensions` page.
+2. The PWA/IWA origin is an allowlisted origin.
 3. The PWA origin is using a secure protocol (HTTPS).
-4. The file permissions are set to be `r+x` for the `chronos` user for all the build folders and files
-5. The `externally_connectable` attribute matches the PWA/IWA origin
+4. The file permissions are set to be `r+x` for the `chronos` user for all the build folders and files.
+5. The `externally_connectable` attribute matches the PWA/IWA origin.
