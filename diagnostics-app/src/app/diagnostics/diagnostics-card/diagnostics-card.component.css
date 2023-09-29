@@ -1,0 +1,93 @@
+/*
+ * Copyright 2023 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+ .diagnostics-card {
+  background-color: var(--app-dashboard-card-background);
+  padding: 3rem;
+  border-radius: 3px;
+ }
+
+ .header-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--app-dashboard-card-color);
+ }
+
+ .header-bar .header-and-params {
+  display: flex;
+  flex-direction: row;
+ }
+  
+ .header-bar header {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: auto;
+  margin-bottom: auto;
+ }
+
+ .params-info {
+  font-size: 10px;
+  color: var(--color-grey);
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 30px;
+ }
+  
+ .param-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ }
+ 
+ .header-bar .buttons {
+  display: flex;
+ }
+
+ .header-bar button {
+  margin: auto 5px;
+ }
+
+ .error-message {
+  color: var(--app-error-message-color);
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ }
+
+ .progress-bar-container {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+ }
+
+ .progress-bar {
+  margin: auto;
+ }
+
+ .message-bar {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+ }
+
+ .green {
+  color: green;
+ }
+ 
+ .yellow {
+  color: var(--color-yellow);
+ }
+
+ .red {
+  color: red;
+ }

@@ -1,0 +1,57 @@
+<!-- 
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<!-- TODO(b/301888904): Change comparison to use enum after migration from const enum to enum -->
+
+<div class="diagnostics-card">
+  <div class="header-bar">
+    <div class="header-and-params">
+      <header>{{ routine.toUpperCase() }}</header>
+      <div class="params-info" *ngIf="params">
+        <div class="param-info" *ngFor="let param of $any(params) | keyvalue: originalOrder">
+          {{ param.key }}: {{ param.value }}
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button mat-raised-button color="basic" (click)="startRoutine()" [disabled]="state !== 'ready'">Run</button>
+      <button mat-raised-button color="warn" (click)="stopRoutine()" [disabled]="state !== 'running'">Stop</button>
+      <button mat-raised-button color="basic" (click)="resumeRoutine()" [disabled]="!canResume() || state !== 'waiting_for_user_action'">Resume</button>
+    </div>
+  </div>
+  <ng-container *ngIf="state !== 'ready'">
+    <ng-container *ngIf="error; then showError; else showRunning"></ng-container>
+    <ng-template #showError>
+      <div class="error-message">
+        <mat-icon mat-list-icon>warning</mat-icon>
+        {{ error }}
+      </div>
+    </ng-template>
+    <ng-template #showRunning>
+      <div class="progress-bar-container">
+        <mat-progress-bar class="progress-bar" mode="determinate" [value]="routineInfo?.progress_percent"></mat-progress-bar>
+        {{ routineInfo?.progress_percent }}%
+      </div>
+    </ng-template>
+  </ng-container> 
+  <div class="message-bar" [ngClass]="messageColor" *ngIf="routineInfo">
+    <div *ngIf="routineInfo.status === 'passed'">Passed</div>
+    <div *ngIf="routineInfo.status ==='failed'">
+      Failed: {{ routineInfo.status_message }}
+    </div>
+    <div *ngIf="routineInfo.status === 'error'">
+      Error: {{ routineInfo.status_message }}
+    </div>
+    <div *ngIf="routineInfo.status === 'cancelled'">Cancelled</div>
+    <div *ngIf="routineInfo.status === 'failed_to_start'">Failed To Start</div>
+    <div *ngIf="routineInfo.status === 'removed'">Removed</div>
+    <div *ngIf="routineInfo.status === 'unsupported'">Unsupported</div>
+    <div *ngIf="routineInfo.status === 'not_run'">Not Run</div>
+    <div *ngIf="routineInfo.status === 'waiting_user_action'">
+      {{ routineInfo.status_message }}: {{ routineInfo.user_message }}
+    </div>
+  </div>
+</div>

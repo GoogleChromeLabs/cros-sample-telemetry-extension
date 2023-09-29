@@ -37,8 +37,9 @@ export const enum ResponseErrorInfoMessage {
   MissingTelemetryRequest = 'Missing telemetry object in request.',
   MissingDiagnosticsRequest = 'Missing diagnostics object in request.',
   InvalidDiagnosticsAction = 'The requested diagnostics action is either invalid or missing.',
-  InvalidDiagnosticsParams = 'The requested diagnostics params are either invalid or missing.',  
+  InvalidDiagnosticsParams = 'The requested diagnostics params are either invalid or missing.',
   InvalidDiagnosticsRoutineName = 'The requested diagnostics routine name is either invalid or missing.',
+  InvalidDiagnosticsRoutineInfo = 'The requested diagnostics routine info is either invalid or missing.',
   InvalidDiagnosticsRoutineId = 'The requested diagnostics routine id is either invalid or missing.',
   UnsupportedTelemetryFunction = 'Unsupported operation. The requested telemetry function is not supported',
 }
