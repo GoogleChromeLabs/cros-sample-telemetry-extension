@@ -36,7 +36,7 @@ describe('should return correct error messages', () => {
     const req: Request = {
       type: RequestType.TELEMETRY,
       //@ts-ignore
-      telemetry: { info: 'CACHED_VPD' },
+      telemetry: { info: 'invalid_type' },
     };
     const res: (response: Response) => void = jest.fn();
 
@@ -80,34 +80,74 @@ describe('should return correct telemetry data', () => {
     expectedResult: TelemetryInfoUnion;
   }[] = [
     {
+      name: `audio`,
+      infoType: TelemetryInfoType.AUDIO,
+      expectedResult: fakeData.audioInfo,
+    },
+    {
       name: `battery`,
       infoType: TelemetryInfoType.BATTERY,
-      expectedResult: fakeData.batteryInfo(),
-    },
-    {
-      name: `vpd`,
-      infoType: TelemetryInfoType.VPD,
-      expectedResult: fakeData.vpdInfo(),
-    },
-    {
-      name: `cpu`,
-      infoType: TelemetryInfoType.CPU,
-      expectedResult: fakeData.cpuInfo(),
-    },
-    {
-      name: `memory`,
-      infoType: TelemetryInfoType.MEMORY,
-      expectedResult: fakeData.memoryInfo(),
+      expectedResult: fakeData.batteryInfo,
     },
     {
       name: `block device`,
       infoType: TelemetryInfoType.BLOCK_DEVICE,
-      expectedResult: fakeData.blockDeviceInfo(),
+      expectedResult: fakeData.blockDeviceInfo,
+    },
+    {
+      name: `cpu`,
+      infoType: TelemetryInfoType.CPU,
+      expectedResult: fakeData.cpuInfo,
+    },
+    {
+      name: `display`,
+      infoType: TelemetryInfoType.DISPLAY,
+      expectedResult: fakeData.displayInfo,
+    },
+    {
+      name: `marketing`,
+      infoType: TelemetryInfoType.MARKETING,
+      expectedResult: fakeData.marketingInfo,
+    },
+    {
+      name: `memory`,
+      infoType: TelemetryInfoType.MEMORY,
+      expectedResult: fakeData.memoryInfo,
+    },
+    {
+      name: `network`,
+      infoType: TelemetryInfoType.NETWORK,
+      expectedResult: fakeData.networkInfo,
+    },
+    {
+      name: `oem`,
+      infoType: TelemetryInfoType.OEM,
+      expectedResult: fakeData.oemInfo,
+    },
+    {
+      name: `os version`,
+      infoType: TelemetryInfoType.OS_VERSION,
+      expectedResult: fakeData.osVersionInfo,
+    },
+    {
+      name: `usb`,
+      infoType: TelemetryInfoType.USB,
+      expectedResult: fakeData.usbInfo,
+    },
+    {
+      name: `vpd`,
+      infoType: TelemetryInfoType.VPD,
+      expectedResult: fakeData.vpdInfo,
     },
     {
       name: `stateful partition`,
       infoType: TelemetryInfoType.STATEFUL_PARTITION,
-      expectedResult: fakeData.statefulPartitionInfo(),
+      expectedResult: fakeData.statefulPartitionInfo,
+    },
+    {
+      name: `tpm`,
+      infoType: TelemetryInfoType.TPM,
+      expectedResult: fakeData.tpmInfo,
     },
   ];
 

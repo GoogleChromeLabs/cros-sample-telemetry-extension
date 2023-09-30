@@ -7,57 +7,32 @@
  */
 
 import {
+  AudioInfo,
   BatteryInfo,
-  BlockDeviceInfo,
+  NonRemovableBlockDeviceInfoResponse,
   CpuArchitectureEnum,
   CpuInfo,
+  DisplayInputType,
+  DisplayInfo,
+  MarketingInfo,
   MemoryInfo,
+  InternetConnectivityInfo,
   OemData,
-  StatefulPartitionInfo,
+  OsVersionInfo,
+  UsbBusDevices,
   VpdInfo,
+  StatefulPartitionInfo,
+  TpmInfo,
 } from '@common/dpsl';
 
-export const vpdInfo = (): VpdInfo => ({
-  skuNumber: 'sku',
-  serialNumber: 'serial-number',
-  modelName: 'model',
-});
+export const audioInfo: AudioInfo = {
+  outputNodes: [{}],
+  inputNodes: [{}],
+};
+export const getAudioInfo = async (): Promise<AudioInfo> => audioInfo;
 
-export const memoryInfo = (): MemoryInfo => ({
-  totalMemoryKiB: 16270856,
-  freeMemoryKiB: 13067496,
-  availableMemoryKiB: 14810656,
-  pageFaultsSinceLastBoot: '62076622',
-});
-
-export const oemData = (): OemData => ({
-  oemData: 'ABCDEFGHIJKLMN',
-});
-
-export const blockDeviceInfo = (): BlockDeviceInfo => [
-  {
-    path: '/dev/nvme0n1',
-    size: '256060514304',
-    type: 'block:nvme:pci:pci',
-    manufacturerId: 0,
-    name: 'WDC PC SN520 SDAPTUW-256G-1006',
-    serial: '4294967295',
-    bytesReadSinceLastBoot: '5274074112',
-    bytesWrittenSinceLastBoot: '13497171968',
-    readTimeSecondsSinceLastBoot: '40',
-    writeTimeSecondsSinceLastBoot: '1077',
-    ioTimeSecondsSinceLastBoot: '152',
-    discardTimeSecondsSinceLastBoot: '0',
-  },
-];
-
-export const statefulPartitionInfo = (): StatefulPartitionInfo => ({
-  availableSpace: '1340000',
-  totalSpace: '2005000',
-});
-
-export const batteryInfo = (): BatteryInfo => ({
-  cycleCount: '75',
+export const batteryInfo: BatteryInfo = {
+  cycleCount: 75,
   voltageNow: 14,
   vendor: 'google',
   serialNumber: 'test-bat-111',
@@ -70,10 +45,20 @@ export const batteryInfo = (): BatteryInfo => ({
   technology: 'plutonium',
   status: 'good',
   manufactureDate: '2019-07-09T16:59:39.787Z',
-  temperature: '43',
-});
+  temperature: 43,
+};
+export const getBatteryInfo = async (): Promise<BatteryInfo> => batteryInfo;
 
-export const cpuInfo = (): CpuInfo => ({
+export const blockDeviceInfo: NonRemovableBlockDeviceInfoResponse = [
+  {
+    size: 256060514304,
+    type: 'block:nvme:pci:pci',
+    name: 'WDC PC SN520 SDAPTUW-256G-1006',
+  },
+];
+export const getNonRemovableBlockDevicesInfo = async (): Promise<NonRemovableBlockDeviceInfoResponse> => blockDeviceInfo;
+
+export const cpuInfo: CpuInfo = {
   numTotalThreads: 8,
   architecture: CpuArchitectureEnum.x86_64,
   physicalCpus: [
@@ -443,4 +428,72 @@ export const cpuInfo = (): CpuInfo => ({
       ],
     },
   ],
-});
+};
+export const getCpuInfo = async (): Promise<CpuInfo> => cpuInfo;
+
+export const displayInfo: DisplayInfo = {
+  embeddedDisplay: {
+    inputType: DisplayInputType.unknown,
+  },
+  externalDisplays: [
+    {
+      inputType: DisplayInputType.unknown,
+    }
+  ]
+};
+export const getDisplayInfo = async (): Promise<DisplayInfo> => displayInfo;
+
+export const marketingInfo: MarketingInfo = {};
+export const getMarketingInfo = async (): Promise<MarketingInfo> => marketingInfo;
+
+export const memoryInfo: MemoryInfo = {
+  totalMemoryKiB: 16270856,
+  freeMemoryKiB: 13067496,
+  availableMemoryKiB: 14810656,
+  pageFaultsSinceLastBoot: '62076622',
+};
+export const getMemoryInfo = async (): Promise<MemoryInfo> => memoryInfo;
+
+export const networkInfo: InternetConnectivityInfo = {
+  networks: [
+    { ipv6Addresses: ['2001:db8:3333:4444:5555:6666:7777:8888'] },
+  ]
+};
+export const getInternetConnectivityInfo = async (): Promise<InternetConnectivityInfo> => networkInfo;
+
+export const oemInfo: OemData = {
+  oemData: 'ABCDEFGHIJKLMN',
+};
+export const getOemData = async (): Promise<OemData> => oemInfo;
+
+export const osVersionInfo: OsVersionInfo = {};
+export const getOsVersionInfo = async (): Promise<OsVersionInfo> => osVersionInfo;
+
+export const usbInfo: UsbBusDevices = {
+  devices: [
+    {interfaces: [
+      {}
+    ]}
+  ]
+};
+export const getUsbBusInfo = async (): Promise<UsbBusDevices> => usbInfo;
+
+export const vpdInfo: VpdInfo = {
+  skuNumber: 'sku',
+  serialNumber: 'serial-number',
+  modelName: 'model',
+};
+export const getVpdInfo = async (): Promise<VpdInfo> => vpdInfo;
+
+export const statefulPartitionInfo: StatefulPartitionInfo = {
+  availableSpace: 1340000,
+  totalSpace: 2005000,
+};
+export const getStatefulPartitionInfo = async (): Promise<StatefulPartitionInfo> => statefulPartitionInfo;
+
+export const tpmInfo: TpmInfo = {
+  version: {},
+  status: {},
+  dictionaryAttack: {},
+};
+export const getTpmInfo = async (): Promise<TpmInfo> => tpmInfo;

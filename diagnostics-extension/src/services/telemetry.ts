@@ -7,44 +7,43 @@
  */
 
 import {
+  AudioInfo,
   BatteryInfo,
-  BlockDeviceInfo,
+  NonRemovableBlockDeviceInfoResponse,
   CpuInfo,
+  DisplayInfo,
+  MarketingInfo,
   MemoryInfo,
+  InternetConnectivityInfo,
   OemData,
-  StatefulPartitionInfo,
+  OsVersionInfo,
+  UsbBusDevices,
   VpdInfo,
+  StatefulPartitionInfo,
+  TpmInfo,
 } from '@common/dpsl';
-import * as fakeData from './fake_telemetry.data';
+import * as fakeTelemetry from './fake_telemetry.data';
 import { environment } from '../environments/environment';
-import { ResponseErrorInfoMessage } from '@common/message';
 
 /**
  * Abstract class reprensenting the interface of
  * service to fetch system telemetry data
  */
 export abstract class TelemetryService {
-  getBatteryInfo(): Promise<BatteryInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getCachedVpdInfo(): Promise<VpdInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getCpuInfo(): Promise<CpuInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getMemoryInfo(): Promise<MemoryInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getNonRemovableBlockDevicesInfo(): Promise<BlockDeviceInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getOemData(): Promise<OemData> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
-  getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
-    return Promise.reject(ResponseErrorInfoMessage.UnsupportedTelemetryFunction);
-  }
+  abstract getAudioInfo(): Promise<AudioInfo>;
+  abstract getBatteryInfo(): Promise<BatteryInfo>;
+  abstract getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse>
+  abstract getCpuInfo(): Promise<CpuInfo>;
+  abstract getDisplayInfo(): Promise<DisplayInfo>;
+  abstract getMarketingInfo(): Promise<MarketingInfo>;
+  abstract getMemoryInfo(): Promise<MemoryInfo>;
+  abstract getInternetConnectivityInfo(): Promise<InternetConnectivityInfo>;
+  abstract getOemData(): Promise<OemData>
+  abstract getOsVersionInfo(): Promise<OsVersionInfo>;
+  abstract getUsbBusInfo(): Promise<UsbBusDevices>;
+  abstract getVpdInfo(): Promise<VpdInfo>;
+  abstract getStatefulPartitionInfo(): Promise<StatefulPartitionInfo>;
+  abstract getTpmInfo(): Promise<TpmInfo>;
 }
 
 /**
@@ -52,26 +51,47 @@ export abstract class TelemetryService {
  * @extends TelemetryService
  */
 export class TelemetryServiceImpl extends TelemetryService {
+  async getAudioInfo(): Promise<AudioInfo> {
+    return (chrome as any).os.telemetry.getAudioInfo();
+  }
   async getBatteryInfo(): Promise<BatteryInfo> {
     return (chrome as any).os.telemetry.getBatteryInfo();
   }
-  async getCachedVpdInfo(): Promise<VpdInfo> {
-    return (chrome as any).os.telemetry.getVpdInfo();
+  async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
+    return (chrome as any).os.telemetry.getNonRemovableBlockDevicesInfo();
   }
   async getCpuInfo(): Promise<CpuInfo> {
     return (chrome as any).os.telemetry.getCpuInfo();
   }
+  async getDisplayInfo(): Promise<DisplayInfo> {
+    return (chrome as any).os.telemetry.getDisplayInfo();
+  }
+  async getMarketingInfo(): Promise<MarketingInfo> {
+    return (chrome as any).os.telemetry.getMarketingInfo();
+  }
   async getMemoryInfo(): Promise<MemoryInfo> {
     return (chrome as any).os.telemetry.getMemoryInfo();
   }
-  async getNonRemovableBlockDevicesInfo(): Promise<BlockDeviceInfo> {
-    return (chrome as any).os.telemetry.getNonRemovableBlockDevicesInfo();
+  async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
+    return (chrome as any).os.telemetry.getInternetConnectivityInfo();
   }
   async getOemData(): Promise<OemData> {
     return (chrome as any).os.telemetry.getOemData();
   }
+  async getOsVersionInfo(): Promise<OsVersionInfo> {
+    return (chrome as any).os.telemetry.getOsVersionInfo();
+  }
+  async getUsbBusInfo(): Promise<UsbBusDevices> {
+    return (chrome as any).os.telemetry.getUsbBusInfo();
+  }
+  async getVpdInfo(): Promise<VpdInfo> {
+    return (chrome as any).os.telemetry.getVpdInfo();
+  }
   async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
     return (chrome as any).os.telemetry.getStatefulPartitionInfo();
+  }
+  async getTpmInfo(): Promise<TpmInfo> {
+    return (chrome as any).os.telemetry.getTpmInfo();
   }
 }
 
@@ -80,26 +100,47 @@ export class TelemetryServiceImpl extends TelemetryService {
  * @extends TelemetryService
  */
 export class FakeTelemetryService extends TelemetryService {
-  async getBatteryInfo(): Promise<BatteryInfo> {
-    return fakeData.batteryInfo();
+  async getAudioInfo(): Promise<AudioInfo> {
+    return fakeTelemetry.getAudioInfo();
   }
-  async getCachedVpdInfo(): Promise<VpdInfo> {
-    return fakeData.vpdInfo();
+  async getBatteryInfo(): Promise<BatteryInfo> {
+    return fakeTelemetry.getBatteryInfo();
+  }
+  async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
+    return fakeTelemetry.getNonRemovableBlockDevicesInfo();
   }
   async getCpuInfo(): Promise<CpuInfo> {
-    return fakeData.cpuInfo();
+    return fakeTelemetry.getCpuInfo();
+  }
+  async getDisplayInfo(): Promise<DisplayInfo> {
+    return fakeTelemetry.getDisplayInfo();
+  }
+  async getMarketingInfo(): Promise<MarketingInfo> {
+    return fakeTelemetry.getMarketingInfo();
   }
   async getMemoryInfo(): Promise<MemoryInfo> {
-    return fakeData.memoryInfo();
+    return fakeTelemetry.getMemoryInfo();
   }
-  async getNonRemovableBlockDevicesInfo(): Promise<BlockDeviceInfo> {
-    return fakeData.blockDeviceInfo();
+  async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
+    return fakeTelemetry.getInternetConnectivityInfo();
   }
   async getOemData(): Promise<OemData> {
-    return fakeData.oemData();
+    return fakeTelemetry.getOemData();
+  }
+  async getOsVersionInfo(): Promise<OsVersionInfo> {
+    return fakeTelemetry.getOsVersionInfo();
+  }
+  async getUsbBusInfo(): Promise<UsbBusDevices> {
+    return fakeTelemetry.getUsbBusInfo();
+  }
+  async getVpdInfo(): Promise<VpdInfo> {
+    return fakeTelemetry.getVpdInfo();
   }
   async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
-    return fakeData.statefulPartitionInfo();
+    return fakeTelemetry.getStatefulPartitionInfo();
+  }
+  async getTpmInfo(): Promise<TpmInfo> {
+    return fakeTelemetry.getTpmInfo();
   }
 }
 

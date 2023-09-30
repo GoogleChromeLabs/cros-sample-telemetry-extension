@@ -33,34 +33,74 @@ describe('should return instance of FakeTelemetryService', () => {
     expectedResult: TelemetryInfoUnion;
   }[] = [
     {
+      name: `audio`,
+      methodUnderTest: telemetryService.getAudioInfo,
+      expectedResult: fakeData.audioInfo,
+    },
+    {
       name: `battery`,
       methodUnderTest: telemetryService.getBatteryInfo,
-      expectedResult: fakeData.batteryInfo(),
-    },
-    {
-      name: `vpd`,
-      methodUnderTest: telemetryService.getCachedVpdInfo,
-      expectedResult: fakeData.vpdInfo(),
-    },
-    {
-      name: `cpu`,
-      methodUnderTest: telemetryService.getCpuInfo,
-      expectedResult: fakeData.cpuInfo(),
-    },
-    {
-      name: `memory`,
-      methodUnderTest: telemetryService.getMemoryInfo,
-      expectedResult: fakeData.memoryInfo(),
+      expectedResult: fakeData.batteryInfo,
     },
     {
       name: `block device`,
       methodUnderTest: telemetryService.getNonRemovableBlockDevicesInfo,
-      expectedResult: fakeData.blockDeviceInfo(),
+      expectedResult: fakeData.blockDeviceInfo,
+    },
+    {
+      name: `cpu`,
+      methodUnderTest: telemetryService.getCpuInfo,
+      expectedResult: fakeData.cpuInfo,
+    },
+    {
+      name: `display`,
+      methodUnderTest: telemetryService.getDisplayInfo,
+      expectedResult: fakeData.displayInfo,
+    },
+    {
+      name: `marketing`,
+      methodUnderTest: telemetryService.getMarketingInfo,
+      expectedResult: fakeData.marketingInfo,
+    },
+    {
+      name: `memory`,
+      methodUnderTest: telemetryService.getMemoryInfo,
+      expectedResult: fakeData.memoryInfo,
+    },
+    {
+      name: `network`,
+      methodUnderTest: telemetryService.getInternetConnectivityInfo,
+      expectedResult: fakeData.networkInfo,
+    },
+    {
+      name: `oem`,
+      methodUnderTest: telemetryService.getOemData,
+      expectedResult: fakeData.oemInfo,
+    },
+    {
+      name: `os version`,
+      methodUnderTest: telemetryService.getOsVersionInfo,
+      expectedResult: fakeData.osVersionInfo,
+    },
+    {
+      name: `usb`,
+      methodUnderTest: telemetryService.getUsbBusInfo,
+      expectedResult: fakeData.usbInfo,
+    },
+    {
+      name: `vpd`,
+      methodUnderTest: telemetryService.getVpdInfo,
+      expectedResult: fakeData.vpdInfo,
     },
     {
       name: `stateful partition`,
       methodUnderTest: telemetryService.getStatefulPartitionInfo,
-      expectedResult: fakeData.statefulPartitionInfo(),
+      expectedResult: fakeData.statefulPartitionInfo,
+    },
+    {
+      name: `tpm`,
+      methodUnderTest: telemetryService.getTpmInfo,
+      expectedResult: fakeData.tpmInfo,
     },
   ];
 

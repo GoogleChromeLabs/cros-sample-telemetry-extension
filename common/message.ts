@@ -22,12 +22,20 @@ export const enum RequestType {
 }
 
 export const enum TelemetryInfoType {
+  AUDIO = 'audio',
   BATTERY = 'battery',
-  BLOCK_DEVICE = 'block-device',
+  BLOCK_DEVICE = 'block_device',
   CPU = 'cpu',
+  DISPLAY = 'display',
+  MARKETING = 'marketing',
   MEMORY = 'memory',
-  STATEFUL_PARTITION = 'stateful-partition',
+  NETWORK = 'network',
+  OEM = 'oem',
+  OS_VERSION = 'os_version',
+  USB = 'usb',
   VPD = 'vpd',
+  STATEFUL_PARTITION = 'stateful_partition',
+  TPM = 'tpm',
 }
 
 export const enum ResponseErrorInfoMessage {
