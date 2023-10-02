@@ -20,7 +20,6 @@
   "_devDependencies": {
     "@typescript-eslint/eslint-plugin": "TypeScript plugin for eslint",
     "@typescript-eslint/parser": "^Typescript parser for eslint",
-    "cros-dpsl-js": "Diagnostics support library for Chrome OS",
     "eslint": "eslint for lint configurations",
     "jest": "Testing library",
     "ts-jest": "TypeScript support for Jest",
@@ -34,7 +33,6 @@
     "@types/jest": "^27.5.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "cros-dpsl-js": "^1.3.1",
     "eslint": "^7.32.0",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.5",
