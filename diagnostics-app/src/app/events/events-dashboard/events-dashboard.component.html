@@ -1,1 +1,21 @@
-<p>events-dashboard works!</p>
+<!--
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<div class="events-dashboard">
+    <ng-container *ngIf="error; then showError; else renderContent"></ng-container>
+    <ng-template #showError>
+      <div class="error-message">
+        <mat-icon mat-list-icon>warning</mat-icon>
+        {{ error }}
+      </div>
+    </ng-template>
+    <ng-template #renderContent>
+      <div class="events-card-container" *ngFor="let category of supportedCategories">
+        <app-events-card [category]="category"></app-events-card>
+      </div>
+    </ng-template>
+  </div>
+    
