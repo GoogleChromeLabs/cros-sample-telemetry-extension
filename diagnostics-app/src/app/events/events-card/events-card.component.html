@@ -1,0 +1,35 @@
+<!--
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<!-- TODO(b/301888904): Change comparison to use enum after migration from const enum to enum -->
+
+<div class="events-card">
+  <div class="header-bar">
+    <header>{{ category.toUpperCase() }}</header>
+    <div class="buttons">
+      <button mat-raised-button color="basic" (click)="startCapturingEvents()" [disabled]="state === 'listening'">Start</button>
+      <button mat-raised-button color="warn" (click)="stopCapturingEvents()" [disabled]="state === 'not_listening'">Stop</button>
+    </div>
+  </div>
+  <div class="events-content">
+    <ng-container *ngIf="error; then showError; else showContent"></ng-container>
+    <ng-template #showError>
+      <div class="error-message">
+        <mat-icon mat-list-icon>warning</mat-icon>
+        {{ error }}
+      </div>
+    </ng-template>
+    <ng-template #showContent>
+      <ng-container *ngIf="state === 'listening'">
+        <div class="events-card-content-container" *ngFor="let event of eventList">
+          Get event:
+          <app-events-card-content [event]="event!"></app-events-card-content>
+        </div>
+        <div class="listening-text">listening {{ category }} event ...</div>
+      </ng-container>
+    </ng-template>
+  </div>
+</div>
