@@ -12,15 +12,27 @@ import {
   ResponseErrorInfoMessage,
 } from '@common/message';
 import { handleDiagnostics } from './controllers/diagnostics';
-import { handleEvents } from './controllers/events';
+import {
+  handleEvents,
+  onEventPortConnect,
+} from './controllers/events';
 import { handleTelemetry } from './controllers/telemetry';
 import { generateErrorResponse } from './utils';
+
+let isFirstConnection: boolean; // true if the it's the first port connection from the UI 
 
 chrome.runtime.onInstalled.addListener(
   (details: chrome.runtime.InstalledDetails) => {
     console.log('Service worker is installed!', details);
+    isFirstConnection = true;
   }
 );
+
+chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
+  // the event handlers should only be registered for once
+  onEventPortConnect(port, isFirstConnection);
+  isFirstConnection = false;
+});
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
   console.log(req, sender);
