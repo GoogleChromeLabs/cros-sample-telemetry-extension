@@ -1,0 +1,18 @@
+<!--
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<div class="events-card-content">
+  <div *ngFor="let item of $any(event) | keyvalue: originalOrder">
+    <b>{{ item.key }}</b>:
+    <ng-container *ngIf="isPrimitiveType(item.value); then renderPrimitive; else renderSubobject"></ng-container>
+    <ng-template #renderPrimitive>
+      {{ item.value }}
+    </ng-template>
+    <ng-template #renderSubobject>
+      <app-events-card-content [event]="item.value"></app-events-card-content>
+    </ng-template>
+  </div>
+</div>
