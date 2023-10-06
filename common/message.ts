@@ -10,6 +10,9 @@
 import {
   TelemetryInfoUnion,
   DiagnosticsParams,
+  EventCategory,
+  EventsInfo,
+  EventSupportStatusInfo,
   GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
   RoutineType,
@@ -44,12 +47,18 @@ export const enum ResponseErrorInfoMessage {
   InvalidDiagnosticsRoutineStatus = 'The diagnostics routine status is invalid.',
   MissingTelemetryRequest = 'Missing telemetry object in request.',
   MissingDiagnosticsRequest = 'Missing diagnostics object in request.',
+  MissingEventsRequest = 'Missing events object in request.',
   InvalidDiagnosticsAction = 'The requested diagnostics action is either invalid or missing.',
   InvalidDiagnosticsParams = 'The requested diagnostics params are either invalid or missing.',
   InvalidDiagnosticsRoutineName = 'The requested diagnostics routine name is either invalid or missing.',
   InvalidDiagnosticsRoutineInfo = 'The requested diagnostics routine info is either invalid or missing.',
   InvalidDiagnosticsRoutineId = 'The requested diagnostics routine id is either invalid or missing.',
+  InvalidEventsAction = 'The requested events action is either invalid or missing.',
+  InvalidEventsGetSubject = 'The requested events category is invalid.',
+  InvalidPortName = 'The connection port name is either invalid or missing.',
   UnsupportedTelemetryFunction = 'Unsupported operation. The requested telemetry function is not supported',
+  MissingEventsTypeSubject = 'Missing the subject for sending the event info from events service',
+  FailedEventsServiceConstructor = 'Error when establishing connection and add listener with extension.',
 }
 
 export const enum DiagnosticsAction {
@@ -58,6 +67,16 @@ export const enum DiagnosticsAction {
   START = 'start',
   STATUS = 'status',
   STOP = 'stop',
+}
+
+export const enum EventsAction {
+  IS_EVENT_SUPPORTED = 'is-event-supported',
+  START_CAPTURING_EVENT = 'start-capturing-event',
+  STOP_CAPTURING_EVENT = 'stop-capturing-event',
+}
+
+export const enum PortName {
+  EVENTS_PORT = 'events-port',
 }
 
 export interface TelemetryRequest {
@@ -71,10 +90,16 @@ export interface DiagnosticsRequest {
   params?: DiagnosticsParams;
 }
 
+export interface EventsRequest {
+  action: EventsAction;
+  eventType: EventCategory;
+}
+
 export interface Request {
   type: RequestType;
   telemetry?: TelemetryRequest;
   diagnostics?: DiagnosticsRequest;
+  events?: EventsRequest;
 }
 
 export interface Error {
@@ -90,6 +115,14 @@ export interface RoutineUpdateResponse {
   info: GetRoutineUpdateResponse;
 }
 
+export type EventsResponse =
+  | EventSupportStatusInfo
+
+export interface EventMessage {
+  type: EventCategory;
+  info: EventsInfo;
+}
+
 export type DiagnosticsResponse =
   | GetAvailableRoutinesResponse
   | RoutineUpdateResponse
@@ -99,4 +132,5 @@ export interface Response {
   error?: Error;
   telemetry?: TelemetryResponse;
   diagnostics?: DiagnosticsResponse;
+  events?: EventsResponse;
 }
