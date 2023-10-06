@@ -1,0 +1,57 @@
+/*
+ * Copyright 2023 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+ .events-card {
+  background-color: var(--app-dashboard-card-background);
+  padding: 3rem;
+  border-radius: 3px;
+ }
+
+ .events-card header {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: auto;
+  margin-bottom: auto;
+ }
+
+ .header-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 14px;
+ }
+
+ .header-bar .buttons {
+  display: flex;
+ }
+
+ .header-bar button {
+  margin: auto 5px;
+ }
+
+ .error-message {
+  color: var(--app-error-message-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+ }
+
+ .events-card-content-container {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+ }
+
+ .listening-text {
+  color: aqua;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+ }
