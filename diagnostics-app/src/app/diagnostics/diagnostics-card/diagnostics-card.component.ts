@@ -44,7 +44,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
   private _reachedTerminalState = false; // true if the routine reaches a terminal state
   
   // the set containing all the terminal states of RoutineStatus
-  readonly ternimalStates = new Set<RoutineStatus>([
+  readonly terminalStates = new Set<RoutineStatus>([
     RoutineStatus.passed, RoutineStatus.failed, RoutineStatus.error,
     RoutineStatus.cancelled, RoutineStatus.failed_to_start, RoutineStatus.removed,
     RoutineStatus.unsupported, RoutineStatus.not_run
@@ -88,7 +88,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
     if (this._routineInfo.status === RoutineStatus.waiting_user_action) {
       this._state = DiagnosticsCardState.WAITING_FOR_USER_ACTION;
-    } else if (this.ternimalStates.has(this._routineInfo.status)) {
+    } else if (this.terminalStates.has(this._routineInfo.status)) {
       this._reachedTerminalState = true;
       this.stopRoutine();
     }
