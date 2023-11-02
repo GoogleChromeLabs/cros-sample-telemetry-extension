@@ -113,7 +113,12 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       const interval = (refreshIntervals.diagnostics.has(this.routine)) ?
         refreshIntervals.diagnostics.get(this.routine) : defaultDiagnosticsRefreshInterval;
       this._intervalId = window.setInterval(() => {
-        this.getRoutineStatus();
+        // In case there is a race condition where additional getRoutineStatus
+        // is run after the routine has finished, check that the interval ID is
+        // still set.
+        if (this.intervalId !== undefined) {
+          this.getRoutineStatus();
+        }
       }, interval);
 
       this.handleResponse();
@@ -129,20 +134,25 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       this._intervalId = undefined;
     }
 
-    try {
-      let res = await this.diagnosticsService.stopRoutine(this._routineId!);
-      res = res as RoutineUpdateResponse;
-      if (!this._reachedTerminalState) {
-        this._routineInfo = res.info;
-      }
-      this._reachedTerminalState = false;
-      this._state = DiagnosticsCardState.READY;
-      this._error = undefined;
-      this._routineId = undefined;
+    // The routine is in the process of being terminated / already terminated.
+    if (!this._routineId) {
+      return;
+    }
 
-    } catch(err) {
+    try {
+      // To prevent race condition where multiple stopRoutine is issued before
+      // the first stop routine request is returned, we reset routineId to
+      // indicate the stopRoutine request is already sent.
+      const routineId = this._routineId;
+      this._routineId = undefined;
+      await this.diagnosticsService.stopRoutine(routineId);
+      this._error = undefined;
+    } catch (err) {
       this._error = String(err);
     }
+
+    this._reachedTerminalState = false;
+    this._state = DiagnosticsCardState.READY;
   }
 
   async resumeRoutine() {
@@ -166,9 +176,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       res = res as RoutineUpdateResponse;
       this._error = undefined;
       this._routineInfo = res.info;
-
       this.handleResponse();
-
     } catch(err) {
       this._error = String(err);
     }
