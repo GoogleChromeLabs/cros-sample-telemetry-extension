@@ -8,7 +8,7 @@
   <button id="btnToggleDrawer" mat-icon-button (click)="onToggleDrawer()">
     <mat-icon>menu</mat-icon>
   </button>
-  <span>ChromeOS Diagnostics</span>
+  <span>{{app_name}}</span>
   <span class="nav-spacer"></span>
   <button id="btnToggleTheme" mat-icon-button (click)="onToggleTheme()">
     <mat-icon id="iconTheme" *ngIf="isDarkModeActivated()">light_mode</mat-icon>

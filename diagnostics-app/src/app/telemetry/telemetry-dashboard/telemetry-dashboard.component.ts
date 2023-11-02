@@ -10,6 +10,7 @@
 
 import { Component } from '@angular/core';
 import { TelemetryInfoType } from '@common/message';
+import { VISIBLE_TELEMETRY_CARDS } from 'src/config/config';
 
 @Component({
   selector: 'app-telemetry-dashboard',
@@ -18,14 +19,7 @@ import { TelemetryInfoType } from '@common/message';
 })
 export class TelemetryDashboardComponent {
   // Array of telemetry info types that will be displayed
-  private _visibleTypes: TelemetryInfoType[] = [
-    TelemetryInfoType.BATTERY,
-    TelemetryInfoType.BLOCK_DEVICE,
-    TelemetryInfoType.CPU,
-    TelemetryInfoType.MEMORY,
-    TelemetryInfoType.STATEFUL_PARTITION,
-    TelemetryInfoType.VPD,
-  ];
+  private _visibleTypes: TelemetryInfoType[] = VISIBLE_TELEMETRY_CARDS;
 
   get visibleTypes() { return this._visibleTypes; }
 }
