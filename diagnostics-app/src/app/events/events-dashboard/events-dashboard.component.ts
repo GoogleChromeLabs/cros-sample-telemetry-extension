@@ -45,6 +45,7 @@ export class EventsDashboardComponent implements OnInit {
       statusInfo = statusInfo as EventSupportStatusInfo;
       if (statusInfo.status === EventSupportStatus.supported) {
         this._supportedCategories.push(category);
+        this._supportedCategories.sort();
       }
     } catch (err) {
       this._error = String(err);

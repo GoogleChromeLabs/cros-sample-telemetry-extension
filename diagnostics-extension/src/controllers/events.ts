@@ -64,18 +64,20 @@ const stopCapturingEvents = async (
   }
 }
 
-export const onEventPortConnect = async (port: chrome.runtime.Port, isFirstConnection: boolean) => {
-  if (port.name === PortName.EVENTS_PORT) {
-    eventsService.registerPort(port);
-    if (isFirstConnection) {
-      eventsService.registerEventHandlers().then(response => {
-        if (!response.success) {
-          console.error(response.error?.message);
-        }
-      }).catch(err => {
-        console.error(err.message);
-      });
+export const registerEventHandlers = async() =>{
+  eventsService.registerEventHandlers().then(response => {
+    if (!response.success) {
+      console.error(response.error?.message);
     }
+  }).catch(err => {
+    console.error(err.message);
+  });
+}
+
+export const onEventPortConnect = async (port: chrome.runtime.Port) => {
+  if (port.name === PortName.EVENTS_PORT) {
+    console.log("[yycheng] Event port connected");
+    eventsService.registerPort(port);
   } else {
     console.error(ResponseErrorInfoMessage.InvalidPortName);
   }
@@ -86,7 +88,7 @@ export const handleEvents: EventsController = async (req, res) => {
     return res(
       generateErrorResponse(ResponseErrorInfoMessage.MissingEventsRequest)
     );
-  
+
   const eventType = req.events.eventType;
   switch (req.events.action) {
     case EventsAction.IS_EVENT_SUPPORTED:

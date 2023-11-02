@@ -95,6 +95,9 @@ export class EventsServiceImpl extends EventsService {
   ]
 
   private notifyPort = (type: EventCategory, event) => {
+    if (!this.port) {
+      return;
+    }
     this.port.postMessage({
       type: type,
       info: event

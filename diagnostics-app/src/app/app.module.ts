@@ -7,8 +7,8 @@
  * Imports all the submodules and global dependencies of the project.
  */
 
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
@@ -24,6 +24,13 @@ import { HeaderComponent } from './layout/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { SideNavComponent } from './layout/side-nav/side-nav.component';
 import { TelemetryModule } from './telemetry/telemetry.module';
+import { EventsService } from './core/services/events.service';
+
+const initializeEventService = (eventsService: EventsService): () => Promise<any> => {
+  return () => {
+    return eventsService.Init();
+  };
+}
 
 @NgModule({
   declarations: [
@@ -47,7 +54,18 @@ import { TelemetryModule } from './telemetry/telemetry.module';
     SharedModule,
     TelemetryModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [
+    EventsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeEventService,
+      multi: true,
+      deps: [EventsService]
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

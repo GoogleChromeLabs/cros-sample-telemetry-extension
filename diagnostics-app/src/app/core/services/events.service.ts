@@ -28,6 +28,7 @@ import {
   PortName,
   ResponseErrorInfoMessage,
 } from '@common/message';
+import { VISIBLE_EVENT_CARDS } from 'src/config/config';
 
 export interface getSubjectResponse {
   success: Boolean,
@@ -41,7 +42,8 @@ export interface getSubjectResponse {
 export class EventsService {
   private extensionId!: string; // the ID of the extension it connects to
   private subjects = new Map<string, Subject<EventsInfo>>; // the map of subjects that
-  private port?; // the port for connecting with the extension to get the captured event
+  private port?: any; // the port for connecting with the extension to get the captured event
+  private cache: Map<EventCategory, Promise<EventsResponse>>; // A cache to preload the supported events
 
   private constructEventsRequest: (
     payload: EventsRequest
@@ -74,27 +76,36 @@ export class EventsService {
     });
   };
 
+  Init(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      try {
+        //@ts-ignore
+        this.port = window.chrome.runtime.connect(
+          environment.extensionId,
+          { name: PortName.EVENTS_PORT }
+        );
+
+        this.port.onMessage.addListener((msg: EventMessage) => {
+          if (this.subjects.has(msg.type)) {
+            this.subjects.get(msg.type)!.next(msg.info);
+          } else {
+            console.error(ResponseErrorInfoMessage.MissingEventsTypeSubject);
+          }
+        });
+        for (const category of VISIBLE_EVENT_CARDS) {
+          this.isEventSupported(category);
+        }
+        resolve();
+      } catch (err) {
+        console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
+        reject();
+      }
+    })
+  }
+
   constructor() {
     this.extensionId = environment.extensionId;
-
-    try {
-      //@ts-ignore
-      this.port = window.chrome.runtime.connect(
-        environment.extensionId,
-        { name: PortName.EVENTS_PORT }
-      );
-
-      this.port.onMessage.addListener((msg: EventMessage) => {
-        if (this.subjects.has(msg.type)) {
-          this.subjects.get(msg.type)!.next(msg.info);
-        } else {
-          console.error(ResponseErrorInfoMessage.MissingEventsTypeSubject);
-        }
-      });
-
-    } catch (err) {
-      console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
-    }
+    this.cache = new Map<EventCategory, Promise<EventsResponse>>;
   }
 
   getSubject: (category: EventCategory) => Promise<getSubjectResponse> = async (category) => {
@@ -108,7 +119,7 @@ export class EventsService {
       } catch (err) {
         return { success: false, error: String(err) };
       }
-      
+
     }
     return { success: true, subject: this.subjects.get(category)! };
   }
@@ -118,8 +129,13 @@ export class EventsService {
       action: EventsAction.IS_EVENT_SUPPORTED,
       eventType,
     };
+    if (this.cache.has(eventType)) {
+      return this.cache.get(eventType)!;
+    }
     const request = this.constructEventsRequest(payload);
-    return this.sendRequest(request);
+    const promise = this.sendRequest(request);
+    this.cache.set(eventType, promise);
+    return promise;
   }
 
   startCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = eventType => {

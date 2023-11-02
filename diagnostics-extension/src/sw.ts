@@ -18,20 +18,20 @@ import {
 } from './controllers/events';
 import { handleTelemetry } from './controllers/telemetry';
 import { generateErrorResponse } from './utils';
+import { registerEventHandlers } from './controllers/events';
 
-let isFirstConnection: boolean; // true if the it's the first port connection from the UI 
+let isFirstConnection: boolean; // true if the it's the first port connection from the UI
 
 chrome.runtime.onInstalled.addListener(
   (details: chrome.runtime.InstalledDetails) => {
     console.log('Service worker is installed!', details);
-    isFirstConnection = true;
+    registerEventHandlers();
   }
 );
 
 chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
   // the event handlers should only be registered for once
-  onEventPortConnect(port, isFirstConnection);
-  isFirstConnection = false;
+  onEventPortConnect(port);
 });
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
