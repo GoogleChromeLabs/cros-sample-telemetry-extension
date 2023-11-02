@@ -17,12 +17,12 @@
       </div>
     </div>
     <div class="buttons">
-      <button mat-raised-button color="basic" (click)="startRoutine()" [disabled]="state !== 'ready'">Run</button>
-      <button mat-raised-button color="warn" (click)="stopRoutine()" [disabled]="state !== 'running'">Stop</button>
-      <button mat-raised-button color="basic" (click)="resumeRoutine()" [disabled]="!canResume() || state !== 'waiting_for_user_action'">Resume</button>
+      <button mat-raised-button color="basic" (click)="startRoutine()" [disabled]="state !== DiagnosticsCardState.READY">Run</button>
+      <button mat-raised-button color="warn" (click)="stopRoutine()" [disabled]="state !== DiagnosticsCardState.RUNNING">Stop</button>
+      <button mat-raised-button color="basic" (click)="resumeRoutine()" [disabled]="!canResume() || state !== DiagnosticsCardState.WAITING_FOR_USER_ACTION">Resume</button>
     </div>
   </div>
-  <ng-container *ngIf="state !== 'ready'">
+  <ng-container *ngIf="state !== DiagnosticsCardState.READY">
     <ng-container *ngIf="error; then showError; else showRunning"></ng-container>
     <ng-template #showError>
       <div class="error-message">
