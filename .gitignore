@@ -48,6 +48,3 @@
 # System Files
 */.DS_Store
 */Thumbs.db
-
-# Keys
-*/ed25519key.pem
