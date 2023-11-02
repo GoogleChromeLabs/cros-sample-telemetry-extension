@@ -5,24 +5,24 @@
 -->
 
 <div class="telemetry-card">
-    <header>{{ type.toUpperCase() }}</header>
+  <header>{{ type.toUpperCase() }}</header>
+  <div class="telemetry-card-content-container">
     <ng-container *ngIf="info; then renderCardContent; else renderLoadingOrError"></ng-container>
     <ng-template #renderCardContent>
-        <app-telemetry-card-content [info]="info!"></app-telemetry-card-content>
+      <app-telemetry-card-content [info]="info!"></app-telemetry-card-content>
     </ng-template>
     <ng-template #renderLoadingOrError>
-        <ng-container *ngIf="error; then showError; else showLoading"></ng-container>
-        <ng-template #showError>
-            <div class="error-message">
-                <mat-icon mat-list-icon>warning</mat-icon>
-                {{ error }}
-            </div>
-        </ng-template>
-        <ng-template #showLoading>
-            <mat-spinner 
-                [diameter]="20"
-                class="loading-spinner">
-            </mat-spinner>
-        </ng-template>
+      <ng-container *ngIf="error; then showError; else showLoading"></ng-container>
+      <ng-template #showError>
+        <div class="error-message">
+          <mat-icon mat-list-icon>warning</mat-icon>
+          {{ error }}
+        </div>
+      </ng-template>
+      <ng-template #showLoading>
+        <mat-spinner [diameter]="20" class="loading-spinner">
+        </mat-spinner>
+      </ng-template>
     </ng-template>
+  </div>
 </div>
