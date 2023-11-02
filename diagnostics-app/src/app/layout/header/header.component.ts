@@ -10,6 +10,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Theme } from 'src/app/core/enums/global.enums';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { APP_NAME } from 'src/config/config';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 })
 export class HeaderComponent {
   @Output() toggleDrawer = new EventEmitter<void>();
+  app_name = APP_NAME;
 
   constructor(private _themeService: ThemeService) {}
 

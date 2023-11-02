@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { GetAvailableRoutinesResponse, RoutineType } from '@common/dpsl';
 import { DiagnosticsService } from 'src/app/core/services/diagnostics.service';
+import { VISIBLE_DIAGNOSTICS_CARDS } from 'src/config/config';
 
 @Component({
   selector: 'app-diagnostics-dashboard',
@@ -23,16 +24,7 @@ export class DiagnosticsDashboardComponent implements OnInit {
   private _error?: string; // the error message received
 
   // Array of diagnostics routine names that will be displayed
-  readonly _visibleRoutines: RoutineType[] = [
-    RoutineType.ac_power,
-    RoutineType.audio_driver,
-    RoutineType.battery_charge,
-    RoutineType.battery_discharge,
-    RoutineType.cpu_cache,
-    RoutineType.dns_resolution,
-    RoutineType.power_button,
-    RoutineType.sensitive_sensor,
-  ];
+  readonly _visibleRoutines: RoutineType[] = VISIBLE_DIAGNOSTICS_CARDS;
 
   get error() { return this._error; }
   get visibleRoutines() {
