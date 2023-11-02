@@ -5,6 +5,9 @@
 -->
 
 <div class="diagnostics-dashboard">
+  <div class="vertical-center">
+    <button mat-raised-button color="primary">Run All Diagnostics in Sequence</button>
+  </div>
   <ng-container *ngIf="error; then showError; else renderContent"></ng-container>
   <ng-template #showError>
     <div class="error-message">
