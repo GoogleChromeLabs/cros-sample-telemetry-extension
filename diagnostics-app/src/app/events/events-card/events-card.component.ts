@@ -62,6 +62,7 @@ export class EventsCardComponent implements OnInit {
 
     this.eventsService.startCapturingEvents(this.category).then(_ => {
       this.state = EventsCardState.LISTENING;
+      this.eventList = [];
       this.error = undefined;
 
     }).catch(err => {
@@ -73,7 +74,6 @@ export class EventsCardComponent implements OnInit {
     this.eventsService.stopCapturingEvents(this.category).then(_ => {
       this.state = EventsCardState.NOT_LISTENING;
       this.error = undefined;
-      this.eventList = [];
 
     }).catch(err => {
       this.error = err.message;
