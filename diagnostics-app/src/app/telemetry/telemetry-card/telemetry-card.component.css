@@ -3,7 +3,6 @@
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
  */
-
   .telemetry-card {
     background-color: var(--app-dashboard-card-background);
     padding: 3rem;
@@ -14,11 +13,29 @@
     font-size: 14px;
     color: var(--app-dashboard-card-color);
   }
-  
+
   .telemetry-card header {
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 1rem;
+  }
+
+  .telemetry-card-content-container {
+    max-height: 300px;
+    overflow: auto;
+    padding: 10px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+    overflow-y: scroll;
+    background: grey;
+    box-shadow: inset 0 0 4px #707070;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 10px;
   }
 
   .error-message {
@@ -33,4 +50,3 @@
   .loading-spinner {
     margin: auto;
   }
-  
