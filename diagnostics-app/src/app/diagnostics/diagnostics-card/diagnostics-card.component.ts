@@ -11,7 +11,6 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { KeyValue } from '@angular/common';
 
 import {
-  DiagnosticsCardState,
   DiagnosticsParams,
   GetRoutineUpdateResponse,
   RESUMABLE_ROUTINES,
@@ -26,6 +25,13 @@ import { DiagnosticsService } from 'src/app/core/services/diagnostics.service';
 import { defaultDiagnosticsRefreshInterval, refreshIntervals } from '../../core/config/data-refresh-intervals';
 import { diagnosticsParams } from '../../core/config/diagnostics-params';
 
+enum DiagnosticsCardState{
+  READY = 'ready',
+  RUNNING = 'running',
+  STOPPING = 'stopping',
+  WAITING_FOR_USER_ACTION = 'waiting_for_user_action',
+}
+
 @Component({
   selector: 'app-diagnostics-card',
   templateUrl: './diagnostics-card.component.html',
@@ -33,6 +39,8 @@ import { diagnosticsParams } from '../../core/config/diagnostics-params';
 })
 export class DiagnosticsCardComponent implements OnInit, OnDestroy {
   @Input({ required: true }) routine!: RoutineType;
+
+  public DiagnosticsCardState = DiagnosticsCardState;
 
   private _error?: String; // the error message received, undefined if no error occurs
   private _intervalId?: number; // the interval id, undefined if there is no interval id
@@ -113,7 +121,9 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       const interval = (refreshIntervals.diagnostics.has(this.routine)) ?
         refreshIntervals.diagnostics.get(this.routine) : defaultDiagnosticsRefreshInterval;
       this._intervalId = window.setInterval(() => {
-        this.getRoutineStatus();
+        if (this._state === DiagnosticsCardState.RUNNING) {
+          this.getRoutineStatus();
+        }
       }, interval);
 
       this.handleResponse();
@@ -128,21 +138,26 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       window.clearInterval(this._intervalId);
       this._intervalId = undefined;
     }
+    
+    // The routine is no longer running.
+    if (this._state !== DiagnosticsCardState.RUNNING) {
+      return;
+    }
 
     try {
-      let res = await this.diagnosticsService.stopRoutine(this._routineId!);
-      res = res as RoutineUpdateResponse;
-      if (!this._reachedTerminalState) {
-        this._routineInfo = res.info;
+      this._state = DiagnosticsCardState.STOPPING;
+      if (this._routineId == undefined){
+        throw "Routine ID is undefined";
       }
-      this._reachedTerminalState = false;
-      this._state = DiagnosticsCardState.READY;
+      await this.diagnosticsService.stopRoutine(this._routineId);
       this._error = undefined;
-      this._routineId = undefined;
-
-    } catch(err) {
+    } catch (err) {
       this._error = String(err);
     }
+    
+    this._routineId = undefined;
+    this._reachedTerminalState = false;
+    this._state = DiagnosticsCardState.READY;
   }
 
   async resumeRoutine() {
@@ -166,9 +181,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       res = res as RoutineUpdateResponse;
       this._error = undefined;
       this._routineInfo = res.info;
-
       this.handleResponse();
-
     } catch(err) {
       this._error = String(err);
     }

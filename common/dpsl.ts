@@ -1015,15 +1015,6 @@ export const enum EventsCardState {
 }
 
 /**
- * States of a diagnostics card used for setting UI
- */
-export const enum DiagnosticsCardState {
-  READY = 'ready',
-  RUNNING = 'running',
-  WAITING_FOR_USER_ACTION = 'waiting_for_user_action',
-}
-
-/**
  * An array that contains all diagnostics routines that require user action
  */
 export const RESUMABLE_ROUTINES = [
