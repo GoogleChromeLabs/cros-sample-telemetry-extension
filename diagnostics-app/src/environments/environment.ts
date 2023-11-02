@@ -9,7 +9,7 @@
 
 export const environment = {
   production: false,
-  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc',
+  extensionId: 'jmalcmbicpnakfkncbgbcmlmgpfkhdca',
   serviceWorker: false,
 };
 
