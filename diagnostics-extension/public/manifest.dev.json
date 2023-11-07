@@ -1,0 +1,19 @@
+{
+  "name": "Chrome OS Reference App Companion Extension",
+  "version": "1.9.0",
+  "description": "The development companion extension for the ChromeOS Reference App.",
+  "manifest_version": 3,
+  "icons": {
+    "16": "images/favicon-16x16.png",
+    "32": "images/favicon-32x32.png",
+    "48": "images/favicon-48x48.png",
+    "128": "images/favicon-120x120.png",
+    "192": "images/favicon-192x192.png"
+  },
+  "background": {
+    "service_worker": "sw.js"
+  },
+  "externally_connectable": {
+    "matches": ["*://localhost/*"]
+  }
+}

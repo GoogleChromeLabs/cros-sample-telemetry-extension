@@ -4,8 +4,8 @@
   "description": "Extension for Sample Diagnostics App",
   "scripts": {
     "prebuild": "sudo rm -rf build/",
-    "build": "webpack",
-    "postbuild": "cp -R public/** build",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "npm run prebuild && webpack --config webpack.dev.js",
     "lint": "eslint . --ext .ts",
     "test": "jest --passWithNoTests --coverage",
     "script:ci": "sh ./scripts/ci.sh"
@@ -33,6 +33,7 @@
     "@types/jest": "^27.5.2",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "copy-webpack-plugin": "^11.0.0",
     "eslint": "^7.32.0",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.5",
