@@ -4,7 +4,8 @@
   "description": "Extension for Sample Diagnostics App",
   "scripts": {
     "prebuild": "sudo rm -rf build/",
-    "build": "webpack",
+    "build": "webpack --config webpack.prod.js",
+    "dev": "npm run prebuild && webpack --config webpack.dev.js && npm run postbuild",
     "postbuild": "cp -R public/** build",
     "lint": "eslint . --ext .ts",
     "test": "jest --passWithNoTests --coverage",
