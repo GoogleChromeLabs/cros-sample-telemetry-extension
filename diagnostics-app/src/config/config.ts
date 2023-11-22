@@ -3,7 +3,7 @@
 // found in the LICENSE file.
 
 
-import {RoutineType} from '@common/dpsl';
+import {EventCategory, RoutineType} from '@common/dpsl';
 import {TelemetryInfoType} from '@common/message';
 
 export const APP_NAME = 'Healthd Reference App';
@@ -23,6 +23,24 @@ export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.VPD,
   TelemetryInfoType.STATEFUL_PARTITION,
   TelemetryInfoType.TPM,
+];
+
+export const VISIBLE_EVENT_CARDS: EventCategory[] = [
+  EventCategory.audio_jack,
+  EventCategory.external_display,
+  EventCategory.keyboard_diagnostic,
+  EventCategory.lid,
+  EventCategory.sd_card,
+  EventCategory.stylus_connected,
+  EventCategory.stylus_garage,
+  EventCategory.stylus_touch,
+  EventCategory.touchpad_button,
+  EventCategory.touchpad_connected,
+  EventCategory.touchpad_touch,
+  EventCategory.touchscreen_connected,
+  EventCategory.touchscreen_touch,
+  EventCategory.usb,
+  EventCategory.power,
 ];
 
 export const VISIBLE_DIAGNOSTICS_CARDS: RoutineType[] = [

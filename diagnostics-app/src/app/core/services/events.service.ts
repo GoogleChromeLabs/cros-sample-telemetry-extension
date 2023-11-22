@@ -28,6 +28,7 @@ import {
   PortName,
   ResponseErrorInfoMessage,
 } from '@common/message';
+import { VISIBLE_EVENT_CARDS } from 'src/config/config';
 
 export interface getSubjectResponse {
   success: Boolean,
@@ -39,10 +40,14 @@ export interface getSubjectResponse {
   providedIn: 'root'
 })
 export class EventsService {
-  private extensionId!: string; // the ID of the extension it connects to
+  private extensionId: string = environment.extensionId; // the ID of the extension it connects to
   private subjects = new Map<string, Subject<EventsInfo>>; // the map of subjects that
   private port?: chrome.runtime.Port; // the port for connecting with the extension to get the captured event
-
+  
+  // A cache to preload the supported events.
+  private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> = 
+  new Map<EventCategory, Promise<EventsResponse>>;  
+  
   private constructEventsRequest: (
     payload: EventsRequest
   ) => Request = payload => {
@@ -74,30 +79,39 @@ export class EventsService {
     });
   };
 
-  constructor() {
-    this.extensionId = environment.extensionId;
-
-    try {
-      //@ts-ignore
-      this.port = window.chrome.runtime.connect(
-        this.extensionId,
-        { name: PortName.EVENTS_PORT }
-      );
-
-      this.port.onMessage.addListener((msg: EventMessage) => {
-        if (this.subjects.has(msg.type)) {
-          this.subjects.get(msg.type)!.next(msg.info);
-        } else {
-          console.error(ResponseErrorInfoMessage.MissingEventsTypeSubject);
+  Init(): Promise<void>{
+    return new Promise<void>((resolve, reject) => {
+      try {
+        //@ts-ignore
+        this.port = window.chrome.runtime.connect(
+          this.extensionId,
+          { name: PortName.EVENTS_PORT }
+        );
+        this.port.onMessage.addListener((msg: EventMessage) => {
+          if (this.subjects.has(msg.type)) {
+            this.subjects.get(msg.type)!.next(msg.info);
+          } else {
+            console.error(ResponseErrorInfoMessage.MissingEventsTypeSubject);
+          }
+        });
+        for (const category of VISIBLE_EVENT_CARDS) {
+          this.isEventSupported(category);
         }
-      });
-
-    } catch (err) {
-      console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
-    }
+        resolve();
+      } catch (err) {
+        console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
+        reject();
+      }
+    })
   }
 
   getSubject: (category: EventCategory) => Promise<getSubjectResponse> = async (category) => {
+    if (!this.isEventSupported(category)) {
+      console.error(
+          'A getSubject request is called on unsupported event: ', category)
+      return {success: false, error: 'Unsupported event'};
+    }
+
     if (!this.subjects.has(category)) {
       try {
         let statusInfo = await this.isEventSupported(category);
@@ -118,8 +132,12 @@ export class EventsService {
       action: EventsAction.IS_EVENT_SUPPORTED,
       eventType,
     };
-    const request = this.constructEventsRequest(payload);
-    return this.sendRequest(request);
+    if (!this.supportabilityCache.has(eventType)) {
+      const request = this.constructEventsRequest(payload);
+      const promise = this.sendRequest(request);
+      this.supportabilityCache.set(eventType, promise);
+    }
+    return this.supportabilityCache.get(eventType)!;
   }
 
   startCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = eventType => {

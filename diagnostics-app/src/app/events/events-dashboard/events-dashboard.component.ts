@@ -15,6 +15,7 @@ import {
   EventSupportStatusInfo
 } from '@common/dpsl';
 import { EventsService } from 'src/app/core/services/events.service';
+import { VISIBLE_EVENT_CARDS } from 'src/config/config';
 
 @Component({
   selector: 'app-events-dashboard',
@@ -24,15 +25,6 @@ import { EventsService } from 'src/app/core/services/events.service';
 export class EventsDashboardComponent implements OnInit {
   private _error?: string; // the error message if there is any error
 
-  // Array of events categories that should be display if supported
-  readonly _visibleCategories: EventCategory[] = [
-    EventCategory.audio_jack,
-    EventCategory.power,
-    EventCategory.touchpad_touch,
-    EventCategory.touchscreen_touch,
-    EventCategory.lid,
-    EventCategory.stylus_connected,
-  ];
   // Array of events categories that will actually be displayed
   private _supportedCategories: EventCategory[] = [];
 
@@ -45,6 +37,7 @@ export class EventsDashboardComponent implements OnInit {
       statusInfo = statusInfo as EventSupportStatusInfo;
       if (statusInfo.status === EventSupportStatus.supported) {
         this._supportedCategories.push(category);
+        this._supportedCategories.sort();
       }
     } catch (err) {
       this._error = String(err);
@@ -54,7 +47,7 @@ export class EventsDashboardComponent implements OnInit {
   constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
-    for (let category of this._visibleCategories) {
+    for (let category of VISIBLE_EVENT_CARDS) {
       this.isEventSupported(category);
     }
   }
