@@ -64,18 +64,19 @@ const stopCapturingEvents = async (
   }
 }
 
-export const onEventPortConnect = async (port: chrome.runtime.Port, isFirstConnection: boolean) => {
+export const registerEventHandlers = async() =>{
+  eventsService.registerEventHandlers().then(response => {
+    if (!response.success) {
+      console.error(response.error?.message);
+    }
+  }).catch(err => {
+    console.error(err.message);
+  });
+}
+
+export const onEventPortConnect = async (port: chrome.runtime.Port) => {
   if (port.name === PortName.EVENTS_PORT) {
     eventsService.registerPort(port);
-    if (isFirstConnection) {
-      eventsService.registerEventHandlers().then(response => {
-        if (!response.success) {
-          console.error(response.error?.message);
-        }
-      }).catch(err => {
-        console.error(err.message);
-      });
-    }
   } else {
     console.error(ResponseErrorInfoMessage.InvalidPortName);
   }
