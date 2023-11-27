@@ -6,6 +6,10 @@
  * @fileoverview Classes related to events
  */
 
+// The API calls to chrome.os* are not defined in the standard chrome type.
+// Allow type-casting into any for access.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {EventCategory, EventSupportStatusInfo} from '@common/dpsl';
 import {Response} from '@common/message';
 import * as fake_events from './fake_events.data';
@@ -113,7 +117,7 @@ export class EventsServiceImpl extends EventsService {
 
   registerEventHandlers = async (): Promise<Response> => {
     try {
-      for (let item of this.eventCategoryAndMethods) {
+      for (const item of this.eventCategoryAndMethods) {
         (item.func as any).addListener(this.notifyPort.bind(null, item.type));
       }
       return generateEventsSuccessResponse();

@@ -6,6 +6,10 @@
  * @fileoverview Classes related to diagnostics
  */
 
+// The API calls to chrome.os* are not defined in the standard chrome type.
+// Allow type-casting into any for access.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   DiagnosticsParams,
   RoutineCommandType,

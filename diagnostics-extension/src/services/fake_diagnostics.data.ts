@@ -6,6 +6,9 @@
  * @fileoverview Functions to generate fake diagnostics data.
  */
 
+// Fake data may not use certain parameter variables.
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
   DiagnosticsParams,
   RoutineStatus,
@@ -62,20 +65,26 @@ export const runAcPowerRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runAudioDriverRoutine = async (): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runBatteryCapacityRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -86,7 +95,10 @@ export const runBatteryChargeRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -94,14 +106,17 @@ export const runBatteryDischargeRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runBatteryHealthRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -111,7 +126,7 @@ export const runBatteryHealthRoutine =
 export const runBluetoothDiscoveryRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -122,14 +137,17 @@ export const runBluetoothPairingRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runBluetoothPowerRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -140,7 +158,10 @@ export const runBluetoothScanningRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -148,7 +169,10 @@ export const runCpuCacheRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -156,7 +180,10 @@ export const runCpuFloatingPointAccuracyRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -164,7 +191,10 @@ export const runCpuPrimeSearchRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -172,7 +202,10 @@ export const runCpuStressRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -180,14 +213,17 @@ export const runDiskReadRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runDnsResolutionRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -197,7 +233,7 @@ export const runDnsResolutionRoutine =
 export const runDnsResolverPresentRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -206,14 +242,17 @@ export const runDnsResolverPresentRoutine =
 
 export const runEmmcLifetimeRoutine = async (): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runFingerprintAliveRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -223,7 +262,7 @@ export const runFingerprintAliveRoutine =
 export const runGatewayCanBePingedRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -233,7 +272,7 @@ export const runGatewayCanBePingedRoutine =
 export const runLanConnectivityRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -242,7 +281,10 @@ export const runLanConnectivityRoutine =
 
 export const runMemoryRoutine = async (): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -250,7 +292,10 @@ export const runNvmeSelfTestRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -258,7 +303,10 @@ export const runNvmeWearLevelRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
@@ -266,14 +314,17 @@ export const runPowerButtonRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runSensitiveSensorRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -283,7 +334,7 @@ export const runSensitiveSensorRoutine =
 export const runSignalStrengthRoutine =
   async (): Promise<RunRoutineResponse> => {
     const routineId = generateRandomId();
-    let res: RunRoutineResponse = {
+    const res: RunRoutineResponse = {
       id: routineId,
       status: RoutineStatus.unknown,
     };
@@ -294,13 +345,19 @@ export const runSmartctlCheckRoutine = async (
   params: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 
 export const runUfsLifetimeRoutine = async (): Promise<RunRoutineResponse> => {
   const routineId = generateRandomId();
-  let res: RunRoutineResponse = {id: routineId, status: RoutineStatus.unknown};
+  const res: RunRoutineResponse = {
+    id: routineId,
+    status: RoutineStatus.unknown,
+  };
   return res;
 };
 

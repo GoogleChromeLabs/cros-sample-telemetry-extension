@@ -6,6 +6,9 @@
  * @fileoverview Functions to generate fake events data.
  */
 
+// Fake data may not use certain parameter variables.
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {EventCategory, EventSupportStatusInfo} from '@common/dpsl';
 import {Response} from '@common/message';
 
@@ -18,7 +21,7 @@ export const registerPort = (port: chrome.runtime.Port): void => {
 export const isEventSupported = async (
   eventType: EventCategory,
 ): Promise<EventSupportStatusInfo> => {
-  let res: EventSupportStatusInfo = {};
+  const res: EventSupportStatusInfo = {};
   return res;
 };
 export const startCapturingEvents = async (

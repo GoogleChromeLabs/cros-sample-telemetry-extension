@@ -33,72 +33,72 @@ describe('should return instance of FakeTelemetryService', () => {
     expectedResult: TelemetryInfoUnion;
   }[] = [
     {
-      name: `audio`,
+      name: 'audio',
       methodUnderTest: telemetryService.getAudioInfo,
       expectedResult: fakeData.audioInfo,
     },
     {
-      name: `battery`,
+      name: 'battery',
       methodUnderTest: telemetryService.getBatteryInfo,
       expectedResult: fakeData.batteryInfo,
     },
     {
-      name: `block device`,
+      name: 'block device',
       methodUnderTest: telemetryService.getNonRemovableBlockDevicesInfo,
       expectedResult: fakeData.blockDeviceInfo,
     },
     {
-      name: `cpu`,
+      name: 'cpu',
       methodUnderTest: telemetryService.getCpuInfo,
       expectedResult: fakeData.cpuInfo,
     },
     {
-      name: `display`,
+      name: 'display',
       methodUnderTest: telemetryService.getDisplayInfo,
       expectedResult: fakeData.displayInfo,
     },
     {
-      name: `marketing`,
+      name: 'marketing',
       methodUnderTest: telemetryService.getMarketingInfo,
       expectedResult: fakeData.marketingInfo,
     },
     {
-      name: `memory`,
+      name: 'memory',
       methodUnderTest: telemetryService.getMemoryInfo,
       expectedResult: fakeData.memoryInfo,
     },
     {
-      name: `network`,
+      name: 'network',
       methodUnderTest: telemetryService.getInternetConnectivityInfo,
       expectedResult: fakeData.networkInfo,
     },
     {
-      name: `oem`,
+      name: 'oem',
       methodUnderTest: telemetryService.getOemData,
       expectedResult: fakeData.oemInfo,
     },
     {
-      name: `os version`,
+      name: 'os version',
       methodUnderTest: telemetryService.getOsVersionInfo,
       expectedResult: fakeData.osVersionInfo,
     },
     {
-      name: `usb`,
+      name: 'usb',
       methodUnderTest: telemetryService.getUsbBusInfo,
       expectedResult: fakeData.usbInfo,
     },
     {
-      name: `vpd`,
+      name: 'vpd',
       methodUnderTest: telemetryService.getVpdInfo,
       expectedResult: fakeData.vpdInfo,
     },
     {
-      name: `stateful partition`,
+      name: 'stateful partition',
       methodUnderTest: telemetryService.getStatefulPartitionInfo,
       expectedResult: fakeData.statefulPartitionInfo,
     },
     {
-      name: `tpm`,
+      name: 'tpm',
       methodUnderTest: telemetryService.getTpmInfo,
       expectedResult: fakeData.tpmInfo,
     },
