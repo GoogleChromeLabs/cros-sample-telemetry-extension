@@ -5,17 +5,16 @@
 -->
 
 <div class="events-dashboard">
-    <ng-container *ngIf="error; then showError; else renderContent"></ng-container>
-    <ng-template #showError>
-      <div class="error-message">
-        <mat-icon mat-list-icon>warning</mat-icon>
-        {{ error }}
-      </div>
-    </ng-template>
-    <ng-template #renderContent>
-      <div class="events-card-container" *ngFor="let category of supportedCategories">
-        <app-events-card [category]="category"></app-events-card>
-      </div>
-    </ng-template>
-  </div>
-    
+  <ng-container *ngIf="error; then showError; else renderContent"></ng-container>
+  <ng-template #showError>
+    <div class="error-message">
+      <mat-icon mat-list-icon>warning</mat-icon>
+      {{ error }}
+    </div>
+  </ng-template>
+  <ng-template #renderContent>
+    <div class="events-card-container" *ngFor="let category of supportedCategories">
+      <app-events-card [category]="category"></app-events-card>
+    </div>
+  </ng-template>
+</div>

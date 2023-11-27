@@ -14,15 +14,15 @@ export interface NavigationItem {
 
 export const TELEMETRY_NAV_DATA: NavigationItem = {
   name: 'Telemetry',
-  link: '/telemetry'
+  link: '/telemetry',
 };
 
 export const DIAGNOSTICS_NAV_DATA: NavigationItem = {
   name: 'Diagnostics',
-  link: '/diagnostics'
+  link: '/diagnostics',
 };
 
 export const EVENTS_NAV_DATA: NavigationItem = {
   name: 'Events',
-  link: '/events'
+  link: '/events',
 };

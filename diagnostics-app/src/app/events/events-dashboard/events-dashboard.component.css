@@ -4,22 +4,22 @@
  * found in the LICENSE file.
  */
 
- .events-dashboard {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-   }
-  
-   .events-card-container {
-    margin: 8px;
-    width: 100%;
-   }
-  
-   .error-message {
-    color: var(--app-error-message-color);
-    border-radius: 5px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-   }
+.events-dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.events-card-container {
+  margin: 8px;
+  width: 100%;
+}
+
+.error-message {
+  color: var(--app-error-message-color);
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

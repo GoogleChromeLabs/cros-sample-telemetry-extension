@@ -6,9 +6,9 @@
  * @fileoverview Defines tests for dashboard.component.ts
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TelemetryDashboardComponent } from './telemetry-dashboard.component';
+import {TelemetryDashboardComponent} from './telemetry-dashboard.component';
 
 describe('TelemetryDashboardComponent', () => {
   let component: TelemetryDashboardComponent;
@@ -16,9 +16,8 @@ describe('TelemetryDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TelemetryDashboardComponent ]
-    })
-    .compileComponents();
+      declarations: [TelemetryDashboardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -8,7 +8,7 @@
  */
 
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {EventCategory, EventsCardState,} from '@common/dpsl';
+import {EventCategory, EventsCardState} from '@common/dpsl';
 import {ResponseErrorInfoMessage} from '@common/message';
 import {EventsService} from 'src/app/core/services/events.service';
 
@@ -21,61 +21,68 @@ export class EventsCardComponent implements OnInit {
   @Input({required: true}) category!: EventCategory;
 
   public eventList: object[] = [];
-  public error?: String;  // the error message received, null if no error occurs
+  public error?: String; // the error message received, null if no error occurs
   public state? = EventsCardState.NOT_LISTENING;
 
   constructor(
-      private eventsService: EventsService,
-      private changeDetectorRef: ChangeDetectorRef) {}
+    private eventsService: EventsService,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
-    this.eventsService.getSubject(this.category)
-        .then(res => {
-          if (res.success && res.subject) {
-            res.subject.subscribe({
-              next: event => {
-                this.error = undefined;
-                this.eventList.push(event);
+    this.eventsService
+      .getSubject(this.category)
+      .then((res) => {
+        if (res.success && res.subject) {
+          res.subject.subscribe({
+            next: (event) => {
+              this.error = undefined;
+              this.eventList.push(event);
 
-                // this is for triggering Angular change detection
-                this.changeDetectorRef.detectChanges();
-              }
-            })
-          } else {
-            this.error = res.error;
-          }
-        })
-        .catch(err => {
-          this.error = err.message;
-        });
+              // this is for triggering Angular change detection
+              this.changeDetectorRef.detectChanges();
+            },
+          });
+        } else {
+          this.error = res.error;
+        }
+      })
+      .catch((err) => {
+        this.error = err.message;
+      });
   }
 
-  startCapturingEvents =
-      async () => {
+  startCapturingEvents = async () => {
     if (this.state == EventsCardState.LISTENING) {
       console.error('Event is already being captured');
       return;
     }
-    
+
     this.state = EventsCardState.LISTENING;
     this.eventList = [];
     this.error = undefined;
 
-    this.eventsService.startCapturingEvents(this.category).then().catch(err => {
-      this.error = err.message;
-    })
-  }
+    this.eventsService
+      .startCapturingEvents(this.category)
+      .then()
+      .catch((err) => {
+        this.error = err.message;
+      });
+  };
 
   stopCapturingEvents = async () => {
     if (this.state == EventsCardState.NOT_LISTENING) {
       console.error('Event has already stopped captured');
       return;
     }
-    
+
     this.state = EventsCardState.NOT_LISTENING;
 
-    this.eventsService.stopCapturingEvents(this.category).then().catch(err => {
-      this.error = err.message;
-    })
-  }
+    this.eventsService
+      .stopCapturingEvents(this.category)
+      .then()
+      .catch((err) => {
+        this.error = err.message;
+      });
+  };
 }

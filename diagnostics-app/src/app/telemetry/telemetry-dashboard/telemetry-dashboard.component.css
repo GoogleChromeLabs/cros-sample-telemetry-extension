@@ -4,12 +4,12 @@
  * found in the LICENSE file.
  */
 
- .telemetry-dashboard {
+.telemetry-dashboard {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
- }
+}
 
- .telemetry-card-container {
+.telemetry-card-container {
   margin: 8px;
- }
+}

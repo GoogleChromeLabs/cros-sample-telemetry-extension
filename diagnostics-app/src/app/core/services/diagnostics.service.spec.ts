@@ -6,9 +6,9 @@
  * @fileoverview Unit tests for diagnostics.service
  */
 
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { DiagnosticsService } from './diagnostics.service';
+import {DiagnosticsService} from './diagnostics.service';
 
 describe('DiagnosticsService', () => {
   let service: DiagnosticsService;

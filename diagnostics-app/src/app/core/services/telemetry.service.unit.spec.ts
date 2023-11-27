@@ -6,9 +6,9 @@
  * @fileoverview Unit tests for telemetry.service
  */
 
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TelemetryService } from './telemetry.service';
+import {TelemetryService} from './telemetry.service';
 
 describe('TelemetryService', () => {
   let service: TelemetryService;

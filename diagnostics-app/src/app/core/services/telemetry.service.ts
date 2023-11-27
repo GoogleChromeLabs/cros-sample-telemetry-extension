@@ -6,9 +6,9 @@
  * @fileoverview Service for fetching telemetry data from Chrome extension.
  */
 
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { TelemetryInfoUnion } from '@common/dpsl';
+import {Injectable} from '@angular/core';
+import {environment} from 'src/environments/environment';
+import {TelemetryInfoUnion} from '@common/dpsl';
 import {
   Request,
   Response,
@@ -24,11 +24,11 @@ export class TelemetryService {
 
   private constructTelemetryRequest: (infoType: TelemetryInfoType) => Request =
     (infoType) => {
-      return { type: RequestType.TELEMETRY, telemetry: { infoType } };
+      return {type: RequestType.TELEMETRY, telemetry: {infoType}};
     };
 
   public fetchTelemetryData: (
-    infoType: TelemetryInfoType
+    infoType: TelemetryInfoType,
   ) => Promise<TelemetryInfoUnion> | undefined = (category) => {
     return new Promise((resolve, reject) => {
       const request = this.constructTelemetryRequest(category);
@@ -45,7 +45,7 @@ export class TelemetryService {
             } else {
               resolve(response.telemetry.info);
             }
-          }
+          },
         );
       } catch (err) {
         reject(err);

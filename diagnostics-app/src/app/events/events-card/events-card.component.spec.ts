@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventCategory } from '@common/dpsl';
-import { EventsCardComponent } from './events-card.component';
-import { EventsService } from 'src/app/core/services/events.service';
+import {EventCategory} from '@common/dpsl';
+import {EventsCardComponent} from './events-card.component';
+import {EventsService} from 'src/app/core/services/events.service';
 
 describe('EventsCardComponent', () => {
   let component: EventsCardComponent;
@@ -10,8 +10,8 @@ describe('EventsCardComponent', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ EventsCardComponent ],
-      providers: [ EventsService ]
+      declarations: [EventsCardComponent],
+      providers: [EventsService],
     });
     fixture = TestBed.createComponent(EventsCardComponent);
     component = fixture.componentInstance;

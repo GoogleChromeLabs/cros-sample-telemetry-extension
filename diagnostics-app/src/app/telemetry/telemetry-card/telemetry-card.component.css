@@ -3,50 +3,50 @@
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file.
  */
-  .telemetry-card {
-    background-color: var(--app-dashboard-card-background);
-    padding: 3rem;
-    border-radius: 3px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 14px;
-    color: var(--app-dashboard-card-color);
-  }
+.telemetry-card {
+  background-color: var(--app-dashboard-card-background);
+  padding: 3rem;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--app-dashboard-card-color);
+}
 
-  .telemetry-card header {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 1rem;
-  }
+.telemetry-card header {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
 
-  .telemetry-card-content-container {
-    max-height: 300px;
-    overflow: auto;
-    padding: 10px;
-  }
+.telemetry-card-content-container {
+  max-height: 300px;
+  overflow: auto;
+  padding: 10px;
+}
 
-  ::-webkit-scrollbar {
-    width: 4px;
-    overflow-y: scroll;
-    background: grey;
-    box-shadow: inset 0 0 4px #707070;
-  }
+::-webkit-scrollbar {
+  width: 4px;
+  overflow-y: scroll;
+  background: grey;
+  box-shadow: inset 0 0 4px #707070;
+}
 
-  ::-webkit-scrollbar-thumb {
-    background: black;
-    border-radius: 10px;
-  }
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
 
-  .error-message {
-    color: var(--app-error-message-color);
-    border-radius: 5px;
-    padding: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
+.error-message {
+  color: var(--app-error-message-color);
+  border-radius: 5px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .loading-spinner {
-    margin: auto;
-  }
+.loading-spinner {
+  margin: auto;
+}

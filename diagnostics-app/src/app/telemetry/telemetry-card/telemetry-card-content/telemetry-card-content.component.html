@@ -5,8 +5,11 @@
 -->
 
 <div class="telemetry-card-content" *ngFor="let item of $any(info) | keyvalue: originalOrder">
-  <b>{{ item.key }}</b>:
-  <ng-container *ngIf="isPrimitiveType(item.value); then renderPrimitive; else renderSubobject"></ng-container>
+  <b>{{ item.key }}</b
+  >:
+  <ng-container
+    *ngIf="isPrimitiveType(item.value); then renderPrimitive; else renderSubobject"
+  ></ng-container>
   <ng-template #renderPrimitive>
     {{ item.value }}
   </ng-template>

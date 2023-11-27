@@ -7,16 +7,16 @@
  * capturing events from Chrome extension.
  */
 
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 import {
   EventCategory,
   EventsInfo,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '@common/dpsl'
+} from '@common/dpsl';
 import {
   EventsAction,
   EventMessage,
@@ -28,34 +28,34 @@ import {
   PortName,
   ResponseErrorInfoMessage,
 } from '@common/message';
-import { VISIBLE_EVENT_CARDS } from 'src/config/config';
+import {VISIBLE_EVENT_CARDS} from 'src/config/config';
 
 export interface getSubjectResponse {
-  success: Boolean,
-  subject?: Subject<EventsInfo>,
-  error?: String,
+  success: Boolean;
+  subject?: Subject<EventsInfo>;
+  error?: String;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsService {
   private extensionId: string = environment.extensionId; // the ID of the extension it connects to
-  private subjects = new Map<string, Subject<EventsInfo>>; // the map of subjects that
+  private subjects = new Map<string, Subject<EventsInfo>>(); // the map of subjects that
   private port?: chrome.runtime.Port; // the port for connecting with the extension to get the captured event
-  
+
   // A cache to preload the supported events.
-  private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> = 
-  new Map<EventCategory, Promise<EventsResponse>>;  
-  
-  private constructEventsRequest: (
-    payload: EventsRequest
-  ) => Request = payload => {
-    return { type: RequestType.EVENTS, events: payload };
+  private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> =
+    new Map<EventCategory, Promise<EventsResponse>>();
+
+  private constructEventsRequest: (payload: EventsRequest) => Request = (
+    payload,
+  ) => {
+    return {type: RequestType.EVENTS, events: payload};
   };
 
   private sendRequest: (request: Request) => Promise<EventsResponse> = (
-    request: Request
+    request: Request,
   ) => {
     return new Promise((resolve, reject) => {
       try {
@@ -71,7 +71,7 @@ export class EventsService {
             } else {
               resolve(response.events);
             }
-          }
+          },
         );
       } catch (err) {
         reject(err);
@@ -79,14 +79,13 @@ export class EventsService {
     });
   };
 
-  Init(): Promise<void>{
+  Init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       try {
         //@ts-ignore
-        this.port = window.chrome.runtime.connect(
-          this.extensionId,
-          { name: PortName.EVENTS_PORT }
-        );
+        this.port = window.chrome.runtime.connect(this.extensionId, {
+          name: PortName.EVENTS_PORT,
+        });
         this.port.onMessage.addListener((msg: EventMessage) => {
           if (this.subjects.has(msg.type)) {
             this.subjects.get(msg.type)!.next(msg.info);
@@ -102,13 +101,17 @@ export class EventsService {
         console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
         reject();
       }
-    })
+    });
   }
 
-  getSubject: (category: EventCategory) => Promise<getSubjectResponse> = async (category) => {
+  getSubject: (category: EventCategory) => Promise<getSubjectResponse> = async (
+    category,
+  ) => {
     if (!this.isEventSupported(category)) {
       console.error(
-          'A getSubject request is called on unsupported event: ', category)
+        'A getSubject request is called on unsupported event: ',
+        category,
+      );
       return {success: false, error: 'Unsupported event'};
     }
 
@@ -117,17 +120,18 @@ export class EventsService {
         let statusInfo = await this.isEventSupported(category);
         statusInfo = statusInfo as EventSupportStatusInfo;
         if (statusInfo.status === EventSupportStatus.supported) {
-          this.subjects.set(category, new Subject<EventsInfo>);
+          this.subjects.set(category, new Subject<EventsInfo>());
         }
       } catch (err) {
-        return { success: false, error: String(err) };
+        return {success: false, error: String(err)};
       }
-      
     }
-    return { success: true, subject: this.subjects.get(category)! };
-  }
+    return {success: true, subject: this.subjects.get(category)!};
+  };
 
-  isEventSupported: (eventType: EventCategory) => Promise<EventsResponse> = eventType => {
+  isEventSupported: (eventType: EventCategory) => Promise<EventsResponse> = (
+    eventType,
+  ) => {
     const payload: EventsRequest = {
       action: EventsAction.IS_EVENT_SUPPORTED,
       eventType,
@@ -138,23 +142,26 @@ export class EventsService {
       this.supportabilityCache.set(eventType, promise);
     }
     return this.supportabilityCache.get(eventType)!;
-  }
+  };
 
-  startCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = eventType => {
-    const payload: EventsRequest = {
-      action: EventsAction.START_CAPTURING_EVENT,
-      eventType,
+  startCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> =
+    (eventType) => {
+      const payload: EventsRequest = {
+        action: EventsAction.START_CAPTURING_EVENT,
+        eventType,
+      };
+      const request = this.constructEventsRequest(payload);
+      return this.sendRequest(request);
     };
-    const request = this.constructEventsRequest(payload);
-    return this.sendRequest(request);
-  }
 
-  stopCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = eventType => {
+  stopCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = (
+    eventType,
+  ) => {
     const payload: EventsRequest = {
       action: EventsAction.STOP_CAPTURING_EVENT,
       eventType,
     };
     const request = this.constructEventsRequest(payload);
     return this.sendRequest(request);
-  }
+  };
 }

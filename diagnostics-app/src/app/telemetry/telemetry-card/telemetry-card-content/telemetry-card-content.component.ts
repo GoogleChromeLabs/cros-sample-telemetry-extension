@@ -7,19 +7,22 @@
  * Imported by telemetry.module.ts
  */
 
-import { Component, Input } from '@angular/core';
-import { KeyValue } from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {KeyValue} from '@angular/common';
 
 @Component({
   selector: 'app-telemetry-card-content',
   templateUrl: './telemetry-card-content.component.html',
-  styleUrls: ['./telemetry-card-content.component.css']
+  styleUrls: ['./telemetry-card-content.component.css'],
 })
 export class TelemetryCardContentComponent {
-  @Input({ required: true }) info!: Object;
+  @Input({required: true}) info!: Object;
 
   // this function is used for maintaining the attributes' original order
-  public originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => 0;
+  public originalOrder = (
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>,
+  ): number => 0;
 
   public isPrimitiveType(a: any) {
     return typeof a !== 'object';

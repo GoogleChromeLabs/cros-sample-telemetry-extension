@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventsDashboardComponent } from './events-dashboard.component';
+import {EventsDashboardComponent} from './events-dashboard.component';
 
 describe('EventsDashboardComponent', () => {
   let component: EventsDashboardComponent;
@@ -8,7 +8,7 @@ describe('EventsDashboardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EventsDashboardComponent]
+      declarations: [EventsDashboardComponent],
     });
     fixture = TestBed.createComponent(EventsDashboardComponent);
     component = fixture.componentInstance;

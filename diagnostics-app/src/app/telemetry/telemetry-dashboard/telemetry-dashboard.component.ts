@@ -8,9 +8,9 @@
  * Imported by telemetry.module.ts
  */
 
-import { Component } from '@angular/core';
-import { TelemetryInfoType } from '@common/message';
-import { VISIBLE_TELEMETRY_CARDS } from 'src/config/config';
+import {Component} from '@angular/core';
+import {TelemetryInfoType} from '@common/message';
+import {VISIBLE_TELEMETRY_CARDS} from 'src/config/config';
 
 @Component({
   selector: 'app-telemetry-dashboard',
@@ -21,5 +21,7 @@ export class TelemetryDashboardComponent {
   // Array of telemetry info types that will be displayed
   private _visibleTypes: TelemetryInfoType[] = VISIBLE_TELEMETRY_CARDS;
 
-  get visibleTypes() { return this._visibleTypes; }
+  get visibleTypes() {
+    return this._visibleTypes;
+  }
 }

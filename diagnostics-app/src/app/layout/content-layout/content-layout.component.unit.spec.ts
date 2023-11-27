@@ -6,23 +6,21 @@
  * @fileoverview Defines tests for the Content Layout Component.
  */
 
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {waitForAsync, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ContentLayoutComponent } from './content-layout.component';
+import {ContentLayoutComponent} from './content-layout.component';
 
 describe('unit: component ContentLayout', () => {
   let component: ContentLayoutComponent;
   let fixture: ComponentFixture<ContentLayoutComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ContentLayoutComponent],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ContentLayoutComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentLayoutComponent);

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EventsCardContentComponent } from './events-card-content.component';
+import {EventsCardContentComponent} from './events-card-content.component';
 
 describe('EventsCardContentComponent', () => {
   let component: EventsCardContentComponent;
@@ -8,7 +8,7 @@ describe('EventsCardContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [EventsCardContentComponent]
+      declarations: [EventsCardContentComponent],
     });
     fixture = TestBed.createComponent(EventsCardContentComponent);
     component = fixture.componentInstance;
