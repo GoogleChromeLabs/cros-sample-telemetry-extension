@@ -20,7 +20,7 @@ import {
   Response,
   ResponseErrorInfoMessage,
 } from '@common/message';
-import { DiagnosticsServiceProvider } from '../services/diagnostics';
+import {DiagnosticsServiceProvider} from '../services/diagnostics';
 import {
   generateDiagnosticsSuccessResponse,
   generateErrorResponse,
@@ -28,63 +28,67 @@ import {
 
 type DiagnosticsController = (
   category: Request,
-  res: (data: Response) => void
+  res: (data: Response) => void,
 ) => void;
 
 const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 
-const getAvailableRoutines = async (
-  res: (data: Response) => void
-) => {
+const getAvailableRoutines = async (res: (data: Response) => void) => {
   try {
-    const payload: GetAvailableRoutinesResponse = await diagnosticsService.getAvailableRoutines();
+    const payload: GetAvailableRoutinesResponse =
+      await diagnosticsService.getAvailableRoutines();
     return res(generateDiagnosticsSuccessResponse(payload));
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-}
+};
 
 const handleStartRoutine = async (
   routineName: RoutineType | undefined,
   res: (data: Response) => void,
-  params?: DiagnosticsParams
+  params?: DiagnosticsParams,
 ) => {
   if (!routineName) {
     return res(
       generateErrorResponse(
-        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName
-      )
+        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
+      ),
     );
   }
   try {
-    const response: RunRoutineResponse = await diagnosticsService.startRoutine(routineName, params);
-    if (response.status === RoutineStatus.ready               ||
-        response.status === RoutineStatus.running             ||
-        response.status === RoutineStatus.waiting_user_action ||
-        response.status === RoutineStatus.passed) {
-      return handleRoutineOperation(
-        response.id,
-        DiagnosticsAction.STATUS,
-        res
-      );
+    const response: RunRoutineResponse = await diagnosticsService.startRoutine(
+      routineName,
+      params,
+    );
+    if (
+      response.status === RoutineStatus.ready ||
+      response.status === RoutineStatus.running ||
+      response.status === RoutineStatus.waiting_user_action ||
+      response.status === RoutineStatus.passed
+    ) {
+      return handleRoutineOperation(response.id, DiagnosticsAction.STATUS, res);
     } else {
-      return res(generateErrorResponse(ResponseErrorInfoMessage.InvalidDiagnosticsRoutineStatus));
+      return res(
+        generateErrorResponse(
+          ResponseErrorInfoMessage.InvalidDiagnosticsRoutineStatus,
+        ),
+      );
     }
   } catch (err) {
-    return res(generateErrorResponse(String(err)))
+    return res(generateErrorResponse(String(err)));
   }
 };
 
 const handleRoutineOperation = async (
   id: number | undefined,
   command: DiagnosticsAction,
-  res: (data: Response) => void
+  res: (data: Response) => void,
 ) => {
   if (!id) {
     return res(
       generateErrorResponse(
-        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId
-      )
+        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId,
+      ),
     );
   }
   try {
@@ -100,17 +104,17 @@ const handleRoutineOperation = async (
         info = await diagnosticsService.getRoutineStatus(id);
         break;
     }
-    const payload: DiagnosticsResponse = { id, info };
+    const payload: DiagnosticsResponse = {id, info};
     return res(generateDiagnosticsSuccessResponse(payload));
   } catch (err) {
-    return res(generateErrorResponse(String(err)))
+    return res(generateErrorResponse(String(err)));
   }
 };
 
 export const handleDiagnostics: DiagnosticsController = (req, res) => {
   if (!req.diagnostics)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingDiagnosticsRequest)
+      generateErrorResponse(ResponseErrorInfoMessage.MissingDiagnosticsRequest),
     );
 
   switch (req.diagnostics.action) {
@@ -120,7 +124,7 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
       return handleStartRoutine(
         req.diagnostics.routineName,
         res,
-        req.diagnostics.params
+        req.diagnostics.params,
       );
     case DiagnosticsAction.STATUS:
     case DiagnosticsAction.STOP:
@@ -128,11 +132,13 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
       return handleRoutineOperation(
         req.diagnostics.routineId,
         req.diagnostics.action,
-        res
+        res,
       );
     default:
-    return res(
-      generateErrorResponse(ResponseErrorInfoMessage.InvalidDiagnosticsAction)
-    );
+      return res(
+        generateErrorResponse(
+          ResponseErrorInfoMessage.InvalidDiagnosticsAction,
+        ),
+      );
   }
 };

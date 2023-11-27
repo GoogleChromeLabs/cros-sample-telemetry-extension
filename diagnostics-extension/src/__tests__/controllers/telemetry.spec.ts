@@ -15,20 +15,20 @@ import {
   TelemetryInfoType,
   ResponseErrorInfoMessage,
 } from '@common/message';
-import { TelemetryInfoUnion } from '@common/dpsl';
-import { handleTelemetry } from '../../controllers/telemetry';
+import {TelemetryInfoUnion} from '@common/dpsl';
+import {handleTelemetry} from '../../controllers/telemetry';
 import * as fakeData from '../../services/fake_telemetry.data';
 
 describe('should return correct error messages', () => {
   it('should return error when telemetry object is missing', async () => {
-    const req: Request = { type: RequestType.TELEMETRY };
+    const req: Request = {type: RequestType.TELEMETRY};
     const res: (response: Response) => void = jest.fn();
 
     await handleTelemetry(req, res);
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: { message: ResponseErrorInfoMessage.MissingTelemetryRequest },
+      error: {message: ResponseErrorInfoMessage.MissingTelemetryRequest},
     });
   });
 
@@ -36,7 +36,7 @@ describe('should return correct error messages', () => {
     const req: Request = {
       type: RequestType.TELEMETRY,
       //@ts-ignore
-      telemetry: { info: 'invalid_type' },
+      telemetry: {info: 'invalid_type'},
     };
     const res: (response: Response) => void = jest.fn();
 
@@ -44,7 +44,7 @@ describe('should return correct error messages', () => {
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: { message: ResponseErrorInfoMessage.InvalidTelemetryInfoType },
+      error: {message: ResponseErrorInfoMessage.InvalidTelemetryInfoType},
     });
   });
 
@@ -60,7 +60,7 @@ describe('should return correct error messages', () => {
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: { message: ResponseErrorInfoMessage.InvalidTelemetryInfoType },
+      error: {message: ResponseErrorInfoMessage.InvalidTelemetryInfoType},
     });
   });
 });
@@ -70,7 +70,7 @@ describe('should return correct telemetry data', () => {
   let res: (response: Response) => void;
 
   beforeEach(() => {
-    req = { type: RequestType.TELEMETRY };
+    req = {type: RequestType.TELEMETRY};
     res = jest.fn();
   });
 
@@ -153,11 +153,11 @@ describe('should return correct telemetry data', () => {
 
   testCases.forEach((testCase) => {
     it(`should return correct ${testCase.name} info`, async () => {
-      req = { ...req, telemetry: { infoType: testCase.infoType } };
+      req = {...req, telemetry: {infoType: testCase.infoType}};
 
       await handleTelemetry(req, res);
 
-      const payload = { info: testCase.expectedResult };
+      const payload = {info: testCase.expectedResult};
       expect(res).toHaveBeenCalledWith({
         success: true,
         telemetry: payload,

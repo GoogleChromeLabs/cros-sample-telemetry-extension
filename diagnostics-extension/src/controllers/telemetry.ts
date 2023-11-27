@@ -13,7 +13,7 @@ import {
   TelemetryInfoType,
   TelemetryResponse,
 } from '@common/message';
-import { TelemetryServiceProvider } from '../services/telemetry';
+import {TelemetryServiceProvider} from '../services/telemetry';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,
@@ -21,7 +21,7 @@ import {
 
 type TelemetryController = (
   category: Request,
-  res: (data: Response) => void
+  res: (data: Response) => void,
 ) => void;
 
 const telemetryService = TelemetryServiceProvider.getTelemetryService();
@@ -64,7 +64,7 @@ const mapInfoTypeToMethod = (infoType: TelemetryInfoType) => {
 export const handleTelemetry: TelemetryController = async (req, res) => {
   if (!req.telemetry)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingTelemetryRequest)
+      generateErrorResponse(ResponseErrorInfoMessage.MissingTelemetryRequest),
     );
 
   const infoType = req.telemetry.infoType;
@@ -72,16 +72,14 @@ export const handleTelemetry: TelemetryController = async (req, res) => {
 
   if (!requiredMethod)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.InvalidTelemetryInfoType)
+      generateErrorResponse(ResponseErrorInfoMessage.InvalidTelemetryInfoType),
     );
 
   try {
     const data = await requiredMethod();
-    const payload: TelemetryResponse = { info: data };
+    const payload: TelemetryResponse = {info: data};
     return res(generateTelemetrySuccessResponse(payload));
   } catch (err) {
-    return res(
-      generateErrorResponse(String(err))
-    );
+    return res(generateErrorResponse(String(err)));
   }
 };

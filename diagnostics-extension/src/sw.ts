@@ -6,19 +6,12 @@
  * @fileoverview Service worker script
  */
 
-import {
-  Request,
-  RequestType,
-  ResponseErrorInfoMessage,
-} from '@common/message';
-import { handleDiagnostics } from './controllers/diagnostics';
-import {
-  handleEvents,
-  onEventPortConnect,
-} from './controllers/events';
-import { handleTelemetry } from './controllers/telemetry';
-import { generateErrorResponse } from './utils';
-import { registerEventHandlers } from './controllers/events';
+import {Request, RequestType, ResponseErrorInfoMessage} from '@common/message';
+import {handleDiagnostics} from './controllers/diagnostics';
+import {handleEvents, onEventPortConnect} from './controllers/events';
+import {handleTelemetry} from './controllers/telemetry';
+import {generateErrorResponse} from './utils';
+import {registerEventHandlers} from './controllers/events';
 
 // Event handlers in service workers need to be declared in the global scope.
 registerEventHandlers();
@@ -26,7 +19,7 @@ registerEventHandlers();
 chrome.runtime.onInstalled.addListener(
   (details: chrome.runtime.InstalledDetails) => {
     console.log('Service worker is installed!', details);
-  }
+  },
 );
 
 chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
@@ -44,7 +37,7 @@ chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
       return handleEvents(req, res);
     default:
       return res(
-        generateErrorResponse(ResponseErrorInfoMessage.InvalidRequestType)
+        generateErrorResponse(ResponseErrorInfoMessage.InvalidRequestType),
       );
   }
 });

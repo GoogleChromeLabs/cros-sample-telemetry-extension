@@ -6,5 +6,5 @@
 // during compilation by the development webpack config.
 
 export const environment = {
-  testModeEnabled: true
+  testModeEnabled: true,
 };

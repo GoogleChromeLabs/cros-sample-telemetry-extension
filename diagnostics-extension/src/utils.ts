@@ -14,23 +14,23 @@ import {
 } from '@common/message';
 
 export const generateTelemetrySuccessResponse = (
-  payload: TelemetryResponse
+  payload: TelemetryResponse,
 ): Response => {
-  return { success: true, telemetry: payload };
+  return {success: true, telemetry: payload};
 };
 
 export const generateDiagnosticsSuccessResponse = (
-  payload: DiagnosticsResponse
+  payload: DiagnosticsResponse,
 ): Response => {
-  return { success: true, diagnostics: payload };
+  return {success: true, diagnostics: payload};
 };
 
 export const generateEventsSuccessResponse = (
-  payload?: EventsResponse
+  payload?: EventsResponse,
 ): Response => {
-  return { success: true, events: payload };
+  return {success: true, events: payload};
 };
 
 export const generateErrorResponse = (message: string): Response => {
-  return { success: false, error: { message } };
+  return {success: false, error: {message}};
 };

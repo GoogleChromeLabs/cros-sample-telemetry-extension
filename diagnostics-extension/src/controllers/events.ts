@@ -6,7 +6,7 @@
  * @fileoverview Handle event requests
  */
 
-import { EventCategory } from '@common/dpsl';
+import {EventCategory} from '@common/dpsl';
 import {
   EventsAction,
   Request,
@@ -14,15 +14,12 @@ import {
   ResponseErrorInfoMessage,
   PortName,
 } from '@common/message';
-import { EventsServiceProvider } from '../services/events';
-import {
-  generateErrorResponse,
-  generateEventsSuccessResponse,
-} from '../utils';
+import {EventsServiceProvider} from '../services/events';
+import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 
 type EventsController = (
   category: Request,
-  res: (data: Response) => void
+  res: (data: Response) => void,
 ) => void;
 
 const eventsService = EventsServiceProvider.getEventsService();
@@ -37,7 +34,7 @@ const isEventSupported = async (
   } catch (err) {
     res(generateErrorResponse(String(err)));
   }
-}
+};
 
 const startCapturingEvents = async (
   eventType: EventCategory,
@@ -50,7 +47,7 @@ const startCapturingEvents = async (
   } catch (err) {
     res(generateErrorResponse(String(err)));
   }
-}
+};
 
 const stopCapturingEvents = async (
   eventType: EventCategory,
@@ -62,17 +59,20 @@ const stopCapturingEvents = async (
   } catch (err) {
     res(generateErrorResponse(String(err)));
   }
-}
+};
 
-export const registerEventHandlers = async() =>{
-  eventsService.registerEventHandlers().then(response => {
-    if (!response.success) {
-      console.error(response.error?.message);
-    }
-  }).catch(err => {
-    console.error(err.message);
-  });
-}
+export const registerEventHandlers = async () => {
+  eventsService
+    .registerEventHandlers()
+    .then((response) => {
+      if (!response.success) {
+        console.error(response.error?.message);
+      }
+    })
+    .catch((err) => {
+      console.error(err.message);
+    });
+};
 
 export const onEventPortConnect = async (port: chrome.runtime.Port) => {
   if (port.name === PortName.EVENTS_PORT) {
@@ -80,14 +80,14 @@ export const onEventPortConnect = async (port: chrome.runtime.Port) => {
   } else {
     console.error(ResponseErrorInfoMessage.InvalidPortName);
   }
-}
+};
 
 export const handleEvents: EventsController = async (req, res) => {
   if (!req.events)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingEventsRequest)
+      generateErrorResponse(ResponseErrorInfoMessage.MissingEventsRequest),
     );
-  
+
   const eventType = req.events.eventType;
   switch (req.events.action) {
     case EventsAction.IS_EVENT_SUPPORTED:
@@ -98,7 +98,7 @@ export const handleEvents: EventsController = async (req, res) => {
       return stopCapturingEvents(eventType, res);
     default:
       return res(
-        generateErrorResponse(ResponseErrorInfoMessage.InvalidEventsAction)
+        generateErrorResponse(ResponseErrorInfoMessage.InvalidEventsAction),
       );
   }
 };

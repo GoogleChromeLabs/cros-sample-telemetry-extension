@@ -6,11 +6,11 @@
  * @fileoverview Classes related to events
  */
 
-import { EventCategory, EventSupportStatusInfo } from '@common/dpsl';
-import { Response } from '@common/message';
+import {EventCategory, EventSupportStatusInfo} from '@common/dpsl';
+import {Response} from '@common/message';
 import * as fake_events from './fake_events.data';
-import { environment } from '../environments/environment';
-import { generateEventsSuccessResponse, generateErrorResponse } from '../utils';
+import {environment} from '../environments/environment';
+import {generateEventsSuccessResponse, generateErrorResponse} from '../utils';
 
 /**
  * Abstract class reprensenting the interface of
@@ -19,7 +19,9 @@ import { generateEventsSuccessResponse, generateErrorResponse } from '../utils';
 export abstract class EventsService {
   abstract registerEventHandlers(): Promise<Response>;
   abstract registerPort(port: chrome.runtime.Port): void;
-  abstract isEventSupported(eventType: EventCategory): Promise<EventSupportStatusInfo>;
+  abstract isEventSupported(
+    eventType: EventCategory,
+  ): Promise<EventSupportStatusInfo>;
   abstract startCapturingEvents(eventType: EventCategory): Promise<void>;
   abstract stopCapturingEvents(eventType: EventCategory): Promise<void>;
 }
@@ -31,7 +33,7 @@ export abstract class EventsService {
 export class EventsServiceImpl extends EventsService {
   private port!: chrome.runtime.Port;
 
-  private eventCategoryAndMethods: {type: EventCategory, func: any}[] = [
+  private eventCategoryAndMethods: {type: EventCategory; func: any}[] = [
     {
       type: EventCategory.audio_jack,
       func: (chrome as any).os.events.onAudioJackEvent,
@@ -92,7 +94,7 @@ export class EventsServiceImpl extends EventsService {
       type: EventCategory.power,
       func: (chrome as any).os.events.onPowerEvent,
     },
-  ]
+  ];
 
   private notifyPort = (type: EventCategory, event) => {
     if (!this.port) {
@@ -100,14 +102,14 @@ export class EventsServiceImpl extends EventsService {
     }
     this.port.postMessage({
       type: type,
-      info: event
-    })
+      info: event,
+    });
     return;
-  }
+  };
 
   registerPort = (port: chrome.runtime.Port): void => {
     this.port = port;
-  }
+  };
 
   registerEventHandlers = async (): Promise<Response> => {
     try {
@@ -118,16 +120,18 @@ export class EventsServiceImpl extends EventsService {
     } catch (err) {
       return generateErrorResponse(String(err));
     }
-  }
-  isEventSupported = async (eventType: EventCategory): Promise<EventSupportStatusInfo> => {
+  };
+  isEventSupported = async (
+    eventType: EventCategory,
+  ): Promise<EventSupportStatusInfo> => {
     return (chrome as any).os.events.isEventSupported(eventType);
-  }
+  };
   startCapturingEvents = async (eventType: EventCategory): Promise<void> => {
     return (chrome as any).os.events.startCapturingEvents(eventType);
-  }
+  };
   stopCapturingEvents = async (eventType: EventCategory): Promise<void> => {
     return (chrome as any).os.events.stopCapturingEvents(eventType);
-  }
+  };
 }
 
 /**
@@ -135,22 +139,23 @@ export class EventsServiceImpl extends EventsService {
  * @extends EventsService
  */
 export class FakeEventsService implements EventsService {
-
   registerEventHandlers = async (): Promise<Response> => {
     return fake_events.registerEventHandlers();
-  }
+  };
   registerPort = (port: chrome.runtime.Port) => {
     return fake_events.registerPort(port);
-  }
-  isEventSupported = async (eventType: EventCategory): Promise<EventSupportStatusInfo> => {
+  };
+  isEventSupported = async (
+    eventType: EventCategory,
+  ): Promise<EventSupportStatusInfo> => {
     return fake_events.isEventSupported(eventType);
-  }
+  };
   startCapturingEvents = async (eventType: EventCategory): Promise<void> => {
     return fake_events.startCapturingEvents(eventType);
-  }
+  };
   stopCapturingEvents = async (eventType: EventCategory): Promise<void> => {
     return fake_events.stopCapturingEvents(eventType);
-  }
+  };
 }
 
 export class EventsServiceProvider {

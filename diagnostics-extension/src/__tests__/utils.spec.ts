@@ -6,8 +6,8 @@
  * @fileoverview Unit tests for src/utils
  */
 
-import { BatteryInfo } from '@common/dpsl';
-import { Response, TelemetryResponse } from '@common/message';
+import {BatteryInfo} from '@common/dpsl';
+import {Response, TelemetryResponse} from '@common/message';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,
@@ -28,7 +28,7 @@ describe('should generate correct response objects', () => {
 
   it('should generate correct telemetry response object', async () => {
     const info: BatteryInfo = await fakeData.getBatteryInfo();
-    const payload: TelemetryResponse = { info };
+    const payload: TelemetryResponse = {info};
     const response: Response = generateTelemetrySuccessResponse(payload);
     expect(response).toEqual({
       success: true,
