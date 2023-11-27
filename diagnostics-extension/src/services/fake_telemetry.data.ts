@@ -6,6 +6,9 @@
  * @fileoverview Functions to generate fake telemetry data.
  */
 
+// Fake data may not use certain parameter variables.
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import {
   AudioInfo,
   BatteryInfo,

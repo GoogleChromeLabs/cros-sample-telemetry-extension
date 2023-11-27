@@ -80,72 +80,72 @@ describe('should return correct telemetry data', () => {
     expectedResult: TelemetryInfoUnion;
   }[] = [
     {
-      name: `audio`,
+      name: 'audio',
       infoType: TelemetryInfoType.AUDIO,
       expectedResult: fakeData.audioInfo,
     },
     {
-      name: `battery`,
+      name: 'battery',
       infoType: TelemetryInfoType.BATTERY,
       expectedResult: fakeData.batteryInfo,
     },
     {
-      name: `block device`,
+      name: 'block device',
       infoType: TelemetryInfoType.BLOCK_DEVICE,
       expectedResult: fakeData.blockDeviceInfo,
     },
     {
-      name: `cpu`,
+      name: 'cpu',
       infoType: TelemetryInfoType.CPU,
       expectedResult: fakeData.cpuInfo,
     },
     {
-      name: `display`,
+      name: 'display',
       infoType: TelemetryInfoType.DISPLAY,
       expectedResult: fakeData.displayInfo,
     },
     {
-      name: `marketing`,
+      name: 'marketing',
       infoType: TelemetryInfoType.MARKETING,
       expectedResult: fakeData.marketingInfo,
     },
     {
-      name: `memory`,
+      name: 'memory',
       infoType: TelemetryInfoType.MEMORY,
       expectedResult: fakeData.memoryInfo,
     },
     {
-      name: `network`,
+      name: 'network',
       infoType: TelemetryInfoType.NETWORK,
       expectedResult: fakeData.networkInfo,
     },
     {
-      name: `oem`,
+      name: 'oem',
       infoType: TelemetryInfoType.OEM,
       expectedResult: fakeData.oemInfo,
     },
     {
-      name: `os version`,
+      name: 'os version',
       infoType: TelemetryInfoType.OS_VERSION,
       expectedResult: fakeData.osVersionInfo,
     },
     {
-      name: `usb`,
+      name: 'usb',
       infoType: TelemetryInfoType.USB,
       expectedResult: fakeData.usbInfo,
     },
     {
-      name: `vpd`,
+      name: 'vpd',
       infoType: TelemetryInfoType.VPD,
       expectedResult: fakeData.vpdInfo,
     },
     {
-      name: `stateful partition`,
+      name: 'stateful partition',
       infoType: TelemetryInfoType.STATEFUL_PARTITION,
       expectedResult: fakeData.statefulPartitionInfo,
     },
     {
-      name: `tpm`,
+      name: 'tpm',
       infoType: TelemetryInfoType.TPM,
       expectedResult: fakeData.tpmInfo,
     },
