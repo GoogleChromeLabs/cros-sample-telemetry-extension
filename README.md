@@ -23,6 +23,9 @@ header:
 - In case git hooks don't work as intended, run this command to set necessary permissions:
  `cd .githooks && chmod +x *`
 
+To run the code formatter on either the Diagnostics App or the Diagnostics extension project, Run:
+```npm run format```
+
 ### Diagnostics App PWA
 
 1. ```cd diagnostics-app```

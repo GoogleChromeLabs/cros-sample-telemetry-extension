@@ -9,7 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
-    "script:ci": "sh ./scripts/ci.sh"
+    "script:ci": "sh ./scripts/ci.sh",
+    "format": "npx prettier --config .prettierrc.js --write src",
+    "format:check": "npx prettier --config .prettierrc.js --check src"
   },
   "private": true,
   "engines": {

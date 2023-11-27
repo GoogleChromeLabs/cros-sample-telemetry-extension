@@ -4,8 +4,10 @@ set -e
 
 cd diagnostics-app
 npm run script:ci
+npm run format:check
 cd ..
 
 cd diagnostics-extension
 npm run script:ci
+npm run format:check
 cd ..

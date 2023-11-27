@@ -8,7 +8,9 @@
     "dev": "npm run prebuild && webpack --config webpack.dev.js",
     "lint": "eslint . --ext .ts",
     "test": "jest --passWithNoTests --coverage",
-    "script:ci": "sh ./scripts/ci.sh"
+    "script:ci": "sh ./scripts/ci.sh",
+    "format": "npx prettier --config .prettierrc.js --write src",
+    "format:check": "npx prettier --config .prettierrc.js --check src"
   },
   "keywords": [],
   "author": "",
