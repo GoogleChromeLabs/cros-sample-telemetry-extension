@@ -1,0 +1,12 @@
+# compiled output
+**/build
+**/dist
+**/tmp
+**/out-tsc
+**/.angular
+
+# dependencies
+**/node_modules
+
+# config files
+*.conf.js

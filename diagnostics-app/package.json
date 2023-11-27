@@ -11,7 +11,14 @@
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless --code-coverage",
     "script:ci": "sh ./scripts/ci.sh",
     "format": "npx prettier --config .prettierrc.js --write src",
-    "format:check": "npx prettier --config .prettierrc.js --check src"
+    "format:check": "npx prettier --config .prettierrc.js --check src",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint"
   },
   "private": true,
   "engines": {
@@ -84,6 +91,7 @@
     "karma-jasmine-html-reporter": "^2.0.0",
     "typescript": "4.9.5",
     "wbn": "^0.0.9",
-    "wbn-sign": "^0.1.2"
+    "wbn-sign": "^0.1.2",
+    "gts": "^5.2.0"
   }
 }
