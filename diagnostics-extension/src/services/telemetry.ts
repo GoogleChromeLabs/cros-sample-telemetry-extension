@@ -23,7 +23,7 @@ import {
   TpmInfo,
 } from '@common/dpsl';
 import * as fakeTelemetry from './fake_telemetry.data';
-import { environment } from '../environments/environment';
+import {environment} from '../environments/environment';
 
 /**
  * Abstract class reprensenting the interface of
@@ -32,13 +32,13 @@ import { environment } from '../environments/environment';
 export abstract class TelemetryService {
   abstract getAudioInfo(): Promise<AudioInfo>;
   abstract getBatteryInfo(): Promise<BatteryInfo>;
-  abstract getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse>
+  abstract getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse>;
   abstract getCpuInfo(): Promise<CpuInfo>;
   abstract getDisplayInfo(): Promise<DisplayInfo>;
   abstract getMarketingInfo(): Promise<MarketingInfo>;
   abstract getMemoryInfo(): Promise<MemoryInfo>;
   abstract getInternetConnectivityInfo(): Promise<InternetConnectivityInfo>;
-  abstract getOemData(): Promise<OemData>
+  abstract getOemData(): Promise<OemData>;
   abstract getOsVersionInfo(): Promise<OsVersionInfo>;
   abstract getUsbBusInfo(): Promise<UsbBusDevices>;
   abstract getVpdInfo(): Promise<VpdInfo>;

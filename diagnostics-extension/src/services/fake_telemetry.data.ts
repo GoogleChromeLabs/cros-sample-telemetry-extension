@@ -56,7 +56,8 @@ export const blockDeviceInfo: NonRemovableBlockDeviceInfoResponse = [
     name: 'WDC PC SN520 SDAPTUW-256G-1006',
   },
 ];
-export const getNonRemovableBlockDevicesInfo = async (): Promise<NonRemovableBlockDeviceInfoResponse> => blockDeviceInfo;
+export const getNonRemovableBlockDevicesInfo =
+  async (): Promise<NonRemovableBlockDeviceInfoResponse> => blockDeviceInfo;
 
 export const cpuInfo: CpuInfo = {
   numTotalThreads: 8,
@@ -438,13 +439,14 @@ export const displayInfo: DisplayInfo = {
   externalDisplays: [
     {
       inputType: DisplayInputType.unknown,
-    }
-  ]
+    },
+  ],
 };
 export const getDisplayInfo = async (): Promise<DisplayInfo> => displayInfo;
 
 export const marketingInfo: MarketingInfo = {};
-export const getMarketingInfo = async (): Promise<MarketingInfo> => marketingInfo;
+export const getMarketingInfo = async (): Promise<MarketingInfo> =>
+  marketingInfo;
 
 export const memoryInfo: MemoryInfo = {
   totalMemoryKiB: 16270856,
@@ -455,11 +457,10 @@ export const memoryInfo: MemoryInfo = {
 export const getMemoryInfo = async (): Promise<MemoryInfo> => memoryInfo;
 
 export const networkInfo: InternetConnectivityInfo = {
-  networks: [
-    { ipv6Addresses: ['2001:db8:3333:4444:5555:6666:7777:8888'] },
-  ]
+  networks: [{ipv6Addresses: ['2001:db8:3333:4444:5555:6666:7777:8888']}],
 };
-export const getInternetConnectivityInfo = async (): Promise<InternetConnectivityInfo> => networkInfo;
+export const getInternetConnectivityInfo =
+  async (): Promise<InternetConnectivityInfo> => networkInfo;
 
 export const oemInfo: OemData = {
   oemData: 'ABCDEFGHIJKLMN',
@@ -467,14 +468,11 @@ export const oemInfo: OemData = {
 export const getOemData = async (): Promise<OemData> => oemInfo;
 
 export const osVersionInfo: OsVersionInfo = {};
-export const getOsVersionInfo = async (): Promise<OsVersionInfo> => osVersionInfo;
+export const getOsVersionInfo = async (): Promise<OsVersionInfo> =>
+  osVersionInfo;
 
 export const usbInfo: UsbBusDevices = {
-  devices: [
-    {interfaces: [
-      {}
-    ]}
-  ]
+  devices: [{interfaces: [{}]}],
 };
 export const getUsbBusInfo = async (): Promise<UsbBusDevices> => usbInfo;
 
@@ -489,7 +487,8 @@ export const statefulPartitionInfo: StatefulPartitionInfo = {
   availableSpace: 1340000,
   totalSpace: 2005000,
 };
-export const getStatefulPartitionInfo = async (): Promise<StatefulPartitionInfo> => statefulPartitionInfo;
+export const getStatefulPartitionInfo =
+  async (): Promise<StatefulPartitionInfo> => statefulPartitionInfo;
 
 export const tpmInfo: TpmInfo = {
   version: {},
