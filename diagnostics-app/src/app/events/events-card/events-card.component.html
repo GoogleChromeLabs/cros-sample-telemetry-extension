@@ -10,8 +10,22 @@
   <div class="header-bar">
     <header>{{ category.toUpperCase() }}</header>
     <div class="buttons">
-      <button mat-raised-button color="basic" (click)="startCapturingEvents()" [disabled]="state === 'listening'">Start</button>
-      <button mat-raised-button color="warn" (click)="stopCapturingEvents()" [disabled]="state === 'not_listening'">Stop</button>
+      <button
+        mat-raised-button
+        color="basic"
+        (click)="startCapturingEvents()"
+        [disabled]="state === 'listening'"
+      >
+        Start
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="stopCapturingEvents()"
+        [disabled]="state === 'not_listening'"
+      >
+        Stop
+      </button>
     </div>
   </div>
   <div class="events-content-container">
@@ -25,10 +39,10 @@
       </ng-template>
       <ng-template #showContent>
         <ng-container *ngIf="state === 'listening'">
-        <div class="events-card-content-container" *ngFor="let event of eventList">
-          Get event:
-          <app-events-card-content [event]="event!"></app-events-card-content>
-        </div>
+          <div class="events-card-content-container" *ngFor="let event of eventList">
+            Get event:
+            <app-events-card-content [event]="event!"></app-events-card-content>
+          </div>
           <div class="listening-text">listening {{ category }} event ...</div>
         </ng-container>
       </ng-template>

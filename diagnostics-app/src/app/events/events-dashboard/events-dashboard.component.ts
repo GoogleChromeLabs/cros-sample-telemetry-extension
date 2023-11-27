@@ -7,20 +7,20 @@
  * Imported by events.module.ts
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {
   EventCategory,
   EventSupportStatus,
-  EventSupportStatusInfo
+  EventSupportStatusInfo,
 } from '@common/dpsl';
-import { EventsService } from 'src/app/core/services/events.service';
-import { VISIBLE_EVENT_CARDS } from 'src/config/config';
+import {EventsService} from 'src/app/core/services/events.service';
+import {VISIBLE_EVENT_CARDS} from 'src/config/config';
 
 @Component({
   selector: 'app-events-dashboard',
   templateUrl: './events-dashboard.component.html',
-  styleUrls: ['./events-dashboard.component.css']
+  styleUrls: ['./events-dashboard.component.css'],
 })
 export class EventsDashboardComponent implements OnInit {
   private _error?: string; // the error message if there is any error
@@ -28,9 +28,13 @@ export class EventsDashboardComponent implements OnInit {
   // Array of events categories that will actually be displayed
   private _supportedCategories: EventCategory[] = [];
 
-  get error() { return this._error; }
-  get supportedCategories() { return this._supportedCategories; }
-  
+  get error() {
+    return this._error;
+  }
+  get supportedCategories() {
+    return this._supportedCategories;
+  }
+
   async isEventSupported(category: EventCategory) {
     try {
       let statusInfo = await this.eventsService.isEventSupported(category);

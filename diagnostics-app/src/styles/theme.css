@@ -33,7 +33,7 @@
   --app-dashboard-card-color: var(--color-black);
   --app-dashboard-card-border-color: #ccc;
 
-  --app-error-message-color: var(--color-yellow)
+  --app-error-message-color: var(--color-yellow);
 }
 
 .dark {
@@ -71,5 +71,5 @@
   --app-dashboard-card-color: var(--color-white);
   --app-dashboard-card-border-color: #333;
 
-  --app-error-message-color: var(--color-yellow)
+  --app-error-message-color: var(--color-yellow);
 }

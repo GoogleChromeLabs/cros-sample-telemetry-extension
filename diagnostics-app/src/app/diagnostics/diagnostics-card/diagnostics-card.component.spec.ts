@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DiagnosticsCardComponent } from './diagnostics-card.component';
+import {DiagnosticsCardComponent} from './diagnostics-card.component';
 
-import { RoutineType } from '@common/dpsl'
+import {RoutineType} from '@common/dpsl';
 
 describe('DiagnosticsCardComponent', () => {
   let component: DiagnosticsCardComponent;
@@ -10,7 +10,7 @@ describe('DiagnosticsCardComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DiagnosticsCardComponent]
+      declarations: [DiagnosticsCardComponent],
     });
     fixture = TestBed.createComponent(DiagnosticsCardComponent);
     component = fixture.componentInstance;

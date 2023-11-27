@@ -6,10 +6,10 @@
  * @fileoverview Unit tests for header.component
  */
 
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { HeaderComponent } from './header.component';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {HeaderComponent} from './header.component';
 
 describe('unit: component: header', () => {
   let component: HeaderComponent;
@@ -36,7 +36,7 @@ describe('unit: component: header', () => {
   it('calls onToggleTheme on button click', () => {
     spyOn(component, 'onToggleTheme');
     let button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('#btnToggleTheme')
+      By.css('#btnToggleTheme'),
     ).nativeElement;
     button.click();
     fixture.detectChanges();
@@ -48,7 +48,7 @@ describe('unit: component: header', () => {
     spyOn(component.toggleDrawer, 'emit');
 
     let button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('#btnToggleDrawer')
+      By.css('#btnToggleDrawer'),
     ).nativeElement;
 
     button.click();

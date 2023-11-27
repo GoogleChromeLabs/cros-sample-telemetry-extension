@@ -4,22 +4,22 @@
  * found in the LICENSE file.
  */
 
- .diagnostics-dashboard {
+.diagnostics-dashboard {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
- }
+}
 
- .diagnostics-card-container {
+.diagnostics-card-container {
   margin: 8px;
   width: 100%;
- }
+}
 
- .error-message {
+.error-message {
   color: var(--app-error-message-color);
   border-radius: 5px;
   padding: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
- }
+}

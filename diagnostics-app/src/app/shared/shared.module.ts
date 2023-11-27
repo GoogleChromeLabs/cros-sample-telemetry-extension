@@ -8,23 +8,15 @@
  * Imported by app.module.ts
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import { MaterialModule } from './material.module';
+import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-  ],
-  exports: [
-    CommonModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-  ],
+  imports: [CommonModule, BrowserAnimationsModule, MaterialModule],
+  exports: [CommonModule, BrowserAnimationsModule, MaterialModule],
 })
 export class SharedModule {}

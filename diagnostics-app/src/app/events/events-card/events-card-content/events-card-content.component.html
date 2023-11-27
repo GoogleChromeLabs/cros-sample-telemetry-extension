@@ -6,8 +6,11 @@
 
 <div class="events-card-content">
   <div *ngFor="let item of $any(event) | keyvalue: originalOrder">
-    <b>{{ item.key }}</b>:
-    <ng-container *ngIf="isPrimitiveType(item.value); then renderPrimitive; else renderSubobject"></ng-container>
+    <b>{{ item.key }}</b
+    >:
+    <ng-container
+      *ngIf="isPrimitiveType(item.value); then renderPrimitive; else renderSubobject"
+    ></ng-container>
     <ng-template #renderPrimitive>
       {{ item.value }}
     </ng-template>

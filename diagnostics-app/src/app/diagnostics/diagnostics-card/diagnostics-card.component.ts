@@ -7,8 +7,8 @@
  * Imported by diagnostics.module.ts
  */
 
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { KeyValue } from '@angular/common';
+import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {KeyValue} from '@angular/common';
 
 import {
   DiagnosticsParams,
@@ -16,16 +16,16 @@ import {
   RESUMABLE_ROUTINES,
   RoutineStatus,
   RoutineType,
-} from '@common/dpsl'
+} from '@common/dpsl';
+import {ResponseErrorInfoMessage, RoutineUpdateResponse} from '@common/message';
+import {DiagnosticsService} from 'src/app/core/services/diagnostics.service';
 import {
-  ResponseErrorInfoMessage,
-  RoutineUpdateResponse,
-} from '@common/message';
-import { DiagnosticsService } from 'src/app/core/services/diagnostics.service';
-import { defaultDiagnosticsRefreshInterval, refreshIntervals } from '../../core/config/data-refresh-intervals';
-import { diagnosticsParams } from '../../core/config/diagnostics-params';
+  defaultDiagnosticsRefreshInterval,
+  refreshIntervals,
+} from '../../core/config/data-refresh-intervals';
+import {diagnosticsParams} from '../../core/config/diagnostics-params';
 
-enum DiagnosticsCardState{
+enum DiagnosticsCardState {
   READY = 'ready',
   RUNNING = 'running',
   STOPPING = 'stopping',
@@ -35,10 +35,10 @@ enum DiagnosticsCardState{
 @Component({
   selector: 'app-diagnostics-card',
   templateUrl: './diagnostics-card.component.html',
-  styleUrls: ['./diagnostics-card.component.css']
+  styleUrls: ['./diagnostics-card.component.css'],
 })
 export class DiagnosticsCardComponent implements OnInit, OnDestroy {
-  @Input({ required: true }) routine!: RoutineType;
+  @Input({required: true}) routine!: RoutineType;
 
   public DiagnosticsCardState = DiagnosticsCardState;
 
@@ -50,19 +50,34 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   private _state: DiagnosticsCardState = DiagnosticsCardState.READY; // the state of the card component
   private _reachedTerminalState = false; // true if the routine reaches a terminal state
-  
+
   // the set containing all the terminal states of RoutineStatus
   readonly terminalStates = new Set<RoutineStatus>([
-    RoutineStatus.passed, RoutineStatus.failed, RoutineStatus.error,
-    RoutineStatus.cancelled, RoutineStatus.failed_to_start, RoutineStatus.removed,
-    RoutineStatus.unsupported, RoutineStatus.not_run
-  ])
+    RoutineStatus.passed,
+    RoutineStatus.failed,
+    RoutineStatus.error,
+    RoutineStatus.cancelled,
+    RoutineStatus.failed_to_start,
+    RoutineStatus.removed,
+    RoutineStatus.unsupported,
+    RoutineStatus.not_run,
+  ]);
 
-  get error() { return this._error; }
-  get intervalId() { return this._intervalId; }
-  get params() { return this._params; }
-  get routineInfo() { return this._routineInfo; }
-  get state() { return this._state; }
+  get error() {
+    return this._error;
+  }
+  get intervalId() {
+    return this._intervalId;
+  }
+  get params() {
+    return this._params;
+  }
+  get routineInfo() {
+    return this._routineInfo;
+  }
+  get state() {
+    return this._state;
+  }
   get messageColor() {
     switch (this._routineInfo?.status) {
       case RoutineStatus.passed:
@@ -103,7 +118,10 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
   }
 
   // this function is used for maintaining the attributes' original order
-  public originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => 0;
+  public originalOrder = (
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>,
+  ): number => 0;
 
   canResume() {
     return RESUMABLE_ROUTINES.includes(this.routine);
@@ -111,15 +129,19 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   async startRoutine() {
     try {
-      let res = await this.diagnosticsService.startRoutine(this.routine, this._params);
+      let res = await this.diagnosticsService.startRoutine(
+        this.routine,
+        this._params,
+      );
       res = res as RoutineUpdateResponse;
       this._state = DiagnosticsCardState.RUNNING;
       this._error = undefined;
       this._routineId = res.id;
       this._routineInfo = res.info;
 
-      const interval = (refreshIntervals.diagnostics.has(this.routine)) ?
-        refreshIntervals.diagnostics.get(this.routine) : defaultDiagnosticsRefreshInterval;
+      const interval = refreshIntervals.diagnostics.has(this.routine)
+        ? refreshIntervals.diagnostics.get(this.routine)
+        : defaultDiagnosticsRefreshInterval;
       this._intervalId = window.setInterval(() => {
         if (this._state === DiagnosticsCardState.RUNNING) {
           this.getRoutineStatus();
@@ -127,8 +149,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       }, interval);
 
       this.handleResponse();
-
-    } catch(err) {
+    } catch (err) {
       this._error = String(err);
     }
   }
@@ -138,7 +159,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       window.clearInterval(this._intervalId);
       this._intervalId = undefined;
     }
-    
+
     // The routine is no longer running.
     if (this._state !== DiagnosticsCardState.RUNNING) {
       return;
@@ -146,15 +167,15 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
     try {
       this._state = DiagnosticsCardState.STOPPING;
-      if (this._routineId == undefined){
-        throw "Routine ID is undefined";
+      if (this._routineId == undefined) {
+        throw 'Routine ID is undefined';
       }
       await this.diagnosticsService.stopRoutine(this._routineId);
       this._error = undefined;
     } catch (err) {
       this._error = String(err);
     }
-    
+
     this._routineId = undefined;
     this._reachedTerminalState = false;
     this._state = DiagnosticsCardState.READY;
@@ -169,20 +190,21 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       this._routineInfo = res.info;
 
       this.handleResponse();
-
-    } catch(err) {
+    } catch (err) {
       this._error = String(err);
     }
   }
 
   async getRoutineStatus() {
     try {
-      let res = await this.diagnosticsService.getRoutineStatus(this._routineId!);
+      let res = await this.diagnosticsService.getRoutineStatus(
+        this._routineId!,
+      );
       res = res as RoutineUpdateResponse;
       this._error = undefined;
       this._routineInfo = res.info;
       this.handleResponse();
-    } catch(err) {
+    } catch (err) {
       this._error = String(err);
     }
   }

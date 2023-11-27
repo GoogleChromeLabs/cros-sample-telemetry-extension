@@ -7,10 +7,10 @@
  * Imported by app.module.ts
  */
 
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Theme } from 'src/app/core/enums/global.enums';
-import { ThemeService } from 'src/app/core/services/theme.service';
-import { APP_NAME } from 'src/config/config';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Theme} from 'src/app/core/enums/global.enums';
+import {ThemeService} from 'src/app/core/services/theme.service';
+import {APP_NAME} from 'src/config/config';
 
 @Component({
   selector: 'app-header',

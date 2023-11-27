@@ -4,9 +4,9 @@
  * found in the LICENSE file.
  */
 
- .events-card-content {
+.events-card-content {
   font-size: 10px;
 
-   /* This is used for indentation */
+  /* This is used for indentation */
   margin-left: 20px;
- }
+}

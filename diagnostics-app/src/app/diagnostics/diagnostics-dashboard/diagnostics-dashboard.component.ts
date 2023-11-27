@@ -8,16 +8,16 @@
  * Imported by diagnostics.module.ts
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { GetAvailableRoutinesResponse, RoutineType } from '@common/dpsl';
-import { DiagnosticsService } from 'src/app/core/services/diagnostics.service';
-import { VISIBLE_DIAGNOSTICS_CARDS } from 'src/config/config';
+import {GetAvailableRoutinesResponse, RoutineType} from '@common/dpsl';
+import {DiagnosticsService} from 'src/app/core/services/diagnostics.service';
+import {VISIBLE_DIAGNOSTICS_CARDS} from 'src/config/config';
 
 @Component({
   selector: 'app-diagnostics-dashboard',
   templateUrl: './diagnostics-dashboard.component.html',
-  styleUrls: ['./diagnostics-dashboard.component.css']
+  styleUrls: ['./diagnostics-dashboard.component.css'],
 })
 export class DiagnosticsDashboardComponent implements OnInit {
   private _availableRoutines?: RoutineType[]; // the available routines response
@@ -26,14 +26,17 @@ export class DiagnosticsDashboardComponent implements OnInit {
   // Array of diagnostics routine names that will be displayed
   readonly _visibleRoutines: RoutineType[] = VISIBLE_DIAGNOSTICS_CARDS;
 
-  get error() { return this._error; }
+  get error() {
+    return this._error;
+  }
   get visibleRoutines() {
     let routines;
     if (!this._availableRoutines) {
       this.getAvailableRoutines();
     } else {
-      routines = this._visibleRoutines.filter(
-        routine => this._availableRoutines!.includes(routine));
+      routines = this._visibleRoutines.filter((routine) =>
+        this._availableRoutines!.includes(routine),
+      );
     }
     return routines;
   }
@@ -41,9 +44,10 @@ export class DiagnosticsDashboardComponent implements OnInit {
   async getAvailableRoutines() {
     try {
       const response = await this.diagnosticsService.getAvailableRoutines();
-      this._availableRoutines = (response as GetAvailableRoutinesResponse).routines;
+      this._availableRoutines = (
+        response as GetAvailableRoutinesResponse
+      ).routines;
       this._error = undefined;
-  
     } catch (err) {
       this._error = String(err);
     }

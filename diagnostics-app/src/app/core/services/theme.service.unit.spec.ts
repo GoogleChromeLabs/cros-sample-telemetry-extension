@@ -6,10 +6,10 @@
  * @fileoverview Unit tests for theme.service
  */
 
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { Theme } from '../enums/global.enums';
-import { ThemeService } from './theme.service';
+import {Theme} from '../enums/global.enums';
+import {ThemeService} from './theme.service';
 
 describe('unit: service: theme', () => {
   let service: ThemeService;
@@ -33,7 +33,7 @@ describe('unit: service: theme', () => {
   it('should switch from light to dark', () => {
     TestBed.configureTestingModule({
       // passes defaultTheme to ThemeService constructor
-      providers: [{ provide: 'defaultTheme', useValue: Theme.LIGHT }],
+      providers: [{provide: 'defaultTheme', useValue: Theme.LIGHT}],
     });
     service = TestBed.inject(ThemeService);
     expect(service.theme).toBe(Theme.LIGHT);

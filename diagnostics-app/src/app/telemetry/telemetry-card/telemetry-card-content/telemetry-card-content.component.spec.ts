@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TelemetryCardContentComponent } from './telemetry-card-content.component';
+import {TelemetryCardContentComponent} from './telemetry-card-content.component';
 
 describe('TelemetryCardContentComponent', () => {
   let component: TelemetryCardContentComponent;
@@ -8,7 +8,7 @@ describe('TelemetryCardContentComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TelemetryCardContentComponent]
+      declarations: [TelemetryCardContentComponent],
     });
     fixture = TestBed.createComponent(TelemetryCardContentComponent);
     component = fixture.componentInstance;

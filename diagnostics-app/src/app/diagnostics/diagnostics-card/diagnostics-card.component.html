@@ -17,9 +17,30 @@
       </div>
     </div>
     <div class="buttons">
-      <button mat-raised-button color="basic" (click)="startRoutine()" [disabled]="state !== DiagnosticsCardState.READY">Run</button>
-      <button mat-raised-button color="warn" (click)="stopRoutine()" [disabled]="state !== DiagnosticsCardState.RUNNING">Stop</button>
-      <button mat-raised-button color="basic" (click)="resumeRoutine()" [disabled]="!canResume() || state !== DiagnosticsCardState.WAITING_FOR_USER_ACTION">Resume</button>
+      <button
+        mat-raised-button
+        color="basic"
+        (click)="startRoutine()"
+        [disabled]="state !== DiagnosticsCardState.READY"
+      >
+        Run
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="stopRoutine()"
+        [disabled]="state !== DiagnosticsCardState.RUNNING"
+      >
+        Stop
+      </button>
+      <button
+        mat-raised-button
+        color="basic"
+        (click)="resumeRoutine()"
+        [disabled]="!canResume() || state !== DiagnosticsCardState.WAITING_FOR_USER_ACTION"
+      >
+        Resume
+      </button>
     </div>
   </div>
   <ng-container *ngIf="state !== DiagnosticsCardState.READY">
@@ -32,19 +53,19 @@
     </ng-template>
     <ng-template #showRunning>
       <div class="progress-bar-container">
-        <mat-progress-bar class="progress-bar" mode="determinate" [value]="routineInfo?.progress_percent"></mat-progress-bar>
+        <mat-progress-bar
+          class="progress-bar"
+          mode="determinate"
+          [value]="routineInfo?.progress_percent"
+        ></mat-progress-bar>
         {{ routineInfo?.progress_percent }}%
       </div>
     </ng-template>
-  </ng-container> 
+  </ng-container>
   <div class="message-bar" [ngClass]="messageColor" *ngIf="routineInfo">
     <div *ngIf="routineInfo.status === 'passed'">Passed</div>
-    <div *ngIf="routineInfo.status ==='failed'">
-      Failed: {{ routineInfo.status_message }}
-    </div>
-    <div *ngIf="routineInfo.status === 'error'">
-      Error: {{ routineInfo.status_message }}
-    </div>
+    <div *ngIf="routineInfo.status === 'failed'">Failed: {{ routineInfo.status_message }}</div>
+    <div *ngIf="routineInfo.status === 'error'">Error: {{ routineInfo.status_message }}</div>
     <div *ngIf="routineInfo.status === 'cancelled'">Cancelled</div>
     <div *ngIf="routineInfo.status === 'failed_to_start'">Failed To Start</div>
     <div *ngIf="routineInfo.status === 'removed'">Removed</div>

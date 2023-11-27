@@ -6,12 +6,12 @@
  * @fileoverview Integration tests for header.component
  */
 
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { ThemeService } from 'src/app/core/services/theme.service';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {ThemeService} from 'src/app/core/services/theme.service';
 
-import { HeaderComponent } from './header.component';
+import {HeaderComponent} from './header.component';
 
 describe('integration: component: header', () => {
   let component: HeaderComponent;
@@ -35,7 +35,7 @@ describe('integration: component: header', () => {
 
   it('service should emit event on click', () => {
     let button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('#btnToggleTheme')
+      By.css('#btnToggleTheme'),
     ).nativeElement;
     spyOn(service, 'toggleTheme').and.callThrough();
     expect(component.isDarkModeActivated()).toBeTrue();
@@ -46,10 +46,10 @@ describe('integration: component: header', () => {
 
   it('renders correct theme icon', () => {
     let iconEl: HTMLElement = fixture.debugElement.query(
-      By.css('#iconTheme')
+      By.css('#iconTheme'),
     ).nativeElement;
     let button: HTMLButtonElement = fixture.debugElement.query(
-      By.css('#btnToggleTheme')
+      By.css('#btnToggleTheme'),
     ).nativeElement;
     expect(component.isDarkModeActivated()).toBeTrue();
     // It renders on DOM as <mat-icon>light_mode</mat-icon>
