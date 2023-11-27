@@ -28,7 +28,7 @@ import {EventsService} from './core/services/events.service';
 
 const initializeEventService = (
   eventsService: EventsService,
-): (() => Promise<any>) => {
+): (() => Promise<void>) => {
   return () => eventsService.Init();
 };
 

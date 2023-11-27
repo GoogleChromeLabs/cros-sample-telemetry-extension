@@ -9,7 +9,6 @@
 
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {EventCategory, EventsCardState} from '@common/dpsl';
-import {ResponseErrorInfoMessage} from '@common/message';
 import {EventsService} from 'src/app/core/services/events.service';
 
 @Component({
@@ -53,7 +52,7 @@ export class EventsCardComponent implements OnInit {
   }
 
   startCapturingEvents = async () => {
-    if (this.state == EventsCardState.LISTENING) {
+    if (this.state === EventsCardState.LISTENING) {
       console.error('Event is already being captured');
       return;
     }
@@ -71,7 +70,7 @@ export class EventsCardComponent implements OnInit {
   };
 
   stopCapturingEvents = async () => {
-    if (this.state == EventsCardState.NOT_LISTENING) {
+    if (this.state === EventsCardState.NOT_LISTENING) {
       console.error('Event has already stopped captured');
       return;
     }

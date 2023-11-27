@@ -17,7 +17,6 @@ import {HeaderComponent} from '../header/header.component';
 import {ContentLayoutComponent} from './content-layout.component';
 
 describe('integration: component ContentLayout', () => {
-  let component: ContentLayoutComponent;
   let fixture: ComponentFixture<ContentLayoutComponent>;
 
   beforeEach(waitForAsync(() => {
@@ -30,13 +29,12 @@ describe('integration: component ContentLayout', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContentLayoutComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('opens the drawer on receiving toggleDrawer event', () => {
-    let header = fixture.debugElement.query(By.directive(HeaderComponent));
-    let drawerToggle: HTMLButtonElement = header.query(
+    const header = fixture.debugElement.query(By.directive(HeaderComponent));
+    const drawerToggle: HTMLButtonElement = header.query(
       By.css('#btnToggleDrawer'),
     ).nativeElement;
     let sidenavComponent: MatSidenav = fixture.debugElement.query(

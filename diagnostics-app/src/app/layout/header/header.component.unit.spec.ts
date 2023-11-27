@@ -35,7 +35,7 @@ describe('unit: component: header', () => {
 
   it('calls onToggleTheme on button click', () => {
     spyOn(component, 'onToggleTheme');
-    let button: HTMLButtonElement = fixture.debugElement.query(
+    const button: HTMLButtonElement = fixture.debugElement.query(
       By.css('#btnToggleTheme'),
     ).nativeElement;
     button.click();
@@ -47,7 +47,7 @@ describe('unit: component: header', () => {
     spyOn(component, 'onToggleDrawer').and.callThrough();
     spyOn(component.toggleDrawer, 'emit');
 
-    let button: HTMLButtonElement = fixture.debugElement.query(
+    const button: HTMLButtonElement = fixture.debugElement.query(
       By.css('#btnToggleDrawer'),
     ).nativeElement;
 

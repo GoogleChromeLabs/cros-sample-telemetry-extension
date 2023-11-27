@@ -47,7 +47,6 @@ export class DiagnosticsService implements DiagnosticsInterface {
   ) => {
     return new Promise((resolve, reject) => {
       try {
-        //@ts-ignore
         window.chrome.runtime.sendMessage(
           this.extensionId,
           request,

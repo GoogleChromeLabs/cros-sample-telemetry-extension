@@ -20,10 +20,13 @@ export class TelemetryCardContentComponent {
 
   // this function is used for maintaining the attributes' original order
   public originalOrder = (
-    a: KeyValue<number, string>,
-    b: KeyValue<number, string>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _a: KeyValue<number, string>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _b: KeyValue<number, string>,
   ): number => 0;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public isPrimitiveType(a: any) {
     return typeof a !== 'object';
   }

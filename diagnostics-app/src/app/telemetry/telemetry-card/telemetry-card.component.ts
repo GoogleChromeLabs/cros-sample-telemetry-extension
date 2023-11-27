@@ -37,7 +37,7 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
   }
 
   private _updateData(type: TelemetryInfoType) {
-    let promise = <Promise<TelemetryInfoUnion>>(
+    const promise = <Promise<TelemetryInfoUnion>>(
       this.telemetryService.fetchTelemetryData(type)
     );
     promise
@@ -54,8 +54,8 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
   constructor(private telemetryService: TelemetryService) {}
 
   ngOnInit(): void {
-    let type = this.type;
-    let interval = refreshIntervals.telemetry.has(type)
+    const type = this.type;
+    const interval = refreshIntervals.telemetry.has(type)
       ? refreshIntervals.telemetry.get(type)
       : defaultTelemetryRefreshInterval;
 
