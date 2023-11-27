@@ -59,7 +59,6 @@ export class EventsService {
   ) => {
     return new Promise((resolve, reject) => {
       try {
-        //@ts-ignore
         window.chrome.runtime.sendMessage(
           this.extensionId,
           request,
@@ -82,7 +81,6 @@ export class EventsService {
   Init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       try {
-        //@ts-ignore
         this.port = window.chrome.runtime.connect(this.extensionId, {
           name: PortName.EVENTS_PORT,
         });

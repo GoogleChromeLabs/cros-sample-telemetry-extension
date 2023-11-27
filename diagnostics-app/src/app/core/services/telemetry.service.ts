@@ -33,7 +33,6 @@ export class TelemetryService {
     return new Promise((resolve, reject) => {
       const request = this.constructTelemetryRequest(category);
       try {
-        //@ts-ignore
         window.chrome.runtime.sendMessage(
           this.extensionId,
           request,

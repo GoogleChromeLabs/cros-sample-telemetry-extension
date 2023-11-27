@@ -34,7 +34,7 @@ describe('integration: component: header', () => {
   });
 
   it('service should emit event on click', () => {
-    let button: HTMLButtonElement = fixture.debugElement.query(
+    const button: HTMLButtonElement = fixture.debugElement.query(
       By.css('#btnToggleTheme'),
     ).nativeElement;
     spyOn(service, 'toggleTheme').and.callThrough();
@@ -48,7 +48,7 @@ describe('integration: component: header', () => {
     let iconEl: HTMLElement = fixture.debugElement.query(
       By.css('#iconTheme'),
     ).nativeElement;
-    let button: HTMLButtonElement = fixture.debugElement.query(
+    const button: HTMLButtonElement = fixture.debugElement.query(
       By.css('#btnToggleTheme'),
     ).nativeElement;
     expect(component.isDarkModeActivated()).toBeTrue();

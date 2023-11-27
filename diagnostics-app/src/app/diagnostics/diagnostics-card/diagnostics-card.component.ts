@@ -119,8 +119,10 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   // this function is used for maintaining the attributes' original order
   public originalOrder = (
-    a: KeyValue<number, string>,
-    b: KeyValue<number, string>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _a: KeyValue<number, string>,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _b: KeyValue<number, string>,
   ): number => 0;
 
   canResume() {
@@ -167,7 +169,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
     try {
       this._state = DiagnosticsCardState.STOPPING;
-      if (this._routineId == undefined) {
+      if (this._routineId === undefined) {
         throw 'Routine ID is undefined';
       }
       await this.diagnosticsService.stopRoutine(this._routineId);

@@ -51,7 +51,7 @@ export class EventsDashboardComponent implements OnInit {
   constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
-    for (let category of VISIBLE_EVENT_CARDS) {
+    for (const category of VISIBLE_EVENT_CARDS) {
       this.isEventSupported(category);
     }
   }
