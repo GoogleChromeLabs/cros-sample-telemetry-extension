@@ -14,7 +14,7 @@ import {
   RunNvmeWearLevelRequest,
   RunPowerButtonRequest,
   RunSmartctlCheckRequest,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 
 import {DiagnosticsParamsUnion} from '@common/message';
 

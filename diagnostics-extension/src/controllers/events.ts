@@ -6,7 +6,7 @@
  * @fileoverview Handle event requests
  */
 
-import {EventCategory} from '@common/dpsl';
+import {EventCategory} from '@common/telemetry-extension-types';
 import {
   EventsAction,
   Request,

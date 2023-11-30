@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {EventCategory} from '@common/dpsl';
+import {EventCategory} from '@common/telemetry-extension-types';
 import {EventsCardComponent} from './events-card.component';
 import {EventsService} from 'src/app/core/services/events.service';
 

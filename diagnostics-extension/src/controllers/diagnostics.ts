@@ -11,7 +11,7 @@ import {
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {
   DiagnosticsAction,
   DiagnosticsParamsUnion,

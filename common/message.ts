@@ -48,7 +48,7 @@ import {
   UsbBusDevices,
   UsbEventInfo,
   VpdInfo,
-} from './dpsl';
+} from './telemetry-extension-types';
 
 /**
  * @fileoverview Types regarding communication between

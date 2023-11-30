@@ -13,7 +13,7 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {EventsService} from 'src/app/core/services/events.service';
 import {VISIBLE_EVENT_CARDS} from 'src/config/config';
 

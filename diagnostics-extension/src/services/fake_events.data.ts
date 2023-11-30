@@ -13,7 +13,7 @@ import {
   EventCategory,
   EventSupportStatusInfo,
   EventSupportStatus,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {PortName, Response} from '@common/message';
 
 let eventPort: chrome.runtime.Port;

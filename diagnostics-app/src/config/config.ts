@@ -2,10 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {EventCategory, RoutineType} from '@common/dpsl';
+import {EventCategory, RoutineType} from '@common/telemetry-extension-types';
 import {TelemetryInfoType} from '@common/message';
 
-export const APP_NAME = 'Healthd Reference App';
+export const APP_NAME = 'telemetry-extension-types Reference App';
 
 export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.AUDIO,

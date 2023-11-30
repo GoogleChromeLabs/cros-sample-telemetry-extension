@@ -15,7 +15,7 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {
   EventsAction,
   EventMessage,

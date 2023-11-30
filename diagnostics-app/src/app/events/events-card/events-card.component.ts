@@ -8,7 +8,7 @@
  */
 
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {EventCategory} from '@common/dpsl';
+import {EventCategory} from '@common/telemetry-extension-types';
 import {EventsService} from 'src/app/core/services/events.service';
 
 enum EventsCardState {

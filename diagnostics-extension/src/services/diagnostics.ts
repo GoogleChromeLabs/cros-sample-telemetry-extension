@@ -17,7 +17,7 @@ import {
   GetAvailableRoutinesResponse,
   GetRoutineUpdateRequest,
   GetRoutineUpdateResponse,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
