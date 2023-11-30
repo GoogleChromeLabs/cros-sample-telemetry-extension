@@ -21,7 +21,7 @@ import {
 } from '@common/dpsl';
 import {ResponseErrorInfoMessage} from '@common/message';
 import * as fake_diagnostics from './fake_diagnostics.data';
-import {Routine} from './fake_diagnostics.data';
+import {RoutineBase, GenericRoutine} from './fake_diagnostics.data';
 import {environment} from '../environments/environment';
 
 /**
@@ -228,7 +228,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
  * @extends DiagnosticsService
  */
 export class FakeDiagnosticsService implements DiagnosticsService {
-  private _activeRoutines: {[key: number]: Routine} = {};
+  private _activeRoutines: {[key: number]: RoutineBase} = {};
 
   private _fetchRoutineById = (id: number) => {
     if (!(id in this._activeRoutines)) {
@@ -248,279 +248,50 @@ export class FakeDiagnosticsService implements DiagnosticsService {
     params && console.log('Recieved params', params);
 
     switch (name) {
+      // These routines should have a parameter
       case RoutineType.ac_power:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runAcPowerRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
-      case RoutineType.audio_driver:
-        return fake_diagnostics
-          .runAudioDriverRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.battery_capacity:
-        return fake_diagnostics
-          .runBatteryCapacityRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
       case RoutineType.battery_charge:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runBatteryChargeRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.battery_discharge:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runBatteryDischargeRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
-      case RoutineType.battery_health:
-        return fake_diagnostics
-          .runBatteryHealthRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.bluetooth_discovery:
-        return fake_diagnostics
-          .runBluetoothDiscoveryRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
       case RoutineType.bluetooth_pairing:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runBluetoothPairingRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
-      case RoutineType.bluetooth_power:
-        return fake_diagnostics
-          .runBluetoothPowerRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
       case RoutineType.bluetooth_scanning:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runBluetoothScanningRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.cpu_cache:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runCpuCacheRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.cpu_floating_point_accuracy:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runCpuFloatingPointAccuracyRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.cpu_prime_search:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runCpuPrimeSearchRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.cpu_stress:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runCpuStressRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.disk_read:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runDiskReadRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
-      case RoutineType.dns_resolution:
-        return fake_diagnostics
-          .runDnsResolutionRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.dns_resolver_present:
-        return fake_diagnostics
-          .runDnsResolverPresentRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.emmc_lifetime:
-        return fake_diagnostics
-          .runEmmcLifetimeRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.fingerprint_alive:
-        return fake_diagnostics
-          .runFingerprintAliveRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.gateway_can_be_pinged:
-        return fake_diagnostics
-          .runGatewayCanBePingedRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.lan_connectivity:
-        return fake_diagnostics
-          .runLanConnectivityRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.memory:
-        return fake_diagnostics
-          .runMemoryRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
       case RoutineType.nvme_self_test:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runNvmeSelfTestRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.nvme_wear_level:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runNvmeWearLevelRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
       case RoutineType.power_button:
+      case RoutineType.smartctl_check: {
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.InvalidDiagnosticsParams,
           );
-        else
-          return fake_diagnostics
-            .runPowerButtonRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
+        const res: RunRoutineResponse =
+          await fake_diagnostics.runGenericRoutine(params);
+        this._activeRoutines[res.id] = new GenericRoutine(res.id);
+        return res;
+      }
+      case RoutineType.audio_driver:
+      case RoutineType.battery_capacity:
+      case RoutineType.battery_health:
+      case RoutineType.bluetooth_discovery:
+      case RoutineType.bluetooth_power:
+      case RoutineType.dns_resolution:
+      case RoutineType.dns_resolver_present:
+      case RoutineType.emmc_lifetime:
+      case RoutineType.fingerprint_alive:
+      case RoutineType.gateway_can_be_pinged:
+      case RoutineType.lan_connectivity:
+      case RoutineType.memory:
       case RoutineType.sensitive_sensor:
-        return fake_diagnostics
-          .runSensitiveSensorRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
       case RoutineType.signal_strength:
-        return fake_diagnostics
-          .runSignalStrengthRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
-      case RoutineType.smartctl_check:
-        if (!params)
-          return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
-          );
-        else
-          return fake_diagnostics
-            .runSmartctlCheckRoutine(params)
-            .then((res: RunRoutineResponse) => {
-              this._activeRoutines[res.id] = new Routine(res.id);
-              return res;
-            });
-      case RoutineType.ufs_lifetime:
-        return fake_diagnostics
-          .runUfsLifetimeRoutine()
-          .then((res: RunRoutineResponse) => {
-            this._activeRoutines[res.id] = new Routine(res.id);
-            return res;
-          });
+      case RoutineType.ufs_lifetime: {
+        const res: RunRoutineResponse =
+          await fake_diagnostics.runGenericRoutine();
+        this._activeRoutines[res.id] = new GenericRoutine(res.id);
+        return res;
+      }
       default:
         return Promise.reject(
           ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
