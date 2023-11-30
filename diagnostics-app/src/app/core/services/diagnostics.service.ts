@@ -8,7 +8,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {RoutineType} from '@common/dpsl';
+import {RoutineType} from '@common/telemetry-extension-types';
 import {
   DiagnosticsParamsUnion,
   DiagnosticsRequest,

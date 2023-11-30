@@ -17,7 +17,7 @@ import {
   GetRoutineUpdateResponse,
   UserMessageType,
   RoutineCommandType,
-} from '@common/dpsl';
+} from '@common/telemetry-extension-types';
 import {DiagnosticsParamsUnion} from '@common/message';
 
 let id_count = 0;
