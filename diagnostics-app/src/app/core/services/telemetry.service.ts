@@ -8,7 +8,7 @@
 
 import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
-import {TelemetryInfoUnion} from '@common/dpsl';
+import {TelemetryInfoUnion} from '@common/message';
 import {
   Request,
   Response,

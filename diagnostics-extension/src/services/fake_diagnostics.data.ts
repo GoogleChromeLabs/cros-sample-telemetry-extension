@@ -10,7 +10,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import {
-  DiagnosticsParams,
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
@@ -19,6 +18,7 @@ import {
   UserMessageType,
   RoutineCommandType,
 } from '@common/dpsl';
+import {DiagnosticsParamsUnion} from '@common/message';
 
 let id_count = 0;
 
@@ -65,7 +65,7 @@ export const fakeAvailableRoutines =
   };
 
 export const runGenericRoutine = async (
-  params?: DiagnosticsParams,
+  params?: DiagnosticsParamsUnion,
 ): Promise<RunRoutineResponse> => {
   const res: RunRoutineResponse = {
     id: generateRoutineId(),

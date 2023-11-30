@@ -13,13 +13,13 @@ import {Subject} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {
   EventCategory,
-  EventsInfo,
   EventSupportStatus,
   EventSupportStatusInfo,
 } from '@common/dpsl';
 import {
   EventsAction,
   EventMessage,
+  EventsInfoUnion,
   EventsRequest,
   EventsResponse,
   Request,
@@ -32,7 +32,7 @@ import {VISIBLE_EVENT_CARDS} from 'src/config/config';
 
 export interface getSubjectResponse {
   success: Boolean;
-  subject?: Subject<EventsInfo>;
+  subject?: Subject<EventsInfoUnion>;
   error?: String;
 }
 
@@ -41,7 +41,7 @@ export interface getSubjectResponse {
 })
 export class EventsService {
   private extensionId: string = environment.extensionId; // the ID of the extension it connects to
-  private subjects = new Map<string, Subject<EventsInfo>>(); // the map of subjects that
+  private subjects = new Map<string, Subject<EventsInfoUnion>>(); // the map of subjects that
   private port?: chrome.runtime.Port; // the port for connecting with the extension to get the captured event
 
   // A cache to preload the supported events.
@@ -118,7 +118,7 @@ export class EventsService {
         let statusInfo = await this.isEventSupported(category);
         statusInfo = statusInfo as EventSupportStatusInfo;
         if (statusInfo.status === EventSupportStatus.supported) {
-          this.subjects.set(category, new Subject<EventsInfo>());
+          this.subjects.set(category, new Subject<EventsInfoUnion>());
         }
       } catch (err) {
         return {success: false, error: String(err)};

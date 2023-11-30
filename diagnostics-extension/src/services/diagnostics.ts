@@ -11,7 +11,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  DiagnosticsParams,
   RoutineCommandType,
   RoutineType,
   RunRoutineResponse,
@@ -19,7 +18,10 @@ import {
   GetRoutineUpdateRequest,
   GetRoutineUpdateResponse,
 } from '@common/dpsl';
-import {ResponseErrorInfoMessage} from '@common/message';
+import {
+  DiagnosticsParamsUnion,
+  ResponseErrorInfoMessage,
+} from '@common/message';
 import * as fake_diagnostics from './fake_diagnostics.data';
 import {RoutineBase, GenericRoutine} from './fake_diagnostics.data';
 import {environment} from '../environments/environment';
@@ -32,7 +34,7 @@ export abstract class DiagnosticsService {
   abstract getAvailableRoutines(): Promise<GetAvailableRoutinesResponse>;
   abstract startRoutine(
     name: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ): Promise<RunRoutineResponse>;
   abstract stopRoutine(id: number): Promise<GetRoutineUpdateResponse>;
   abstract resumeRoutine(id: number): Promise<GetRoutineUpdateResponse>;
@@ -50,7 +52,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
 
   startRoutine = async (
     name: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ): Promise<RunRoutineResponse> => {
     params && console.log('Recieved params', params);
 
@@ -243,7 +245,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
 
   startRoutine = async (
     name: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ): Promise<RunRoutineResponse> => {
     params && console.log('Recieved params', params);
 

@@ -11,13 +11,15 @@ import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {KeyValue} from '@angular/common';
 
 import {
-  DiagnosticsParams,
   GetRoutineUpdateResponse,
-  RESUMABLE_ROUTINES,
   RoutineStatus,
   RoutineType,
 } from '@common/dpsl';
-import {ResponseErrorInfoMessage, RoutineUpdateResponse} from '@common/message';
+import {
+  DiagnosticsParamsUnion,
+  ResponseErrorInfoMessage,
+  RoutineUpdateResponse,
+} from '@common/message';
 import {DiagnosticsService} from 'src/app/core/services/diagnostics.service';
 import {
   defaultDiagnosticsRefreshInterval,
@@ -32,6 +34,13 @@ enum DiagnosticsCardState {
   WAITING_FOR_USER_ACTION = 'waiting_for_user_action',
 }
 
+// All routines that may be resumed.
+const ResumableRoutines = [
+  RoutineType.ac_power,
+  RoutineType.battery_charge,
+  RoutineType.battery_discharge,
+];
+
 @Component({
   selector: 'app-diagnostics-card',
   templateUrl: './diagnostics-card.component.html',
@@ -44,7 +53,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   private _error?: String; // the error message received, undefined if no error occurs
   private _intervalId?: number; // the interval id, undefined if there is no interval id
-  private _params?: DiagnosticsParams; // the parameter for starting a routine
+  private _params?: DiagnosticsParamsUnion; // the parameter for starting a routine
   private _routineId?: number; // the routine id of the running routine
   private _routineInfo?: GetRoutineUpdateResponse; // the information about the routine
 
@@ -126,7 +135,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
   ): number => 0;
 
   canResume() {
-    return RESUMABLE_ROUTINES.includes(this.routine);
+    return ResumableRoutines.includes(this.routine);
   }
 
   async startRoutine() {

@@ -1,5 +1,4 @@
 import {
-  DiagnosticsParams,
   AcPowerStatus,
   RoutineType,
   RunAcPowerRoutineRequest,
@@ -16,6 +15,8 @@ import {
   RunPowerButtonRequest,
   RunSmartctlCheckRequest,
 } from '@common/dpsl';
+
+import {DiagnosticsParamsUnion} from '@common/message';
 
 const defaultAcPowerRoutineRequest: RunAcPowerRoutineRequest = {
   expected_status: AcPowerStatus.connected,
@@ -65,7 +66,7 @@ const defaultPowerButtonRequest: RunPowerButtonRequest = {
 
 const defaultSmartctlCheck: RunSmartctlCheckRequest = {};
 
-export const diagnosticsParams = new Map<string, DiagnosticsParams>([
+export const diagnosticsParams = new Map<string, DiagnosticsParamsUnion>([
   [RoutineType.ac_power, defaultAcPowerRoutineRequest],
   [RoutineType.battery_charge, defaultBatteryChargeRoutineRequest],
   [RoutineType.battery_discharge, defaultBatteryDischargeRoutineRequest],
