@@ -2,21 +2,58 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import {
+  AudioInfo,
+  AudioJackEventInfo,
+  BatteryInfo,
+  CpuInfo,
+  DisplayInfo,
+  EventCategory,
+  EventSupportStatusInfo,
+  ExternalDisplayEventInfo,
+  GetAvailableRoutinesResponse,
+  GetRoutineUpdateResponse,
+  InternetConnectivityInfo,
+  KeyboardDiagnosticEventInfo,
+  LidEventInfo,
+  MarketingInfo,
+  MemoryInfo,
+  NonRemovableBlockDeviceInfoResponse,
+  OemData,
+  OsVersionInfo,
+  PowerEventInfo,
+  RoutineType,
+  RunAcPowerRoutineRequest,
+  RunBatteryChargeRoutineRequest,
+  RunBatteryDischargeRoutineRequest,
+  RunBluetoothPairingRoutineRequest,
+  RunBluetoothScanningRoutineRequest,
+  RunCpuRoutineRequest,
+  RunDiskReadRequest,
+  RunNvmeSelfTestRequest,
+  RunNvmeWearLevelRequest,
+  RunPowerButtonRequest,
+  RunSmartctlCheckRequest,
+  SdCardEventInfo,
+  StatefulPartitionInfo,
+  StylusConnectedEventInfo,
+  StylusGarageEventInfo,
+  StylusTouchEventInfo,
+  TouchpadButtonEventInfo,
+  TouchpadConnectedEventInfo,
+  TouchpadTouchEventInfo,
+  TouchscreenConnectedEventInfo,
+  TouchscreenTouchEventInfo,
+  TpmInfo,
+  UsbBusDevices,
+  UsbEventInfo,
+  VpdInfo,
+} from './dpsl';
+
 /**
  * @fileoverview Types regarding communication between
  * diagostics-app and diagnostics-extension
  */
-
-import {
-  TelemetryInfoUnion,
-  DiagnosticsParams,
-  EventCategory,
-  EventsInfo,
-  EventSupportStatusInfo,
-  GetAvailableRoutinesResponse,
-  GetRoutineUpdateResponse,
-  RoutineType,
-} from './dpsl';
 
 export const enum RequestType {
   TELEMETRY = 'telemetry',
@@ -87,7 +124,7 @@ export interface DiagnosticsRequest {
   action: DiagnosticsAction;
   routineId?: number;
   routineName?: RoutineType;
-  params?: DiagnosticsParams;
+  params?: DiagnosticsParamsUnion;
 }
 
 export interface EventsRequest {
@@ -115,17 +152,16 @@ export interface RoutineUpdateResponse {
   info: GetRoutineUpdateResponse;
 }
 
-export type EventsResponse =
-  | EventSupportStatusInfo
+export type EventsResponse = EventSupportStatusInfo;
 
 export interface EventMessage {
   type: EventCategory;
-  info: EventsInfo;
+  info: EventsInfoUnion;
 }
 
 export type DiagnosticsResponse =
   | GetAvailableRoutinesResponse
-  | RoutineUpdateResponse
+  | RoutineUpdateResponse;
 
 export interface Response {
   success: Boolean;
@@ -134,3 +170,49 @@ export interface Response {
   diagnostics?: DiagnosticsResponse;
   events?: EventsResponse;
 }
+
+export type TelemetryInfoUnion =
+  | AudioInfo
+  | BatteryInfo
+  | NonRemovableBlockDeviceInfoResponse
+  | CpuInfo
+  | DisplayInfo
+  | MarketingInfo
+  | MemoryInfo
+  | InternetConnectivityInfo
+  | OemData
+  | OsVersionInfo
+  | UsbBusDevices
+  | VpdInfo
+  | StatefulPartitionInfo
+  | TpmInfo;
+
+export type DiagnosticsParamsUnion =
+  | RunAcPowerRoutineRequest
+  | RunBatteryChargeRoutineRequest
+  | RunBatteryDischargeRoutineRequest
+  | RunBluetoothPairingRoutineRequest
+  | RunBluetoothScanningRoutineRequest
+  | RunCpuRoutineRequest
+  | RunDiskReadRequest
+  | RunNvmeWearLevelRequest
+  | RunNvmeSelfTestRequest
+  | RunPowerButtonRequest
+  | RunSmartctlCheckRequest;
+
+export type EventsInfoUnion =
+  | KeyboardDiagnosticEventInfo
+  | AudioJackEventInfo
+  | LidEventInfo
+  | UsbEventInfo
+  | ExternalDisplayEventInfo
+  | SdCardEventInfo
+  | PowerEventInfo
+  | StylusGarageEventInfo
+  | TouchpadButtonEventInfo
+  | TouchpadTouchEventInfo
+  | TouchpadConnectedEventInfo
+  | TouchscreenTouchEventInfo
+  | TouchscreenConnectedEventInfo
+  | StylusTouchEventInfo
+  | StylusConnectedEventInfo;

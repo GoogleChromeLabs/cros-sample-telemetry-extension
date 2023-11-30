@@ -7,7 +7,6 @@
  */
 
 import {
-  DiagnosticsParams,
   GetAvailableRoutinesResponse,
   RoutineStatus,
   RoutineType,
@@ -15,6 +14,7 @@ import {
 } from '@common/dpsl';
 import {
   DiagnosticsAction,
+  DiagnosticsParamsUnion,
   DiagnosticsResponse,
   Request,
   Response,
@@ -46,7 +46,7 @@ const getAvailableRoutines = async (res: (data: Response) => void) => {
 const handleStartRoutine = async (
   routineName: RoutineType | undefined,
   res: (data: Response) => void,
-  params?: DiagnosticsParams,
+  params?: DiagnosticsParamsUnion,
 ) => {
   if (!routineName) {
     return res(

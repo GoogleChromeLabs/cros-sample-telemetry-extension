@@ -9,7 +9,7 @@
 
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 
-import {TelemetryInfoUnion} from '@common/dpsl';
+import {TelemetryInfoUnion} from '@common/message';
 import {TelemetryService} from 'src/app/core/services/telemetry.service';
 import {TelemetryInfoType, ResponseErrorInfoMessage} from '@common/message';
 import {

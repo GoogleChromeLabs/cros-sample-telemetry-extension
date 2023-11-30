@@ -8,8 +8,13 @@
  */
 
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
-import {EventCategory, EventsCardState} from '@common/dpsl';
+import {EventCategory} from '@common/dpsl';
 import {EventsService} from 'src/app/core/services/events.service';
+
+enum EventsCardState {
+  LISTENING = 'listening',
+  NOT_LISTENING = 'not_listening',
+}
 
 @Component({
   selector: 'app-events-card',
@@ -18,6 +23,8 @@ import {EventsService} from 'src/app/core/services/events.service';
 })
 export class EventsCardComponent implements OnInit {
   @Input({required: true}) category!: EventCategory;
+
+  public EventsCardState = EventsCardState;
 
   public eventList: object[] = [];
   public error?: String; // the error message received, null if no error occurs

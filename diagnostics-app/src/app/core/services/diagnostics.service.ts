@@ -8,8 +8,9 @@
  */
 
 import {Injectable} from '@angular/core';
-import {DiagnosticsParams, RoutineType} from '@common/dpsl';
+import {RoutineType} from '@common/dpsl';
 import {
+  DiagnosticsParamsUnion,
   DiagnosticsRequest,
   RequestType,
   Request,
@@ -22,7 +23,7 @@ import {environment} from 'src/environments/environment';
 export interface DiagnosticsInterface {
   startRoutine(
     name: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ): Promise<DiagnosticsResponse>;
   stopRoutine(id: number): Promise<DiagnosticsResponse>;
   resumeRoutine(id: number): Promise<DiagnosticsResponse>;
@@ -76,7 +77,7 @@ export class DiagnosticsService implements DiagnosticsInterface {
 
   private _runDiagnosticsRoutine: (
     routineName: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ) => Promise<DiagnosticsResponse> = (routineName, params) => {
     const payload: DiagnosticsRequest = {
       action: DiagnosticsAction.START,
@@ -104,7 +105,7 @@ export class DiagnosticsService implements DiagnosticsInterface {
   }
   startRoutine(
     name: RoutineType,
-    params?: DiagnosticsParams,
+    params?: DiagnosticsParamsUnion,
   ): Promise<DiagnosticsResponse> {
     return this._runDiagnosticsRoutine(name, params);
   }
