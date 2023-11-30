@@ -17,10 +17,13 @@ import {
   GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
   UserMessageType,
+  RoutineCommandType,
 } from '@common/dpsl';
 
-const generateRandomId = () => {
-  return Math.floor(Math.random() * 10000);
+let id_count = 0;
+
+const generateRoutineId = () => {
+  return id_count++;
 };
 
 export const fakeAvailableRoutines =
@@ -61,308 +64,18 @@ export const fakeAvailableRoutines =
     };
   };
 
-export const runAcPowerRoutine = async (
-  params: DiagnosticsParams,
+export const runGenericRoutine = async (
+  params?: DiagnosticsParams,
 ): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
   const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
+    id: generateRoutineId(),
+    status: RoutineStatus.ready,
   };
   return res;
 };
 
-export const runAudioDriverRoutine = async (): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runBatteryCapacityRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runBatteryChargeRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runBatteryDischargeRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runBatteryHealthRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runBluetoothDiscoveryRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runBluetoothPairingRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runBluetoothPowerRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runBluetoothScanningRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runCpuCacheRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runCpuFloatingPointAccuracyRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runCpuPrimeSearchRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runCpuStressRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runDiskReadRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runDnsResolutionRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runDnsResolverPresentRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runEmmcLifetimeRoutine = async (): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runFingerprintAliveRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runGatewayCanBePingedRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runLanConnectivityRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runMemoryRoutine = async (): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runNvmeSelfTestRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runNvmeWearLevelRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runPowerButtonRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runSensitiveSensorRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runSignalStrengthRoutine =
-  async (): Promise<RunRoutineResponse> => {
-    const routineId = generateRandomId();
-    const res: RunRoutineResponse = {
-      id: routineId,
-      status: RoutineStatus.unknown,
-    };
-    return res;
-  };
-
-export const runSmartctlCheckRoutine = async (
-  params: DiagnosticsParams,
-): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export const runUfsLifetimeRoutine = async (): Promise<RunRoutineResponse> => {
-  const routineId = generateRandomId();
-  const res: RunRoutineResponse = {
-    id: routineId,
-    status: RoutineStatus.unknown,
-  };
-  return res;
-};
-
-export class Routine {
-  private _id: number;
+export abstract class RoutineBase {
+  protected _id: number;
 
   constructor(id: number) {
     this._id = id;
@@ -372,29 +85,15 @@ export class Routine {
     return this._id;
   }
 
-  async _genericSendCommand(
-    command: string,
-  ): Promise<GetRoutineUpdateResponse> {
-    const message = {
-      routineId: this._id,
-      command: command,
-      includeOutput: true,
-    };
-    const status: GetRoutineUpdateResponse = {
-      progress_percent: 0,
-      output: '',
-      status: RoutineStatus.unknown,
-      status_message: '',
-      user_message: UserMessageType.unknown,
-    };
-    return status;
-  }
+  abstract _sendCommand(
+    command: RoutineCommandType,
+  ): Promise<GetRoutineUpdateResponse>;
 
   /**
    * Resumes this routine, e.g. when user prompts to run a waiting routine.
    */
   resume(): Promise<GetRoutineUpdateResponse> {
-    return this._genericSendCommand('resume');
+    return this._sendCommand(RoutineCommandType.resume);
   }
 
   /**
@@ -402,14 +101,61 @@ export class Routine {
    * Note: The routine cannot be restarted again.
    */
   stop(): Promise<GetRoutineUpdateResponse> {
-    this._genericSendCommand('cancel');
-    return this._genericSendCommand('remove');
+    this._sendCommand(RoutineCommandType.cancel);
+    return this._sendCommand(RoutineCommandType.remove);
   }
 
   /**
    * Returns current status of this routine.
    */
   getStatus(): Promise<GetRoutineUpdateResponse> {
-    return this._genericSendCommand('get-status');
+    return this._sendCommand(RoutineCommandType.status);
+  }
+}
+
+// In the generic routine, we increment the percentage after each getStatusRequest.
+export class GenericRoutine extends RoutineBase {
+  private _getStatusCounter: number = 0; // A counter to record down the number of time routine status is polled.
+  private _percentageIncrement: number = 20; // How much percentage should increase between each routine status poll.
+
+  _sendCommand(command: RoutineCommandType): Promise<GetRoutineUpdateResponse> {
+    switch (command) {
+      case RoutineCommandType.resume:
+        return Promise.reject('No resume expected on generic routine');
+      case RoutineCommandType.cancel:
+        return Promise.resolve({
+          progress_percent: 100,
+          output: '',
+          status: RoutineStatus.cancelled,
+          status_message: '',
+          user_message: UserMessageType.unknown,
+        });
+      case RoutineCommandType.remove:
+        return Promise.resolve({
+          progress_percent: 100,
+          output: '',
+          status: RoutineStatus.removed,
+          status_message: '',
+          user_message: UserMessageType.unknown,
+        });
+      case RoutineCommandType.status: {
+        const percentage = this._getStatusCounter * this._percentageIncrement;
+        let status: RoutineStatus;
+        if (percentage < 100) {
+          this._getStatusCounter += 1;
+          status = RoutineStatus.running;
+        } else {
+          status = RoutineStatus.passed;
+        }
+        const p = Promise.resolve({
+          progress_percent: percentage,
+          output: '',
+          status: status,
+          status_message: '',
+          user_message: UserMessageType.unknown,
+        });
+        return p;
+      }
+    }
   }
 }
