@@ -40,21 +40,23 @@ describe('integration: component ContentLayout', () => {
     let sidenavComponent: MatSidenav = fixture.debugElement.query(
       By.directive(MatSidenav),
     ).componentInstance;
-    // sidenav should be closed by default
-    expect(sidenavComponent.opened).toBeFalse();
 
-    // should open the drawer
+    // sidenav will be opened or closed by default depending on screen
+    // resolution.
+    const defaultSidenavIsOpened = sidenavComponent.opened;
+
+    // should flip the open state of the drawer
     drawerToggle.click();
     fixture.detectChanges();
-    expect(sidenavComponent.opened).toBeTrue();
+    expect(sidenavComponent.opened).toBe(!defaultSidenavIsOpened);
 
-    // should close the drawer
+    // should flip the open state of the drawer
     drawerToggle.click();
     fixture.detectChanges();
     // update handle
     sidenavComponent = fixture.debugElement.query(
       By.directive(MatSidenav),
     ).componentInstance;
-    expect(sidenavComponent.opened).toBeFalse();
+    expect(sidenavComponent.opened).toBe(defaultSidenavIsOpened);
   });
 });
