@@ -13,6 +13,7 @@ import {
   DIAGNOSTICS_NAV_DATA,
   EVENTS_NAV_DATA,
   NavigationItem,
+  ROUTINE_V2_NAV_DATA,
   TELEMETRY_NAV_DATA,
 } from './side-nav.data';
 
@@ -26,6 +27,7 @@ export class SideNavComponent implements OnInit {
     TELEMETRY_NAV_DATA,
     DIAGNOSTICS_NAV_DATA,
     EVENTS_NAV_DATA,
+    ROUTINE_V2_NAV_DATA,
   ];
 
   get navLists() {

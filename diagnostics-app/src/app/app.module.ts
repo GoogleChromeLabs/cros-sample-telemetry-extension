@@ -23,6 +23,7 @@ import {EventsModule} from './events/events.module';
 import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
 import {HeaderComponent} from './layout/header/header.component';
 import {SideNavComponent} from './layout/side-nav/side-nav.component';
+import {RoutineV2Module} from './routine-v2/routine-v2.module';
 import {SharedModule} from './shared/shared.module';
 import {TelemetryModule} from './telemetry/telemetry.module';
 
@@ -45,6 +46,7 @@ const initializeEventService = (
     CoreModule,
     DiagnosticsModule,
     EventsModule,
+    RoutineV2Module,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.serviceWorker,
       // Register the ServiceWorker as soon as the app is stable

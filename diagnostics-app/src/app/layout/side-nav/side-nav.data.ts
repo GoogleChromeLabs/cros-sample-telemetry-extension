@@ -26,3 +26,8 @@ export const EVENTS_NAV_DATA: NavigationItem = {
   name: 'Events',
   link: '/events',
 };
+
+export const ROUTINE_V2_NAV_DATA: NavigationItem = {
+  name: 'Routine V2',
+  link: '/routine-v2',
+};
