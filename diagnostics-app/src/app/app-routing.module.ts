@@ -12,6 +12,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DiagnosticsDashboardComponent} from './diagnostics/diagnostics-dashboard/diagnostics-dashboard.component';
 import {EventsDashboardComponent} from './events/events-dashboard/events-dashboard.component';
+import {RoutineV2DashboardComponent} from './routine-v2/routine-v2-dashboard/routine-v2-dashboard.component';
 import {TelemetryDashboardComponent} from './telemetry/telemetry-dashboard/telemetry-dashboard.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'telemetry', component: TelemetryDashboardComponent},
   {path: 'diagnostics', component: DiagnosticsDashboardComponent},
   {path: 'events', component: EventsDashboardComponent},
+  {path: 'routine-v2', component: RoutineV2DashboardComponent},
   {path: '**', redirectTo: '/telemetry'},
 ];
 
