@@ -9,7 +9,7 @@
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
-import {ThemeService} from 'src/app/core/services/theme.service';
+import {ThemeService} from 'app/core/services/theme.service';
 
 import {HeaderComponent} from './header.component';
 

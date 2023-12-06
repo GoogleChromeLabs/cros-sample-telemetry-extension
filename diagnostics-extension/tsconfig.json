@@ -6,11 +6,6 @@
       "ES2015",
     ],
     "baseUrl": ".",
-    "paths": {
-      "@common/*": [
-        "../common/*"
-      ]
-    },
     "moduleResolution": "node",
     "noImplicitAny": false,
     "allowJs": true,

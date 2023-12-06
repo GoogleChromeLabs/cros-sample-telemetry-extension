@@ -12,7 +12,7 @@ import {
   ResponseErrorInfoMessage,
   TelemetryInfoType,
   TelemetryResponse,
-} from '@common/message';
+} from '../common/message';
 import {TelemetryServiceProvider} from '../services/telemetry';
 import {
   generateErrorResponse,

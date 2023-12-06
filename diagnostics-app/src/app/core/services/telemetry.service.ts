@@ -7,14 +7,14 @@
  */
 
 import {Injectable} from '@angular/core';
-import {environment} from 'src/environments/environment';
-import {TelemetryInfoUnion} from '@common/message';
+import {environment} from 'environments/environment';
+import {TelemetryInfoUnion} from 'common/message';
 import {
   Request,
   Response,
   RequestType,
   TelemetryInfoType,
-} from '@common/message';
+} from 'common/message';
 
 @Injectable({
   providedIn: 'root',

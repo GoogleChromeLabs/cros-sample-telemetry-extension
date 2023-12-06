@@ -26,7 +26,7 @@ import {
   VpdInfo,
   StatefulPartitionInfo,
   TpmInfo,
-} from '@common/telemetry-extension-types';
+} from '../common/telemetry-extension-types';
 
 export const audioInfo: AudioInfo = {
   outputNodes: [{}],

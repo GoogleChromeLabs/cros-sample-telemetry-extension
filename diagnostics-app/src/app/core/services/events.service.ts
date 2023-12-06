@@ -10,12 +10,12 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {environment} from 'src/environments/environment';
+import {environment} from 'environments/environment';
 import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '@common/telemetry-extension-types';
+} from 'common/telemetry-extension-types';
 import {
   EventsAction,
   EventMessage,
@@ -27,8 +27,8 @@ import {
   Response,
   PortName,
   ResponseErrorInfoMessage,
-} from '@common/message';
-import {VISIBLE_EVENT_CARDS} from 'src/config/config';
+} from 'common/message';
+import {VISIBLE_EVENT_CARDS} from 'config/config';
 
 export interface getSubjectResponse {
   success: Boolean;

@@ -25,7 +25,7 @@ import {
   VpdInfo,
   StatefulPartitionInfo,
   TpmInfo,
-} from '@common/telemetry-extension-types';
+} from '../common/telemetry-extension-types';
 import * as fakeTelemetry from './fake_telemetry.data';
 import {environment} from '../environments/environment';
 
