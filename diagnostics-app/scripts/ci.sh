@@ -1,4 +1,4 @@
 set -e
 
 tsc -b
-npm run test:ci
+npm run test
