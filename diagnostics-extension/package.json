@@ -2,10 +2,11 @@
   "name": "diagnostics-extension",
   "version": "1.0.0",
   "description": "Extension for Sample Diagnostics App",
+  "type":"module",
   "scripts": {
     "prebuild": "sudo rm -rf build/",
-    "build": "webpack --config webpack.prod.js",
-    "dev": "npm run prebuild && webpack --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.cjs",
+    "dev": "npm run prebuild && webpack --config webpack.dev.cjs",
     "lint": "gts lint",
     "test": "jest --passWithNoTests --coverage",
     "script:ci": "sh ./scripts/ci.sh",

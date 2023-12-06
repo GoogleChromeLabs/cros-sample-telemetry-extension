@@ -3,7 +3,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
-const config = require('./webpack_config.js');
+const config = require('./webpack_config.cjs');
 
 module.exports = {
   mode : 'production',

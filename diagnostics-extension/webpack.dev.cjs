@@ -6,8 +6,8 @@ const {merge} = require('webpack-merge');
 const {NormalModuleReplacementPlugin} = require('webpack');
 const path = require('path');
 
-const common = require('./webpack.common.js');
-const config = require('./webpack_config.js');
+const common = require('./webpack.common.cjs');
+const config = require('./webpack_config.cjs');
 
 module.exports = merge(common, {
   mode : 'development',
