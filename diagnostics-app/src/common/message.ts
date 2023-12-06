@@ -55,13 +55,13 @@ import {
  * diagostics-app and diagnostics-extension
  */
 
-export const enum RequestType {
+export enum RequestType {
   TELEMETRY = 'telemetry',
   DIAGNOSTICS = 'diagnostics',
   EVENTS = 'events',
 }
 
-export const enum TelemetryInfoType {
+export enum TelemetryInfoType {
   AUDIO = 'audio',
   BATTERY = 'battery',
   BLOCK_DEVICE = 'block_device',
@@ -78,7 +78,7 @@ export const enum TelemetryInfoType {
   TPM = 'tpm',
 }
 
-export const enum ResponseErrorInfoMessage {
+export enum ResponseErrorInfoMessage {
   InvalidRequestType = 'Invalid or missing request type.',
   InvalidTelemetryInfoType = 'The requested telemetry infoType is either invalid or missing.',
   InvalidDiagnosticsRoutineStatus = 'The diagnostics routine status is invalid.',
@@ -98,7 +98,7 @@ export const enum ResponseErrorInfoMessage {
   FailedEventsServiceConstructor = 'Error when establishing connection and add listener with extension.',
 }
 
-export const enum DiagnosticsAction {
+export enum DiagnosticsAction {
   GET_AVAILABLE_ROUTINE = 'get-available-routine',
   RESUME = 'resume',
   START = 'start',
@@ -106,13 +106,13 @@ export const enum DiagnosticsAction {
   STOP = 'stop',
 }
 
-export const enum EventsAction {
+export enum EventsAction {
   IS_EVENT_SUPPORTED = 'is-event-supported',
   START_CAPTURING_EVENT = 'start-capturing-event',
   STOP_CAPTURING_EVENT = 'stop-capturing-event',
 }
 
-export const enum PortName {
+export enum PortName {
   EVENTS_PORT = 'events-port',
 }
 
