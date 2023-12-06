@@ -77,7 +77,7 @@ export type NonRemovableBlockDeviceInfoResponse = NonRemovableBlockDeviceInfo[];
 /**
  * Types of CPU architectures
  */
-export const enum CpuArchitectureEnum {
+export enum CpuArchitectureEnum {
   unknown = 'unknown',
   x86_64 = 'x86_64',
   aarch64 = 'aarch64',
@@ -124,7 +124,7 @@ export interface CpuInfo {
 /**
  * Types of display inputs
  */
-export const enum DisplayInputType {
+export enum DisplayInputType {
   unknown = 'unknown',
   digital = 'digital',
   analog = 'analog',
@@ -198,7 +198,7 @@ export interface MemoryInfo {
 /**
  * Types of networks
  */
-export const enum NetworkType {
+export enum NetworkType {
   cellular = 'cellular',
   ethernet = 'ethernet',
   tether = 'tether',
@@ -209,7 +209,7 @@ export const enum NetworkType {
 /**
  * Types of network states
  */
-export const enum NetworkState {
+export enum NetworkState {
   uninitialized = 'uninitialized',
   disabled = 'disabled',
   prohibited = 'prohibited',
@@ -269,7 +269,7 @@ export interface UsbBusInterfaceInfo {
 /**
  * Types of the formats of firmware version in fwpud
  */
-export const enum FwupdVersionFormat {
+export enum FwupdVersionFormat {
   plain = 'plain',
   number = 'number',
   pair = 'pair',
@@ -295,7 +295,7 @@ export interface FwupdFirmwareVersionInfo {
 /**
  * Types of USB versions
  */
-export const enum UsbVersion {
+export enum UsbVersion {
   unknown = 'unknown',
   usb1 = 'usb1',
   usb2 = 'usb2',
@@ -305,7 +305,7 @@ export const enum UsbVersion {
 /**
  * Types of USB spec speeds in Mbps
  */
-export const enum UsbSpecSpeed {
+export enum UsbSpecSpeed {
   unknown = 'unknown',
   n1_5Mbps = 'n1_5Mbps',
   n12Mbps = 'n12Mbps',
@@ -358,7 +358,7 @@ export interface StatefulPartitionInfo {
 /**
  * Types of a TPM GSC versions
  */
-export const enum TpmGSCVersion {
+export enum TpmGSCVersion {
   not_gsc = 'not_gsc',
   cr50 = 'cr50',
   ti50 = 'ti50',
@@ -410,7 +410,7 @@ export interface TpmInfo {
 /**
  * Types of diagnostics routine
  */
-export const enum RoutineType {
+export enum RoutineType {
   available_routines = 'available_routines',
   ac_power = 'ac_power',
   audio_driver = 'audio_driver',
@@ -454,7 +454,7 @@ export interface GetAvailableRoutinesResponse {
 /**
  * Types of diagnostics routine status
  */
-export const enum RoutineStatus {
+export enum RoutineStatus {
   unknown = 'unknown',
   ready = 'ready',
   running = 'running',
@@ -481,7 +481,7 @@ export interface RunRoutineResponse {
 /**
  * Types of routine command types
  */
-export const enum RoutineCommandType {
+export enum RoutineCommandType {
   cancel = 'cancel',
   remove = 'remove',
   resume = 'resume',
@@ -491,7 +491,7 @@ export const enum RoutineCommandType {
 /**
  * Types of messages sent to user
  */
-export const enum UserMessageType {
+export enum UserMessageType {
   unknown = 'unknown',
   unplug_ac_power = 'unplug_ac_power',
   plug_in_ac_power = 'plug_in_ac_power',
@@ -526,7 +526,7 @@ export interface GetRoutineUpdateResponse {
 /**
  * Types of Ac power status
  */
-export const enum AcPowerStatus {
+export enum AcPowerStatus {
   connected = 'connected',
   disconnected = 'disconnected',
 }
@@ -580,7 +580,7 @@ export interface RunCpuRoutineRequest {
 /**
  * Types of disk read routine types
  */
-export const enum DiskReadRoutineType {
+export enum DiskReadRoutineType {
   linear = 'linear',
   random = 'random',
 }
@@ -597,7 +597,7 @@ export interface RunDiskReadRequest {
 /**
  * Types of nvme self test types
  */
-export const enum NvmeSelfTestType {
+export enum NvmeSelfTestType {
   short_test = 'short_test',
   long_test = 'long_test',
 }
@@ -635,7 +635,7 @@ export interface RunSmartctlCheckRequest {
 /**
  * Types of event categories
  */
-export const enum EventCategory {
+export enum EventCategory {
   audio_jack = 'audio_jack',
   external_display = 'external_display',
   keyboard_diagnostic = 'keyboard_diagnostic',
@@ -656,7 +656,7 @@ export const enum EventCategory {
 /**
  * Types of event support status
  */
-export const enum EventSupportStatus {
+export enum EventSupportStatus {
   supported = 'supported',
   unsupported = 'unsupported',
 }
@@ -671,7 +671,7 @@ export interface EventSupportStatusInfo {
 /**
  * Types of audio jack events
  */
-export const enum AudioJackEvent {
+export enum AudioJackEvent {
   connected = 'connected',
   disconnected = 'disconnected',
 }
@@ -679,7 +679,7 @@ export const enum AudioJackEvent {
 /**
  * Types of audio jack device types
  */
-export const enum AudioJackDeviceType {
+export enum AudioJackDeviceType {
   headphone = 'headphone',
   microphone = 'microphone',
 }
@@ -687,7 +687,7 @@ export const enum AudioJackDeviceType {
 /**
  * Types of keyboard connections
  */
-export const enum KeyboardConnectionType {
+export enum KeyboardConnectionType {
   internal = 'internal',
   usb = 'usb',
   bluetooth = 'bluetooth',
@@ -697,7 +697,7 @@ export const enum KeyboardConnectionType {
 /**
  * Types of physical keyboard layouts
  */
-export const enum PhysicalKeyboardLayout {
+export enum PhysicalKeyboardLayout {
   unknown = 'unknown',
   chrome_os = 'chrome_os',
 }
@@ -705,7 +705,7 @@ export const enum PhysicalKeyboardLayout {
 /**
  * Types of mechanical keyboard layouts
  */
-export const enum MechanicalKeyboardLayout {
+export enum MechanicalKeyboardLayout {
   unknown = 'unknown',
   ansi = 'ansi',
   iso = 'iso',
@@ -715,7 +715,7 @@ export const enum MechanicalKeyboardLayout {
 /**
  * Types of keyboard number pad presence
  */
-export const enum KeyboardNumberPadPresence {
+export enum KeyboardNumberPadPresence {
   unknown = 'unknown',
   present = 'present',
   not_present = 'not_present',
@@ -724,7 +724,7 @@ export const enum KeyboardNumberPadPresence {
 /**
  * Types of keyboard top row keys
  */
-export const enum KeyboardTopRowKey {
+export enum KeyboardTopRowKey {
   no_key = 'no_key',
   unknown = 'unknown',
   back = 'back',
@@ -753,7 +753,7 @@ export const enum KeyboardTopRowKey {
 /**
  * Types of keyboard top right keys
  */
-export const enum KeyboardTopRightKey {
+export enum KeyboardTopRightKey {
   unknown = 'unknown',
   power = 'power',
   lock = 'lock',
@@ -788,7 +788,7 @@ export interface KeyboardDiagnosticEventInfo {
 /**
  * Types of lid events
  */
-export const enum LidEvent {
+export enum LidEvent {
   closed = 'closed',
   opened = 'opened',
 }
@@ -796,7 +796,7 @@ export const enum LidEvent {
 /**
  * Types of usb events
  */
-export const enum UsbEvent {
+export enum UsbEvent {
   connected = 'connected',
   disconnected = 'disconnected',
 }
@@ -804,7 +804,7 @@ export const enum UsbEvent {
 /**
  * Types of external display events
  */
-export const enum ExternalDisplayEvent {
+export enum ExternalDisplayEvent {
   connected = 'connected',
   disconnected = 'disconnected',
 }
@@ -812,7 +812,7 @@ export const enum ExternalDisplayEvent {
 /**
  * Types of sd card events
  */
-export const enum SdCardEvent {
+export enum SdCardEvent {
   connected = 'connected',
   disconnected = 'disconnected',
 }
@@ -820,7 +820,7 @@ export const enum SdCardEvent {
 /**
  * Types of power events
  */
-export const enum PowerEvent {
+export enum PowerEvent {
   ac_inserted = 'ac_inserted',
   ac_removed = 'ac_removed',
   os_suspend = 'os_suspend',
@@ -830,7 +830,7 @@ export const enum PowerEvent {
 /**
  * Types of stylus garage events
  */
-export const enum StylusGarageEvent {
+export enum StylusGarageEvent {
   inserted = 'inserted',
   removed = 'removed',
 }
@@ -913,7 +913,7 @@ export interface StylusGarageEventInfo {
 /**
  * Types of input touch buttons
  */
-export const enum InputTouchButton {
+export enum InputTouchButton {
   left = 'left',
   middle = 'middle',
   right = 'right',
@@ -922,7 +922,7 @@ export const enum InputTouchButton {
 /**
  * Types of input touch button states
  */
-export const enum InputTouchButtonState {
+export enum InputTouchButtonState {
   pressed = 'pressed',
   released = 'released',
 }
