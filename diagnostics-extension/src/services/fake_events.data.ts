@@ -13,8 +13,8 @@ import {
   EventCategory,
   EventSupportStatusInfo,
   EventSupportStatus,
-} from '@common/telemetry-extension-types';
-import {PortName, Response} from '@common/message';
+} from '../common/telemetry-extension-types';
+import {PortName, Response} from '../common/message';
 
 let eventPort: chrome.runtime.Port;
 const categoryToIntervalId: Map<

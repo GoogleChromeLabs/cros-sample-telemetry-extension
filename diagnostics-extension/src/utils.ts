@@ -11,7 +11,7 @@ import {
   EventsResponse,
   Response,
   TelemetryResponse,
-} from '@common/message';
+} from './common/message';
 
 export const generateTelemetrySuccessResponse = (
   payload: TelemetryResponse,

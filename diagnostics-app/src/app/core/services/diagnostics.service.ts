@@ -8,7 +8,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {RoutineType} from '@common/telemetry-extension-types';
+import {RoutineType} from 'common/telemetry-extension-types';
 import {
   DiagnosticsParamsUnion,
   DiagnosticsRequest,
@@ -17,8 +17,8 @@ import {
   Response,
   DiagnosticsAction,
   DiagnosticsResponse,
-} from '@common/message';
-import {environment} from 'src/environments/environment';
+} from 'common/message';
+import {environment} from 'environments/environment';
 
 export interface DiagnosticsInterface {
   startRoutine(

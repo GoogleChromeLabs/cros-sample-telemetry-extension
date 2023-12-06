@@ -9,8 +9,8 @@
  */
 
 import {Component} from '@angular/core';
-import {TelemetryInfoType} from '@common/message';
-import {VISIBLE_TELEMETRY_CARDS} from 'src/config/config';
+import {TelemetryInfoType} from 'common/message';
+import {VISIBLE_TELEMETRY_CARDS} from 'config/config';
 
 @Component({
   selector: 'app-telemetry-dashboard',

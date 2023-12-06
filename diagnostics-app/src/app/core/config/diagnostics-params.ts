@@ -14,9 +14,9 @@ import {
   RunNvmeWearLevelRequest,
   RunPowerButtonRequest,
   RunSmartctlCheckRequest,
-} from '@common/telemetry-extension-types';
+} from 'common/telemetry-extension-types';
 
-import {DiagnosticsParamsUnion} from '@common/message';
+import {DiagnosticsParamsUnion} from 'common/message';
 
 const defaultAcPowerRoutineRequest: RunAcPowerRoutineRequest = {
   expected_status: AcPowerStatus.connected,

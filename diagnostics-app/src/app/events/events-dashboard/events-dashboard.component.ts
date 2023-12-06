@@ -13,9 +13,9 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '@common/telemetry-extension-types';
-import {EventsService} from 'src/app/core/services/events.service';
-import {VISIBLE_EVENT_CARDS} from 'src/config/config';
+} from 'common/telemetry-extension-types';
+import {EventsService} from 'app/core/services/events.service';
+import {VISIBLE_EVENT_CARDS} from 'config/config';
 
 @Component({
   selector: 'app-events-dashboard',

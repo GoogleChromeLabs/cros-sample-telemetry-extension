@@ -11,7 +11,7 @@ import {
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
-} from '@common/telemetry-extension-types';
+} from '../common/telemetry-extension-types';
 import {
   DiagnosticsAction,
   DiagnosticsParamsUnion,
@@ -19,7 +19,7 @@ import {
   Request,
   Response,
   ResponseErrorInfoMessage,
-} from '@common/message';
+} from '../common/message';
 import {DiagnosticsServiceProvider} from '../services/diagnostics';
 import {
   generateDiagnosticsSuccessResponse,

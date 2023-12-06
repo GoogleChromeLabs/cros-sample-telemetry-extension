@@ -15,7 +15,7 @@ import {
   TelemetryInfoType,
   ResponseErrorInfoMessage,
   TelemetryInfoUnion,
-} from '@common/message';
+} from '../../common/message';
 import {handleTelemetry} from '../../controllers/telemetry';
 import * as fakeData from '../../services/fake_telemetry.data';
 

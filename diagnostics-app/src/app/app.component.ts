@@ -10,7 +10,7 @@
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 
-import {Theme} from 'src/app/core/enums/global.enums';
+import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from './core/services/theme.service';
 
 @Component({

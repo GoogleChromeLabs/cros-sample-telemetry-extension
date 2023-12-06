@@ -1,4 +1,4 @@
-import {TelemetryInfoType} from '@common/message';
+import {TelemetryInfoType} from 'common/message';
 
 export const defaultTelemetryRefreshInterval = 10000;
 export const defaultDiagnosticsRefreshInterval = 500;

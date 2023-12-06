@@ -14,13 +14,13 @@ import {
   GetRoutineUpdateResponse,
   RoutineStatus,
   RoutineType,
-} from '@common/telemetry-extension-types';
+} from 'common/telemetry-extension-types';
 import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
   RoutineUpdateResponse,
-} from '@common/message';
-import {DiagnosticsService} from 'src/app/core/services/diagnostics.service';
+} from 'common/message';
+import {DiagnosticsService} from 'app/core/services/diagnostics.service';
 import {
   defaultDiagnosticsRefreshInterval,
   refreshIntervals,

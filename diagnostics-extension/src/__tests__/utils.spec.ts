@@ -6,8 +6,8 @@
  * @fileoverview Unit tests for src/utils
  */
 
-import {BatteryInfo} from '@common/telemetry-extension-types';
-import {Response, TelemetryResponse} from '@common/message';
+import {BatteryInfo} from '../common/telemetry-extension-types';
+import {Response, TelemetryResponse} from '../common/message';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,

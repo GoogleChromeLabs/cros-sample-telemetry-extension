@@ -13,8 +13,8 @@
 import {
   EventCategory,
   EventSupportStatusInfo,
-} from '@common/telemetry-extension-types';
-import {Response} from '@common/message';
+} from '../common/telemetry-extension-types';
+import {Response} from '../common/message';
 import * as fake_events from './fake_events.data';
 import {environment} from '../environments/environment';
 import {generateEventsSuccessResponse, generateErrorResponse} from '../utils';

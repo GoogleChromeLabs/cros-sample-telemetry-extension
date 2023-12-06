@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TelemetryCardComponent} from './telemetry-card.component';
-import {TelemetryInfoType} from '@common/message';
+import {TelemetryInfoType} from 'common/message';
 
 describe('TelemetryCardComponent', () => {
   let component: TelemetryCardComponent;

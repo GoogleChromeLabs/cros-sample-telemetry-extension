@@ -17,8 +17,8 @@ import {
   GetRoutineUpdateResponse,
   UserMessageType,
   RoutineCommandType,
-} from '@common/telemetry-extension-types';
-import {DiagnosticsParamsUnion} from '@common/message';
+} from '../common/telemetry-extension-types';
+import {DiagnosticsParamsUnion} from '../common/message';
 
 let id_count = 0;
 

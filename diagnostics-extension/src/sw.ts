@@ -6,7 +6,7 @@
  * @fileoverview Service worker script
  */
 
-import {Request, RequestType, ResponseErrorInfoMessage} from '@common/message';
+import {Request, RequestType, ResponseErrorInfoMessage} from './common/message';
 import {handleDiagnostics} from './controllers/diagnostics';
 import {handleEvents, onEventPortConnect} from './controllers/events';
 import {handleTelemetry} from './controllers/telemetry';

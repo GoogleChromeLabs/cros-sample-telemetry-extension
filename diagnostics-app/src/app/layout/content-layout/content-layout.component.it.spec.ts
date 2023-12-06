@@ -11,7 +11,7 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {MatSidenav} from '@angular/material/sidenav';
 import {By} from '@angular/platform-browser';
 
-import {SharedModule} from 'src/app/shared/shared.module';
+import {SharedModule} from 'app/shared/shared.module';
 
 import {HeaderComponent} from '../header/header.component';
 import {ContentLayoutComponent} from './content-layout.component';

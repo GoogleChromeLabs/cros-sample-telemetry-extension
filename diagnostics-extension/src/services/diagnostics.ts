@@ -17,11 +17,11 @@ import {
   GetAvailableRoutinesResponse,
   GetRoutineUpdateRequest,
   GetRoutineUpdateResponse,
-} from '@common/telemetry-extension-types';
+} from '../common/telemetry-extension-types';
 import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
-} from '@common/message';
+} from '../common/message';
 import * as fake_diagnostics from './fake_diagnostics.data';
 import {RoutineBase, GenericRoutine} from './fake_diagnostics.data';
 import {environment} from '../environments/environment';
