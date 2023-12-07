@@ -82,7 +82,7 @@ export const enum CpuArchitectureEnum {
   x86_64 = 'x86_64',
   aarch64 = 'aarch64',
   armv7l = 'armv7l',
-};
+}
 
 /**
  * Information about a CPU's C-states
@@ -474,8 +474,8 @@ export const enum RoutineStatus {
  * Response of chrome.os.diagnostics.run*()
  */
 export interface RunRoutineResponse {
-  id: number,
-  status: RoutineStatus,
+  id: number;
+  status: RoutineStatus;
 }
 
 /**
@@ -494,7 +494,7 @@ export const enum RoutineCommandType {
 export const enum UserMessageType {
   unknown = 'unknown',
   unplug_ac_power = 'unplug_ac_power',
-  plug_in_ac_power = "plug_in_ac_power",
+  plug_in_ac_power = 'plug_in_ac_power',
   press_power_button = 'press_power_button',
 }
 
@@ -583,7 +583,7 @@ export interface RunCpuRoutineRequest {
 export const enum DiskReadRoutineType {
   linear = 'linear',
   random = 'random',
-};
+}
 
 /**
  * Params object of chrome.os.diagnostics.runDiskReadRoutine()
@@ -600,13 +600,13 @@ export interface RunDiskReadRequest {
 export const enum NvmeSelfTestType {
   short_test = 'short_test',
   long_test = 'long_test',
-};
+}
 
 /**
  * Params object of chrome.os.diagnostics.runNvmeSelfTestRoutine()
  */
 export interface RunNvmeSelfTestRequest {
-  test_type: NvmeSelfTestType	;
+  test_type: NvmeSelfTestType;
 }
 
 /**
@@ -629,7 +629,6 @@ export interface RunPowerButtonRequest {
 export interface RunSmartctlCheckRequest {
   percentage_used_threshold?: number;
 }
-
 
 // chrome.os.events.* type definitions
 
@@ -666,7 +665,7 @@ export const enum EventSupportStatus {
  * Response of chrome.os.events.isEventSupported(<EventCategory>)
  */
 export interface EventSupportStatusInfo {
-  status?: EventSupportStatus,
+  status?: EventSupportStatus;
 }
 
 /**
