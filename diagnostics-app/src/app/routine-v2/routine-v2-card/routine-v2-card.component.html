@@ -1,0 +1,76 @@
+<!-- 
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+
+<!-- TODO(b/301888904): Change comparison to use enum after migration from const enum to enum -->
+
+<div class="routine-v2-card">
+  <div class="header-bar">
+    <div class="header-and-params">
+      <header>{{ routineArgument.category.toUpperCase() }}</header>
+      <div class="params-info" *ngIf="routineArgument.argument">
+        <div
+          class="param-info"
+          *ngFor="let param of $any(routineArgument.argument) | keyvalue: originalOrder"
+        >
+          {{ param.key }}: {{ param.value }}
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button
+        mat-raised-button
+        color="basic"
+        (click)="createAndStartRoutine()"
+        [disabled]="
+          routineState !== RoutineV2State.FINISHED &&
+          routineState !== RoutineV2State.CANCELLED &&
+          routineState !== RoutineV2State.EXCEPTION
+        "
+      >
+        Run
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="cancelRoutine()"
+        [disabled]="
+          routineState !== RoutineV2State.RUNNING && routineState !== RoutineV2State.WAITING
+        "
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+  <ng-container *ngIf="error; then showError; else showRunning"></ng-container>
+  <ng-template #showError>
+    <div class="error-message">
+      <mat-icon mat-list-icon>warning</mat-icon>
+      {{ error }}
+    </div>
+  </ng-template>
+  <ng-template #showRunning>
+    <div class="progress-bar-container">
+      <mat-progress-bar
+        class="progress-bar"
+        mode="determinate"
+        [value]="percentage"
+      ></mat-progress-bar>
+      {{ percentage }}%
+    </div>
+  </ng-template>
+  <div
+    class="message-bar"
+    [ngClass]="passedColor"
+    *ngIf="routineState === RoutineV2State.FINISHED && hasPassed !== undefined"
+  >
+    {{ hasPassed ? "Routine Passed" : "Routine Failed" }}
+  </div>
+  <div class="message-bar" [ngClass]="messageColor">
+    <div class="routine-v2-card-content-container">
+      <app-routine-v2-card-content [output]="output"></app-routine-v2-card-content>
+    </div>
+  </div>
+</div>
