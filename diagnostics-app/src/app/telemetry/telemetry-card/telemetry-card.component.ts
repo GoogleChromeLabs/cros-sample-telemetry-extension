@@ -7,15 +7,18 @@
  * Imported by telemetry.module.ts
  */
 
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
-import {TelemetryInfoUnion} from 'common/message';
-import {TelemetryService} from 'app/core/services/telemetry.service';
-import {TelemetryInfoType, ResponseErrorInfoMessage} from 'common/message';
 import {
   defaultTelemetryRefreshInterval,
   refreshIntervals,
-} from '../../core/config/data-refresh-intervals';
+} from 'app/core/config/data-refresh-intervals';
+import {TelemetryService} from 'app/core/services/telemetry.service';
+import {
+  ResponseErrorInfoMessage,
+  TelemetryInfoType,
+  TelemetryInfoUnion,
+} from 'common/message';
 
 @Component({
   selector: 'app-telemetry-card',

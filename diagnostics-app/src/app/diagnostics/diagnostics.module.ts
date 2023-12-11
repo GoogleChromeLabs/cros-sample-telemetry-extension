@@ -7,11 +7,11 @@
  * Imported by app.module.ts
  */
 
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {DiagnosticsDashboardComponent} from './diagnostics-dashboard/diagnostics-dashboard.component';
-import {DiagnosticsCardComponent} from './diagnostics-card/diagnostics-card.component';
+import {NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
+import {DiagnosticsCardComponent} from './diagnostics-card/diagnostics-card.component';
+import {DiagnosticsDashboardComponent} from './diagnostics-dashboard/diagnostics-dashboard.component';
 
 @NgModule({
   declarations: [DiagnosticsCardComponent, DiagnosticsDashboardComponent],

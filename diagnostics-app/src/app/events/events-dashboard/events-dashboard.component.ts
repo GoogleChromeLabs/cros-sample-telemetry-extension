@@ -9,12 +9,12 @@
 
 import {Component, OnInit} from '@angular/core';
 
+import {EventsService} from 'app/core/services/events.service';
 import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
 } from 'common/telemetry-extension-types';
-import {EventsService} from 'app/core/services/events.service';
 import {VISIBLE_EVENT_CARDS} from 'config/config';
 
 @Component({

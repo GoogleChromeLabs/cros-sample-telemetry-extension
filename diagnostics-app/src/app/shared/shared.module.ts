@@ -8,8 +8,8 @@
  * Imported by app.module.ts
  */
 
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MaterialModule} from './material.module';

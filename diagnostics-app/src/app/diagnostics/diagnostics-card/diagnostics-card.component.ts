@@ -7,25 +7,25 @@
  * Imported by diagnostics.module.ts
  */
 
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
 import {KeyValue} from '@angular/common';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 import {
-  GetRoutineUpdateResponse,
-  RoutineStatus,
-  RoutineType,
-} from 'common/telemetry-extension-types';
+  defaultDiagnosticsRefreshInterval,
+  refreshIntervals,
+} from 'app/core/config/data-refresh-intervals';
+import {diagnosticsParams} from 'app/core/config/diagnostics-params';
+import {DiagnosticsService} from 'app/core/services/diagnostics.service';
 import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
   RoutineUpdateResponse,
 } from 'common/message';
-import {DiagnosticsService} from 'app/core/services/diagnostics.service';
 import {
-  defaultDiagnosticsRefreshInterval,
-  refreshIntervals,
-} from '../../core/config/data-refresh-intervals';
-import {diagnosticsParams} from '../../core/config/diagnostics-params';
+  GetRoutineUpdateResponse,
+  RoutineStatus,
+  RoutineType,
+} from 'common/telemetry-extension-types';
 
 enum DiagnosticsCardState {
   READY = 'ready',
