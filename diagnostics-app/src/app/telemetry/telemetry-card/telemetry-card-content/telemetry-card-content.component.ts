@@ -7,8 +7,8 @@
  * Imported by telemetry.module.ts
  */
 
-import {Component, Input} from '@angular/core';
 import {KeyValue} from '@angular/common';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-telemetry-card-content',

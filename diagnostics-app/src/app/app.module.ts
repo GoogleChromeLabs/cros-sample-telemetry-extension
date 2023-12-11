@@ -14,17 +14,17 @@ import {ServiceWorkerModule} from '@angular/service-worker';
 
 import {environment} from '../environments/environment';
 
-import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
+import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
+import {EventsService} from './core/services/events.service';
 import {DiagnosticsModule} from './diagnostics/diagnostics.module';
 import {EventsModule} from './events/events.module';
+import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
 import {HeaderComponent} from './layout/header/header.component';
-import {SharedModule} from './shared/shared.module';
 import {SideNavComponent} from './layout/side-nav/side-nav.component';
+import {SharedModule} from './shared/shared.module';
 import {TelemetryModule} from './telemetry/telemetry.module';
-import {EventsService} from './core/services/events.service';
 
 const initializeEventService = (
   eventsService: EventsService,

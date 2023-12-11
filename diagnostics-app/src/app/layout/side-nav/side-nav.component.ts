@@ -10,10 +10,10 @@
 import {Component, OnInit} from '@angular/core';
 
 import {
-  NavigationItem,
-  TELEMETRY_NAV_DATA,
   DIAGNOSTICS_NAV_DATA,
   EVENTS_NAV_DATA,
+  NavigationItem,
+  TELEMETRY_NAV_DATA,
 } from './side-nav.data';
 
 @Component({

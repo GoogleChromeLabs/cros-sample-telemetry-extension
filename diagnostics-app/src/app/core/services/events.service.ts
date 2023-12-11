@@ -10,25 +10,25 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {environment} from 'environments/environment';
+import {
+  EventMessage,
+  EventsAction,
+  EventsInfoUnion,
+  EventsRequest,
+  EventsResponse,
+  PortName,
+  Request,
+  RequestType,
+  Response,
+  ResponseErrorInfoMessage,
+} from 'common/message';
 import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
 } from 'common/telemetry-extension-types';
-import {
-  EventsAction,
-  EventMessage,
-  EventsInfoUnion,
-  EventsRequest,
-  EventsResponse,
-  Request,
-  RequestType,
-  Response,
-  PortName,
-  ResponseErrorInfoMessage,
-} from 'common/message';
 import {VISIBLE_EVENT_CARDS} from 'config/config';
+import {environment} from 'environments/environment';
 
 export interface getSubjectResponse {
   success: Boolean;

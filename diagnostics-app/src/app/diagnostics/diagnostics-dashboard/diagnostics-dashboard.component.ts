@@ -10,11 +10,11 @@
 
 import {Component, OnInit} from '@angular/core';
 
+import {DiagnosticsService} from 'app/core/services/diagnostics.service';
 import {
   GetAvailableRoutinesResponse,
   RoutineType,
 } from 'common/telemetry-extension-types';
-import {DiagnosticsService} from 'app/core/services/diagnostics.service';
 import {VISIBLE_DIAGNOSTICS_CARDS} from 'config/config';
 
 @Component({

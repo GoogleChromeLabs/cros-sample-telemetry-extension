@@ -1,5 +1,7 @@
 import {
   AcPowerStatus,
+  DiskReadRoutineType,
+  NvmeSelfTestType,
   RoutineType,
   RunAcPowerRoutineRequest,
   RunBatteryChargeRoutineRequest,
@@ -7,9 +9,7 @@ import {
   RunBluetoothPairingRoutineRequest,
   RunBluetoothScanningRoutineRequest,
   RunCpuRoutineRequest,
-  DiskReadRoutineType,
   RunDiskReadRequest,
-  NvmeSelfTestType,
   RunNvmeSelfTestRequest,
   RunNvmeWearLevelRequest,
   RunPowerButtonRequest,

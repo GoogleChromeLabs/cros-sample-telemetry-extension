@@ -8,8 +8,8 @@
  * Imported by app.module.ts
  */
 
-import {Component} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Component} from '@angular/core';
 
 import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';

@@ -8,16 +8,16 @@
  */
 
 import {Injectable} from '@angular/core';
-import {RoutineType} from 'common/telemetry-extension-types';
 import {
+  DiagnosticsAction,
   DiagnosticsParamsUnion,
   DiagnosticsRequest,
-  RequestType,
-  Request,
-  Response,
-  DiagnosticsAction,
   DiagnosticsResponse,
+  Request,
+  RequestType,
+  Response,
 } from 'common/message';
+import {RoutineType} from 'common/telemetry-extension-types';
 import {environment} from 'environments/environment';
 
 export interface DiagnosticsInterface {
