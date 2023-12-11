@@ -10,10 +10,10 @@
 
 import {
   Request,
-  Response,
   RequestType,
-  TelemetryInfoType,
+  Response,
   ResponseErrorInfoMessage,
+  TelemetryInfoType,
   TelemetryInfoUnion,
 } from '../../common/message';
 import {handleTelemetry} from '../../controllers/telemetry';

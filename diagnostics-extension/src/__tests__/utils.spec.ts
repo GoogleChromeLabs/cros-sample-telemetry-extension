@@ -6,13 +6,13 @@
  * @fileoverview Unit tests for src/utils
  */
 
-import {BatteryInfo} from '../common/telemetry-extension-types';
 import {Response, TelemetryResponse} from '../common/message';
+import {BatteryInfo} from '../common/telemetry-extension-types';
+import * as fakeData from '../services/fake_telemetry.data';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,
 } from '../utils';
-import * as fakeData from '../services/fake_telemetry.data';
 
 describe('should generate correct response objects', () => {
   it('should generate correct error object', () => {

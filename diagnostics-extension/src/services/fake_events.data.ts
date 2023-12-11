@@ -9,12 +9,12 @@
 // Fake data may not use certain parameter variables.
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import {Response} from '../common/message';
 import {
   EventCategory,
-  EventSupportStatusInfo,
   EventSupportStatus,
+  EventSupportStatusInfo,
 } from '../common/telemetry-extension-types';
-import {PortName, Response} from '../common/message';
 
 let eventPort: chrome.runtime.Port;
 const categoryToIntervalId: Map<

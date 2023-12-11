@@ -10,14 +10,14 @@
 // Allow type-casting into any for access.
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import {Response} from '../common/message';
 import {
   EventCategory,
   EventSupportStatusInfo,
 } from '../common/telemetry-extension-types';
-import {Response} from '../common/message';
-import * as fakeEvents from './fake_events.data';
 import {environment} from '../environments/environment';
-import {generateEventsSuccessResponse, generateErrorResponse} from '../utils';
+import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
+import * as fakeEvents from './fake_events.data';
 
 /**
  * Abstract class reprensenting the interface of

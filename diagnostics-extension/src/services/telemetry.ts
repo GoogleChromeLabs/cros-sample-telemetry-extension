@@ -13,21 +13,21 @@
 import {
   AudioInfo,
   BatteryInfo,
-  NonRemovableBlockDeviceInfoResponse,
   CpuInfo,
   DisplayInfo,
+  InternetConnectivityInfo,
   MarketingInfo,
   MemoryInfo,
-  InternetConnectivityInfo,
+  NonRemovableBlockDeviceInfoResponse,
   OemData,
   OsVersionInfo,
-  UsbBusDevices,
-  VpdInfo,
   StatefulPartitionInfo,
   TpmInfo,
+  UsbBusDevices,
+  VpdInfo,
 } from '../common/telemetry-extension-types';
-import * as fakeTelemetry from './fake_telemetry.data';
 import {environment} from '../environments/environment';
+import * as fakeTelemetry from './fake_telemetry.data';
 
 /**
  * Abstract class reprensenting the interface of

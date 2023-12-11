@@ -6,12 +6,12 @@
  * @fileoverview Unit tests for src/services/telemetry
  */
 
+import {TelemetryInfoUnion} from '../../common/message';
+import * as fakeData from '../../services/fake_telemetry.data';
 import {
   TelemetryService,
   TelemetryServiceProvider,
 } from '../../services/telemetry';
-import * as fakeData from '../../services/fake_telemetry.data';
-import {TelemetryInfoUnion} from '../../common/message';
 
 describe('should return instance of FakeTelemetryService', () => {
   const telemetryService: TelemetryService =

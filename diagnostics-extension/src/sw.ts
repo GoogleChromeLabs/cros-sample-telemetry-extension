@@ -8,10 +8,13 @@
 
 import {Request, RequestType, ResponseErrorInfoMessage} from './common/message';
 import {handleDiagnostics} from './controllers/diagnostics';
-import {handleEvents, onEventPortConnect} from './controllers/events';
+import {
+  handleEvents,
+  onEventPortConnect,
+  registerEventHandlers,
+} from './controllers/events';
 import {handleTelemetry} from './controllers/telemetry';
 import {generateErrorResponse} from './utils';
-import {registerEventHandlers} from './controllers/events';
 
 // Event handlers in service workers need to be declared in the global scope.
 registerEventHandlers();
