@@ -17,7 +17,7 @@ import {
 } from '../common/telemetry-extension-types';
 import {environment} from '../environments/environment';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
-import * as fakeEvents from './fake_events.data';
+import * as fakeEvents from './fake-events.service';
 
 /**
  * Abstract class reprensenting the interface of

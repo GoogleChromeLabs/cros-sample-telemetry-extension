@@ -20,7 +20,7 @@ import {
   RoutineType,
   RunRoutineResponse,
 } from '../common/telemetry-extension-types';
-import {DiagnosticsServiceProvider} from '../services/diagnostics';
+import {DiagnosticsServiceProvider} from '../services/diagnostics.service';
 import {
   generateDiagnosticsSuccessResponse,
   generateErrorResponse,

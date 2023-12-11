@@ -7,11 +7,11 @@
  */
 
 import {TelemetryInfoUnion} from '../../common/message';
-import * as fakeData from '../../services/fake_telemetry.data';
+import * as fakeData from '../../services/fake-telemetry.data';
 import {
   TelemetryService,
   TelemetryServiceProvider,
-} from '../../services/telemetry';
+} from '../../services/telemetry.service';
 
 describe('should return instance of FakeTelemetryService', () => {
   const telemetryService: TelemetryService =

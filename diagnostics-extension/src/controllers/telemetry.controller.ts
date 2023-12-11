@@ -13,7 +13,7 @@ import {
   TelemetryInfoType,
   TelemetryResponse,
 } from '../common/message';
-import {TelemetryServiceProvider} from '../services/telemetry';
+import {TelemetryServiceProvider} from '../services/telemetry.service';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,

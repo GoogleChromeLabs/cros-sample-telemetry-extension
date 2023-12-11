@@ -8,7 +8,7 @@
 
 import {Response, TelemetryResponse} from '../common/message';
 import {BatteryInfo} from '../common/telemetry-extension-types';
-import * as fakeData from '../services/fake_telemetry.data';
+import * as fakeData from '../services/fake-telemetry.data';
 import {
   generateErrorResponse,
   generateTelemetrySuccessResponse,

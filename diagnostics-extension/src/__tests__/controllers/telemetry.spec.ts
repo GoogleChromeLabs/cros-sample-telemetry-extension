@@ -16,8 +16,8 @@ import {
   TelemetryInfoType,
   TelemetryInfoUnion,
 } from '../../common/message';
-import {handleTelemetry} from '../../controllers/telemetry';
-import * as fakeData from '../../services/fake_telemetry.data';
+import {handleTelemetry} from '../../controllers/telemetry.controller';
+import * as fakeData from '../../services/fake-telemetry.data';
 
 describe('should return correct error messages', () => {
   it('should return error when telemetry object is missing', async () => {
