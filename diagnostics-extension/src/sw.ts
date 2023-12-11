@@ -6,18 +6,29 @@
  * @fileoverview Service worker script
  */
 
-import {Request, RequestType, ResponseErrorInfoMessage} from './common/message';
+import {
+  PortName,
+  Request,
+  RequestType,
+  ResponseErrorInfoMessage,
+} from './common/message';
 import {handleDiagnostics} from './controllers/diagnostics.controller';
 import {
   handleEvents,
   onEventPortConnect,
   registerEventHandlers,
 } from './controllers/events.controller';
+import {
+  handleRoutineV2,
+  onRoutineV2PortConnect,
+  registerRoutineV2EventHandlers,
+} from './controllers/routine-v2.controller';
 import {handleTelemetry} from './controllers/telemetry.controller';
 import {generateErrorResponse} from './utils';
 
 // Event handlers in service workers need to be declared in the global scope.
 registerEventHandlers();
+registerRoutineV2EventHandlers();
 
 chrome.runtime.onInstalled.addListener(
   (details: chrome.runtime.InstalledDetails) => {
@@ -26,11 +37,19 @@ chrome.runtime.onInstalled.addListener(
 );
 
 chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
-  onEventPortConnect(port);
+  switch (port.name) {
+    case PortName.EVENTS_PORT:
+      onEventPortConnect(port);
+      return;
+    case PortName.ROUTINE_V2_PORT:
+      onRoutineV2PortConnect(port);
+      return;
+    default:
+      console.error(ResponseErrorInfoMessage.InvalidPortName);
+  }
 });
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
-  console.log(req, sender);
   switch (req.type) {
     case RequestType.TELEMETRY:
       return handleTelemetry(req, res);
@@ -38,6 +57,8 @@ chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
       return handleDiagnostics(req, res);
     case RequestType.EVENTS:
       return handleEvents(req, res);
+    case RequestType.ROUTINE_V2:
+      return handleRoutineV2(req, res);
     default:
       return res(
         generateErrorResponse(ResponseErrorInfoMessage.InvalidRequestType),

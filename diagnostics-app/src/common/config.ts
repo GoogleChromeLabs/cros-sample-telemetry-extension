@@ -2,8 +2,19 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {TelemetryInfoType} from './message';
-import {EventCategory, RoutineType} from './telemetry-extension-types';
+import {
+  RoutineV2Argument,
+  RoutineV2Category,
+  TelemetryInfoType,
+} from './message';
+import {
+  EventCategory,
+  RoutineType,
+  RunFanRoutineArguments,
+  RunMemoryRoutineArguments,
+  RunVolumeButtonRoutineArguments,
+  VolumeButtonType,
+} from './telemetry-extension-types';
 
 export const APP_NAME = 'telemetry-extension-types Reference App';
 
@@ -73,4 +84,26 @@ export const VISIBLE_DIAGNOSTICS_CARDS: RoutineType[] = [
   RoutineType.smartctl_check,
   RoutineType.smartctl_check_with_percentage_used,
   RoutineType.ufs_lifetime,
+];
+
+// Routine V2 types must have an associated argument for supportability check
+// and initialization.
+export const FanRoutineArgument: RunFanRoutineArguments = {};
+export const MemoryRoutineArgument: RunMemoryRoutineArguments = {
+  maxTestingMemKib: 10000,
+};
+/* eslint-disable camelcase*/
+export const VolumeButtonRoutineArgument: RunVolumeButtonRoutineArguments = {
+  button_type: VolumeButtonType.volume_up,
+  timeout_seconds: 10,
+};
+/* eslint-enable camelcase*/
+
+export const VISIBLE_ROUTINE_V2_CARDS: RoutineV2Argument[] = [
+  {category: RoutineV2Category.fan, argument: FanRoutineArgument},
+  {category: RoutineV2Category.memory, argument: MemoryRoutineArgument},
+  {
+    category: RoutineV2Category.volumeButton,
+    argument: VolumeButtonRoutineArgument,
+  },
 ];

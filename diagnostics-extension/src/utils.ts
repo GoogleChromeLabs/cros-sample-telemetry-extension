@@ -10,6 +10,7 @@ import {
   DiagnosticsResponse,
   EventsResponse,
   Response,
+  RoutineV2Response,
   TelemetryResponse,
 } from './common/message';
 
@@ -29,6 +30,12 @@ export const generateEventsSuccessResponse = (
   payload?: EventsResponse,
 ): Response => {
   return {success: true, events: payload};
+};
+
+export const generateRoutineV2SuccessResponse = (
+  payload?: RoutineV2Response,
+): Response => {
+  return {success: true, routineV2: payload};
 };
 
 export const generateErrorResponse = (message: string): Response => {
