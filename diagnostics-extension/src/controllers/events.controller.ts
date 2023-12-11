@@ -8,7 +8,6 @@
 
 import {
   EventsAction,
-  PortName,
   Request,
   Response,
   ResponseErrorInfoMessage,
@@ -75,11 +74,7 @@ export const registerEventHandlers = async () => {
 };
 
 export const onEventPortConnect = async (port: chrome.runtime.Port) => {
-  if (port.name === PortName.EVENTS_PORT) {
-    eventsService.registerPort(port);
-  } else {
-    console.error(ResponseErrorInfoMessage.InvalidPortName);
-  }
+  eventsService.registerPort(port);
 };
 
 export const handleEvents: EventsController = async (req, res) => {
