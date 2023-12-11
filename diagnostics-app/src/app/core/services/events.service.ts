@@ -96,7 +96,9 @@ export class EventsService {
         }
         resolve();
       } catch (err) {
-        console.error(ResponseErrorInfoMessage.FailedEventsServiceConstructor);
+        console.error(
+          ResponseErrorInfoMessage.FailedPortConnectionServiceConstructor,
+        );
         reject();
       }
     });
