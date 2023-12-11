@@ -17,6 +17,7 @@ const shared = {
 };
 
 const config = {
+  plugins: ['prettier-plugin-organize-imports'],
   overrides: [
     {
       files: '*.ts',
