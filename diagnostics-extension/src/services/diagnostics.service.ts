@@ -23,7 +23,7 @@ import {
   RunRoutineResponse,
 } from '../common/telemetry-extension-types';
 import {environment} from '../environments/environment';
-import * as fakeDiagnostics from './fake_diagnostics.data';
+import * as fakeDiagnostics from './fake-diagnostics.service';
 
 /**
  * Abstract class reprensenting the interface of

@@ -27,7 +27,7 @@ import {
   VpdInfo,
 } from '../common/telemetry-extension-types';
 import {environment} from '../environments/environment';
-import * as fakeTelemetry from './fake_telemetry.data';
+import * as fakeTelemetry from './fake-telemetry.data';
 
 /**
  * Abstract class reprensenting the interface of

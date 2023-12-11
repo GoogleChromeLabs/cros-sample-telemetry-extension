@@ -14,7 +14,7 @@ import {
   ResponseErrorInfoMessage,
 } from '../common/message';
 import {EventCategory} from '../common/telemetry-extension-types';
-import {EventsServiceProvider} from '../services/events';
+import {EventsServiceProvider} from '../services/events.service';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 
 type EventsController = (
