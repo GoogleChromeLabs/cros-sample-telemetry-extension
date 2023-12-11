@@ -15,7 +15,7 @@ import {
   EventSupportStatusInfo,
 } from '../common/telemetry-extension-types';
 import {Response} from '../common/message';
-import * as fake_events from './fake_events.data';
+import * as fakeEvents from './fake_events.data';
 import {environment} from '../environments/environment';
 import {generateEventsSuccessResponse, generateErrorResponse} from '../utils';
 
@@ -147,21 +147,21 @@ export class EventsServiceImpl extends EventsService {
  */
 export class FakeEventsService implements EventsService {
   registerEventHandlers = async (): Promise<Response> => {
-    return fake_events.registerEventHandlers();
+    return fakeEvents.registerEventHandlers();
   };
   registerPort = (port: chrome.runtime.Port) => {
-    return fake_events.registerPort(port);
+    return fakeEvents.registerPort(port);
   };
   isEventSupported = async (
     eventType: EventCategory,
   ): Promise<EventSupportStatusInfo> => {
-    return fake_events.isEventSupported(eventType);
+    return fakeEvents.isEventSupported(eventType);
   };
   startCapturingEvents = async (eventType: EventCategory): Promise<void> => {
-    return fake_events.startCapturingEvents(eventType);
+    return fakeEvents.startCapturingEvents(eventType);
   };
   stopCapturingEvents = async (eventType: EventCategory): Promise<void> => {
-    return fake_events.stopCapturingEvents(eventType);
+    return fakeEvents.stopCapturingEvents(eventType);
   };
 }
 

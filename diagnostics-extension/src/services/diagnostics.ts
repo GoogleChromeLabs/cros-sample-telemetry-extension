@@ -22,7 +22,7 @@ import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
 } from '../common/message';
-import * as fake_diagnostics from './fake_diagnostics.data';
+import * as fakeDiagnostics from './fake_diagnostics.data';
 import {RoutineBase, GenericRoutine} from './fake_diagnostics.data';
 import {environment} from '../environments/environment';
 
@@ -240,7 +240,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
   };
 
   getAvailableRoutines = async (): Promise<GetAvailableRoutinesResponse> => {
-    return fake_diagnostics.fakeAvailableRoutines();
+    return fakeDiagnostics.fakeAvailableRoutines();
   };
 
   startRoutine = async (
@@ -270,7 +270,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
             ResponseErrorInfoMessage.InvalidDiagnosticsParams,
           );
         const res: RunRoutineResponse =
-          await fake_diagnostics.runGenericRoutine(params);
+          await fakeDiagnostics.runGenericRoutine(params);
         this._activeRoutines[res.id] = new GenericRoutine(res.id);
         return res;
       }
@@ -290,7 +290,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
       case RoutineType.signal_strength:
       case RoutineType.ufs_lifetime: {
         const res: RunRoutineResponse =
-          await fake_diagnostics.runGenericRoutine();
+          await fakeDiagnostics.runGenericRoutine();
         this._activeRoutines[res.id] = new GenericRoutine(res.id);
         return res;
       }

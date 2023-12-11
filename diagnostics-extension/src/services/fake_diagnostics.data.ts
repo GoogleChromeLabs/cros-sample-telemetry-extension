@@ -9,6 +9,9 @@
 // Fake data may not use certain parameter variables.
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+// Telemetry extension API types may not be camelCase.
+/* eslint-disable camelcase */
+
 import {
   RoutineStatus,
   RoutineType,
@@ -20,10 +23,10 @@ import {
 } from '../common/telemetry-extension-types';
 import {DiagnosticsParamsUnion} from '../common/message';
 
-let id_count = 0;
+let idCount = 0;
 
 const generateRoutineId = () => {
-  return id_count++;
+  return idCount++;
 };
 
 export const fakeAvailableRoutines =
