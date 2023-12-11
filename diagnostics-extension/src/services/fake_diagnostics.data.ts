@@ -12,16 +12,16 @@
 // Telemetry extension API types may not be camelCase.
 /* eslint-disable camelcase */
 
+import {DiagnosticsParamsUnion} from '../common/message';
 import {
+  GetAvailableRoutinesResponse,
+  GetRoutineUpdateResponse,
+  RoutineCommandType,
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
-  GetAvailableRoutinesResponse,
-  GetRoutineUpdateResponse,
   UserMessageType,
-  RoutineCommandType,
 } from '../common/telemetry-extension-types';
-import {DiagnosticsParamsUnion} from '../common/message';
 
 let idCount = 0;
 

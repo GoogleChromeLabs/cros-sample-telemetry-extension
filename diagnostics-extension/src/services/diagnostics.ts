@@ -11,20 +11,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
-  RoutineCommandType,
-  RoutineType,
-  RunRoutineResponse,
-  GetAvailableRoutinesResponse,
-  GetRoutineUpdateRequest,
-  GetRoutineUpdateResponse,
-} from '../common/telemetry-extension-types';
-import {
   DiagnosticsParamsUnion,
   ResponseErrorInfoMessage,
 } from '../common/message';
-import * as fakeDiagnostics from './fake_diagnostics.data';
-import {RoutineBase, GenericRoutine} from './fake_diagnostics.data';
+import {
+  GetAvailableRoutinesResponse,
+  GetRoutineUpdateRequest,
+  GetRoutineUpdateResponse,
+  RoutineCommandType,
+  RoutineType,
+  RunRoutineResponse,
+} from '../common/telemetry-extension-types';
 import {environment} from '../environments/environment';
+import * as fakeDiagnostics from './fake_diagnostics.data';
 
 /**
  * Abstract class reprensenting the interface of
@@ -230,7 +229,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
  * @extends DiagnosticsService
  */
 export class FakeDiagnosticsService implements DiagnosticsService {
-  private _activeRoutines: {[key: number]: RoutineBase} = {};
+  private _activeRoutines: {[key: number]: fakeDiagnostics.RoutineBase} = {};
 
   private _fetchRoutineById = (id: number) => {
     if (!(id in this._activeRoutines)) {
@@ -271,7 +270,9 @@ export class FakeDiagnosticsService implements DiagnosticsService {
           );
         const res: RunRoutineResponse =
           await fakeDiagnostics.runGenericRoutine(params);
-        this._activeRoutines[res.id] = new GenericRoutine(res.id);
+        this._activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
+          res.id,
+        );
         return res;
       }
       case RoutineType.audio_driver:
@@ -291,7 +292,9 @@ export class FakeDiagnosticsService implements DiagnosticsService {
       case RoutineType.ufs_lifetime: {
         const res: RunRoutineResponse =
           await fakeDiagnostics.runGenericRoutine();
-        this._activeRoutines[res.id] = new GenericRoutine(res.id);
+        this._activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
+          res.id,
+        );
         return res;
       }
       default:

@@ -6,14 +6,14 @@
  * @fileoverview Handle event requests
  */
 
-import {EventCategory} from '../common/telemetry-extension-types';
 import {
   EventsAction,
+  PortName,
   Request,
   Response,
   ResponseErrorInfoMessage,
-  PortName,
 } from '../common/message';
+import {EventCategory} from '../common/telemetry-extension-types';
 import {EventsServiceProvider} from '../services/events';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 

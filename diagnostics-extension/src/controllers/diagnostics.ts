@@ -7,12 +7,6 @@
  */
 
 import {
-  GetAvailableRoutinesResponse,
-  RoutineStatus,
-  RoutineType,
-  RunRoutineResponse,
-} from '../common/telemetry-extension-types';
-import {
   DiagnosticsAction,
   DiagnosticsParamsUnion,
   DiagnosticsResponse,
@@ -20,6 +14,12 @@ import {
   Response,
   ResponseErrorInfoMessage,
 } from '../common/message';
+import {
+  GetAvailableRoutinesResponse,
+  RoutineStatus,
+  RoutineType,
+  RunRoutineResponse,
+} from '../common/telemetry-extension-types';
 import {DiagnosticsServiceProvider} from '../services/diagnostics';
 import {
   generateDiagnosticsSuccessResponse,

@@ -15,20 +15,20 @@
 import {
   AudioInfo,
   BatteryInfo,
-  NonRemovableBlockDeviceInfoResponse,
   CpuArchitectureEnum,
   CpuInfo,
-  DisplayInputType,
   DisplayInfo,
+  DisplayInputType,
+  InternetConnectivityInfo,
   MarketingInfo,
   MemoryInfo,
-  InternetConnectivityInfo,
+  NonRemovableBlockDeviceInfoResponse,
   OemData,
   OsVersionInfo,
-  UsbBusDevices,
-  VpdInfo,
   StatefulPartitionInfo,
   TpmInfo,
+  UsbBusDevices,
+  VpdInfo,
 } from '../common/telemetry-extension-types';
 
 export const audioInfo: AudioInfo = {
