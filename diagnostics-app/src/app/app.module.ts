@@ -18,6 +18,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {EventsService} from './core/services/events.service';
+import {RoutineV2Service} from './core/services/routine-v2.service';
 import {DiagnosticsModule} from './diagnostics/diagnostics.module';
 import {EventsModule} from './events/events.module';
 import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
@@ -27,11 +28,17 @@ import {RoutineV2Module} from './routine-v2/routine-v2.module';
 import {SharedModule} from './shared/shared.module';
 import {TelemetryModule} from './telemetry/telemetry.module';
 
-const initializeEventService = (
+function initializeEventServiceFactory(
   eventsService: EventsService,
-): (() => Promise<void>) => {
+): () => Promise<void> {
   return () => eventsService.Init();
-};
+}
+
+function initializeRoutineV2ServiceFactory(
+  routineV2Service: RoutineV2Service,
+): () => Promise<void> {
+  return () => routineV2Service.Init();
+}
 
 @NgModule({
   declarations: [
@@ -60,9 +67,15 @@ const initializeEventService = (
     EventsService,
     {
       provide: APP_INITIALIZER,
-      useFactory: initializeEventService,
+      useFactory: initializeEventServiceFactory,
       multi: true,
       deps: [EventsService],
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeRoutineV2ServiceFactory,
+      multi: true,
+      deps: [RoutineV2Service],
     },
     {
       provide: LocationStrategy,
