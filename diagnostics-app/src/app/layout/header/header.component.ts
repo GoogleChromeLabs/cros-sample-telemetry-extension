@@ -19,7 +19,7 @@ import {APP_NAME} from 'config/config';
 })
 export class HeaderComponent {
   @Output() toggleDrawer = new EventEmitter<void>();
-  readonly app_name = APP_NAME;
+  readonly appName = APP_NAME;
 
   constructor(private _themeService: ThemeService) {}
 

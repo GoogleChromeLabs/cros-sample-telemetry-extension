@@ -11,7 +11,8 @@
     "./node_modules/gts/"
   ],
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "camelcase": ["error", { "properties": "always" }]
   },
   "env": {
     "node": true,

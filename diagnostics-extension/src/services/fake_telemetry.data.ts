@@ -9,6 +9,9 @@
 // Fake data may not use certain parameter variables.
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+// Telemetry extension API types may not be camelCase.
+/* eslint-disable camelcase */
+
 import {
   AudioInfo,
   BatteryInfo,

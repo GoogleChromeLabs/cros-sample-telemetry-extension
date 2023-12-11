@@ -18,6 +18,9 @@ import {
 
 import {DiagnosticsParamsUnion} from 'common/message';
 
+// Telemetry extension API types may not be camelCase.
+/* eslint-disable camelcase */
+
 const defaultAcPowerRoutineRequest: RunAcPowerRoutineRequest = {
   expected_status: AcPowerStatus.connected,
 };
