@@ -11,11 +11,11 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DiagnosticsService} from 'app/core/services/diagnostics.service';
+import {VISIBLE_DIAGNOSTICS_CARDS} from 'common/config';
 import {
   GetAvailableRoutinesResponse,
   RoutineType,
 } from 'common/telemetry-extension-types';
-import {VISIBLE_DIAGNOSTICS_CARDS} from 'config/config';
 
 @Component({
   selector: 'app-diagnostics-dashboard',

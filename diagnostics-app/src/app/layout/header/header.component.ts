@@ -10,7 +10,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from 'app/core/services/theme.service';
-import {APP_NAME} from 'config/config';
+import {APP_NAME} from 'common/config';
 
 @Component({
   selector: 'app-header',
