@@ -38,16 +38,16 @@ export class TelemetryService {
           request,
           (response: Response) => {
             if (!response.success) {
-              reject(response.error);
+              return reject(response.error);
             } else if (!response.telemetry) {
               throw 'Invalid response';
             } else {
-              resolve(response.telemetry.info);
+              return resolve(response.telemetry.info);
             }
           },
         );
       } catch (err) {
-        reject(err);
+        return reject(err);
       }
     });
   };

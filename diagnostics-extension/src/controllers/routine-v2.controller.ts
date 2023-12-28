@@ -66,6 +66,6 @@ export const handleRoutineV2: RoutineV2Controller = async (
         );
     }
   } catch (err) {
-    res(generateErrorResponse(String(err)));
+    return res(generateErrorResponse(String(err)));
   }
 };
