@@ -124,10 +124,10 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
     ],
   ]);
 
-  private notifyPort = (
+  private notifyPort(
     eventCategory: RoutineV2EventCategory,
     event: RoutineV2EventUnion,
-  ) => {
+  ) {
     if (!this.port) {
       console.error('port not established');
       return;
@@ -143,13 +143,13 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
     };
     this.port.postMessage(routineV2Event);
     return;
-  };
+  }
 
-  registerPort = (port: chrome.runtime.Port): void => {
+  public registerPort(port: chrome.runtime.Port): void {
     this.port = port;
-  };
+  }
 
-  registerRoutineV2EventHandlers = (): void => {
+  public registerRoutineV2EventHandlers(): void {
     try {
       for (const [eventCategory, routineEventListener] of this
         .routineEventListeners) {
@@ -162,41 +162,41 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       console.error(err);
       return;
     }
-  };
+  }
 
-  isRoutineArgumentSupported = (
+  public isRoutineArgumentSupported(
     routineArgument: RoutineV2Argument,
-  ): Promise<RoutineSupportStatusInfo> => {
+  ): Promise<RoutineSupportStatusInfo> {
     if (!this.routineCategoryToMethods.has(routineArgument.category)) {
       return Promise.reject('invalid routine category');
     }
     return this.routineCategoryToMethods
       .get(routineArgument.category)!
       .isRoutineArgumentSupportedFunc(routineArgument.argument);
-  };
+  }
 
-  createRoutine = async (
+  public async createRoutine(
     routineArgument: RoutineV2Argument,
-  ): Promise<CreateRoutineResponse> => {
+  ): Promise<CreateRoutineResponse> {
     if (!this.routineCategoryToMethods.has(routineArgument.category)) {
       return Promise.reject('invalid routine category');
     }
     return this.routineCategoryToMethods
       .get(routineArgument.category)!
       .createRoutineFunc(routineArgument.argument);
-  };
+  }
 
-  startRoutine = async (
+  public async startRoutine(
     startRoutineRequest: StartRoutineRequest,
-  ): Promise<void> => {
+  ): Promise<void> {
     return (chrome as any).os.diagnostics.startRoutine(startRoutineRequest);
-  };
+  }
 
-  cancelRoutine = async (
+  public async cancelRoutine(
     cancelRoutineRequest: CancelRoutineRequest,
-  ): Promise<void> => {
+  ): Promise<void> {
     return (chrome as any).os.diagnostics.cancelRoutine(cancelRoutineRequest);
-  };
+  }
 }
 
 /**
@@ -204,26 +204,33 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
  * @extends RoutineV2Service
  */
 export class FakeRoutineV2Service implements RoutineV2Service {
-  registerRoutineV2EventHandlers(): void {
+  public registerRoutineV2EventHandlers(): void {
     return fakeRoutineV2.registerEventHandlers();
   }
-  registerPort(port: chrome.runtime.Port): void {
+
+  public registerPort(port: chrome.runtime.Port): void {
     return fakeRoutineV2.registerPort(port);
   }
-  isRoutineArgumentSupported(
+
+  public isRoutineArgumentSupported(
     routineArgument: RoutineV2Argument,
   ): Promise<RoutineSupportStatusInfo> {
     return fakeRoutineV2.isRoutineArgumentSupported(routineArgument);
   }
-  createRoutine(
+
+  public createRoutine(
     routineArgument: RoutineV2Argument,
   ): Promise<CreateRoutineResponse> {
     return fakeRoutineV2.createRoutine(routineArgument);
   }
-  startRoutine(startRoutineRequest: StartRoutineRequest): Promise<void> {
+
+  public startRoutine(startRoutineRequest: StartRoutineRequest): Promise<void> {
     return fakeRoutineV2.startRoutine(startRoutineRequest);
   }
-  cancelRoutine(cancelRoutineRequest: CancelRoutineRequest): Promise<void> {
+
+  public cancelRoutine(
+    cancelRoutineRequest: CancelRoutineRequest,
+  ): Promise<void> {
     return fakeRoutineV2.cancelRoutine(cancelRoutineRequest);
   }
 }

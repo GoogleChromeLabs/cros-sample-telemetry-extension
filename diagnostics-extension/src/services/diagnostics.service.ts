@@ -45,14 +45,14 @@ export abstract class DiagnosticsService {
  * @extends DiagnosticsService
  */
 export class DiagnosticsServiceImpl extends DiagnosticsService {
-  getAvailableRoutines = async (): Promise<GetAvailableRoutinesResponse> => {
+  public async getAvailableRoutines(): Promise<GetAvailableRoutinesResponse> {
     return (chrome as any).os.diagnostics.getAvailableRoutines();
-  };
+  }
 
-  startRoutine = async (
+  public async startRoutine(
     name: RoutineType,
     params?: DiagnosticsParamsUnion,
-  ): Promise<RunRoutineResponse> => {
+  ): Promise<RunRoutineResponse> {
     params && console.log('Recieved params', params);
 
     switch (name) {
@@ -195,8 +195,9 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
         );
     }
-  };
-  stopRoutine = (id: number): Promise<GetRoutineUpdateResponse> => {
+  }
+
+  public stopRoutine(id: number): Promise<GetRoutineUpdateResponse> {
     const cancelReq: GetRoutineUpdateRequest = {
       id,
       command: RoutineCommandType.cancel,
@@ -207,21 +208,23 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
     };
     (chrome as any).os.diagnostics.getRoutineUpdate(cancelReq);
     return (chrome as any).os.diagnostics.getRoutineUpdate(removeReq);
-  };
-  resumeRoutine = (id: number): Promise<GetRoutineUpdateResponse> => {
+  }
+
+  public resumeRoutine(id: number): Promise<GetRoutineUpdateResponse> {
     const req: GetRoutineUpdateRequest = {
       id,
       command: RoutineCommandType.resume,
     };
     return (chrome as any).os.diagnostics.getRoutineUpdate(req);
-  };
-  getRoutineStatus = (id: number): Promise<GetRoutineUpdateResponse> => {
+  }
+
+  public getRoutineStatus(id: number): Promise<GetRoutineUpdateResponse> {
     const req: GetRoutineUpdateRequest = {
       id,
       command: RoutineCommandType.status,
     };
     return (chrome as any).os.diagnostics.getRoutineUpdate(req);
-  };
+  }
 }
 
 /**
@@ -231,21 +234,21 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
 export class FakeDiagnosticsService implements DiagnosticsService {
   private _activeRoutines: {[key: number]: fakeDiagnostics.RoutineBase} = {};
 
-  private _fetchRoutineById = (id: number) => {
+  private _fetchRoutineById(id: number) {
     if (!(id in this._activeRoutines)) {
       throw ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId;
     }
     return this._activeRoutines[id];
-  };
+  }
 
-  getAvailableRoutines = async (): Promise<GetAvailableRoutinesResponse> => {
+  public async getAvailableRoutines(): Promise<GetAvailableRoutinesResponse> {
     return fakeDiagnostics.fakeAvailableRoutines();
-  };
+  }
 
-  startRoutine = async (
+  public async startRoutine(
     name: RoutineType,
     params?: DiagnosticsParamsUnion,
-  ): Promise<RunRoutineResponse> => {
+  ): Promise<RunRoutineResponse> {
     params && console.log('Recieved params', params);
 
     switch (name) {
@@ -302,23 +305,23 @@ export class FakeDiagnosticsService implements DiagnosticsService {
           ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
         );
     }
-  };
+  }
 
-  stopRoutine = (id: number): Promise<GetRoutineUpdateResponse> => {
+  public stopRoutine(id: number): Promise<GetRoutineUpdateResponse> {
     const routine = this._fetchRoutineById(id);
     delete this._activeRoutines[id];
     return routine.stop();
-  };
+  }
 
-  resumeRoutine = (id: number): Promise<GetRoutineUpdateResponse> => {
+  public resumeRoutine(id: number): Promise<GetRoutineUpdateResponse> {
     const routine = this._fetchRoutineById(id);
     return routine.resume();
-  };
+  }
 
-  getRoutineStatus = (id: number): Promise<GetRoutineUpdateResponse> => {
+  public getRoutineStatus(id: number): Promise<GetRoutineUpdateResponse> {
     const routine = this._fetchRoutineById(id);
     return routine.getStatus();
-  };
+  }
 }
 
 export class DiagnosticsServiceProvider {

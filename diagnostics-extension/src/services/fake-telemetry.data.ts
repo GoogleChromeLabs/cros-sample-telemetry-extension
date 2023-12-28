@@ -35,7 +35,9 @@ export const audioInfo: AudioInfo = {
   outputNodes: [{}],
   inputNodes: [{}],
 };
-export const getAudioInfo = async (): Promise<AudioInfo> => audioInfo;
+export async function getAudioInfo(): Promise<AudioInfo> {
+  return audioInfo;
+}
 
 export const batteryInfo: BatteryInfo = {
   cycleCount: 75,
@@ -53,7 +55,9 @@ export const batteryInfo: BatteryInfo = {
   manufactureDate: '2019-07-09T16:59:39.787Z',
   temperature: 43,
 };
-export const getBatteryInfo = async (): Promise<BatteryInfo> => batteryInfo;
+export async function getBatteryInfo(): Promise<BatteryInfo> {
+  return batteryInfo;
+}
 
 export const blockDeviceInfo: NonRemovableBlockDeviceInfoResponse = [
   {
@@ -62,8 +66,9 @@ export const blockDeviceInfo: NonRemovableBlockDeviceInfoResponse = [
     name: 'WDC PC SN520 SDAPTUW-256G-1006',
   },
 ];
-export const getNonRemovableBlockDevicesInfo =
-  async (): Promise<NonRemovableBlockDeviceInfoResponse> => blockDeviceInfo;
+export async function getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
+  return blockDeviceInfo;
+}
 
 export const cpuInfo: CpuInfo = {
   numTotalThreads: 8,
@@ -436,7 +441,9 @@ export const cpuInfo: CpuInfo = {
     },
   ],
 };
-export const getCpuInfo = async (): Promise<CpuInfo> => cpuInfo;
+export async function getCpuInfo(): Promise<CpuInfo> {
+  return cpuInfo;
+}
 
 export const displayInfo: DisplayInfo = {
   embeddedDisplay: {
@@ -448,11 +455,14 @@ export const displayInfo: DisplayInfo = {
     },
   ],
 };
-export const getDisplayInfo = async (): Promise<DisplayInfo> => displayInfo;
+export async function getDisplayInfo(): Promise<DisplayInfo> {
+  return displayInfo;
+}
 
 export const marketingInfo: MarketingInfo = {};
-export const getMarketingInfo = async (): Promise<MarketingInfo> =>
-  marketingInfo;
+export async function getMarketingInfo(): Promise<MarketingInfo> {
+  return marketingInfo;
+}
 
 export const memoryInfo: MemoryInfo = {
   totalMemoryKiB: 16270856,
@@ -460,45 +470,58 @@ export const memoryInfo: MemoryInfo = {
   availableMemoryKiB: 14810656,
   pageFaultsSinceLastBoot: '62076622',
 };
-export const getMemoryInfo = async (): Promise<MemoryInfo> => memoryInfo;
+export async function getMemoryInfo(): Promise<MemoryInfo> {
+  return memoryInfo;
+}
 
 export const networkInfo: InternetConnectivityInfo = {
   networks: [{ipv6Addresses: ['2001:db8:3333:4444:5555:6666:7777:8888']}],
 };
-export const getInternetConnectivityInfo =
-  async (): Promise<InternetConnectivityInfo> => networkInfo;
+export async function getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
+  return networkInfo;
+}
 
 export const oemInfo: OemData = {
   oemData: 'ABCDEFGHIJKLMN',
 };
-export const getOemData = async (): Promise<OemData> => oemInfo;
+export async function getOemData(): Promise<OemData> {
+  return oemInfo;
+}
 
 export const osVersionInfo: OsVersionInfo = {};
-export const getOsVersionInfo = async (): Promise<OsVersionInfo> =>
-  osVersionInfo;
+export async function getOsVersionInfo(): Promise<OsVersionInfo> {
+  return osVersionInfo;
+}
 
 export const usbInfo: UsbBusDevices = {
   devices: [{interfaces: [{}]}],
 };
-export const getUsbBusInfo = async (): Promise<UsbBusDevices> => usbInfo;
+export async function getUsbBusInfo(): Promise<UsbBusDevices> {
+  return usbInfo;
+}
 
 export const vpdInfo: VpdInfo = {
   skuNumber: 'sku',
   serialNumber: 'serial-number',
   modelName: 'model',
 };
-export const getVpdInfo = async (): Promise<VpdInfo> => vpdInfo;
+export async function getVpdInfo(): Promise<VpdInfo> {
+  return vpdInfo;
+}
 
 export const statefulPartitionInfo: StatefulPartitionInfo = {
   availableSpace: 1340000,
   totalSpace: 2005000,
 };
-export const getStatefulPartitionInfo =
-  async (): Promise<StatefulPartitionInfo> => statefulPartitionInfo;
+export async function getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
+  return statefulPartitionInfo;
+}
 
 export const tpmInfo: TpmInfo = {
   version: {},
   status: {},
   dictionaryAttack: {},
 };
-export const getTpmInfo = async (): Promise<TpmInfo> => tpmInfo;
+export async function getTpmInfo(): Promise<TpmInfo> {
+  return tpmInfo;
+}

@@ -55,46 +55,46 @@ export abstract class TelemetryService {
  * @extends TelemetryService
  */
 export class TelemetryServiceImpl extends TelemetryService {
-  async getAudioInfo(): Promise<AudioInfo> {
+  public async getAudioInfo(): Promise<AudioInfo> {
     return (chrome as any).os.telemetry.getAudioInfo();
   }
-  async getBatteryInfo(): Promise<BatteryInfo> {
+  public async getBatteryInfo(): Promise<BatteryInfo> {
     return (chrome as any).os.telemetry.getBatteryInfo();
   }
-  async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
+  public async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
     return (chrome as any).os.telemetry.getNonRemovableBlockDevicesInfo();
   }
-  async getCpuInfo(): Promise<CpuInfo> {
+  public async getCpuInfo(): Promise<CpuInfo> {
     return (chrome as any).os.telemetry.getCpuInfo();
   }
-  async getDisplayInfo(): Promise<DisplayInfo> {
+  public async getDisplayInfo(): Promise<DisplayInfo> {
     return (chrome as any).os.telemetry.getDisplayInfo();
   }
-  async getMarketingInfo(): Promise<MarketingInfo> {
+  public async getMarketingInfo(): Promise<MarketingInfo> {
     return (chrome as any).os.telemetry.getMarketingInfo();
   }
-  async getMemoryInfo(): Promise<MemoryInfo> {
+  public async getMemoryInfo(): Promise<MemoryInfo> {
     return (chrome as any).os.telemetry.getMemoryInfo();
   }
-  async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
+  public async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
     return (chrome as any).os.telemetry.getInternetConnectivityInfo();
   }
-  async getOemData(): Promise<OemData> {
+  public async getOemData(): Promise<OemData> {
     return (chrome as any).os.telemetry.getOemData();
   }
-  async getOsVersionInfo(): Promise<OsVersionInfo> {
+  public async getOsVersionInfo(): Promise<OsVersionInfo> {
     return (chrome as any).os.telemetry.getOsVersionInfo();
   }
-  async getUsbBusInfo(): Promise<UsbBusDevices> {
+  public async getUsbBusInfo(): Promise<UsbBusDevices> {
     return (chrome as any).os.telemetry.getUsbBusInfo();
   }
-  async getVpdInfo(): Promise<VpdInfo> {
+  public async getVpdInfo(): Promise<VpdInfo> {
     return (chrome as any).os.telemetry.getVpdInfo();
   }
-  async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
+  public async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
     return (chrome as any).os.telemetry.getStatefulPartitionInfo();
   }
-  async getTpmInfo(): Promise<TpmInfo> {
+  public async getTpmInfo(): Promise<TpmInfo> {
     return (chrome as any).os.telemetry.getTpmInfo();
   }
 }
@@ -104,46 +104,46 @@ export class TelemetryServiceImpl extends TelemetryService {
  * @extends TelemetryService
  */
 export class FakeTelemetryService extends TelemetryService {
-  async getAudioInfo(): Promise<AudioInfo> {
+  public async getAudioInfo(): Promise<AudioInfo> {
     return fakeTelemetry.getAudioInfo();
   }
-  async getBatteryInfo(): Promise<BatteryInfo> {
+  public async getBatteryInfo(): Promise<BatteryInfo> {
     return fakeTelemetry.getBatteryInfo();
   }
-  async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
+  public async getNonRemovableBlockDevicesInfo(): Promise<NonRemovableBlockDeviceInfoResponse> {
     return fakeTelemetry.getNonRemovableBlockDevicesInfo();
   }
-  async getCpuInfo(): Promise<CpuInfo> {
+  public async getCpuInfo(): Promise<CpuInfo> {
     return fakeTelemetry.getCpuInfo();
   }
-  async getDisplayInfo(): Promise<DisplayInfo> {
+  public async getDisplayInfo(): Promise<DisplayInfo> {
     return fakeTelemetry.getDisplayInfo();
   }
-  async getMarketingInfo(): Promise<MarketingInfo> {
+  public async getMarketingInfo(): Promise<MarketingInfo> {
     return fakeTelemetry.getMarketingInfo();
   }
-  async getMemoryInfo(): Promise<MemoryInfo> {
+  public async getMemoryInfo(): Promise<MemoryInfo> {
     return fakeTelemetry.getMemoryInfo();
   }
-  async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
+  public async getInternetConnectivityInfo(): Promise<InternetConnectivityInfo> {
     return fakeTelemetry.getInternetConnectivityInfo();
   }
-  async getOemData(): Promise<OemData> {
+  public async getOemData(): Promise<OemData> {
     return fakeTelemetry.getOemData();
   }
-  async getOsVersionInfo(): Promise<OsVersionInfo> {
+  public async getOsVersionInfo(): Promise<OsVersionInfo> {
     return fakeTelemetry.getOsVersionInfo();
   }
-  async getUsbBusInfo(): Promise<UsbBusDevices> {
+  public async getUsbBusInfo(): Promise<UsbBusDevices> {
     return fakeTelemetry.getUsbBusInfo();
   }
-  async getVpdInfo(): Promise<VpdInfo> {
+  public async getVpdInfo(): Promise<VpdInfo> {
     return fakeTelemetry.getVpdInfo();
   }
-  async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
+  public async getStatefulPartitionInfo(): Promise<StatefulPartitionInfo> {
     return fakeTelemetry.getStatefulPartitionInfo();
   }
-  async getTpmInfo(): Promise<TpmInfo> {
+  public async getTpmInfo(): Promise<TpmInfo> {
     return fakeTelemetry.getTpmInfo();
   }
 }

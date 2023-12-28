@@ -19,25 +19,20 @@ import {
   generateRoutineV2SuccessResponse,
 } from '../utils';
 
-type RoutineV2Controller = (
-  req: Request,
-  res: (data: Response) => void,
-) => void;
-
 const routineV2Service = RoutineV2ServiceProvider.getRoutineV2Service();
 
-export const registerRoutineV2EventHandlers: () => void = () => {
+export function registerRoutineV2EventHandlers(): void {
   routineV2Service.registerRoutineV2EventHandlers();
-};
+}
 
-export const onRoutineV2PortConnect = async (port: chrome.runtime.Port) => {
+export async function onRoutineV2PortConnect(port: chrome.runtime.Port) {
   routineV2Service.registerPort(port);
-};
+}
 
-export const handleRoutineV2: RoutineV2Controller = async (
+export async function handleRoutineV2(
   req: Request,
   res: (data: Response) => void,
-) => {
+): Promise<void> {
   if (!req.routineV2)
     return res(generateErrorResponse('Missing routine v2 object in request.'));
 
@@ -68,4 +63,4 @@ export const handleRoutineV2: RoutineV2Controller = async (
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}

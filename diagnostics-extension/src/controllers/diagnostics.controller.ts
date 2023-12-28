@@ -26,14 +26,9 @@ import {
   generateErrorResponse,
 } from '../utils';
 
-type DiagnosticsController = (
-  category: Request,
-  res: (data: Response) => void,
-) => void;
-
 const diagnosticsService = DiagnosticsServiceProvider.getDiagnosticsService();
 
-const getAvailableRoutines = async (res: (data: Response) => void) => {
+async function getAvailableRoutines(res: (data: Response) => void) {
   try {
     const payload: GetAvailableRoutinesResponse =
       await diagnosticsService.getAvailableRoutines();
@@ -41,13 +36,13 @@ const getAvailableRoutines = async (res: (data: Response) => void) => {
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-const handleStartRoutine = async (
+async function handleStartRoutine(
   routineName: RoutineType | undefined,
   res: (data: Response) => void,
   params?: DiagnosticsParamsUnion,
-) => {
+) {
   if (!routineName) {
     return res(
       generateErrorResponse(
@@ -77,13 +72,13 @@ const handleStartRoutine = async (
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-const handleRoutineOperation = async (
+async function handleRoutineOperation(
   id: number | undefined,
   command: DiagnosticsAction,
   res: (data: Response) => void,
-) => {
+) {
   if (!id) {
     return res(
       generateErrorResponse(
@@ -109,9 +104,12 @@ const handleRoutineOperation = async (
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-export const handleDiagnostics: DiagnosticsController = (req, res) => {
+export async function handleDiagnostics(
+  req: Request,
+  res: (data: Response) => void,
+): Promise<void> {
   if (!req.diagnostics)
     return res(
       generateErrorResponse(ResponseErrorInfoMessage.MissingDiagnosticsRequest),
@@ -141,4 +139,4 @@ export const handleDiagnostics: DiagnosticsController = (req, res) => {
         ),
       );
   }
-};
+}

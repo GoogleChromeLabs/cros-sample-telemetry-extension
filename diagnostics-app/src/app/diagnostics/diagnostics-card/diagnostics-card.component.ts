@@ -105,7 +105,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(private diagnosticsService: DiagnosticsService) {}
+  public constructor(private diagnosticsService: DiagnosticsService) {}
 
   ngOnInit(): void {
     if (diagnosticsParams.has(this.routine)) {
@@ -135,17 +135,19 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   // This function is used for maintaining the attributes' original order.
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  public originalOrder = (
+  public originalOrder(
     _a: KeyValue<number, string>,
     _b: KeyValue<number, string>,
-  ): number => 0;
+  ): number {
+    return 0;
+  }
   /* eslint-enable @typescript-eslint/no-unused-vars */
 
-  canResume() {
+  public canResume() {
     return ResumableRoutines.includes(this.routine);
   }
 
-  async startRoutine() {
+  public async startRoutine() {
     try {
       let res = await this.diagnosticsService.startRoutine(
         this.routine,
@@ -172,7 +174,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  async stopRoutine() {
+  public async stopRoutine() {
     if (this._intervalId) {
       window.clearInterval(this._intervalId);
       this._intervalId = undefined;
@@ -199,7 +201,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
     this._state = DiagnosticsCardState.READY;
   }
 
-  async resumeRoutine() {
+  public async resumeRoutine() {
     try {
       let res = await this.diagnosticsService.resumeRoutine(this._routineId!);
       res = res as RoutineUpdateResponse;
@@ -213,7 +215,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  async getRoutineStatus() {
+  public async getRoutineStatus() {
     try {
       let res = await this.diagnosticsService.getRoutineStatus(
         this._routineId!,

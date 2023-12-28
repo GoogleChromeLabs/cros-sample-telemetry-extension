@@ -27,16 +27,16 @@ const fakeEventData: Map<EventCategory, object> = new Map<
 >();
 const fakeDataInterval: number = 3000; // Send fake data every 3 seconds.
 
-export const registerEventHandlers = async (): Promise<Response> => {
+export async function registerEventHandlers(): Promise<Response> {
   return {success: true};
-};
+}
 
-export const registerPort = (port: chrome.runtime.Port): void => {
+export function registerPort(port: chrome.runtime.Port): void {
   eventPort = port;
   return;
-};
+}
 
-const notifyPort = (type: EventCategory, message: object): void => {
+function notifyPort(type: EventCategory, message: object): void {
   if (!eventPort) {
     return;
   }
@@ -45,29 +45,29 @@ const notifyPort = (type: EventCategory, message: object): void => {
     info: message,
   });
   return;
-};
+}
 
-const getFakeData = (type: EventCategory): object => {
+function getFakeData(type: EventCategory): object {
   if (fakeEventData.has(type)) {
     return fakeEventData.get(type)!;
   }
   return {type: 'no mocked data'};
-};
+}
 
 // Default to support all events in fake data.
-export const isEventSupported = async (
+export async function isEventSupported(
   eventType: EventCategory,
-): Promise<EventSupportStatusInfo> => {
+): Promise<EventSupportStatusInfo> {
   const res: EventSupportStatusInfo = {
     status: EventSupportStatus.supported,
   };
   return res;
-};
+}
 
 // Set a timer to periodically send fake data once event starts capturing.
-export const startCapturingEvents = async (
+export async function startCapturingEvents(
   eventType: EventCategory,
-): Promise<void> => {
+): Promise<void> {
   categoryToIntervalId.set(
     eventType,
     setInterval(() => {
@@ -75,15 +75,15 @@ export const startCapturingEvents = async (
     }, fakeDataInterval),
   );
   return;
-};
+}
 
 // Destroy the event timer.
-export const stopCapturingEvents = async (
+export async function stopCapturingEvents(
   eventType: EventCategory,
-): Promise<void> => {
+): Promise<void> {
   if (categoryToIntervalId.has(eventType)) {
     clearInterval(categoryToIntervalId.get(eventType));
   }
   categoryToIntervalId.delete(eventType);
   return;
-};
+}

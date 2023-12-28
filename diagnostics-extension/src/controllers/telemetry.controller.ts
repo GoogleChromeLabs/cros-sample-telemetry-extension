@@ -19,14 +19,12 @@ import {
   generateTelemetrySuccessResponse,
 } from '../utils';
 
-type TelemetryController = (
-  category: Request,
-  res: (data: Response) => void,
-) => void;
-
 const telemetryService = TelemetryServiceProvider.getTelemetryService();
 
-const mapInfoTypeToMethod = (infoType: TelemetryInfoType) => {
+function mapInfoTypeToMethod(
+  infoType: TelemetryInfoType,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): () => Promise<any> {
   switch (infoType) {
     case TelemetryInfoType.AUDIO:
       return telemetryService.getAudioInfo;
@@ -57,11 +55,15 @@ const mapInfoTypeToMethod = (infoType: TelemetryInfoType) => {
     case TelemetryInfoType.TPM:
       return telemetryService.getTpmInfo;
     default:
-      return null;
+      return () =>
+        Promise.reject(ResponseErrorInfoMessage.InvalidTelemetryInfoType);
   }
-};
+}
 
-export const handleTelemetry: TelemetryController = async (req, res) => {
+export async function handleTelemetry(
+  req: Request,
+  res: (data: Response) => void,
+): Promise<void> {
   if (!req.telemetry)
     return res(
       generateErrorResponse(ResponseErrorInfoMessage.MissingTelemetryRequest),
@@ -82,4 +84,4 @@ export const handleTelemetry: TelemetryController = async (req, res) => {
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}

@@ -16,29 +16,24 @@ import {EventCategory} from '../common/telemetry-extension-types';
 import {EventsServiceProvider} from '../services/events.service';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 
-type EventsController = (
-  category: Request,
-  res: (data: Response) => void,
-) => void;
-
 const eventsService = EventsServiceProvider.getEventsService();
 
-const isEventSupported = async (
+async function isEventSupported(
   eventType: EventCategory,
   res: (data: Response) => void,
-) => {
+) {
   try {
     const paylaod = await eventsService.isEventSupported(eventType);
     return res(generateEventsSuccessResponse(paylaod));
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-const startCapturingEvents = async (
+async function startCapturingEvents(
   eventType: EventCategory,
   res: (data: Response) => void,
-) => {
+) {
   try {
     await eventsService.startCapturingEvents(eventType);
     const payload = {};
@@ -46,21 +41,21 @@ const startCapturingEvents = async (
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-const stopCapturingEvents = async (
+async function stopCapturingEvents(
   eventType: EventCategory,
   res: (data: Response) => void,
-) => {
+) {
   try {
     await eventsService.stopCapturingEvents(eventType);
     return res(generateEventsSuccessResponse({}));
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
-};
+}
 
-export const registerEventHandlers = async () => {
+export async function registerEventHandlers() {
   eventsService
     .registerEventHandlers()
     .then((response) => {
@@ -71,13 +66,16 @@ export const registerEventHandlers = async () => {
     .catch((err) => {
       console.error(err.message);
     });
-};
+}
 
-export const onEventPortConnect = async (port: chrome.runtime.Port) => {
+export async function onEventPortConnect(port: chrome.runtime.Port) {
   eventsService.registerPort(port);
-};
+}
 
-export const handleEvents: EventsController = async (req, res) => {
+export async function handleEvents(
+  req: Request,
+  res: (data: Response) => void,
+): Promise<void> {
   if (!req.events)
     return res(
       generateErrorResponse(ResponseErrorInfoMessage.MissingEventsRequest),
@@ -96,4 +94,4 @@ export const handleEvents: EventsController = async (req, res) => {
         generateErrorResponse(ResponseErrorInfoMessage.InvalidEventsAction),
       );
   }
-};
+}

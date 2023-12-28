@@ -33,7 +33,7 @@ export class EventsCardComponent implements OnInit {
   public error?: String;
   public state? = EventsCardState.NOT_LISTENING;
 
-  constructor(
+  public constructor(
     private eventsService: EventsService,
     private changeDetectorRef: ChangeDetectorRef,
   ) {}

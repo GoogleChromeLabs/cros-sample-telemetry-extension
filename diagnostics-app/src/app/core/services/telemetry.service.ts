@@ -22,16 +22,15 @@ import {environment} from 'environments/environment';
 export class TelemetryService {
   private extensionId!: string;
 
-  private constructTelemetryRequest: (infoType: TelemetryInfoType) => Request =
-    (infoType) => {
-      return {type: RequestType.TELEMETRY, telemetry: {infoType}};
-    };
+  private constructTelemetryRequest(infoType: TelemetryInfoType): Request {
+    return {type: RequestType.TELEMETRY, telemetry: {infoType}};
+  }
 
-  public fetchTelemetryData: (
+  public fetchTelemetryData(
     infoType: TelemetryInfoType,
-  ) => Promise<TelemetryInfoUnion> | undefined = (category) => {
+  ): Promise<TelemetryInfoUnion> | undefined {
     return new Promise((resolve, reject) => {
-      const request = this.constructTelemetryRequest(category);
+      const request = this.constructTelemetryRequest(infoType);
       try {
         window.chrome.runtime.sendMessage(
           this.extensionId,
@@ -50,9 +49,9 @@ export class TelemetryService {
         return reject(err);
       }
     });
-  };
+  }
 
-  constructor() {
+  public constructor() {
     this.extensionId = environment.extensionId;
   }
 }

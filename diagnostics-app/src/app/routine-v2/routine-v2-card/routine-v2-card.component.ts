@@ -95,7 +95,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     return 'white';
   }
 
-  constructor(
+  public constructor(
     private routineV2Service: RoutineV2Service,
     private changeDetectorRef: ChangeDetectorRef,
   ) {}
@@ -127,10 +127,12 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
 
   // This function is used for maintaining the attributes' original order.
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  public originalOrder = (
+  public originalOrder(
     _a: KeyValue<number, string>,
     _b: KeyValue<number, string>,
-  ): number => 0;
+  ): number {
+    return 0;
+  }
   /* eslint-enable @typescript-eslint/no-unused-vars */
 
   // Checks whether the UUID received is the same as the UUID of the running
@@ -144,7 +146,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     }
     return true;
   }
-  async handleEventResponse(event: RoutineV2Event) {
+  private async handleEventResponse(event: RoutineV2Event) {
     switch (event.eventCategory) {
       case RoutineV2EventCategory.initialized: {
         this._output = 'initialized';
@@ -213,7 +215,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     this.changeDetectorRef.detectChanges();
   }
 
-  async createAndStartRoutine() {
+  public async createAndStartRoutine() {
     try {
       const createRoutineResponse = await this.routineV2Service.CreateRoutine(
         this.routineArgument,
@@ -233,7 +235,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     }
   }
 
-  async cancelRoutine() {
+  public async cancelRoutine() {
     if (!this._uuid) {
       return;
     }

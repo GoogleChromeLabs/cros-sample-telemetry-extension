@@ -34,7 +34,7 @@ export class SideNavComponent implements OnInit {
     return this._navLists;
   }
 
-  constructor() {}
+  public constructor() {}
 
   ngOnInit(): void {}
 }

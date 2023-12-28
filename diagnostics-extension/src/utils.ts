@@ -14,30 +14,30 @@ import {
   TelemetryResponse,
 } from './common/message';
 
-export const generateTelemetrySuccessResponse = (
+export function generateTelemetrySuccessResponse(
   payload: TelemetryResponse,
-): Response => {
+): Response {
   return {success: true, telemetry: payload};
-};
+}
 
-export const generateDiagnosticsSuccessResponse = (
+export function generateDiagnosticsSuccessResponse(
   payload: DiagnosticsResponse,
-): Response => {
+): Response {
   return {success: true, diagnostics: payload};
-};
+}
 
-export const generateEventsSuccessResponse = (
+export function generateEventsSuccessResponse(
   payload?: EventsResponse,
-): Response => {
+): Response {
   return {success: true, events: payload};
-};
+}
 
-export const generateRoutineV2SuccessResponse = (
+export function generateRoutineV2SuccessResponse(
   payload?: RoutineV2Response,
-): Response => {
+): Response {
   return {success: true, routineV2: payload};
-};
+}
 
-export const generateErrorResponse = (message: string): Response => {
+export function generateErrorResponse(message: string): Response {
   return {success: false, error: {message}};
-};
+}
