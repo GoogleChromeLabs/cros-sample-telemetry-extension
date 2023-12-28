@@ -50,45 +50,30 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
 
   public RoutineV2State = RoutineV2State;
 
-  private _routineOutput?: RoutineV2FinishedInfoUnion;
   // The output, which may be either routine result or user action.
-  private _output?: object | string;
+  public output?: object | string;
   // Whether the routine has passed. Only shown if the routine is finished.
-  private _hasPassed?: boolean;
-  // The error message if any.
-  private _error?: string;
-  // The routine id associated with the card, possibly null if no routine is running.
-  private _uuid?: string;
+  public hasPassed?: boolean;
+  // The error message, undefined if no error occurs.
+  public error?: string;
   // An integer between 0 ~ 100 detailing the percentage ran of the routine.
-  private _percentage = 0;
+  public percentage = 0;
   // The state of the underlying routine.
-  private _routineState: RoutineV2State = RoutineV2State.FINISHED;
+  public routineState: RoutineV2State = RoutineV2State.FINISHED;
 
-  get error() {
-    return this._error;
-  }
-  get output() {
-    return this._output;
-  }
-  get percentage() {
-    return this._percentage;
-  }
-  get routineState() {
-    return this._routineState;
-  }
-  get hasPassed() {
-    return this._hasPassed;
-  }
+  // The routine id associated with the card, possibly null if no routine is running.
+  private uuid?: string;
+
   get passedColor() {
-    if (this._hasPassed) {
+    if (this.hasPassed) {
       return 'green';
     }
     return 'red';
   }
   get messageColor() {
     if (
-      this._routineState === RoutineV2State.EXCEPTION ||
-      this._routineState === RoutineV2State.CANCELLED
+      this.routineState === RoutineV2State.EXCEPTION ||
+      this.routineState === RoutineV2State.CANCELLED
     ) {
       return 'yellow';
     }
@@ -111,25 +96,25 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
             },
           });
         } else {
-          this._error = res.error;
+          this.error = res.error;
         }
       })
       .catch((err) => {
-        this._error = err.message;
+        this.error = err.message;
       });
   }
 
   ngOnDestroy(): void {
-    if (this._uuid) {
-      this.routineV2Service.CancelRoutine(this._uuid);
+    if (this.uuid) {
+      this.routineV2Service.CancelRoutine(this.uuid);
     }
   }
 
   // This function is used for maintaining the attributes' original order.
   /* eslint-disable @typescript-eslint/no-unused-vars */
   public originalOrder(
-    _a: KeyValue<number, string>,
-    _b: KeyValue<number, string>,
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>,
   ): number {
     return 0;
   }
@@ -139,9 +124,9 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   // routine.
   // TODO(b/317946517): Add UI/UX for error handling when UUID is not matched.
   private _checkUUID(uuid: string | undefined): boolean {
-    if (this._uuid !== uuid) {
+    if (this.uuid !== uuid) {
       console.error('UUID not matched');
-      this._error = 'ERROR: uuid not matched';
+      this.error = 'ERROR: uuid not matched';
       return false;
     }
     return true;
@@ -149,9 +134,8 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   private async handleEventResponse(event: RoutineV2Event) {
     switch (event.eventCategory) {
       case RoutineV2EventCategory.initialized: {
-        this._output = 'initialized';
-        this._routineOutput = undefined;
-        this._routineState = RoutineV2State.RUNNING;
+        this.output = 'initialized';
+        this.routineState = RoutineV2State.RUNNING;
         const routineInitializedInfo = event.event as RoutineInitializedInfo;
         if (!this._checkUUID(routineInitializedInfo.uuid)) {
           break;
@@ -159,52 +143,52 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         break;
       }
       case RoutineV2EventCategory.running: {
-        this._output = 'running...';
-        this._routineState = RoutineV2State.RUNNING;
+        this.output = 'running...';
+        this.routineState = RoutineV2State.RUNNING;
         const routineRunningInfo = event.event as RoutineRunningInfo;
         if (!this._checkUUID(routineRunningInfo.uuid)) {
           break;
         }
         if (routineRunningInfo.percentage) {
-          this._percentage = routineRunningInfo.percentage;
+          this.percentage = routineRunningInfo.percentage;
         }
         break;
       }
       case RoutineV2EventCategory.waiting: {
-        this._routineState = RoutineV2State.WAITING;
+        this.routineState = RoutineV2State.WAITING;
         const routineWaitingInfo = event.event as RoutineWaitingInfo;
         if (!this._checkUUID(routineWaitingInfo.uuid)) {
           break;
         }
         if (routineWaitingInfo.percentage) {
-          this._percentage = routineWaitingInfo.percentage;
+          this.percentage = routineWaitingInfo.percentage;
         }
-        this._output = 'Waiting: ' + routineWaitingInfo.message;
+        this.output = 'Waiting: ' + routineWaitingInfo.message;
         break;
       }
       case RoutineV2EventCategory.exception: {
-        this._routineState = RoutineV2State.EXCEPTION;
+        this.routineState = RoutineV2State.EXCEPTION;
         const routineExceptionInfo = event.event as ExceptionInfo;
         if (!this._checkUUID(routineExceptionInfo.uuid)) {
           break;
         }
-        this._percentage = 0;
-        this._output = 'Exception: ' + routineExceptionInfo.debugMessage;
+        this.percentage = 0;
+        this.output = 'Exception: ' + routineExceptionInfo.debugMessage;
         break;
       }
       case RoutineV2EventCategory.fanFinished:
       case RoutineV2EventCategory.memoryFinished:
       case RoutineV2EventCategory.volumeButtonFinished: {
-        this._routineState = RoutineV2State.FINISHED;
+        this.routineState = RoutineV2State.FINISHED;
         const routineFinishedInfo = event.event as RoutineV2FinishedInfoUnion;
         if (!this._checkUUID(routineFinishedInfo.uuid)) {
           break;
         }
-        this._percentage = 100;
-        this._hasPassed = routineFinishedInfo.has_passed;
+        this.percentage = 100;
+        this.hasPassed = routineFinishedInfo.has_passed;
         delete routineFinishedInfo.uuid;
         delete routineFinishedInfo.has_passed;
-        this._output = routineFinishedInfo;
+        this.output = routineFinishedInfo;
 
         break;
       }
@@ -220,35 +204,35 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       const createRoutineResponse = await this.routineV2Service.CreateRoutine(
         this.routineArgument,
       );
-      this._uuid = createRoutineResponse.uuid;
-      this._routineState = RoutineV2State.INITIALIZED;
-      this._output = undefined;
-      this._hasPassed = undefined;
-      if (this._uuid === undefined) {
+      this.uuid = createRoutineResponse.uuid;
+      this.routineState = RoutineV2State.INITIALIZED;
+      this.output = undefined;
+      this.hasPassed = undefined;
+      if (this.uuid === undefined) {
         throw new TypeError('Create routine error');
       }
-      await this.routineV2Service.StartRoutine(this._uuid);
-      this._percentage = 0;
+      await this.routineV2Service.StartRoutine(this.uuid);
+      this.percentage = 0;
     } catch (err) {
       console.log('an error was found: ', err);
-      this._error = String(err);
+      this.error = String(err);
     }
   }
 
   public async cancelRoutine() {
-    if (!this._uuid) {
+    if (!this.uuid) {
       return;
     }
 
     try {
-      this._routineState = RoutineV2State.CANCELLED;
-      const uuid = this._uuid;
-      this._uuid = undefined;
+      this.routineState = RoutineV2State.CANCELLED;
+      const uuid = this.uuid;
+      this.uuid = undefined;
       await this.routineV2Service.CancelRoutine(uuid);
-      this._output = 'routine cancelled';
-      this._percentage = 0;
+      this.output = 'routine cancelled';
+      this.percentage = 0;
     } catch (err) {
-      this._error = String(err);
+      this.error = String(err);
     }
   }
 }

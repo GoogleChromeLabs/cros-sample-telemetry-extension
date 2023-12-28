@@ -29,8 +29,8 @@ export class EventsCardComponent implements OnInit {
   // Array of all events received from healthd API. These are the outputs that
   // will be shown for each card.
   public eventList: object[] = [];
-  // Error message received, undefined if no error occurs.
-  public error?: String;
+  // The error message, undefined if no error occurs.
+  public error?: string;
   public state? = EventsCardState.NOT_LISTENING;
 
   public constructor(

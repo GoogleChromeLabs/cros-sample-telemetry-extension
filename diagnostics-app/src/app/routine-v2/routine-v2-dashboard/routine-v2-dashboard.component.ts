@@ -20,28 +20,21 @@ import {RoutineSupportStatus} from 'common/telemetry-extension-types';
   styleUrls: ['./routine-v2-dashboard.component.css'],
 })
 export class RoutineV2DashboardComponent implements OnInit {
-  // The error message if there is any error.
-  private _error?: string;
+  // The error message, undefined if no error occurs.
+  public error?: string;
 
   // Array of routine-v2 arguments that will actually be displayed
-  private _supportedRoutines: RoutineV2Argument[] = [];
-
-  get error() {
-    return this._error;
-  }
-  get supportedRoutines() {
-    return this._supportedRoutines;
-  }
+  public supportedRoutines: RoutineV2Argument[] = [];
 
   public async isRoutineArgumentSupported(argument: RoutineV2Argument) {
     try {
       const supportStatusInfo =
         await this.RoutineV2Service.isRoutineArgumentSupported(argument);
       if (supportStatusInfo.status === RoutineSupportStatus.supported) {
-        this._supportedRoutines.push(argument);
+        this.supportedRoutines.push(argument);
       }
     } catch (err) {
-      this._error = String(err);
+      this.error = String(err);
     }
   }
 

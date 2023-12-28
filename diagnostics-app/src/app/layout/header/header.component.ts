@@ -21,10 +21,10 @@ export class HeaderComponent {
   @Output() toggleDrawer = new EventEmitter<void>();
   readonly appName = APP_NAME;
 
-  public constructor(private _themeService: ThemeService) {}
+  public constructor(private themeService: ThemeService) {}
 
   public onToggleTheme() {
-    this._themeService.toggleTheme();
+    this.themeService.toggleTheme();
   }
 
   public onToggleDrawer() {
@@ -32,6 +32,6 @@ export class HeaderComponent {
   }
 
   public isDarkModeActivated() {
-    return this._themeService.theme === Theme.DARK;
+    return this.themeService.theme === Theme.DARK;
   }
 }

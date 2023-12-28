@@ -33,7 +33,7 @@ import {environment} from 'environments/environment';
 export interface getSubjectResponse {
   success: Boolean;
   subject?: Subject<EventsInfoUnion>;
-  error?: String;
+  error?: string;
 }
 
 @Injectable({
