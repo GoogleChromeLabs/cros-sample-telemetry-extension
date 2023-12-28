@@ -28,9 +28,12 @@ import {
 export class TelemetryCardComponent implements OnInit, OnDestroy {
   @Input({required: true}) type!: TelemetryInfoType;
 
-  private _error?: ResponseErrorInfoMessage; // the error message received, null if no error occurs
-  private _intervalId!: number; // the interval id of this card component
-  private _info?: TelemetryInfoUnion; // the telemetry info received by calling telemetry service
+  // The error message received, null if no error occurs.
+  private _error?: ResponseErrorInfoMessage;
+  // The interval id used for polling changes from healthd API.
+  private _intervalId!: number;
+  // The telemetry info received by calling telemetry service.
+  private _info?: TelemetryInfoUnion;
 
   get error() {
     return this._error;

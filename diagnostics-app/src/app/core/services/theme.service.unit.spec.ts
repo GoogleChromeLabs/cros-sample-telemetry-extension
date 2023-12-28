@@ -18,7 +18,7 @@ describe('unit: service: theme', () => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(ThemeService);
     expect(service).toBeTruthy();
-    // default mode should be dark
+    // Default mode should be dark.
     expect(service.theme).toBe(Theme.DARK);
   });
 
@@ -32,7 +32,7 @@ describe('unit: service: theme', () => {
 
   it('should switch from light to dark', () => {
     TestBed.configureTestingModule({
-      // passes defaultTheme to ThemeService constructor
+      // Passes defaultTheme to ThemeService constructor.
       providers: [{provide: 'defaultTheme', useValue: Theme.LIGHT}],
     });
     service = TestBed.inject(ThemeService);

@@ -18,13 +18,13 @@ import {Component, Input} from '@angular/core';
 export class EventsCardContentComponent {
   @Input({required: true}) event!: Object;
 
-  // this function is used for maintaining the attributes' original order
+  // This function is used for maintaining the attributes' original order.
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   public originalOrder = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _a: KeyValue<number, string>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _b: KeyValue<number, string>,
   ): number => 0;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public isPrimitiveType(a: any) {

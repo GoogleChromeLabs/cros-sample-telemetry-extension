@@ -40,9 +40,12 @@ export interface getSubjectResponse {
   providedIn: 'root',
 })
 export class EventsService {
-  private extensionId: string = environment.extensionId; // the ID of the extension it connects to
-  private subjects = new Map<string, Subject<EventsInfoUnion>>(); // the map of subjects that
-  private port?: chrome.runtime.Port; // the port for connecting with the extension to get the captured event
+  // The ID of the extension event service connects to.
+  private extensionId: string = environment.extensionId;
+  // Maps the event category to its corresponding subject.
+  private subjects = new Map<EventCategory, Subject<EventsInfoUnion>>();
+  // The port for connecting with the extension to get the captured event.
+  private port?: chrome.runtime.Port;
 
   // A cache to preload the supported events.
   private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> =

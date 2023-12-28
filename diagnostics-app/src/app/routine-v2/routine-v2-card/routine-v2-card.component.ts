@@ -51,7 +51,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   public RoutineV2State = RoutineV2State;
 
   private _routineOutput?: RoutineV2FinishedInfoUnion;
-  // the output, which may be either routine result or user action.
+  // The output, which may be either routine result or user action.
   private _output?: object | string;
   // Whether the routine has passed. Only shown if the routine is finished.
   private _hasPassed?: boolean;
@@ -61,7 +61,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   private _uuid?: string;
   // An integer between 0 ~ 100 detailing the percentage ran of the routine.
   private _percentage = 0;
-  // the state of the underlying routine
+  // The state of the underlying routine.
   private _routineState: RoutineV2State = RoutineV2State.FINISHED;
 
   get error() {
@@ -125,13 +125,13 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     }
   }
 
-  // this function is used for maintaining the attributes' original order
+  // This function is used for maintaining the attributes' original order.
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   public originalOrder = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _a: KeyValue<number, string>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _b: KeyValue<number, string>,
   ): number => 0;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   // Checks whether the UUID received is the same as the UUID of the running
   // routine.

@@ -29,8 +29,8 @@ export class ThemeService {
     return this._themeChangedSource.subscribe(cb);
   }
 
-  // executed by header component
-  // publishes theme change events to entire app
+  // Executed by header component and publishes theme change events to entire
+  // app.
   public toggleTheme() {
     this._theme = this._theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
     this._themeChangedSource.next(this._theme);

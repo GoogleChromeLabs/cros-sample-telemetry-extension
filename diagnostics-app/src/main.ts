@@ -32,9 +32,9 @@ const bootstrapModule = () => {
 };
 
 if (window.WebComponents.ready) {
-  // Web Components are ready
+  // Web Components are ready.
   bootstrapModule();
 } else {
-  // Wait for polyfills to load
+  // Wait for polyfills to load.
   window.addEventListener('WebComponentsReady', bootstrapModule);
 }

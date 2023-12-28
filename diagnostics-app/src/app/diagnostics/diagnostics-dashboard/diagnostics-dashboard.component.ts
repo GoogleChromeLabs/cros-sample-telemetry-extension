@@ -23,11 +23,13 @@ import {
   styleUrls: ['./diagnostics-dashboard.component.css'],
 })
 export class DiagnosticsDashboardComponent implements OnInit {
-  private _availableRoutines?: RoutineType[]; // the available routines response
-  private _error?: string; // the error message received
-
-  // Array of diagnostics routine names that will be displayed
+  // Array of diagnostics routine names that will be displayed if available.
   readonly _visibleRoutines: RoutineType[] = VISIBLE_DIAGNOSTICS_CARDS;
+
+  // Array of available routines returned by healthd API.
+  private _availableRoutines?: RoutineType[];
+  // Error message received, if any.
+  private _error?: string;
 
   get error() {
     return this._error;

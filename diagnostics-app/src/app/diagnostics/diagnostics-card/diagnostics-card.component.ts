@@ -51,16 +51,23 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   public DiagnosticsCardState = DiagnosticsCardState;
 
-  private _error?: String; // the error message received, undefined if no error occurs
-  private _intervalId?: number; // the interval id, undefined if there is no interval id
-  private _params?: DiagnosticsParamsUnion; // the parameter for starting a routine
-  private _routineId?: number; // the routine id of the running routine
-  private _routineInfo?: GetRoutineUpdateResponse; // the information about the routine
+  // The error message received, undefined if no error occurs.
+  private _error?: String;
+  // The interval id for polling routine state, undefined if no routine is
+  // running.
+  private _intervalId?: number;
+  // The parameter for starting a routine.
+  private _params?: DiagnosticsParamsUnion;
+  // The routine id of the running routine, undefined if no routine is running.
+  private _routineId?: number;
+  // Latest information received about the routine.
+  private _routineInfo?: GetRoutineUpdateResponse;
 
-  private _state: DiagnosticsCardState = DiagnosticsCardState.READY; // the state of the card component
-  private _reachedTerminalState = false; // true if the routine reaches a terminal state
+  private _state: DiagnosticsCardState = DiagnosticsCardState.READY;
+  // True if the routine reaches a state defined by `terminalStates`.
+  private _reachedTerminalState = false;
 
-  // the set containing all the terminal states of RoutineStatus
+  // Contains all states considered terminal states of RoutineStatus.
   readonly terminalStates = new Set<RoutineStatus>([
     RoutineStatus.passed,
     RoutineStatus.failed,
@@ -126,13 +133,13 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
     }
   }
 
-  // this function is used for maintaining the attributes' original order
+  // This function is used for maintaining the attributes' original order.
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   public originalOrder = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _a: KeyValue<number, string>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _b: KeyValue<number, string>,
   ): number => 0;
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   canResume() {
     return ResumableRoutines.includes(this.routine);

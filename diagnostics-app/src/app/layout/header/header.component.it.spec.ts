@@ -52,7 +52,7 @@ describe('integration: component: header', () => {
       By.css('#btnToggleTheme'),
     ).nativeElement;
     expect(component.isDarkModeActivated()).toBeTrue();
-    // It renders on DOM as <mat-icon>light_mode</mat-icon>
+    // It renders on DOM as <mat-icon>light_mode</mat-icon>.
     expect(iconEl.textContent).toBe('light_mode');
     button.click();
     fixture.detectChanges();

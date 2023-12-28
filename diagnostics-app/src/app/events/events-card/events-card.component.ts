@@ -26,8 +26,11 @@ export class EventsCardComponent implements OnInit {
 
   public EventsCardState = EventsCardState;
 
+  // Array of all events received from healthd API. These are the outputs that
+  // will be shown for each card.
   public eventList: object[] = [];
-  public error?: String; // the error message received, null if no error occurs
+  // Error message received, undefined if no error occurs.
+  public error?: String;
   public state? = EventsCardState.NOT_LISTENING;
 
   constructor(
@@ -44,8 +47,9 @@ export class EventsCardComponent implements OnInit {
             next: (event) => {
               this.error = undefined;
               this.eventList.push(event);
-
-              // this is for triggering Angular change detection
+              // Angular does not detect changes outside of its detection zone.
+              // Since these updates are asynchronous via event notification
+              // from extension, manually trigger change detection.
               this.changeDetectorRef.detectChanges();
             },
           });

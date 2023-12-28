@@ -405,7 +405,7 @@ export interface TpmInfo {
   dictionaryAttack: TpmDictionaryAttack;
 }
 
-// chrome.os.diagnostics.* type definitions
+// `chrome.os.diagnostics.*` type definitions.
 
 /**
  * Types of diagnostics routine
@@ -630,7 +630,7 @@ export interface RunSmartctlCheckRequest {
   percentage_used_threshold?: number;
 }
 
-// chrome.os.events.* type definitions
+// `chrome.os.events.*` type definitions.
 
 /**
  * Types of event categories
@@ -1005,7 +1005,7 @@ export interface StylusConnectedEventInfo {
   maxPressure?: number;
 }
 
-// Below are definitions for Routine API V2
+// Below are definitions for Routine API V2.
 
 export interface RoutineInitializedInfo {
   uuid?: string;
