@@ -57,7 +57,7 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
       });
   }
 
-  constructor(private telemetryService: TelemetryService) {}
+  public constructor(private telemetryService: TelemetryService) {}
 
   ngOnInit(): void {
     const type = this.type;

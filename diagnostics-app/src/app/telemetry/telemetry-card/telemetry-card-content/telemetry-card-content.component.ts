@@ -18,18 +18,18 @@ import {Component, Input} from '@angular/core';
 export class TelemetryCardContentComponent {
   @Input({required: true}) info!: Object;
 
-  // this function is used for maintaining the attributes' original order
-  public originalOrder = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // This function is used for maintaining the attributes' original order.
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  public originalOrder(
     _a: KeyValue<number, string>,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _b: KeyValue<number, string>,
-  ): number => 0;
+  ): number {
+    return 0;
+  }
+  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public isPrimitiveType(a: any) {
     return typeof a !== 'object';
   }
-
-  constructor() {}
 }

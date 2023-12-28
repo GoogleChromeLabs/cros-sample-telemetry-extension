@@ -63,15 +63,11 @@ export class RoutineV2Service {
     Promise<RoutineSupportStatusInfo>
   >();
 
-  private constructRoutineV2Request: (payload: RoutineV2Request) => Request = (
-    payload,
-  ) => {
+  private constructRoutineV2Request(payload: RoutineV2Request): Request {
     return {type: RequestType.ROUTINE_V2, routineV2: payload};
-  };
+  }
 
-  private sendRequest: (request: Request) => Promise<RoutineV2Response> = (
-    request: Request,
-  ) => {
+  private sendRequest(request: Request): Promise<RoutineV2Response> {
     return new Promise((resolve, reject) => {
       try {
         window.chrome.runtime.sendMessage(
@@ -91,9 +87,9 @@ export class RoutineV2Service {
         return reject(err);
       }
     });
-  };
+  }
 
-  Init(): Promise<void> {
+  public Init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       try {
         this.port = window.chrome.runtime.connect(this.extensionId, {
@@ -131,9 +127,9 @@ export class RoutineV2Service {
     });
   }
 
-  private sendIsRoutineArgumentSupportedRequest: (
+  private sendIsRoutineArgumentSupportedRequest(
     routineArg: RoutineV2Argument,
-  ) => Promise<RoutineSupportStatusInfo> = (routineArg) => {
+  ): Promise<RoutineSupportStatusInfo> {
     const routineV2Request: IsRoutineArgumentSupportedMessage = {
       type: RoutineV2Action.IS_ROUTINE_ARGUMENT_SUPPORTED,
       request: routineArg,
@@ -149,28 +145,31 @@ export class RoutineV2Service {
         })
         .catch((error) => reject(error));
     });
-  };
+  }
 
-  isRoutineArgumentSupported: (
+  public isRoutineArgumentSupported(
     routineArgument: RoutineV2Argument,
-  ) => Promise<RoutineSupportStatusInfo> = (routineArgument) => {
+  ): Promise<RoutineSupportStatusInfo> {
     if (!this.supportabilityCache.has(routineArgument)) {
       const promise =
         this.sendIsRoutineArgumentSupportedRequest(routineArgument);
       this.supportabilityCache.set(routineArgument, promise);
     }
     return this.supportabilityCache.get(routineArgument)!;
-  };
+  }
 
-  getSubject: (
+  public async getSubject(
     routineArgument: RoutineV2Argument,
-  ) => Promise<getSubjectResponse> = async (routineArgument) => {
+  ): Promise<getSubjectResponse> {
     if (!this.isRoutineArgumentSupported(routineArgument)) {
       console.error(
         'A getSubject request is called on unsupported routine argument: ',
         routineArgument,
       );
-      return {success: false, error: 'Unsupported routine argument'};
+      return Promise.reject({
+        success: false,
+        error: 'Unsupported routine argument',
+      });
     }
 
     if (!this.subjects.has(routineArgument)) {
@@ -185,11 +184,11 @@ export class RoutineV2Service {
       }
     }
     return {success: true, subject: this.subjects.get(routineArgument)!};
-  };
+  }
 
-  private sendCreateRoutineRequest: (
+  private sendCreateRoutineRequest(
     routineArg: RoutineV2Argument,
-  ) => Promise<CreateRoutineResponse> = (routineArg) => {
+  ): Promise<CreateRoutineResponse> {
     const routineV2Request: CreateRoutineMessage = {
       type: RoutineV2Action.CREATE_ROUTINE,
       request: routineArg,
@@ -205,34 +204,34 @@ export class RoutineV2Service {
         })
         .catch((error) => reject(error));
     });
-  };
+  }
 
-  CreateRoutine: (
+  public CreateRoutine(
     routineArgument: RoutineV2Argument,
-  ) => Promise<CreateRoutineResponse> = (routineArgument) => {
+  ): Promise<CreateRoutineResponse> {
     const promise = this.sendCreateRoutineRequest(routineArgument);
     promise.then((response: CreateRoutineResponse) => {
       if (response.uuid !== undefined)
         this.uuidToRoutineArgument.set(response.uuid, routineArgument);
     });
     return promise;
-  };
+  }
 
-  StartRoutine: (uuid: string) => void = (uuid) => {
+  public StartRoutine(uuid: string): void {
     const routineV2Request: StartRoutineMessage = {
       type: RoutineV2Action.START_ROUTINE,
       request: {uuid: uuid},
     };
     const payload: Request = this.constructRoutineV2Request(routineV2Request);
     this.sendRequest(payload);
-  };
+  }
 
-  CancelRoutine: (uuid: string) => void = (uuid) => {
+  public CancelRoutine(uuid: string): void {
     const routineV2Request: CancelRoutineMessage = {
       type: RoutineV2Action.CANCEL_ROUTINE,
       request: {uuid: uuid},
     };
     const payload: Request = this.constructRoutineV2Request(routineV2Request);
     this.sendRequest(payload);
-  };
+  }
 }

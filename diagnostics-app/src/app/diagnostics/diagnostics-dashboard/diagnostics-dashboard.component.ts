@@ -46,7 +46,7 @@ export class DiagnosticsDashboardComponent implements OnInit {
     return routines;
   }
 
-  async getAvailableRoutines() {
+  public async getAvailableRoutines() {
     try {
       const response = await this.diagnosticsService.getAvailableRoutines();
       this._availableRoutines = (
@@ -58,7 +58,7 @@ export class DiagnosticsDashboardComponent implements OnInit {
     }
   }
 
-  constructor(private diagnosticsService: DiagnosticsService) {}
+  public constructor(private diagnosticsService: DiagnosticsService) {}
 
   ngOnInit(): void {
     this.getAvailableRoutines();

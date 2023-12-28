@@ -25,62 +25,61 @@ import {
 
 let idCount = 0;
 
-const generateRoutineId = () => {
+function generateRoutineId(): number {
   return idCount++;
-};
+}
 
-export const fakeAvailableRoutines =
-  async (): Promise<GetAvailableRoutinesResponse> => {
-    return {
-      routines: [
-        RoutineType.ac_power,
-        RoutineType.audio_driver,
-        RoutineType.battery_capacity,
-        RoutineType.battery_charge,
-        RoutineType.battery_discharge,
-        RoutineType.battery_health,
-        RoutineType.bluetooth_discovery,
-        RoutineType.bluetooth_pairing,
-        RoutineType.bluetooth_power,
-        RoutineType.bluetooth_scanning,
-        RoutineType.cpu_cache,
-        RoutineType.cpu_floating_point_accuracy,
-        RoutineType.cpu_prime_search,
-        RoutineType.cpu_stress,
-        RoutineType.disk_read,
-        RoutineType.dns_resolution,
-        RoutineType.dns_resolver_present,
-        RoutineType.emmc_lifetime,
-        RoutineType.fingerprint_alive,
-        RoutineType.gateway_can_be_pinged,
-        RoutineType.lan_connectivity,
-        RoutineType.memory,
-        RoutineType.nvme_self_test,
-        RoutineType.nvme_wear_level,
-        RoutineType.power_button,
-        RoutineType.sensitive_sensor,
-        RoutineType.signal_strength,
-        RoutineType.smartctl_check,
-        RoutineType.smartctl_check_with_percentage_used,
-        RoutineType.ufs_lifetime,
-      ],
-    };
+export async function fakeAvailableRoutines(): Promise<GetAvailableRoutinesResponse> {
+  return {
+    routines: [
+      RoutineType.ac_power,
+      RoutineType.audio_driver,
+      RoutineType.battery_capacity,
+      RoutineType.battery_charge,
+      RoutineType.battery_discharge,
+      RoutineType.battery_health,
+      RoutineType.bluetooth_discovery,
+      RoutineType.bluetooth_pairing,
+      RoutineType.bluetooth_power,
+      RoutineType.bluetooth_scanning,
+      RoutineType.cpu_cache,
+      RoutineType.cpu_floating_point_accuracy,
+      RoutineType.cpu_prime_search,
+      RoutineType.cpu_stress,
+      RoutineType.disk_read,
+      RoutineType.dns_resolution,
+      RoutineType.dns_resolver_present,
+      RoutineType.emmc_lifetime,
+      RoutineType.fingerprint_alive,
+      RoutineType.gateway_can_be_pinged,
+      RoutineType.lan_connectivity,
+      RoutineType.memory,
+      RoutineType.nvme_self_test,
+      RoutineType.nvme_wear_level,
+      RoutineType.power_button,
+      RoutineType.sensitive_sensor,
+      RoutineType.signal_strength,
+      RoutineType.smartctl_check,
+      RoutineType.smartctl_check_with_percentage_used,
+      RoutineType.ufs_lifetime,
+    ],
   };
+}
 
-export const runGenericRoutine = async (
+export async function runGenericRoutine(
   params?: DiagnosticsParamsUnion,
-): Promise<RunRoutineResponse> => {
+): Promise<RunRoutineResponse> {
   const res: RunRoutineResponse = {
     id: generateRoutineId(),
     status: RoutineStatus.ready,
   };
   return res;
-};
+}
 
 export abstract class RoutineBase {
   protected _id: number;
 
-  constructor(id: number) {
+  public constructor(id: number) {
     this._id = id;
   }
 
@@ -88,14 +87,14 @@ export abstract class RoutineBase {
     return this._id;
   }
 
-  abstract _sendCommand(
+  protected abstract _sendCommand(
     command: RoutineCommandType,
   ): Promise<GetRoutineUpdateResponse>;
 
   /**
    * Resumes this routine, e.g. when user prompts to run a waiting routine.
    */
-  resume(): Promise<GetRoutineUpdateResponse> {
+  public resume(): Promise<GetRoutineUpdateResponse> {
     return this._sendCommand(RoutineCommandType.resume);
   }
 
@@ -103,7 +102,7 @@ export abstract class RoutineBase {
    * Stops this routine, if running, or remove otherwise.
    * Note: The routine cannot be restarted again.
    */
-  stop(): Promise<GetRoutineUpdateResponse> {
+  public stop(): Promise<GetRoutineUpdateResponse> {
     this._sendCommand(RoutineCommandType.cancel);
     return this._sendCommand(RoutineCommandType.remove);
   }
@@ -111,7 +110,7 @@ export abstract class RoutineBase {
   /**
    * Returns current status of this routine.
    */
-  getStatus(): Promise<GetRoutineUpdateResponse> {
+  public getStatus(): Promise<GetRoutineUpdateResponse> {
     return this._sendCommand(RoutineCommandType.status);
   }
 }
@@ -123,7 +122,9 @@ export class GenericRoutine extends RoutineBase {
   // How much percentage should increase between each routine status poll.
   private _percentageIncrement: number = 20;
 
-  _sendCommand(command: RoutineCommandType): Promise<GetRoutineUpdateResponse> {
+  protected _sendCommand(
+    command: RoutineCommandType,
+  ): Promise<GetRoutineUpdateResponse> {
     switch (command) {
       case RoutineCommandType.resume:
         return Promise.reject('No resume expected on generic routine');

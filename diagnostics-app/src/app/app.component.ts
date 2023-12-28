@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     return this._cssClass;
   }
 
-  constructor(private _themeService: ThemeService) {}
+  public constructor(private _themeService: ThemeService) {}
 
   ngOnInit() {
     this._cssClass = this._themeService.theme;

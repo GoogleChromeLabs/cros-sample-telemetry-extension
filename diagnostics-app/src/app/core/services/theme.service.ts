@@ -17,7 +17,7 @@ export class ThemeService {
   private _theme!: Theme;
   private _themeChangedSource = new Subject<Theme>();
 
-  constructor(@Inject('defaultTheme') @Optional() defaultTheme: Theme) {
+  public constructor(@Inject('defaultTheme') @Optional() defaultTheme: Theme) {
     this._theme = defaultTheme || Theme.DARK;
   }
 

@@ -33,7 +33,7 @@ export class RoutineV2DashboardComponent implements OnInit {
     return this._supportedRoutines;
   }
 
-  async isRoutineArgumentSupported(argument: RoutineV2Argument) {
+  public async isRoutineArgumentSupported(argument: RoutineV2Argument) {
     try {
       const supportStatusInfo =
         await this.RoutineV2Service.isRoutineArgumentSupported(argument);
@@ -45,7 +45,7 @@ export class RoutineV2DashboardComponent implements OnInit {
     }
   }
 
-  constructor(private RoutineV2Service: RoutineV2Service) {}
+  public constructor(private RoutineV2Service: RoutineV2Service) {}
 
   ngOnInit(): void {
     for (const argument of VISIBLE_ROUTINE_V2_CARDS) {

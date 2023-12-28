@@ -103,7 +103,7 @@ export class EventsServiceImpl extends EventsService {
     },
   ];
 
-  private notifyPort = (type: EventCategory, event) => {
+  private notifyPort(type: EventCategory, event): void {
     if (!this.port) {
       return;
     }
@@ -112,13 +112,13 @@ export class EventsServiceImpl extends EventsService {
       info: event,
     });
     return;
-  };
+  }
 
-  registerPort = (port: chrome.runtime.Port): void => {
+  public registerPort(port: chrome.runtime.Port): void {
     this.port = port;
-  };
+  }
 
-  registerEventHandlers = async (): Promise<Response> => {
+  public async registerEventHandlers(): Promise<Response> {
     try {
       for (const item of this.eventCategoryAndMethods) {
         (item.func as any).addListener(this.notifyPort.bind(null, item.type));
@@ -127,18 +127,21 @@ export class EventsServiceImpl extends EventsService {
     } catch (err) {
       return generateErrorResponse(String(err));
     }
-  };
-  isEventSupported = async (
+  }
+
+  public async isEventSupported(
     eventType: EventCategory,
-  ): Promise<EventSupportStatusInfo> => {
+  ): Promise<EventSupportStatusInfo> {
     return (chrome as any).os.events.isEventSupported(eventType);
-  };
-  startCapturingEvents = async (eventType: EventCategory): Promise<void> => {
+  }
+
+  public async startCapturingEvents(eventType: EventCategory): Promise<void> {
     return (chrome as any).os.events.startCapturingEvents(eventType);
-  };
-  stopCapturingEvents = async (eventType: EventCategory): Promise<void> => {
+  }
+
+  public async stopCapturingEvents(eventType: EventCategory): Promise<void> {
     return (chrome as any).os.events.stopCapturingEvents(eventType);
-  };
+  }
 }
 
 /**
@@ -146,23 +149,27 @@ export class EventsServiceImpl extends EventsService {
  * @extends EventsService
  */
 export class FakeEventsService implements EventsService {
-  registerEventHandlers = async (): Promise<Response> => {
+  public async registerEventHandlers(): Promise<Response> {
     return fakeEvents.registerEventHandlers();
-  };
-  registerPort = (port: chrome.runtime.Port) => {
+  }
+
+  public registerPort(port: chrome.runtime.Port) {
     return fakeEvents.registerPort(port);
-  };
-  isEventSupported = async (
+  }
+
+  public async isEventSupported(
     eventType: EventCategory,
-  ): Promise<EventSupportStatusInfo> => {
+  ): Promise<EventSupportStatusInfo> {
     return fakeEvents.isEventSupported(eventType);
-  };
-  startCapturingEvents = async (eventType: EventCategory): Promise<void> => {
+  }
+
+  public async startCapturingEvents(eventType: EventCategory): Promise<void> {
     return fakeEvents.startCapturingEvents(eventType);
-  };
-  stopCapturingEvents = async (eventType: EventCategory): Promise<void> => {
+  }
+
+  public async stopCapturingEvents(eventType: EventCategory): Promise<void> {
     return fakeEvents.stopCapturingEvents(eventType);
-  };
+  }
 }
 
 export class EventsServiceProvider {

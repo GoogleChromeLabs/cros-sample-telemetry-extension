@@ -51,15 +51,11 @@ export class EventsService {
   private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> =
     new Map<EventCategory, Promise<EventsResponse>>();
 
-  private constructEventsRequest: (payload: EventsRequest) => Request = (
-    payload,
-  ) => {
+  private constructEventsRequest(payload: EventsRequest): Request {
     return {type: RequestType.EVENTS, events: payload};
-  };
+  }
 
-  private sendRequest: (request: Request) => Promise<EventsResponse> = (
-    request: Request,
-  ) => {
+  private sendRequest(request: Request): Promise<EventsResponse> {
     return new Promise((resolve, reject) => {
       try {
         window.chrome.runtime.sendMessage(
@@ -79,9 +75,9 @@ export class EventsService {
         return reject(err);
       }
     });
-  };
+  }
 
-  Init(): Promise<void> {
+  public Init(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       try {
         this.port = window.chrome.runtime.connect(this.extensionId, {
@@ -107,15 +103,15 @@ export class EventsService {
     });
   }
 
-  getSubject: (category: EventCategory) => Promise<getSubjectResponse> = async (
-    category,
-  ) => {
+  public async getSubject(
+    category: EventCategory,
+  ): Promise<getSubjectResponse> {
     if (!this.isEventSupported(category)) {
       console.error(
         'A getSubject request is called on unsupported event: ',
         category,
       );
-      return {success: false, error: 'Unsupported event'};
+      return Promise.reject({success: false, error: 'Unsupported event'});
     }
 
     if (!this.subjects.has(category)) {
@@ -130,11 +126,9 @@ export class EventsService {
       }
     }
     return {success: true, subject: this.subjects.get(category)!};
-  };
+  }
 
-  isEventSupported: (eventType: EventCategory) => Promise<EventsResponse> = (
-    eventType,
-  ) => {
+  public isEventSupported(eventType: EventCategory): Promise<EventsResponse> {
     const payload: EventsRequest = {
       action: EventsAction.IS_EVENT_SUPPORTED,
       eventType,
@@ -145,26 +139,27 @@ export class EventsService {
       this.supportabilityCache.set(eventType, promise);
     }
     return this.supportabilityCache.get(eventType)!;
-  };
+  }
 
-  startCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> =
-    (eventType) => {
-      const payload: EventsRequest = {
-        action: EventsAction.START_CAPTURING_EVENT,
-        eventType,
-      };
-      const request = this.constructEventsRequest(payload);
-      return this.sendRequest(request);
+  public startCapturingEvents(
+    eventType: EventCategory,
+  ): Promise<EventsResponse> {
+    const payload: EventsRequest = {
+      action: EventsAction.START_CAPTURING_EVENT,
+      eventType,
     };
+    const request = this.constructEventsRequest(payload);
+    return this.sendRequest(request);
+  }
 
-  stopCapturingEvents: (eventType: EventCategory) => Promise<EventsResponse> = (
-    eventType,
-  ) => {
+  public stopCapturingEvents(
+    eventType: EventCategory,
+  ): Promise<EventsResponse> {
     const payload: EventsRequest = {
       action: EventsAction.STOP_CAPTURING_EVENT,
       eventType,
     };
     const request = this.constructEventsRequest(payload);
     return this.sendRequest(request);
-  };
+  }
 }

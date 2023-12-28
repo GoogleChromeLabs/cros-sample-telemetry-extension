@@ -114,8 +114,8 @@ enum RoutineState {
 }
 
 abstract class FakeRoutine {
-  abstract StartRoutine();
-  abstract CancelRoutine();
+  abstract startRoutine();
+  abstract cancelRoutine();
 }
 
 class FakeGenericRoutine {
@@ -127,7 +127,7 @@ class FakeGenericRoutine {
   routineFinishedInfo: RoutineV2FinishedInfoUnion;
   pendingTimeout?: ReturnType<typeof setTimeout>;
 
-  constructor(
+  public constructor(
     uuid: string,
     routineArgument: RoutineV2Argument,
     routineFinishedEventCategory: RoutineV2EventCategory,
@@ -145,7 +145,7 @@ class FakeGenericRoutine {
     notifyPort(RoutineV2EventCategory.initialized, routineInitializedInfo);
   }
 
-  StartRoutine() {
+  public startRoutine() {
     // Send waiting for resource queue event.
     const routineWaitingInfo: RoutineWaitingInfo = {
       uuid: this.uuid,
@@ -155,12 +155,12 @@ class FakeGenericRoutine {
     };
     notifyPort(RoutineV2EventCategory.waiting, routineWaitingInfo);
     this.pendingTimeout = setTimeout(
-      () => this.sendRunning(),
+      () => this._sendRunning(),
       fakeDataInterval,
     );
   }
 
-  sendRunning() {
+  private _sendRunning() {
     this.percentage += percentageIncrement;
     if (this.percentage >= 100) {
       this.sendFinished();
@@ -173,33 +173,33 @@ class FakeGenericRoutine {
     };
     notifyPort(RoutineV2EventCategory.running, routineRunningInfo);
     this.pendingTimeout = setTimeout(
-      () => this.sendRunning(),
+      () => this._sendRunning(),
       fakeDataInterval,
     );
   }
 
-  sendFinished() {
+  private sendFinished() {
     notifyPort(this.routineFinishedEventCategory, this.routineFinishedInfo);
   }
 
-  CancelRoutine() {
+  public cancelRoutine() {
     if (this.pendingTimeout !== undefined) clearTimeout(this.pendingTimeout);
   }
 }
 
-export const registerEventHandlers = (): void => {
+export function registerEventHandlers(): void {
   return;
-};
+}
 
-export const registerPort = (port: chrome.runtime.Port): void => {
+export function registerPort(port: chrome.runtime.Port): void {
   routineV2Port = port;
   return;
-};
+}
 
-const notifyPort = (
+function notifyPort(
   eventCategory: RoutineV2EventCategory,
   event: RoutineV2EventUnion,
-): void => {
+): void {
   if (!routineV2Port) {
     return;
   }
@@ -208,15 +208,15 @@ const notifyPort = (
     event: event,
   });
   return;
-};
+}
 
-const getFakeData = (
+function getFakeData(
   argument: RoutineV2Argument,
   uuid: string,
 ): {
   category: RoutineV2EventCategory;
   info: RoutineV2FinishedInfoUnion;
-} => {
+} {
   const argumentStr: string = JSON.stringify(argument);
   if (fakeRoutineData.has(argumentStr)) {
     const fakeCategory = fakeRoutineData.get(argumentStr)!.category;
@@ -229,21 +229,21 @@ const getFakeData = (
     // eslint-disable-next-line camelcase
     info: {uuid: uuid, has_passed: true},
   };
-};
+}
 
 // Default to support all routines in fake data.
-export const isRoutineArgumentSupported = async (
+export async function isRoutineArgumentSupported(
   routineArgument: RoutineV2Argument,
-): Promise<RoutineSupportStatusInfo> => {
+): Promise<RoutineSupportStatusInfo> {
   const res: RoutineSupportStatusInfo = {
     status: RoutineSupportStatus.supported,
   };
   return res;
-};
+}
 
-export const createRoutine = async (
+export async function createRoutine(
   routineArgument: RoutineV2Argument,
-): Promise<CreateRoutineResponse> => {
+): Promise<CreateRoutineResponse> {
   const uuid = uuidv4();
   const fakeRoutine = new FakeGenericRoutine(
     uuid,
@@ -253,18 +253,18 @@ export const createRoutine = async (
   );
   uuidToFakeRoutine.set(uuid, fakeRoutine);
   return {uuid: uuid};
-};
+}
 
-export const startRoutine = async (
+export async function startRoutine(
   startRoutineRequest: StartRoutineRequest,
-): Promise<void> => {
-  uuidToFakeRoutine.get(startRoutineRequest.uuid)?.StartRoutine();
-};
+): Promise<void> {
+  uuidToFakeRoutine.get(startRoutineRequest.uuid)?.startRoutine();
+}
 
-export const cancelRoutine = async (
+export async function cancelRoutine(
   cancelRoutineRequest: CancelRoutineRequest,
-): Promise<void> => {
-  uuidToFakeRoutine.get(cancelRoutineRequest.uuid)?.CancelRoutine();
+): Promise<void> {
+  uuidToFakeRoutine.get(cancelRoutineRequest.uuid)?.cancelRoutine();
   // Delete the fake routine, should stop all related functions from running.
   uuidToFakeRoutine.delete(cancelRoutineRequest.uuid);
-};
+}

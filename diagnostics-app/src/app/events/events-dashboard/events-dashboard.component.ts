@@ -36,7 +36,7 @@ export class EventsDashboardComponent implements OnInit {
     return this._supportedCategories;
   }
 
-  async isEventSupported(category: EventCategory) {
+  public async isEventSupported(category: EventCategory) {
     try {
       let statusInfo = await this.eventsService.isEventSupported(category);
       statusInfo = statusInfo as EventSupportStatusInfo;
@@ -49,7 +49,7 @@ export class EventsDashboardComponent implements OnInit {
     }
   }
 
-  constructor(private eventsService: EventsService) {}
+  public constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     for (const category of VISIBLE_EVENT_CARDS) {

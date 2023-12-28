@@ -27,5 +27,5 @@ export class ContentLayoutComponent {
       shareReplay(),
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  public constructor(private breakpointObserver: BreakpointObserver) {}
 }
