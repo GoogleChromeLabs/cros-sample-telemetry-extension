@@ -23,29 +23,21 @@ import {
   styleUrls: ['./events-dashboard.component.css'],
 })
 export class EventsDashboardComponent implements OnInit {
-  // Error message, undefined if there is no error.
-  private _error?: string;
-
+  // The error message received, undefined if no error occurs.
+  public error?: string;
   // Array of events categories that is supported, checked via healthd API.
-  private _supportedCategories: EventCategory[] = [];
-
-  get error() {
-    return this._error;
-  }
-  get supportedCategories() {
-    return this._supportedCategories;
-  }
+  public supportedCategories: EventCategory[] = [];
 
   public async isEventSupported(category: EventCategory) {
     try {
       let statusInfo = await this.eventsService.isEventSupported(category);
       statusInfo = statusInfo as EventSupportStatusInfo;
       if (statusInfo.status === EventSupportStatus.supported) {
-        this._supportedCategories.push(category);
-        this._supportedCategories.sort();
+        this.supportedCategories.push(category);
+        this.supportedCategories.sort();
       }
     } catch (err) {
-      this._error = String(err);
+      this.error = String(err);
     }
   }
 

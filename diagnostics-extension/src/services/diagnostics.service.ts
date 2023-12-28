@@ -232,13 +232,13 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
  * @extends DiagnosticsService
  */
 export class FakeDiagnosticsService implements DiagnosticsService {
-  private _activeRoutines: {[key: number]: fakeDiagnostics.RoutineBase} = {};
+  private activeRoutines: {[key: number]: fakeDiagnostics.RoutineBase} = {};
 
-  private _fetchRoutineById(id: number) {
-    if (!(id in this._activeRoutines)) {
+  private fetchRoutineById(id: number) {
+    if (!(id in this.activeRoutines)) {
       throw ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId;
     }
-    return this._activeRoutines[id];
+    return this.activeRoutines[id];
   }
 
   public async getAvailableRoutines(): Promise<GetAvailableRoutinesResponse> {
@@ -273,7 +273,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
           );
         const res: RunRoutineResponse =
           await fakeDiagnostics.runGenericRoutine(params);
-        this._activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
+        this.activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
           res.id,
         );
         return res;
@@ -295,7 +295,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
       case RoutineType.ufs_lifetime: {
         const res: RunRoutineResponse =
           await fakeDiagnostics.runGenericRoutine();
-        this._activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
+        this.activeRoutines[res.id] = new fakeDiagnostics.GenericRoutine(
           res.id,
         );
         return res;
@@ -308,18 +308,18 @@ export class FakeDiagnosticsService implements DiagnosticsService {
   }
 
   public stopRoutine(id: number): Promise<GetRoutineUpdateResponse> {
-    const routine = this._fetchRoutineById(id);
-    delete this._activeRoutines[id];
+    const routine = this.fetchRoutineById(id);
+    delete this.activeRoutines[id];
     return routine.stop();
   }
 
   public resumeRoutine(id: number): Promise<GetRoutineUpdateResponse> {
-    const routine = this._fetchRoutineById(id);
+    const routine = this.fetchRoutineById(id);
     return routine.resume();
   }
 
   public getRoutineStatus(id: number): Promise<GetRoutineUpdateResponse> {
-    const routine = this._fetchRoutineById(id);
+    const routine = this.fetchRoutineById(id);
     return routine.getStatus();
   }
 }

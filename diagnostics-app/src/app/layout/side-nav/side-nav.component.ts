@@ -23,16 +23,12 @@ import {
   styleUrls: ['./side-nav.component.css'],
 })
 export class SideNavComponent implements OnInit {
-  private _navLists: NavigationItem[] = [
+  public navLists: NavigationItem[] = [
     TELEMETRY_NAV_DATA,
     DIAGNOSTICS_NAV_DATA,
     EVENTS_NAV_DATA,
     ROUTINE_V2_NAV_DATA,
   ];
-
-  get navLists() {
-    return this._navLists;
-  }
 
   public constructor() {}
 

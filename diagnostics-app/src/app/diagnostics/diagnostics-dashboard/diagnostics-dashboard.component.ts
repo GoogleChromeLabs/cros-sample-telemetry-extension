@@ -24,23 +24,20 @@ import {
 })
 export class DiagnosticsDashboardComponent implements OnInit {
   // Array of diagnostics routine names that will be displayed if available.
-  readonly _visibleRoutines: RoutineType[] = VISIBLE_DIAGNOSTICS_CARDS;
+  readonly allVisibleRoutines: RoutineType[] = VISIBLE_DIAGNOSTICS_CARDS;
 
+  // The error message, undefined if no error occurs.
+  public error?: string;
   // Array of available routines returned by healthd API.
-  private _availableRoutines?: RoutineType[];
-  // Error message received, if any.
-  private _error?: string;
+  private availableRoutines?: RoutineType[];
 
-  get error() {
-    return this._error;
-  }
   get visibleRoutines() {
     let routines;
-    if (!this._availableRoutines) {
+    if (!this.availableRoutines) {
       this.getAvailableRoutines();
     } else {
-      routines = this._visibleRoutines.filter((routine) =>
-        this._availableRoutines!.includes(routine),
+      routines = this.allVisibleRoutines.filter((routine) =>
+        this.availableRoutines!.includes(routine),
       );
     }
     return routines;
@@ -49,12 +46,12 @@ export class DiagnosticsDashboardComponent implements OnInit {
   public async getAvailableRoutines() {
     try {
       const response = await this.diagnosticsService.getAvailableRoutines();
-      this._availableRoutines = (
+      this.availableRoutines = (
         response as GetAvailableRoutinesResponse
       ).routines;
-      this._error = undefined;
+      this.error = undefined;
     } catch (err) {
-      this._error = String(err);
+      this.error = String(err);
     }
   }
 

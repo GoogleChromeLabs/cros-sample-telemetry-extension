@@ -19,26 +19,22 @@ import {ThemeService} from './core/services/theme.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  @HostBinding('class') private _cssClass!: Theme;
-  private _themeSubscription!: Subscription;
+  @HostBinding('class') public cssClass!: Theme;
+  private themeSubscription!: Subscription;
 
-  get cssClass() {
-    return this._cssClass;
-  }
-
-  public constructor(private _themeService: ThemeService) {}
+  public constructor(private themeService: ThemeService) {}
 
   ngOnInit() {
-    this._cssClass = this._themeService.theme;
+    this.cssClass = this.themeService.theme;
     // Listen to theme updates from themeService.
-    this._themeSubscription = this._themeService.subscribeOnThemeChange(
+    this.themeSubscription = this.themeService.subscribeOnThemeChange(
       (theme: Theme) => {
-        this._cssClass = theme;
+        this.cssClass = theme;
       },
     );
   }
 
   ngOnDestroy() {
-    this._themeSubscription.unsubscribe();
+    this.themeSubscription.unsubscribe();
   }
 }

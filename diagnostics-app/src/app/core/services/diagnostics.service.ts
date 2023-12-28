@@ -22,7 +22,7 @@ import {environment} from 'environments/environment';
 
 export interface DiagnosticsInterface {
   startRoutine(
-    name: RoutineType,
+    routineName: RoutineType,
     params?: DiagnosticsParamsUnion,
   ): Promise<DiagnosticsResponse>;
   stopRoutine(id: number): Promise<DiagnosticsResponse>;
@@ -37,11 +37,11 @@ export interface DiagnosticsInterface {
 export class DiagnosticsService implements DiagnosticsInterface {
   private extensionId!: string;
 
-  private _constructDiagnosticsRequest(payload: DiagnosticsRequest): Request {
+  private constructDiagnosticsRequest(payload: DiagnosticsRequest): Request {
     return {type: RequestType.DIAGNOSTICS, diagnostics: payload};
   }
 
-  private _sendRequest(request: Request): Promise<DiagnosticsResponse> {
+  private sendRequest(request: Request): Promise<DiagnosticsResponse> {
     return new Promise((resolve, reject) => {
       try {
         window.chrome.runtime.sendMessage(
@@ -63,15 +63,23 @@ export class DiagnosticsService implements DiagnosticsInterface {
     });
   }
 
-  private _getAvailableRoutines(): Promise<DiagnosticsResponse> {
+  private manageDiagnosticsRoutine(
+    action: DiagnosticsAction,
+    routineId: number,
+  ): Promise<DiagnosticsResponse> {
     const payload: DiagnosticsRequest = {
-      action: DiagnosticsAction.GET_AVAILABLE_ROUTINE,
+      action,
+      routineId,
     };
-    const request = this._constructDiagnosticsRequest(payload);
-    return this._sendRequest(request);
+    const request = this.constructDiagnosticsRequest(payload);
+    return this.sendRequest(request);
   }
 
-  private _runDiagnosticsRoutine(
+  public constructor() {
+    this.extensionId = environment.extensionId;
+  }
+
+  public startRoutine(
     routineName: RoutineType,
     params?: DiagnosticsParamsUnion,
   ): Promise<DiagnosticsResponse> {
@@ -80,46 +88,27 @@ export class DiagnosticsService implements DiagnosticsInterface {
       routineName,
       params,
     };
-    const request = this._constructDiagnosticsRequest(payload);
-    return this._sendRequest(request);
-  }
-
-  private _manageDiagnosticsRoutine(
-    action: DiagnosticsAction,
-    routineId: number,
-  ): Promise<DiagnosticsResponse> {
-    const payload: DiagnosticsRequest = {
-      action,
-      routineId,
-    };
-    const request = this._constructDiagnosticsRequest(payload);
-    return this._sendRequest(request);
-  }
-
-  public constructor() {
-    this.extensionId = environment.extensionId;
-  }
-
-  public startRoutine(
-    name: RoutineType,
-    params?: DiagnosticsParamsUnion,
-  ): Promise<DiagnosticsResponse> {
-    return this._runDiagnosticsRoutine(name, params);
+    const request = this.constructDiagnosticsRequest(payload);
+    return this.sendRequest(request);
   }
 
   public stopRoutine(id: number): Promise<DiagnosticsResponse> {
-    return this._manageDiagnosticsRoutine(DiagnosticsAction.STOP, id);
+    return this.manageDiagnosticsRoutine(DiagnosticsAction.STOP, id);
   }
 
   public resumeRoutine(id: number): Promise<DiagnosticsResponse> {
-    return this._manageDiagnosticsRoutine(DiagnosticsAction.RESUME, id);
+    return this.manageDiagnosticsRoutine(DiagnosticsAction.RESUME, id);
   }
 
   public getRoutineStatus(id: number): Promise<DiagnosticsResponse> {
-    return this._manageDiagnosticsRoutine(DiagnosticsAction.STATUS, id);
+    return this.manageDiagnosticsRoutine(DiagnosticsAction.STATUS, id);
   }
 
   public getAvailableRoutines(): Promise<DiagnosticsResponse> {
-    return this._getAvailableRoutines();
+    const payload: DiagnosticsRequest = {
+      action: DiagnosticsAction.GET_AVAILABLE_ROUTINE,
+    };
+    const request = this.constructDiagnosticsRequest(payload);
+    return this.sendRequest(request);
   }
 }

@@ -155,12 +155,12 @@ class FakeGenericRoutine {
     };
     notifyPort(RoutineV2EventCategory.waiting, routineWaitingInfo);
     this.pendingTimeout = setTimeout(
-      () => this._sendRunning(),
+      () => this.sendRunning(),
       fakeDataInterval,
     );
   }
 
-  private _sendRunning() {
+  private sendRunning() {
     this.percentage += percentageIncrement;
     if (this.percentage >= 100) {
       this.sendFinished();
@@ -173,7 +173,7 @@ class FakeGenericRoutine {
     };
     notifyPort(RoutineV2EventCategory.running, routineRunningInfo);
     this.pendingTimeout = setTimeout(
-      () => this._sendRunning(),
+      () => this.sendRunning(),
       fakeDataInterval,
     );
   }

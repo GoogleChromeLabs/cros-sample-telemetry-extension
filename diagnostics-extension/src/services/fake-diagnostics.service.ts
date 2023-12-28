@@ -77,17 +77,13 @@ export async function runGenericRoutine(
 }
 
 export abstract class RoutineBase {
-  protected _id: number;
+  protected id: number;
 
   public constructor(id: number) {
-    this._id = id;
+    this.id = id;
   }
 
-  get id(): number {
-    return this._id;
-  }
-
-  protected abstract _sendCommand(
+  protected abstract sendCommand(
     command: RoutineCommandType,
   ): Promise<GetRoutineUpdateResponse>;
 
@@ -95,7 +91,7 @@ export abstract class RoutineBase {
    * Resumes this routine, e.g. when user prompts to run a waiting routine.
    */
   public resume(): Promise<GetRoutineUpdateResponse> {
-    return this._sendCommand(RoutineCommandType.resume);
+    return this.sendCommand(RoutineCommandType.resume);
   }
 
   /**
@@ -103,26 +99,26 @@ export abstract class RoutineBase {
    * Note: The routine cannot be restarted again.
    */
   public stop(): Promise<GetRoutineUpdateResponse> {
-    this._sendCommand(RoutineCommandType.cancel);
-    return this._sendCommand(RoutineCommandType.remove);
+    this.sendCommand(RoutineCommandType.cancel);
+    return this.sendCommand(RoutineCommandType.remove);
   }
 
   /**
    * Returns current status of this routine.
    */
   public getStatus(): Promise<GetRoutineUpdateResponse> {
-    return this._sendCommand(RoutineCommandType.status);
+    return this.sendCommand(RoutineCommandType.status);
   }
 }
 
 // In the generic routine, we increment the percentage after each getStatusRequest.
 export class GenericRoutine extends RoutineBase {
   // A counter to record down the number of time routine status is polled.
-  private _getStatusCounter: number = 0;
+  private getStatusCounter: number = 0;
   // How much percentage should increase between each routine status poll.
-  private _percentageIncrement: number = 20;
+  private percentageIncrement: number = 20;
 
-  protected _sendCommand(
+  protected sendCommand(
     command: RoutineCommandType,
   ): Promise<GetRoutineUpdateResponse> {
     switch (command) {
@@ -145,10 +141,10 @@ export class GenericRoutine extends RoutineBase {
           user_message: UserMessageType.unknown,
         });
       case RoutineCommandType.status: {
-        const percentage = this._getStatusCounter * this._percentageIncrement;
+        const percentage = this.getStatusCounter * this.percentageIncrement;
         let status: RoutineStatus;
         if (percentage < 100) {
-          this._getStatusCounter += 1;
+          this.getStatusCounter += 1;
           status = RoutineStatus.running;
         } else {
           status = RoutineStatus.passed;

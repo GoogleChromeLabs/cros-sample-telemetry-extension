@@ -14,25 +14,21 @@ import {Theme} from '../enums/global.enums';
   providedIn: 'root',
 })
 export class ThemeService {
-  private _theme!: Theme;
-  private _themeChangedSource = new Subject<Theme>();
+  public theme!: Theme;
+  private themeChangedSource = new Subject<Theme>();
 
   public constructor(@Inject('defaultTheme') @Optional() defaultTheme: Theme) {
-    this._theme = defaultTheme || Theme.DARK;
-  }
-
-  public get theme(): Theme {
-    return this._theme;
+    this.theme = defaultTheme || Theme.DARK;
   }
 
   public subscribeOnThemeChange(cb: (theme: Theme) => void): Subscription {
-    return this._themeChangedSource.subscribe(cb);
+    return this.themeChangedSource.subscribe(cb);
   }
 
   // Executed by header component and publishes theme change events to entire
   // app.
   public toggleTheme() {
-    this._theme = this._theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
-    this._themeChangedSource.next(this._theme);
+    this.theme = this.theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+    this.themeChangedSource.next(this.theme);
   }
 }

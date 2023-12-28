@@ -19,9 +19,5 @@ import {TelemetryInfoType} from 'common/message';
 })
 export class TelemetryDashboardComponent {
   // Array of telemetry info types that will be displayed.
-  private _visibleTypes: TelemetryInfoType[] = VISIBLE_TELEMETRY_CARDS;
-
-  get visibleTypes() {
-    return this._visibleTypes;
-  }
+  public visibleTypes: TelemetryInfoType[] = VISIBLE_TELEMETRY_CARDS;
 }

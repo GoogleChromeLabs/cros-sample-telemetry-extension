@@ -22,8 +22,8 @@ export class RoutineV2CardContentComponent {
   // This function is used for maintaining the attributes' original order.
   /* eslint-disable @typescript-eslint/no-unused-vars */
   public originalOrder(
-    _a: KeyValue<number, string>,
-    _b: KeyValue<number, string>,
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>,
   ): number {
     return 0;
   }

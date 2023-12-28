@@ -28,32 +28,26 @@ import {
 export class TelemetryCardComponent implements OnInit, OnDestroy {
   @Input({required: true}) type!: TelemetryInfoType;
 
-  // The error message received, null if no error occurs.
-  private _error?: ResponseErrorInfoMessage;
-  // The interval id used for polling changes from healthd API.
-  private _intervalId!: number;
+  // The error message, undefined if no error occurs.
+  public error?: ResponseErrorInfoMessage;
   // The telemetry info received by calling telemetry service.
-  private _info?: TelemetryInfoUnion;
+  public info?: TelemetryInfoUnion;
 
-  get error() {
-    return this._error;
-  }
-  get info() {
-    return this._info;
-  }
+  // The interval id used for polling changes from healthd API.
+  private intervalId!: number;
 
-  private _updateData(type: TelemetryInfoType) {
+  private updateData(type: TelemetryInfoType) {
     const promise = <Promise<TelemetryInfoUnion>>(
       this.telemetryService.fetchTelemetryData(type)
     );
     promise
       .then((value: TelemetryInfoUnion) => {
-        this._error = undefined;
-        this._info = value;
+        this.error = undefined;
+        this.info = value;
       })
       .catch((e) => {
-        this._error = e.message;
-        this._info = undefined;
+        this.error = e.message;
+        this.info = undefined;
       });
   }
 
@@ -65,13 +59,13 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
       ? refreshIntervals.telemetry.get(type)
       : defaultTelemetryRefreshInterval;
 
-    this._updateData(type);
-    this._intervalId = window.setInterval(() => {
-      this._updateData(type);
+    this.updateData(type);
+    this.intervalId = window.setInterval(() => {
+      this.updateData(type);
     }, interval);
   }
 
   ngOnDestroy(): void {
-    window.clearInterval(this._intervalId);
+    window.clearInterval(this.intervalId);
   }
 }
