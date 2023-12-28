@@ -16,7 +16,7 @@ import {
   VolumeButtonType,
 } from './telemetry-extension-types';
 
-export const APP_NAME = 'telemetry-extension-types Reference App';
+export const APP_NAME = 'Healthd Reference App';
 
 export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.AUDIO,
