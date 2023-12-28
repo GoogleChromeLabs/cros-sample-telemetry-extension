@@ -78,16 +78,16 @@ export class RoutineV2Service {
           request,
           (response: Response) => {
             if (!response.success) {
-              reject(response.error);
+              return reject(response.error);
             } else if (!response.routineV2) {
               throw 'Invalid response';
             } else {
-              resolve(response.routineV2);
+              return resolve(response.routineV2);
             }
           },
         );
       } catch (err) {
-        reject(err);
+        return reject(err);
       }
     });
   };
@@ -120,12 +120,12 @@ export class RoutineV2Service {
         for (const argument of VISIBLE_ROUTINE_V2_CARDS) {
           this.isRoutineArgumentSupported(argument);
         }
-        resolve();
+        return resolve();
       } catch (err) {
         console.error(
           ResponseErrorInfoMessage.FailedPortConnectionServiceConstructor,
         );
-        reject();
+        return reject();
       }
     });
   }
@@ -144,7 +144,7 @@ export class RoutineV2Service {
           if (IsRoutineSupportStatusInfo(response)) {
             resolve(response as RoutineSupportStatusInfo);
           }
-          reject('invalid response type');
+          return reject('invalid response type');
         })
         .catch((error) => reject(error));
     });
@@ -198,9 +198,9 @@ export class RoutineV2Service {
       this.sendRequest(payload)
         .then((response: RoutineV2Response) => {
           if (IsCreateRoutineResponse(response)) {
-            resolve(response as CreateRoutineResponse);
+            return resolve(response as CreateRoutineResponse);
           }
-          reject('invalid response type');
+          return reject('invalid response type');
         })
         .catch((error) => reject(error));
     });

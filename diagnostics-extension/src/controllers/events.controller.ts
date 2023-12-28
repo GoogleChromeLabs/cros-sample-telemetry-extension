@@ -31,7 +31,7 @@ const isEventSupported = async (
     const paylaod = await eventsService.isEventSupported(eventType);
     return res(generateEventsSuccessResponse(paylaod));
   } catch (err) {
-    res(generateErrorResponse(String(err)));
+    return res(generateErrorResponse(String(err)));
   }
 };
 
@@ -44,7 +44,7 @@ const startCapturingEvents = async (
     const payload = {};
     return res(generateEventsSuccessResponse(payload));
   } catch (err) {
-    res(generateErrorResponse(String(err)));
+    return res(generateErrorResponse(String(err)));
   }
 };
 
@@ -56,7 +56,7 @@ const stopCapturingEvents = async (
     await eventsService.stopCapturingEvents(eventType);
     return res(generateEventsSuccessResponse({}));
   } catch (err) {
-    res(generateErrorResponse(String(err)));
+    return res(generateErrorResponse(String(err)));
   }
 };
 

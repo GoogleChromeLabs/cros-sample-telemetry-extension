@@ -64,16 +64,16 @@ export class EventsService {
           request,
           (response: Response) => {
             if (!response.success) {
-              reject(response.error);
+              return reject(response.error);
             } else if (!response.events) {
               throw 'Invalid response';
             } else {
-              resolve(response.events);
+              return resolve(response.events);
             }
           },
         );
       } catch (err) {
-        reject(err);
+        return reject(err);
       }
     });
   };
@@ -94,12 +94,12 @@ export class EventsService {
         for (const category of VISIBLE_EVENT_CARDS) {
           this.isEventSupported(category);
         }
-        resolve();
+        return resolve();
       } catch (err) {
         console.error(
           ResponseErrorInfoMessage.FailedPortConnectionServiceConstructor,
         );
-        reject();
+        return reject();
       }
     });
   }

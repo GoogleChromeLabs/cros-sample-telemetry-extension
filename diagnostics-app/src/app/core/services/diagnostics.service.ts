@@ -53,16 +53,16 @@ export class DiagnosticsService implements DiagnosticsInterface {
           request,
           (response: Response) => {
             if (!response.success) {
-              reject(response.error);
+              return reject(response.error);
             } else if (!response.diagnostics) {
               throw 'Invalid response';
             } else {
-              resolve(response.diagnostics);
+              return resolve(response.diagnostics);
             }
           },
         );
       } catch (err) {
-        reject(err);
+        return reject(err);
       }
     });
   };
