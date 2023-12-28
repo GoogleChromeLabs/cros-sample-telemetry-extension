@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this._cssClass = this._themeService.theme;
-    // listen to theme updates from themeService
+    // Listen to theme updates from themeService.
     this._themeSubscription = this._themeService.subscribeOnThemeChange(
       (theme: Theme) => {
         this._cssClass = theme;

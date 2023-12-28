@@ -20,7 +20,8 @@ import {RoutineSupportStatus} from 'common/telemetry-extension-types';
   styleUrls: ['./routine-v2-dashboard.component.css'],
 })
 export class RoutineV2DashboardComponent implements OnInit {
-  private _error?: string; // the error message if there is any error
+  // The error message if there is any error.
+  private _error?: string;
 
   // Array of routine-v2 arguments that will actually be displayed
   private _supportedRoutines: RoutineV2Argument[] = [];

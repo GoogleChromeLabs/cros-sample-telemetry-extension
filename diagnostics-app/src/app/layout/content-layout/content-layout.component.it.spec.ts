@@ -41,19 +41,19 @@ describe('integration: component ContentLayout', () => {
       By.directive(MatSidenav),
     ).componentInstance;
 
-    // sidenav will be opened or closed by default depending on screen
+    // Sidenav will be opened or closed by default depending on screen
     // resolution.
     const defaultSidenavIsOpened = sidenavComponent.opened;
 
-    // should flip the open state of the drawer
+    // Should flip the open state of the drawer.
     drawerToggle.click();
     fixture.detectChanges();
     expect(sidenavComponent.opened).toBe(!defaultSidenavIsOpened);
 
-    // should flip the open state of the drawer
+    // Should flip the open state of the drawer.
     drawerToggle.click();
     fixture.detectChanges();
-    // update handle
+    // Update handle.
     sidenavComponent = fixture.debugElement.query(
       By.directive(MatSidenav),
     ).componentInstance;

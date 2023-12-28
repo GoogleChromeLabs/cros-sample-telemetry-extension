@@ -23,9 +23,10 @@ import {
   styleUrls: ['./events-dashboard.component.css'],
 })
 export class EventsDashboardComponent implements OnInit {
-  private _error?: string; // the error message if there is any error
+  // Error message, undefined if there is no error.
+  private _error?: string;
 
-  // Array of events categories that will actually be displayed
+  // Array of events categories that is supported, checked via healthd API.
   private _supportedCategories: EventCategory[] = [];
 
   get error() {

@@ -48,9 +48,10 @@ export interface getSubjectResponse {
 export class RoutineV2Service {
   // the ID of the extension service connects to.
   private extensionId: string = environment.extensionId;
-  // A map storing subjects to forward the runtime responses from running routine V2 to.
+  // A map storing subjects to forward the runtime responses from running
+  // routine V2 to.
   private subjects = new Map<RoutineV2Argument, Subject<RoutineV2Event>>();
-  // the port for connecting with the extension to receive runtime responses.
+  // The port for connecting with the extension to receive runtime responses.
   private port?: chrome.runtime.Port;
   // Since we use routine argument as the source of truth for each routine type,
   // we store a map which maps between the uuid and its corresponding routine

@@ -118,8 +118,10 @@ export abstract class RoutineBase {
 
 // In the generic routine, we increment the percentage after each getStatusRequest.
 export class GenericRoutine extends RoutineBase {
-  private _getStatusCounter: number = 0; // A counter to record down the number of time routine status is polled.
-  private _percentageIncrement: number = 20; // How much percentage should increase between each routine status poll.
+  // A counter to record down the number of time routine status is polled.
+  private _getStatusCounter: number = 0;
+  // How much percentage should increase between each routine status poll.
+  private _percentageIncrement: number = 20;
 
   _sendCommand(command: RoutineCommandType): Promise<GetRoutineUpdateResponse> {
     switch (command) {
