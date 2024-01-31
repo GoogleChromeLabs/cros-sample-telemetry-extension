@@ -9,7 +9,7 @@
 
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {SharedModule} from '../shared/shared.module';
+import {SharedModule} from '@shared/shared.module';
 import {DiagnosticsCardComponent} from './diagnostics-card/diagnostics-card.component';
 import {DiagnosticsDashboardComponent} from './diagnostics-dashboard/diagnostics-dashboard.component';
 
