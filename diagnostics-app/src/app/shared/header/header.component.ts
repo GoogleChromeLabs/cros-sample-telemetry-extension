@@ -7,7 +7,7 @@
  * Imported by app.module.ts
  */
 
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from 'app/core/services/theme.service';
 import {APP_NAME} from 'common/config';
@@ -18,6 +18,7 @@ import {APP_NAME} from 'common/config';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  @Input() showToggleSideNavButton = true; // Default to showing the toggle button
   @Output() toggleDrawer = new EventEmitter<void>();
   readonly appName = APP_NAME;
 

@@ -18,7 +18,7 @@ import {
 } from './side-nav.data';
 
 @Component({
-  selector: 'app-side-nav',
+  selector: 'support-assist-app-side-nav',
   templateUrl: './side-nav.component.html',
   styleUrls: ['./side-nav.component.css'],
 })

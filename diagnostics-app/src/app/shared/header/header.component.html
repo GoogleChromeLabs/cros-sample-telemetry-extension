@@ -5,7 +5,7 @@
 -->
 
 <mat-toolbar color="primary" class="app-header">
-  <button id="btnToggleDrawer" mat-icon-button (click)="onToggleDrawer()">
+  <button id="btnToggleDrawer" *ngIf="showToggleSideNavButton" mat-icon-button (click)="onToggleDrawer()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ appName }}</span>

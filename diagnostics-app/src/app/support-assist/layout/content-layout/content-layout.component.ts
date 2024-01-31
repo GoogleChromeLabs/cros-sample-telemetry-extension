@@ -15,7 +15,7 @@ import {Observable} from 'rxjs';
 import {map, shareReplay} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-content-layout',
+  selector: 'support-assist-app-content-layout',
   templateUrl: './content-layout.component.html',
   styleUrls: ['./content-layout.component.css'],
 })
