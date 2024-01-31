@@ -10,13 +10,12 @@
 
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {MaterialModule} from './material.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, BrowserAnimationsModule, MaterialModule],
-  exports: [CommonModule, BrowserAnimationsModule, MaterialModule],
+  imports: [CommonModule, MaterialModule],
+  exports: [CommonModule, MaterialModule],
 })
 export class SharedModule {}

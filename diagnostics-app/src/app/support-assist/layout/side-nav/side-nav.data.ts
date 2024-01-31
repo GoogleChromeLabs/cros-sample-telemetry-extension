@@ -14,20 +14,20 @@ export interface NavigationItem {
 
 export const TELEMETRY_NAV_DATA: NavigationItem = {
   name: 'Telemetry',
-  link: '/telemetry',
+  link: '/support-assist/telemetry',
 };
 
 export const DIAGNOSTICS_NAV_DATA: NavigationItem = {
   name: 'Diagnostics',
-  link: '/diagnostics',
+  link: '/support-assist/diagnostics',
 };
 
 export const EVENTS_NAV_DATA: NavigationItem = {
   name: 'Events',
-  link: '/events',
+  link: '/support-assist/events',
 };
 
 export const ROUTINE_V2_NAV_DATA: NavigationItem = {
   name: 'Routine V2',
-  link: '/routine-v2',
+  link: '/support-assist/routine-v2',
 };

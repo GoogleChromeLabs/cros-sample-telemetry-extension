@@ -10,6 +10,7 @@
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 
 import {environment} from '../environments/environment';
@@ -19,14 +20,7 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {EventsService} from './core/services/events.service';
 import {RoutineV2Service} from './core/services/routine-v2.service';
-import {DiagnosticsModule} from './diagnostics/diagnostics.module';
-import {EventsModule} from './events/events.module';
-import {ContentLayoutComponent} from './layout/content-layout/content-layout.component';
-import {HeaderComponent} from './layout/header/header.component';
-import {SideNavComponent} from './layout/side-nav/side-nav.component';
-import {RoutineV2Module} from './routine-v2/routine-v2.module';
 import {SharedModule} from './shared/shared.module';
-import {TelemetryModule} from './telemetry/telemetry.module';
 
 function initializeEventServiceFactory(
   eventsService: EventsService,
@@ -41,19 +35,12 @@ function initializeRoutineV2ServiceFactory(
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ContentLayoutComponent,
-    HeaderComponent,
-    SideNavComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     CoreModule,
-    DiagnosticsModule,
-    EventsModule,
-    RoutineV2Module,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.serviceWorker,
       // Register the ServiceWorker as soon as the app is stable
@@ -61,7 +48,6 @@ function initializeRoutineV2ServiceFactory(
       registrationStrategy: 'registerWhenStable:30000',
     }),
     SharedModule,
-    TelemetryModule,
   ],
   providers: [
     EventsService,

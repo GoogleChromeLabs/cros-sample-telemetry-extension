@@ -11,7 +11,8 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {MatSidenav} from '@angular/material/sidenav';
 import {By} from '@angular/platform-browser';
 
-import {SharedModule} from 'app/shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SharedModule} from '@shared/shared.module';
 
 import {HeaderComponent} from '../header/header.component';
 import {ContentLayoutComponent} from './content-layout.component';
@@ -21,7 +22,7 @@ describe('integration: component ContentLayout', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule],
+      imports: [SharedModule, BrowserAnimationsModule],
       declarations: [ContentLayoutComponent, HeaderComponent],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
