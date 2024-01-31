@@ -12,9 +12,9 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {By} from '@angular/platform-browser';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HeaderComponent} from '@shared/header/header.component';
 import {SharedModule} from '@shared/shared.module';
 
-import {HeaderComponent} from '../header/header.component';
 import {ContentLayoutComponent} from './content-layout.component';
 
 describe('integration: component ContentLayout', () => {
@@ -23,7 +23,7 @@ describe('integration: component ContentLayout', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, BrowserAnimationsModule],
-      declarations: [ContentLayoutComponent, HeaderComponent],
+      declarations: [ContentLayoutComponent],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
