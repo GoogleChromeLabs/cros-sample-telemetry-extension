@@ -22,6 +22,10 @@ const routes: Routes = [
         (m) => m.SupportAssistModule,
       ),
   },
+  {
+    path: 'rma',
+    loadChildren: () => import('./rma/rma.module').then((m) => m.RmaModule),
+  },
 ];
 
 @NgModule({
