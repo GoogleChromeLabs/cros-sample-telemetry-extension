@@ -1,4 +1,4 @@
-// Copyright 2023 The Chromium Authors. All rights reserved.
+// Copyright 2024 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -6,7 +6,7 @@ import {
   RoutineV2Argument,
   RoutineV2Category,
   TelemetryInfoType,
-} from './message';
+} from '../message';
 import {
   EventCategory,
   RoutineType,
@@ -14,9 +14,7 @@ import {
   RunMemoryRoutineArguments,
   RunVolumeButtonRoutineArguments,
   VolumeButtonType,
-} from './telemetry-extension-types';
-
-export const APP_NAME = 'Healthd Reference App';
+} from '../telemetry-extension-types';
 
 export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.AUDIO,

@@ -12,7 +12,7 @@ import {MatSlideToggleChange} from '@angular/material/slide-toggle';
 import {Router} from '@angular/router';
 import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from 'app/core/services/theme.service';
-import {APP_NAME} from 'common/config';
+import {APP_NAME} from 'common/config/common';
 
 @Component({
   selector: 'app-header',
