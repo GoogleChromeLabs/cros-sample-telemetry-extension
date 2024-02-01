@@ -14,7 +14,7 @@ import {
   FanRoutineArgument,
   MemoryRoutineArgument,
   VolumeButtonRoutineArgument,
-} from '../common/config';
+} from '../common/config/support-assist';
 import {
   RoutineV2Argument,
   RoutineV2Category,

@@ -10,7 +10,7 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
 
-import {VISIBLE_ROUTINE_V2_CARDS} from 'common/config';
+import {VISIBLE_ROUTINE_V2_CARDS} from 'common/config/support-assist';
 import {
   CancelRoutineMessage,
   CreateRoutineMessage,

@@ -11,7 +11,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DiagnosticsService} from 'app/core/services/diagnostics.service';
-import {VISIBLE_DIAGNOSTICS_CARDS} from 'common/config';
+import {VISIBLE_DIAGNOSTICS_CARDS} from 'common/config/support-assist';
 import {
   GetAvailableRoutinesResponse,
   RoutineType,

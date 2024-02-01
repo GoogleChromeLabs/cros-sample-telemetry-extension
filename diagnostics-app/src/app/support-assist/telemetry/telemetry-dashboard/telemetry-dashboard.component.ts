@@ -9,7 +9,7 @@
  */
 
 import {Component} from '@angular/core';
-import {VISIBLE_TELEMETRY_CARDS} from 'common/config';
+import {VISIBLE_TELEMETRY_CARDS} from 'common/config/support-assist';
 import {TelemetryInfoType} from 'common/message';
 
 @Component({
