@@ -8,6 +8,8 @@
  */
 
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MatSlideToggleChange} from '@angular/material/slide-toggle';
+import {Router} from '@angular/router';
 import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from 'app/core/services/theme.service';
 import {APP_NAME} from 'common/config';
@@ -22,7 +24,14 @@ export class HeaderComponent {
   @Output() toggleDrawer = new EventEmitter<void>();
   readonly appName = APP_NAME;
 
-  public constructor(private themeService: ThemeService) {}
+  get isSupportAssistMode(): boolean {
+    return this.router.url.startsWith('/support-assist');
+  }
+
+  public constructor(
+    private themeService: ThemeService,
+    private router: Router,
+  ) {}
 
   public onToggleTheme() {
     this.themeService.toggleTheme();
@@ -30,6 +39,14 @@ export class HeaderComponent {
 
   public onToggleDrawer() {
     this.toggleDrawer.emit();
+  }
+
+  public onToggleModeChange(event: MatSlideToggleChange) {
+    if (event.checked) {
+      this.router.navigateByUrl('/support-assist');
+    } else {
+      this.router.navigateByUrl('/rma');
+    }
   }
 
   public isDarkModeActivated() {
