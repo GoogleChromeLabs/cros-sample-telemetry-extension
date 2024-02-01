@@ -16,3 +16,19 @@
   top: 0;
   z-index: 1;
 }
+
+.mat-slide-toggle {
+  display:inline-flex;
+  vertical-align:top;
+}
+
+.app-label {
+  padding: 1em;
+  background-color: var(--app-header-background);
+  border-bottom: 1px solid var(--app-header-border-bottom-color);
+  color: var(--app-header-color);
+  position: sticky;
+  z-index: 1;
+  font-size: 60%;
+  vertical-align: -6px;
+}

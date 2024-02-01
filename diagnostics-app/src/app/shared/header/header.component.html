@@ -5,11 +5,25 @@
 -->
 
 <mat-toolbar color="primary" class="app-header">
-  <button id="btnToggleDrawer" *ngIf="showToggleSideNavButton" mat-icon-button (click)="onToggleDrawer()">
+  <button
+    id="btnToggleDrawer"
+    *ngIf="showToggleSideNavButton"
+    mat-icon-button
+    (click)="onToggleDrawer()"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <span>{{ appName }}</span>
   <span class="nav-spacer"></span>
+
+  <span class="app-label"> RMA Mode </span>
+  <mat-slide-toggle
+  (change)="onToggleModeChange($event)"
+  [checked]="isSupportAssistMode"
+  hideIcon="true"
+  class="mat-slide-toggle"
+  />
+  <span class="app-label"> Support Assist Mode </span>
   <button id="btnToggleTheme" mat-icon-button (click)="onToggleTheme()">
     <mat-icon id="iconTheme" *ngIf="isDarkModeActivated()">light_mode</mat-icon>
     <mat-icon id="iconTheme" *ngIf="!isDarkModeActivated()">dark_mode</mat-icon>
