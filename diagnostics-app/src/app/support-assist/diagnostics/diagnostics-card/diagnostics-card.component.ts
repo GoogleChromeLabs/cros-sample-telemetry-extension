@@ -105,7 +105,7 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
   private handleResponse() {
     if (!this.routineInfo) {
-      this.error = ResponseErrorInfoMessage.InvalidDiagnosticsRoutineInfo;
+      this.error = ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_INFO;
       return;
     }
 

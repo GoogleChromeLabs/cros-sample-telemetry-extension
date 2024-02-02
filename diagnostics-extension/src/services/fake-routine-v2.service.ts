@@ -51,11 +51,11 @@ const fakeRoutineData = new Map<
   // Fake fan routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.fan,
+      category: RoutineV2Category.FAN,
       argument: FanRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.fanFinished,
+      category: RoutineV2EventCategory.FAN_FINISHED,
       info: {
         uuid: '',
         has_passed: true,
@@ -67,11 +67,11 @@ const fakeRoutineData = new Map<
   // Fake memory routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.memory,
+      category: RoutineV2Category.MEMORY,
       argument: MemoryRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.memoryFinished,
+      category: RoutineV2EventCategory.MEMORY_FINISHED,
       info: {
         uuid: '',
         has_passed: true,
@@ -86,11 +86,11 @@ const fakeRoutineData = new Map<
   // Fake volume button routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.volumeButton,
+      category: RoutineV2Category.VOLUME_BUTTON,
       argument: VolumeButtonRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.memoryFinished,
+      category: RoutineV2EventCategory.MEMORY_FINISHED,
       info: {
         uuid: '',
         has_passed: true,
@@ -142,7 +142,7 @@ class FakeGenericRoutine {
 
     // Send initialized event.
     const routineInitializedInfo: RoutineInitializedInfo = {uuid: this.uuid};
-    notifyPort(RoutineV2EventCategory.initialized, routineInitializedInfo);
+    notifyPort(RoutineV2EventCategory.INITIALIZED, routineInitializedInfo);
   }
 
   public startRoutine() {
@@ -153,7 +153,7 @@ class FakeGenericRoutine {
       reason: RoutineWaitingReason.waiting_to_be_scheduled,
       message: 'waiting for resource queue',
     };
-    notifyPort(RoutineV2EventCategory.waiting, routineWaitingInfo);
+    notifyPort(RoutineV2EventCategory.WAITING, routineWaitingInfo);
     this.pendingTimeout = setTimeout(
       () => this.sendRunning(),
       fakeDataInterval,
@@ -171,7 +171,7 @@ class FakeGenericRoutine {
       uuid: this.uuid,
       percentage: this.percentage,
     };
-    notifyPort(RoutineV2EventCategory.running, routineRunningInfo);
+    notifyPort(RoutineV2EventCategory.RUNNING, routineRunningInfo);
     this.pendingTimeout = setTimeout(
       () => this.sendRunning(),
       fakeDataInterval,
@@ -225,7 +225,7 @@ function getFakeData(
     return {category: fakeCategory, info: fakeFinishedInfo};
   }
   return {
-    category: RoutineV2EventCategory.fanFinished,
+    category: RoutineV2EventCategory.FAN_FINISHED,
     // eslint-disable-next-line camelcase
     info: {uuid: uuid, has_passed: true},
   };

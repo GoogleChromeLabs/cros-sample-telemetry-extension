@@ -87,7 +87,7 @@ export class EventsService {
           if (this.subjects.has(msg.type)) {
             this.subjects.get(msg.type)!.next(msg.info);
           } else {
-            console.error(ResponseErrorInfoMessage.MissingEventsTypeSubject);
+            console.error(ResponseErrorInfoMessage.MISSING_EVENTS_TYPE_SUBJECT);
           }
         });
         for (const category of VISIBLE_EVENT_CARDS) {
@@ -96,7 +96,7 @@ export class EventsService {
         return resolve();
       } catch (err) {
         console.error(
-          ResponseErrorInfoMessage.FailedPortConnectionServiceConstructor,
+          ResponseErrorInfoMessage.FAILED_PORT_CONNECTION_SERVICE_CONSTRUCTOR,
         );
         return reject();
       }

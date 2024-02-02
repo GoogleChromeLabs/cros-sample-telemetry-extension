@@ -67,7 +67,7 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
     }
   >([
     [
-      RoutineV2Category.fan,
+      RoutineV2Category.FAN,
       {
         createRoutineFunc: (chrome as any).os.diagnostics.createFanRoutine,
         isRoutineArgumentSupportedFunc: (chrome as any).os.diagnostics
@@ -75,7 +75,7 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       },
     ],
     [
-      RoutineV2Category.memory,
+      RoutineV2Category.MEMORY,
       {
         createRoutineFunc: (chrome as any).os.diagnostics.createMemoryRoutine,
         isRoutineArgumentSupportedFunc: (chrome as any).os.diagnostics
@@ -83,7 +83,7 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       },
     ],
     [
-      RoutineV2Category.volumeButton,
+      RoutineV2Category.VOLUME_BUTTON,
       {
         createRoutineFunc: (chrome as any).os.diagnostics
           .createVolumeButtonRoutine,
@@ -95,31 +95,31 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
 
   private routineEventListeners = new Map<RoutineV2EventCategory, any>([
     [
-      RoutineV2EventCategory.initialized,
+      RoutineV2EventCategory.INITIALIZED,
       (chrome as any).os.diagnostics.onRoutineInitialized,
     ],
     [
-      RoutineV2EventCategory.running,
+      RoutineV2EventCategory.RUNNING,
       (chrome as any).os.diagnostics.onRoutineRunning,
     ],
     [
-      RoutineV2EventCategory.waiting,
+      RoutineV2EventCategory.WAITING,
       (chrome as any).os.diagnostics.onRoutineWaiting,
     ],
     [
-      RoutineV2EventCategory.memoryFinished,
+      RoutineV2EventCategory.MEMORY_FINISHED,
       (chrome as any).os.diagnostics.onMemoryRoutineFinished,
     ],
     [
-      RoutineV2EventCategory.volumeButtonFinished,
+      RoutineV2EventCategory.VOLUME_BUTTON_FINISHED,
       (chrome as any).os.diagnostics.onVolumeButtonRoutineFinished,
     ],
     [
-      RoutineV2EventCategory.fanFinished,
+      RoutineV2EventCategory.FAN_FINISHED,
       (chrome as any).os.diagnostics.onFanRoutineFinished,
     ],
     [
-      RoutineV2EventCategory.exception,
+      RoutineV2EventCategory.EXCEPTION,
       (chrome as any).os.diagnostics.onRoutineException,
     ],
   ]);

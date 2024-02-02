@@ -45,7 +45,7 @@ chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
       onRoutineV2PortConnect(port);
       return;
     default:
-      console.error(ResponseErrorInfoMessage.InvalidPortName);
+      console.error(ResponseErrorInfoMessage.INVALID_PORT_NAME);
   }
 });
 
@@ -61,7 +61,7 @@ chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
       return handleRoutineV2(req, res);
     default:
       return res(
-        generateErrorResponse(ResponseErrorInfoMessage.InvalidRequestType),
+        generateErrorResponse(ResponseErrorInfoMessage.INVALID_REQUEST_TYPE),
       );
   }
 });

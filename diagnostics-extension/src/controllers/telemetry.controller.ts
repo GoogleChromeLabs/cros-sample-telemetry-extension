@@ -56,7 +56,7 @@ function mapInfoTypeToMethod(
       return telemetryService.getTpmInfo;
     default:
       return () =>
-        Promise.reject(ResponseErrorInfoMessage.InvalidTelemetryInfoType);
+        Promise.reject(ResponseErrorInfoMessage.INVALID_TELEMETRY_INFO_TYPE);
   }
 }
 
@@ -66,7 +66,7 @@ export async function handleTelemetry(
 ): Promise<void> {
   if (!req.telemetry)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingTelemetryRequest),
+      generateErrorResponse(ResponseErrorInfoMessage.MISSING_TELEMETRY_REQUEST),
     );
 
   const infoType = req.telemetry.infoType;
@@ -74,7 +74,9 @@ export async function handleTelemetry(
 
   if (!requiredMethod)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.InvalidTelemetryInfoType),
+      generateErrorResponse(
+        ResponseErrorInfoMessage.INVALID_TELEMETRY_INFO_TYPE,
+      ),
     );
 
   try {

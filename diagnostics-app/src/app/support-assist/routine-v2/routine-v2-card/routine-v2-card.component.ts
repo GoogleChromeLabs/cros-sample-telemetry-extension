@@ -133,7 +133,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   }
   private async handleEventResponse(event: RoutineV2Event) {
     switch (event.eventCategory) {
-      case RoutineV2EventCategory.initialized: {
+      case RoutineV2EventCategory.INITIALIZED: {
         this.output = 'initialized';
         this.routineState = RoutineV2State.RUNNING;
         const routineInitializedInfo = event.event as RoutineInitializedInfo;
@@ -142,7 +142,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         }
         break;
       }
-      case RoutineV2EventCategory.running: {
+      case RoutineV2EventCategory.RUNNING: {
         this.output = 'running...';
         this.routineState = RoutineV2State.RUNNING;
         const routineRunningInfo = event.event as RoutineRunningInfo;
@@ -154,7 +154,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         }
         break;
       }
-      case RoutineV2EventCategory.waiting: {
+      case RoutineV2EventCategory.WAITING: {
         this.routineState = RoutineV2State.WAITING;
         const routineWaitingInfo = event.event as RoutineWaitingInfo;
         if (!this._checkUUID(routineWaitingInfo.uuid)) {
@@ -166,7 +166,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         this.output = 'Waiting: ' + routineWaitingInfo.message;
         break;
       }
-      case RoutineV2EventCategory.exception: {
+      case RoutineV2EventCategory.EXCEPTION: {
         this.routineState = RoutineV2State.EXCEPTION;
         const routineExceptionInfo = event.event as ExceptionInfo;
         if (!this._checkUUID(routineExceptionInfo.uuid)) {
@@ -176,9 +176,9 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         this.output = 'Exception: ' + routineExceptionInfo.debugMessage;
         break;
       }
-      case RoutineV2EventCategory.fanFinished:
-      case RoutineV2EventCategory.memoryFinished:
-      case RoutineV2EventCategory.volumeButtonFinished: {
+      case RoutineV2EventCategory.FAN_FINISHED:
+      case RoutineV2EventCategory.MEMORY_FINISHED:
+      case RoutineV2EventCategory.VOLUME_BUTTON_FINISHED: {
         this.routineState = RoutineV2State.FINISHED;
         const routineFinishedInfo = event.event as RoutineV2FinishedInfoUnion;
         if (!this._checkUUID(routineFinishedInfo.uuid)) {

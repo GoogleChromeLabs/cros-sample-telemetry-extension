@@ -16,7 +16,7 @@ describe('RoutineV2CardComponent', () => {
     fixture = TestBed.createComponent(RoutineV2CardComponent);
     component = fixture.componentInstance;
     const testRoutineArgument: RoutineV2Argument = {
-      category: RoutineV2Category.memory,
+      category: RoutineV2Category.MEMORY,
       argument: {},
     };
     component.routineArgument = testRoutineArgument;

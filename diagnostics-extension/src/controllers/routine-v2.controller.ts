@@ -57,7 +57,7 @@ export async function handleRoutineV2(
         return res(generateRoutineV2SuccessResponse());
       default:
         return res(
-          generateErrorResponse(ResponseErrorInfoMessage.InvalidEventsAction),
+          generateErrorResponse(ResponseErrorInfoMessage.INVALID_EVENTS_ACTION),
         );
     }
   } catch (err) {

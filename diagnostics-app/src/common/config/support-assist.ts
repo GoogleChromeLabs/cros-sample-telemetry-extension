@@ -98,10 +98,10 @@ export const VolumeButtonRoutineArgument: RunVolumeButtonRoutineArguments = {
 /* eslint-enable camelcase*/
 
 export const VISIBLE_ROUTINE_V2_CARDS: RoutineV2Argument[] = [
-  {category: RoutineV2Category.fan, argument: FanRoutineArgument},
-  {category: RoutineV2Category.memory, argument: MemoryRoutineArgument},
+  {category: RoutineV2Category.FAN, argument: FanRoutineArgument},
+  {category: RoutineV2Category.MEMORY, argument: MemoryRoutineArgument},
   {
-    category: RoutineV2Category.volumeButton,
+    category: RoutineV2Category.VOLUME_BUTTON,
     argument: VolumeButtonRoutineArgument,
   },
 ];

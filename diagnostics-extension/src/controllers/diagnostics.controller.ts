@@ -46,7 +46,7 @@ async function handleStartRoutine(
   if (!routineName) {
     return res(
       generateErrorResponse(
-        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
+        ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_NAME,
       ),
     );
   }
@@ -65,7 +65,7 @@ async function handleStartRoutine(
     } else {
       return res(
         generateErrorResponse(
-          ResponseErrorInfoMessage.InvalidDiagnosticsRoutineStatus,
+          ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_STATUS,
         ),
       );
     }
@@ -82,7 +82,7 @@ async function handleRoutineOperation(
   if (!id) {
     return res(
       generateErrorResponse(
-        ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId,
+        ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_ID,
       ),
     );
   }
@@ -112,7 +112,9 @@ export async function handleDiagnostics(
 ): Promise<void> {
   if (!req.diagnostics)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingDiagnosticsRequest),
+      generateErrorResponse(
+        ResponseErrorInfoMessage.MISSING_DIAGNOSTICS_REQUEST,
+      ),
     );
 
   switch (req.diagnostics.action) {
@@ -135,7 +137,7 @@ export async function handleDiagnostics(
     default:
       return res(
         generateErrorResponse(
-          ResponseErrorInfoMessage.InvalidDiagnosticsAction,
+          ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ACTION,
         ),
       );
   }
