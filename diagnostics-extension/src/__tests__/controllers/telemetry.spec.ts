@@ -28,7 +28,7 @@ describe('should return correct error messages', () => {
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: {message: ResponseErrorInfoMessage.MissingTelemetryRequest},
+      error: {message: ResponseErrorInfoMessage.MISSING_TELEMETRY_REQUEST},
     });
   });
 
@@ -44,7 +44,7 @@ describe('should return correct error messages', () => {
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: {message: ResponseErrorInfoMessage.InvalidTelemetryInfoType},
+      error: {message: ResponseErrorInfoMessage.INVALID_TELEMETRY_INFO_TYPE},
     });
   });
 
@@ -60,7 +60,7 @@ describe('should return correct error messages', () => {
 
     expect(res).toHaveBeenCalledWith({
       success: false,
-      error: {message: ResponseErrorInfoMessage.InvalidTelemetryInfoType},
+      error: {message: ResponseErrorInfoMessage.INVALID_TELEMETRY_INFO_TYPE},
     });
   });
 });

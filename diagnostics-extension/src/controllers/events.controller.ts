@@ -78,7 +78,7 @@ export async function handleEvents(
 ): Promise<void> {
   if (!req.events)
     return res(
-      generateErrorResponse(ResponseErrorInfoMessage.MissingEventsRequest),
+      generateErrorResponse(ResponseErrorInfoMessage.MISSING_EVENTS_REQUEST),
     );
 
   const eventType = req.events.eventType;
@@ -91,7 +91,7 @@ export async function handleEvents(
       return stopCapturingEvents(eventType, res);
     default:
       return res(
-        generateErrorResponse(ResponseErrorInfoMessage.InvalidEventsAction),
+        generateErrorResponse(ResponseErrorInfoMessage.INVALID_EVENTS_ACTION),
       );
   }
 }

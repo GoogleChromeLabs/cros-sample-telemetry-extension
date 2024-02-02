@@ -120,7 +120,7 @@ export class RoutineV2Service {
         return resolve();
       } catch (err) {
         console.error(
-          ResponseErrorInfoMessage.FailedPortConnectionServiceConstructor,
+          ResponseErrorInfoMessage.FAILED_PORT_CONNECTION_SERVICE_CONSTRUCTOR,
         );
         return reject();
       }

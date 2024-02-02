@@ -59,7 +59,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.ac_power:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else return (chrome as any).os.diagnostics.runAcPowerRoutine(params);
       case RoutineType.audio_driver:
@@ -69,14 +69,14 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.battery_charge:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runBatteryChargeRoutine(params);
       case RoutineType.battery_discharge:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runBatteryDischargeRoutine(
@@ -89,7 +89,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.bluetooth_pairing:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runBluetoothPairingRoutine(
@@ -100,7 +100,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.bluetooth_scanning:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runBluetoothScanningRoutine(
@@ -109,13 +109,13 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.cpu_cache:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else return (chrome as any).os.diagnostics.runCpuCacheRoutine(params);
       case RoutineType.cpu_floating_point_accuracy:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (
@@ -124,7 +124,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.cpu_prime_search:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runCpuPrimeSearchRoutine(
@@ -133,13 +133,13 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.cpu_stress:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else return (chrome as any).os.diagnostics.runCpuStressRoutine(params);
       case RoutineType.disk_read:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else return (chrome as any).os.diagnostics.runDiskReadRoutine(params);
       case RoutineType.dns_resolution:
@@ -159,21 +159,21 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.nvme_self_test:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runNvmeSelfTestRoutine(params);
       case RoutineType.nvme_wear_level:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runNvmeWearLevelRoutine(params);
       case RoutineType.power_button:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runPowerButtonRoutine(params);
@@ -184,7 +184,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
       case RoutineType.smartctl_check:
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         else
           return (chrome as any).os.diagnostics.runSmartctlCheckRoutine(params);
@@ -192,7 +192,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
         return (chrome as any).os.diagnostics.runUfsLifetimeRoutine();
       default:
         return Promise.reject(
-          ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
+          ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_NAME,
         );
     }
   }
@@ -236,7 +236,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
 
   private fetchRoutineById(id: number) {
     if (!(id in this.activeRoutines)) {
-      throw ResponseErrorInfoMessage.InvalidDiagnosticsRoutineId;
+      throw ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_ID;
     }
     return this.activeRoutines[id];
   }
@@ -269,7 +269,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
       case RoutineType.smartctl_check: {
         if (!params)
           return Promise.reject(
-            ResponseErrorInfoMessage.InvalidDiagnosticsParams,
+            ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
         const res: RunRoutineResponse =
           await fakeDiagnostics.runGenericRoutine(params);
@@ -302,7 +302,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
       }
       default:
         return Promise.reject(
-          ResponseErrorInfoMessage.InvalidDiagnosticsRoutineName,
+          ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_NAME,
         );
     }
   }

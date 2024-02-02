@@ -93,23 +93,23 @@ export enum TelemetryInfoType {
 }
 
 export enum ResponseErrorInfoMessage {
-  InvalidRequestType = 'Invalid or missing request type.',
-  InvalidTelemetryInfoType = 'The requested telemetry infoType is either invalid or missing.',
-  InvalidDiagnosticsRoutineStatus = 'The diagnostics routine status is invalid.',
-  MissingTelemetryRequest = 'Missing telemetry object in request.',
-  MissingDiagnosticsRequest = 'Missing diagnostics object in request.',
-  MissingEventsRequest = 'Missing events object in request.',
-  InvalidDiagnosticsAction = 'The requested diagnostics action is either invalid or missing.',
-  InvalidDiagnosticsParams = 'The requested diagnostics params are either invalid or missing.',
-  InvalidDiagnosticsRoutineName = 'The requested diagnostics routine name is either invalid or missing.',
-  InvalidDiagnosticsRoutineInfo = 'The requested diagnostics routine info is either invalid or missing.',
-  InvalidDiagnosticsRoutineId = 'The requested diagnostics routine id is either invalid or missing.',
-  InvalidEventsAction = 'The requested events action is either invalid or missing.',
-  InvalidEventsGetSubject = 'The requested events category is invalid.',
-  InvalidPortName = 'The connection port name is either invalid or missing.',
-  UnsupportedTelemetryFunction = 'Unsupported operation. The requested telemetry function is not supported',
-  MissingEventsTypeSubject = 'Missing the subject for sending the event info from events service',
-  FailedPortConnectionServiceConstructor = 'Error when establishing connection and add listener with extension.',
+  INVALID_REQUEST_TYPE = 'Invalid or missing request type.',
+  INVALID_TELEMETRY_INFO_TYPE = 'The requested telemetry infoType is either invalid or missing.',
+  INVALID_DIAGNOSTICS_ROUTINE_STATUS = 'The diagnostics routine status is invalid.',
+  MISSING_TELEMETRY_REQUEST = 'Missing telemetry object in request.',
+  MISSING_DIAGNOSTICS_REQUEST = 'Missing diagnostics object in request.',
+  MISSING_EVENTS_REQUEST = 'Missing events object in request.',
+  INVALID_DIAGNOSTICS_ACTION = 'The requested diagnostics action is either invalid or missing.',
+  INVALID_DIAGNOSTICS_PARAMS = 'The requested diagnostics params are either invalid or missing.',
+  INVALID_DIAGNOSTICS_ROUTINE_NAME = 'The requested diagnostics routine name is either invalid or missing.',
+  INVALID_DIAGNOSTICS_ROUTINE_INFO = 'The requested diagnostics routine info is either invalid or missing.',
+  INVALID_DIAGNOSTICS_ROUTINE_ID = 'The requested diagnostics routine id is either invalid or missing.',
+  INVALID_EVENTS_ACTION = 'The requested events action is either invalid or missing.',
+  INVALID_EVENTS_GET_SUBJECT = 'The requested events category is invalid.',
+  INVALID_PORT_NAME = 'The connection port name is either invalid or missing.',
+  UNSUPPORTED_TELEMETRY_FUNCTION = 'Unsupported operation. The requested telemetry function is not supported',
+  MISSING_EVENTS_TYPE_SUBJECT = 'Missing the subject for sending the event info from events service',
+  FAILED_PORT_CONNECTION_SERVICE_CONSTRUCTOR = 'Error when establishing connection and add listener with extension.',
 }
 
 export enum DiagnosticsAction {
@@ -268,9 +268,9 @@ export enum RoutineV2Action {
 }
 
 export enum RoutineV2Category {
-  fan = 'fan',
-  memory = 'memory',
-  volumeButton = 'volume-button',
+  FAN = 'fan',
+  MEMORY = 'memory',
+  VOLUME_BUTTON = 'volume-button',
 }
 
 export interface RoutineV2Argument {
@@ -313,13 +313,13 @@ export type RoutineV2EventUnion =
   | VolumeButtonRoutineFinishedInfo;
 
 export enum RoutineV2EventCategory {
-  initialized = 'initialized',
-  running = 'running',
-  waiting = 'waiting',
-  exception = 'exception',
-  fanFinished = 'fan-finished',
-  memoryFinished = 'memory-finished',
-  volumeButtonFinished = 'volume-button-finished',
+  INITIALIZED = 'initialized',
+  RUNNING = 'running',
+  WAITING = 'waiting',
+  EXCEPTION = 'exception',
+  FAN_FINISHED = 'fan-finished',
+  MEMORY_FINISHED = 'memory-finished',
+  VOLUME_BUTTON_FINISHED = 'volume-button-finished',
 }
 
 export interface RoutineV2Event {
