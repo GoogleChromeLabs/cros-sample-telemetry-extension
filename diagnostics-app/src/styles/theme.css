@@ -41,7 +41,8 @@
   --color-black: #000;
   --color-dark: #121212;
   --color-dark-grey: #1c1c1c;
-  --color-light-grey: #292929;
+  --color-medium-grey: #252525;
+  --color-light-grey: #303030;
   --color-lighter-grey: #cbcaca;
   --color-darker-white: #989898;
   --color-dark-white: #e3e3e3;
@@ -52,7 +53,7 @@
 
   --color-blue: rgb(76, 139, 245);
 
-  --app-header-background: var(--color-light-grey);
+  --app-header-background: var(--color-medium-grey);
   --app-header-border-bottom-color: var(--color-dark-grey);
   --app-header-color: var(--color-white);
 
@@ -70,6 +71,9 @@
   --app-dashboard-card-background: var(--color-dark-grey);
   --app-dashboard-card-color: var(--color-white);
   --app-dashboard-card-border-color: #333;
+
+  --app-log-viewer-background: var(--color-medium-grey);
+  --app-log-viewer-color: var(--color-white);
 
   --app-error-message-color: var(--color-yellow);
 }
