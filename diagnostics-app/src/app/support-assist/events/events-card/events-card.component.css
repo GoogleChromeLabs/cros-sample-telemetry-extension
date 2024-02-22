@@ -61,15 +61,3 @@
   align-items: center;
   margin-top: 1rem;
 }
-
-::-webkit-scrollbar {
-  width: 4px;
-  overflow-y: scroll;
-  background: grey;
-  box-shadow: inset 0 0 4px #707070;
-}
-
-::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 10px;
-}
