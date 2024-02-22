@@ -1,0 +1,3 @@
+<div *ngFor="let log of logs$ | async">
+  [<span class="{{log.level}}">{{log.level}}</span>] {{ formatTimestamp(log.timestamp) }}: {{log.message}}
+</div>

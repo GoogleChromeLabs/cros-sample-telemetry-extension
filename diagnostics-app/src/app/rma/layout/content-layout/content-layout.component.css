@@ -4,7 +4,7 @@
  * found in the LICENSE file.
  */
 
- .sidenav-container {
+.sidenav-container {
   height: 100%;
 }
 
@@ -50,16 +50,22 @@ mat-sidenav.mat-drawer-side {
 .app-content-container {
   display: flex;
   flex-direction: column;
-  flex: 1 1 auto;
+  flex: 1 1 auto; /* Allow app-content-container to fill remaining space */
+  overflow: auto; /* Prevent any scrolling in app-content-container */
 }
 
 .test-container {
+  box-sizing: border-box; /* Key Change */
   padding: 1rem 1rem;
-  flex: 1 1 60%; /* Take 60% of the space */
+  flex: 0 0 60%; /* Take 60% of the space */
   overflow: auto; /* Add scrolling if needed */
+  border-bottom: 5px solid var(--app-header-border-bottom-color);
 }
 
 .log-container {
+  background-color: var(--app-log-viewer-background);
+  box-sizing: border-box; /* Key Change */
   padding: 1rem 1rem;
-  flex: 1 1 40%; /* Take 40% of the space */
+  flex: 0 0 40%; /* Take 40% of the space */
+  overflow: auto; /* Add scrolling if needed */
 }
