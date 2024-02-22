@@ -19,6 +19,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {EventsService} from './core/services/events.service';
+import {LoggingService} from './core/services/logging.service';
 import {RoutineV2Service} from './core/services/routine-v2.service';
 import {SharedModule} from './shared/shared.module';
 
@@ -67,6 +68,7 @@ function initializeRoutineV2ServiceFactory(
       provide: LocationStrategy,
       useClass: HashLocationStrategy,
     },
+    LoggingService,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
