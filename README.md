@@ -1,7 +1,13 @@
-# cros-diag-app
-Third party Diagnostics App for ChromeOS
+# ChromeOS reference Diagnostics app
 
-# Source Code Headers
+This is the reference implementation for [ChromeOS Extension API platform](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/) which enables 3rd party to build their own app on the top of it. 
+
+<!---
+TODO: Give rough idea about PWA + extension and IWA + extension and overview?
+TODO: Do we have public doc about how to run PWA + extension and IWA + extension? The following is focusing on building code.
+-->
+
+## Source Code Headers
 Every file containing source code must include copyright and license information. This includes any JS/CSS files that you might be serving out to browsers. (This is to help well-intentioned people avoid accidental copying that doesn't comply with the license.)
 
 header:
@@ -10,9 +16,10 @@ header:
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 ```
+
 # Instructions to set up project
 
-### Prerequisite Configuration
+### Prerequisite Configuration for code contribution (optional)
 
 - In the repository root, run
 1. ```git config --unset-all core.hooksPath```
@@ -32,7 +39,7 @@ To run the code formatter on either the Diagnostics App or the Diagnostics exten
 2. ```npm ci```
 3. ```npm run build```
 
-At this point, you should be able to see a folder with all the resources in `diagnostics-app/dist/diagnostics-app`. You can now open a server to serve these resources to the client.
+At this point, you should be able to see a folder with all the resources in `diagnostics-app/dist/diagnostics-app` directory. You can now open a server to serve these resources to the client.
 
 To develop against a real extension, you should make sure the URL is allowlisted and the url-scheme is secure (HTTPS).
 
@@ -46,6 +53,7 @@ https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/R
 3. ```npm run build```
 
 At this point, you should be able to see a `sample-iwa.swbn` file. This file is directly installable as an IWA image.
+
 
 ### Diagnostics Extension
 
