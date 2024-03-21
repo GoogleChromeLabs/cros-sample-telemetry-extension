@@ -1,0 +1,19 @@
+<div class="top-button-row">
+  <button
+    mat-raised-button
+    class="test-operation-button"
+    (click)="testCompleted()"
+    [disabled]="!isRunning || currentTestIndex == AUDIT_PAGE_INDEX"
+  >
+    Skip this test
+  </button>
+  <button
+    mat-raised-button
+    class="test-operation-button"
+    (click)="runCurrentTest()"
+    [disabled]="isRunning || currentTestIndex == AUDIT_PAGE_INDEX"
+  >
+    Run this test only
+  </button>
+</div>
+<ng-container #testComponentContainer> </ng-container>
