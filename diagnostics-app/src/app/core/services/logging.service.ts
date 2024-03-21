@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 enum LogLevel {
@@ -18,13 +18,15 @@ export interface LogEntry {
 export class LoggingService {
   private logs$ = new BehaviorSubject<LogEntry[]>([]);
 
-  constructor() {}
+  constructor(private ngZone: NgZone) {}
 
   log(level: LogLevel, message: string) {
-    this.logs$.next([
-      ...this.logs$.value,
-      {timestamp: new Date(), level, message},
-    ]);
+    this.ngZone.run(() => {
+      this.logs$.next([
+        ...this.logs$.value,
+        {timestamp: new Date(), level, message},
+      ]);
+    });
   }
 
   debug(message: string) {
