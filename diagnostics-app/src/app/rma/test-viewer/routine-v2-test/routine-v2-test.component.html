@@ -1,0 +1,29 @@
+<div class="content-container">
+  <div class="test-title">{{ title }}</div>
+  <div class="progress-bar-container">
+    <mat-progress-bar
+      class="progress-bar"
+      mode="determinate"
+      [value]="percentage"
+    ></mat-progress-bar>
+    {{ percentage }}%
+  </div>
+
+  <table>
+    <tr>
+      <th>Argument</th>
+      <td><app-json-viewer [level]="0" [output]="argument"></app-json-viewer></td>
+    </tr>
+    <tr>
+      <th>Passed</th>
+      <td>
+        <b>{{ hasPassed }}</b>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Output</th>
+      <td><app-json-viewer [level]="0" [output]="output"></app-json-viewer></td>
+    </tr>
+  </table>
+</div>
