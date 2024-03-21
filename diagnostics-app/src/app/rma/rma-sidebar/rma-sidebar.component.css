@@ -1,0 +1,51 @@
+.hover-finger {
+  cursor: pointer;
+}
+
+.active {
+  font-weight: 600;
+  color: var(--app-sidenav-item-active-color);
+}
+
+.mat-subheader {
+  color: var(--app-sidenav-subheader-color);
+  font-size: 20px;
+}
+
+.menu-navigation-button {
+  height: 40px;
+  font-size: 18px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+}
+
+.top-button-row {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.test-operation-button {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.menu-navigation-button:hover {
+  color: var(--app-sidenav-item-active-color);
+  cursor: pointer;
+}
+
+.show-icon {
+  position: sticky;
+  z-index: 1;
+  font-size: 40%;
+  vertical-align: -0.7em;
+}
+
+.unsupported {
+  color: var(--color-medium-grey);
+}
+
+.unsupported:hover {
+  color: var(--color-medium-grey);
+}
