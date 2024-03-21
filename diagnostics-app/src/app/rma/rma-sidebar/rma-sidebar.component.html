@@ -1,0 +1,49 @@
+<div class="top-button-row">
+  <button
+    mat-raised-button
+    class="test-operation-button"
+    (click)="startTests()"
+    [disabled]="isRunning"
+  >
+    Run Tests
+  </button>
+  <button
+    mat-raised-button
+    class="test-operation-button"
+    (click)="stopTests()"
+    [disabled]="!isRunning"
+  >
+    Stop Tests
+  </button>
+</div>
+<div
+  class="mat-subheader; menu-navigation-button"
+  (click)="isRunning ? null : handleTestNavigation($event, -1)"
+  [ngClass]="{ active: (getCurrentTestIndex$() | async) === -1 }"
+>
+  Audit Page
+</div>
+<div *ngFor="let testConfig of testList; index as index">
+  <div
+    class="mat-subheader; menu-navigation-button"
+    (click)="isRunning || isUnsupported(index) ? null : handleTestNavigation($event, index)"
+    [ngClass]="{
+      active: (getCurrentTestIndex$() | async) === index,
+      unsupported: isUnsupported(index)
+    }"
+  >
+    <input
+      type="checkbox"
+      (click)="handleCheckboxClick($event, index)"
+      [disabled]="isRunning || isUnsupported(index)"
+      [checked]="testList[index].enabled"
+    />
+    {{ testConfig.title }}
+    <span class="show-icon">
+      <mat-icon *ngIf="getTestStatus(index) === 'passed'" style="color: green">check_circle</mat-icon>
+      <mat-icon *ngIf="getTestStatus(index) === 'failed'" style="color: red">cancel</mat-icon>
+    </span>
+  </div>
+</div>
+<!-- code below is added for the style of sidebar -->
+<div><mat-nav-list></mat-nav-list></div>
