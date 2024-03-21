@@ -6,24 +6,18 @@
  * @fileoverview Service worker script
  */
 
-import {
-  PortName,
-  Request,
-  RequestType,
-  ResponseErrorInfoMessage,
-} from './common/message';
+import {Request, RequestType, ResponseErrorInfoMessage} from './common/message';
 import {handleDiagnostics} from './controllers/diagnostics.controller';
 import {
   handleEvents,
-  onEventPortConnect,
   registerEventHandlers,
 } from './controllers/events.controller';
 import {
   handleRoutineV2,
-  onRoutineV2PortConnect,
   registerRoutineV2EventHandlers,
 } from './controllers/routine-v2.controller';
 import {handleTelemetry} from './controllers/telemetry.controller';
+import {PortService} from './services/port.service';
 import {generateErrorResponse} from './utils';
 
 // Event handlers in service workers need to be declared in the global scope.
@@ -37,16 +31,7 @@ chrome.runtime.onInstalled.addListener(
 );
 
 chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
-  switch (port.name) {
-    case PortName.EVENTS_PORT:
-      onEventPortConnect(port);
-      return;
-    case PortName.ROUTINE_V2_PORT:
-      onRoutineV2PortConnect(port);
-      return;
-    default:
-      console.error(ResponseErrorInfoMessage.INVALID_PORT_NAME);
-  }
+  PortService.getInstance().registerPort(port);
 });
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {

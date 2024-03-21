@@ -68,10 +68,6 @@ export async function registerEventHandlers() {
     });
 }
 
-export async function onEventPortConnect(port: chrome.runtime.Port) {
-  eventsService.registerPort(port);
-}
-
 export async function handleEvents(
   req: Request,
   res: (data: Response) => void,

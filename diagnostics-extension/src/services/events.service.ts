@@ -10,7 +10,7 @@
 // Allow type-casting into any for access.
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {Response} from '../common/message';
+import {PortName, Response} from '../common/message';
 import {
   EventCategory,
   EventSupportStatusInfo,
@@ -18,6 +18,7 @@ import {
 import {environment} from '../environments/environment';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 import * as fakeEvents from './fake-events.service';
+import {PortService} from './port.service';
 
 /**
  * Abstract class reprensenting the interface of
@@ -25,12 +26,15 @@ import * as fakeEvents from './fake-events.service';
  */
 export abstract class EventsService {
   abstract registerEventHandlers(): Promise<Response>;
-  abstract registerPort(port: chrome.runtime.Port): void;
   abstract isEventSupported(
     eventType: EventCategory,
   ): Promise<EventSupportStatusInfo>;
   abstract startCapturingEvents(eventType: EventCategory): Promise<void>;
   abstract stopCapturingEvents(eventType: EventCategory): Promise<void>;
+
+  getPort(): chrome.runtime.Port | undefined {
+    return PortService.getInstance().getPort(PortName.EVENTS_PORT);
+  }
 }
 
 /**
@@ -104,24 +108,21 @@ export class EventsServiceImpl extends EventsService {
   ];
 
   private notifyPort(type: EventCategory, event): void {
-    if (!this.port) {
+    const port = this.getPort();
+    if (!port) {
       return;
     }
-    this.port.postMessage({
+    port.postMessage({
       type: type,
       info: event,
     });
     return;
   }
 
-  public registerPort(port: chrome.runtime.Port): void {
-    this.port = port;
-  }
-
   public async registerEventHandlers(): Promise<Response> {
     try {
       for (const item of this.eventCategoryAndMethods) {
-        (item.func as any).addListener(this.notifyPort.bind(null, item.type));
+        (item.func as any).addListener(this.notifyPort.bind(this, item.type));
       }
       return generateEventsSuccessResponse();
     } catch (err) {
@@ -148,13 +149,9 @@ export class EventsServiceImpl extends EventsService {
  * Fake implementation of EventsService
  * @extends EventsService
  */
-export class FakeEventsService implements EventsService {
+export class FakeEventsService extends EventsService {
   public async registerEventHandlers(): Promise<Response> {
     return fakeEvents.registerEventHandlers();
-  }
-
-  public registerPort(port: chrome.runtime.Port) {
-    return fakeEvents.registerPort(port);
   }
 
   public async isEventSupported(

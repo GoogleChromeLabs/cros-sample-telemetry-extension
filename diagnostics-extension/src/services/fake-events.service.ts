@@ -9,14 +9,14 @@
 // Fake data may not use certain parameter variables.
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {Response} from '../common/message';
+import {PortName, Response} from '../common/message';
 import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
 } from '../common/telemetry-extension-types';
+import {PortService} from './port.service';
 
-let eventPort: chrome.runtime.Port;
 const categoryToIntervalId: Map<
   EventCategory,
   ReturnType<typeof setTimeout>
@@ -31,16 +31,13 @@ export async function registerEventHandlers(): Promise<Response> {
   return {success: true};
 }
 
-export function registerPort(port: chrome.runtime.Port): void {
-  eventPort = port;
-  return;
-}
-
 function notifyPort(type: EventCategory, message: object): void {
-  if (!eventPort) {
+  const port = PortService.getInstance().getPort(PortName.EVENTS_PORT);
+  if (!port) {
+    console.error('port not connected');
     return;
   }
-  eventPort.postMessage({
+  port.postMessage({
     type: type,
     info: message,
   });

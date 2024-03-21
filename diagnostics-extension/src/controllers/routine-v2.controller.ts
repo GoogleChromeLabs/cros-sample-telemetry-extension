@@ -25,10 +25,6 @@ export function registerRoutineV2EventHandlers(): void {
   routineV2Service.registerRoutineV2EventHandlers();
 }
 
-export async function onRoutineV2PortConnect(port: chrome.runtime.Port) {
-  routineV2Service.registerPort(port);
-}
-
 export async function handleRoutineV2(
   req: Request,
   res: (data: Response) => void,
