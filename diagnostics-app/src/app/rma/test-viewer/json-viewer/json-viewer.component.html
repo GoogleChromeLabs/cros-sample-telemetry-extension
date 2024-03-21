@@ -1,0 +1,18 @@
+<!--
+ Copyright 2023 The Chromium Authors. All rights reserved.
+ Use of this source code is governed by a BSD-style license that can be
+ found in the LICENSE file.
+-->
+<ng-container
+  *ngIf="isPrimitiveType(output); then renderPrimitive; else renderSubobject"
+></ng-container>
+<ng-template #renderPrimitive> {{ output }} </ng-template>
+<ng-template #renderSubobject>
+  <div
+    [ngClass]="{ 'add-indent': level !== 0 }"
+    *ngFor="let item of $any(output) | keyvalue: originalOrder"
+  >
+    <b>{{ item.key }}:</b>
+    <app-json-viewer [output]="item.value" [level]="level + 1"></app-json-viewer>
+  </div>
+</ng-template>
