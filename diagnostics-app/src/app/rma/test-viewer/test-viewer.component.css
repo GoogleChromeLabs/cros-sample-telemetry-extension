@@ -1,0 +1,10 @@
+.top-button-row {
+  height: 60px;
+  display: flex;
+  justify-content:first baseline;
+}
+
+.test-operation-button {
+  margin-right: 20px;
+  margin-left: 20px;
+}

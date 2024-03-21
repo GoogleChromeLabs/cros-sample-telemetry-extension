@@ -10,6 +10,7 @@ import {AuditPageComponent} from './test-viewer/audit-page/audit-page.component'
 import {JsonViewerComponent} from './test-viewer/json-viewer/json-viewer.component';
 import {RoutineV1TestComponent} from './test-viewer/routine-v1-test/routine-v1-test.component';
 import {RoutineV2TestComponent} from './test-viewer/routine-v2-test/routine-v2-test.component';
+import {TestViewerComponent} from './test-viewer/test-viewer.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {RoutineV2TestComponent} from './test-viewer/routine-v2-test/routine-v2-t
     LogViewerComponent,
     RmaSidebarComponent,
     JsonViewerComponent,
+    TestViewerComponent,
     RoutineV2TestComponent,
     RoutineV1TestComponent,
     AuditPageComponent,
