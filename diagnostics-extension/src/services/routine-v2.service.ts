@@ -11,6 +11,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import {
+  PortName,
   RoutineV2Argument,
   RoutineV2ArgumentUnion,
   RoutineV2Category,
@@ -26,6 +27,7 @@ import {
 } from '../common/telemetry-extension-types';
 import {environment} from '../environments/environment';
 import * as fakeRoutineV2 from './fake-routine-v2.service';
+import {PortService} from './port.service';
 
 /**
  * Abstract class reprensenting the interface of
@@ -33,7 +35,6 @@ import * as fakeRoutineV2 from './fake-routine-v2.service';
  */
 export abstract class RoutineV2Service {
   abstract registerRoutineV2EventHandlers(): void;
-  abstract registerPort(port: chrome.runtime.Port): void;
   abstract isRoutineArgumentSupported(
     routineArgument: RoutineV2Argument,
   ): Promise<RoutineSupportStatusInfo>;
@@ -46,6 +47,10 @@ export abstract class RoutineV2Service {
   abstract cancelRoutine(
     cancelRoutineRequest: CancelRoutineRequest,
   ): Promise<void>;
+
+  getPort(): chrome.runtime.Port | undefined {
+    return PortService.getInstance().getPort(PortName.ROUTINE_V2_PORT);
+  }
 }
 
 /**
@@ -53,8 +58,6 @@ export abstract class RoutineV2Service {
  * @extends RoutineV2Service
  */
 export class RoutineV2ServiceImpl extends RoutineV2Service {
-  private port!: chrome.runtime.Port;
-
   private routineCategoryToMethods = new Map<
     RoutineV2Category,
     {
@@ -128,7 +131,8 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
     eventCategory: RoutineV2EventCategory,
     event: RoutineV2EventUnion,
   ) {
-    if (!this.port) {
+    const port = this.getPort();
+    if (!port) {
       console.error('port not established');
       return;
     }
@@ -141,12 +145,8 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       eventCategory: eventCategory,
       event: event,
     };
-    this.port.postMessage(routineV2Event);
+    port.postMessage(routineV2Event);
     return;
-  }
-
-  public registerPort(port: chrome.runtime.Port): void {
-    this.port = port;
   }
 
   public registerRoutineV2EventHandlers(): void {
@@ -154,7 +154,7 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       for (const [eventCategory, routineEventListener] of this
         .routineEventListeners) {
         routineEventListener.addListener(
-          this.notifyPort.bind(null, eventCategory),
+          this.notifyPort.bind(this, eventCategory),
         );
       }
       return;
@@ -203,13 +203,9 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
  * Fake implementation of RoutineV2Service
  * @extends RoutineV2Service
  */
-export class FakeRoutineV2Service implements RoutineV2Service {
+export class FakeRoutineV2Service extends RoutineV2Service {
   public registerRoutineV2EventHandlers(): void {
     return fakeRoutineV2.registerEventHandlers();
-  }
-
-  public registerPort(port: chrome.runtime.Port): void {
-    return fakeRoutineV2.registerPort(port);
   }
 
   public isRoutineArgumentSupported(

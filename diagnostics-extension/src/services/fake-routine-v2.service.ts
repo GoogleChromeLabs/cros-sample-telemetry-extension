@@ -16,6 +16,7 @@ import {
   VolumeButtonRoutineArgument,
 } from '../common/config/support-assist';
 import {
+  PortName,
   RoutineV2Argument,
   RoutineV2Category,
   RoutineV2EventCategory,
@@ -34,8 +35,7 @@ import {
   RoutineWaitingReason,
   StartRoutineRequest,
 } from '../common/telemetry-extension-types';
-
-let routineV2Port: chrome.runtime.Port;
+import {PortService} from './port.service';
 
 // Fake data to return result of running each routine.
 // Maps compare reference of objects. Thus we use the JSON stringify notation to
@@ -191,19 +191,16 @@ export function registerEventHandlers(): void {
   return;
 }
 
-export function registerPort(port: chrome.runtime.Port): void {
-  routineV2Port = port;
-  return;
-}
-
 function notifyPort(
   eventCategory: RoutineV2EventCategory,
   event: RoutineV2EventUnion,
 ): void {
-  if (!routineV2Port) {
+  const port = PortService.getInstance().getPort(PortName.ROUTINE_V2_PORT);
+  if (!port) {
+    console.error('port not connected');
     return;
   }
-  routineV2Port.postMessage({
+  port.postMessage({
     eventCategory: eventCategory,
     event: event,
   });
