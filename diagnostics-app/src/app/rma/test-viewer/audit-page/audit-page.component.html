@@ -1,0 +1,21 @@
+<div class="content-container">
+  <div class="test-title">Audit Page</div>
+  <table>
+    <tr>
+      <th>Passed Test:</th>
+      <td>{{ testStatistics.passedTests.length }} / {{ testStatistics.enabledTests.length }}</td>
+    </tr>
+    <tr>
+      <th>Failed Test:</th>
+      <td>{{ testStatistics.failedTests.length }} / {{ testStatistics.enabledTests.length }}</td>
+    </tr>
+    <tr>
+      <th>Unran Test:</th>
+      <td>{{ testStatistics.unranTests.length }} / {{ testStatistics.enabledTests.length }}</td>
+    </tr>
+    <tr>
+      <th>Disabled Test:</th>
+      <td>{{ testStatistics.disabledTests.length }}</td>
+    </tr>
+  </table>
+</div>
