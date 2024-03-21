@@ -23,7 +23,7 @@ import {
   UserMessageType,
 } from '../common/telemetry-extension-types';
 
-let idCount = 0;
+let idCount = 1;
 
 function generateRoutineId(): number {
   return idCount++;
