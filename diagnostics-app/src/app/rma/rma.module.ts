@@ -7,6 +7,7 @@ import {LogViewerComponent} from './log-viewer/log-viewer.component';
 import {RmaRoutingModule} from './rma-routing.module';
 import {RmaSidebarComponent} from './rma-sidebar/rma-sidebar.component';
 import {JsonViewerComponent} from './test-viewer/json-viewer/json-viewer.component';
+import {RoutineV1TestComponent} from './test-viewer/routine-v1-test/routine-v1-test.component';
 import {RoutineV2TestComponent} from './test-viewer/routine-v2-test/routine-v2-test.component';
 
 @NgModule({
@@ -16,6 +17,7 @@ import {RoutineV2TestComponent} from './test-viewer/routine-v2-test/routine-v2-t
     RmaSidebarComponent,
     JsonViewerComponent,
     RoutineV2TestComponent,
+    RoutineV1TestComponent,
   ],
   imports: [RmaRoutingModule, SharedModule],
   exports: [ContentLayoutComponent],
