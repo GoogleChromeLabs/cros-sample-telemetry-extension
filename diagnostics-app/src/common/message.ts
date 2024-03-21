@@ -290,7 +290,8 @@ export type RoutineV2FinishedInfoUnion =
 
 export type RoutineV2Response =
   | CreateRoutineResponse
-  | RoutineSupportStatusInfo;
+  | RoutineSupportStatusInfo
+  | null;
 
 export function IsRoutineSupportStatusInfo(
   response: RoutineV2Response,

@@ -76,11 +76,8 @@ export class RoutineV2Service {
           (response: Response) => {
             if (!response.success) {
               return reject(response.error);
-            } else if (!response.routineV2) {
-              throw 'Invalid response';
-            } else {
-              return resolve(response.routineV2);
             }
+            return resolve(response?.routineV2 ?? null);
           },
         );
       } catch (err) {
