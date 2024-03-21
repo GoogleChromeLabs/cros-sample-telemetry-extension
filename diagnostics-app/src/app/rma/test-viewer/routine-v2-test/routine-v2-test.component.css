@@ -1,0 +1,58 @@
+.content-container {
+  display: flex;
+  flex-direction: column;
+  margin: 15px;
+}
+
+.test-title {
+  line-height: normal;
+  font-size: 30px;
+  font-weight: bold;
+  flex: 0 0 auto;
+}
+
+.progress-bar {
+  width: 100%;
+}
+
+table {
+  border-collapse: collapse; /* Required for single borders */
+  width: 100%;
+}
+
+th,
+td {
+  padding: 10px; /* Add padding for content */
+  text-align: left; /* Align content to the left */
+  position: relative; /* Enable positioning of the border element */
+  border-top: 1px solid white; /* Vertical border on the left of each cell */
+  border-bottom: 1px solid white; /* Vertical border on the right */
+  border-left: none; /* Remove the top border */
+  border-right: none; /* Remove the bottom border */
+  border-collapse: collapse;
+}
+
+/* Styles for width distribution */
+th {
+  width: 30%;
+}
+td {
+  width: 70%;
+}
+
+.progress-bar {
+  flex: 0 0 auto;
+  width: 98%;
+  margin-right: 2%;
+}
+
+.progress-bar-container {
+  display: flex;
+  flex-direction: row; /* Align items vertically */
+  align-items: center; /* Center vertically */
+  margin: 20px;
+}
+
+.offset-left {
+  margin-left: -20px;
+}

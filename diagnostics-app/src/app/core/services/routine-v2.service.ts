@@ -36,7 +36,7 @@ import {
 } from 'common/telemetry-extension-types';
 import {environment} from 'environments/environment';
 
-export interface getSubjectResponse {
+export interface GetSubjectResponse {
   success: Boolean;
   subject?: Subject<RoutineV2Event>;
   error?: string;
@@ -157,7 +157,7 @@ export class RoutineV2Service {
 
   public async getSubject(
     routineArgument: RoutineV2Argument,
-  ): Promise<getSubjectResponse> {
+  ): Promise<GetSubjectResponse> {
     if (!this.isRoutineArgumentSupported(routineArgument)) {
       console.error(
         'A getSubject request is called on unsupported routine argument: ',
