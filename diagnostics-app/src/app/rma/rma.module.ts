@@ -6,12 +6,14 @@ import {ContentLayoutComponent} from './layout/content-layout/content-layout.com
 import {LogViewerComponent} from './log-viewer/log-viewer.component';
 import {RmaRoutingModule} from './rma-routing.module';
 import {RmaSidebarComponent} from './rma-sidebar/rma-sidebar.component';
+import {JsonViewerComponent} from './test-viewer/json-viewer/json-viewer.component';
 
 @NgModule({
   declarations: [
     ContentLayoutComponent,
     LogViewerComponent,
     RmaSidebarComponent,
+    JsonViewerComponent,
   ],
   imports: [RmaRoutingModule, SharedModule],
   exports: [ContentLayoutComponent],
