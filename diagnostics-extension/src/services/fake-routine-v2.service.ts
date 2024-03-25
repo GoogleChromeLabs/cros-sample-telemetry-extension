@@ -140,9 +140,14 @@ class FakeGenericRoutine {
     this.routineState = RoutineState.initialized;
     this.percentage = 0;
 
-    // Send initialized event.
-    const routineInitializedInfo: RoutineInitializedInfo = {uuid: this.uuid};
-    notifyPort(RoutineV2EventCategory.INITIALIZED, routineInitializedInfo);
+    setTimeout(() => {
+      // Send initialized event. This should be called asynchronously by
+      // appending the notification at the end of the JS event queue. This will
+      // ensure that UUID has been returned first before the routine
+      // notification is sent.
+      const routineInitializedInfo: RoutineInitializedInfo = {uuid: this.uuid};
+      notifyPort(RoutineV2EventCategory.INITIALIZED, routineInitializedInfo);
+    }, 0);
   }
 
   public startRoutine() {
