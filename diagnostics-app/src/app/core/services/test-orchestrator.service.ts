@@ -1,6 +1,6 @@
 import {Injectable, NgZone} from '@angular/core';
-import {TestConfig, TestList} from 'common/config/rma';
-import {RequestType, RoutineV2Argument} from 'common/message';
+import {RmaTestType, TestConfig, TestList} from 'common/config/rma';
+import {RoutineV2Argument} from 'common/message';
 import {
   GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
@@ -15,7 +15,7 @@ import {RoutineV2Service} from './routine-v2.service';
 
 export interface V2TestResult {
   title: string;
-  testType: RequestType.ROUTINE_V2;
+  testType: RmaTestType.ROUTINE_V2;
   percentage: number;
   passed: boolean;
   // This is a JSON serializable object to show.
@@ -26,13 +26,20 @@ export interface V2TestResult {
 export interface V1TestResult {
   // Name of the test to be displayed
   title: string;
-  testType: RequestType.DIAGNOSTICS;
+  testType: RmaTestType.DIAGNOSTICS;
   percentage: number;
   passed: boolean;
   routineInfo?: GetRoutineUpdateResponse;
 }
 
-export type TestResult = V2TestResult | V1TestResult | null;
+export interface CameraTestResult {
+  title: string;
+  testType: RmaTestType.CAMERA;
+  percentage: number;
+  passed: boolean;
+}
+
+export type TestResult = V2TestResult | V1TestResult | CameraTestResult | null;
 
 @Injectable({providedIn: 'root'})
 export class TestOrchestratorService {
@@ -77,7 +84,7 @@ export class TestOrchestratorService {
 
       const v2SupportedRoutinesPromise = [];
       for (const testConfig of testList) {
-        if (testConfig.testType === RequestType.ROUTINE_V2) {
+        if (testConfig.testType === RmaTestType.ROUTINE_V2) {
           v2SupportedRoutinesPromise.push(
             this.routineV2Service.isRoutineArgumentSupported(
               testConfig.testArgument as RoutineV2Argument,
@@ -98,12 +105,12 @@ export class TestOrchestratorService {
       ).routines;
 
       for (const testConfig of testList) {
-        if (testConfig.testType === RequestType.DIAGNOSTICS) {
+        if (testConfig.testType === RmaTestType.DIAGNOSTICS) {
           testConfig.supported = v1AvailableRoutines.includes(
-            testConfig.testArgument.category as RoutineType,
+            testConfig.testArgument!.category as RoutineType,
           );
         }
-        if (testConfig.testType === RequestType.ROUTINE_V2) {
+        if (testConfig.testType === RmaTestType.ROUTINE_V2) {
           // Supportability cache will cache all results for v2 routines, so its not
           // costly to await.
           const supportStatus: RoutineSupportStatusInfo =
@@ -112,6 +119,9 @@ export class TestOrchestratorService {
             );
           testConfig.supported =
             supportStatus.status === RoutineSupportStatus.supported;
+        }
+        if (testConfig.testType === RmaTestType.CAMERA) {
+          testConfig.supported = true;
         }
 
         // disable all unsupported tests.

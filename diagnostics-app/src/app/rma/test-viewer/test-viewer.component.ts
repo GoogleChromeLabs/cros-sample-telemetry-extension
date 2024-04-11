@@ -7,17 +7,18 @@ import {
 } from '@angular/core';
 import {LoggingService} from 'app/core/services/logging.service';
 import {TestOrchestratorService} from 'app/core/services/test-orchestrator.service';
-import {TestConfig} from 'common/config/rma';
-import {RequestType} from 'common/message';
+import {RmaTestType, TestConfig} from 'common/config/rma';
 import {AuditPageComponent} from './audit-page/audit-page.component';
 import {BaseTestComponent} from './base-test/base-test.component';
+import {CameraTestComponent} from './camera-test/camera-test.component';
 import {RoutineV1TestComponent} from './routine-v1-test/routine-v1-test.component';
 import {RoutineV2TestComponent} from './routine-v2-test/routine-v2-test.component';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const componentMap = new Map<string, any>([
-  [RequestType.ROUTINE_V2, RoutineV2TestComponent],
-  [RequestType.DIAGNOSTICS, RoutineV1TestComponent],
+const componentMap = new Map<RmaTestType, any>([
+  [RmaTestType.ROUTINE_V2, RoutineV2TestComponent],
+  [RmaTestType.DIAGNOSTICS, RoutineV1TestComponent],
+  [RmaTestType.CAMERA, CameraTestComponent],
 ]);
 
 @Component({
@@ -74,17 +75,21 @@ export class TestViewerComponent {
       this.testComponentContainer.createComponent(AuditPageComponent);
   }
 
-  loadTestComponent(index: number) {
-    const config = this.testList[index];
-    this.testComponentRef = this.testComponentContainer.createComponent(
-      componentMap.get(config.testType),
-    );
-    this.testComponentRef.instance.argument = config.testArgument;
-    this.testComponentRef.instance.title = config.title;
-    this.testComponentRef.instance.index = index;
-    this.testComponentRef.instance.testCompleted.subscribe(() =>
-      this.testCompleted(),
-    );
+  async loadTestComponent(index: number) {
+    try {
+      const config = this.testList[index];
+      this.testComponentRef = this.testComponentContainer.createComponent(
+        componentMap.get(config.testType),
+      );
+      this.testComponentRef.instance.argument = config.testArgument;
+      this.testComponentRef.instance.title = config.title;
+      this.testComponentRef.instance.index = index;
+      this.testComponentRef.instance.testCompleted.subscribe(() =>
+        this.testCompleted(),
+      );
+    } catch (err) {
+      this.loggingService.error(JSON.stringify(err));
+    }
   }
 
   testCompleted() {

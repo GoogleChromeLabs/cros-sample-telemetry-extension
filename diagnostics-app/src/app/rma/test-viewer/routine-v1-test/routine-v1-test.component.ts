@@ -10,12 +10,8 @@ import {
   TestResult,
   V1TestResult,
 } from 'app/core/services/test-orchestrator.service';
-import {RoutineV1TestArgument} from 'common/config/rma';
-import {
-  RequestType,
-  ResponseErrorInfoMessage,
-  RoutineUpdateResponse,
-} from 'common/message';
+import {RmaTestType, RoutineV1TestArgument} from 'common/config/rma';
+import {ResponseErrorInfoMessage, RoutineUpdateResponse} from 'common/message';
 import {
   GetRoutineUpdateResponse,
   RoutineStatus,
@@ -114,7 +110,7 @@ export class RoutineV1TestComponent implements BaseTestComponent {
     const result: TestResult = {
       title: this.title!,
       // Either calling the diagnostics API through telemetry extension, or a custom test that is written locally.
-      testType: RequestType.DIAGNOSTICS,
+      testType: RmaTestType.DIAGNOSTICS,
       passed: this.hasPassed() === null ? false : this.hasPassed()!,
       percentage: this.percentage(),
       routineInfo: this.routineInfo,

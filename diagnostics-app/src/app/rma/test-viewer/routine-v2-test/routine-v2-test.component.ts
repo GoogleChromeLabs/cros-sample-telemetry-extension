@@ -9,8 +9,8 @@ import {
   TestResult,
   V2TestResult,
 } from 'app/core/services/test-orchestrator.service';
+import {RmaTestType} from 'common/config/rma';
 import {
-  RequestType,
   RoutineV2Argument,
   RoutineV2Event,
   RoutineV2EventCategory,
@@ -201,7 +201,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
     }
     const result: TestResult = {
       title: this.title,
-      testType: RequestType.ROUTINE_V2,
+      testType: RmaTestType.ROUTINE_V2,
       percentage: this.percentage,
       passed: this.hasPassed,
       details: this.output!,
