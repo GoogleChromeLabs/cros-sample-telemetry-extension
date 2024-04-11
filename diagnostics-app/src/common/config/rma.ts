@@ -21,6 +21,7 @@ export enum RmaTestType {
   DIAGNOSTICS,
   ROUTINE_V2,
   CAMERA,
+  AUDIO,
 }
 
 export interface TestConfig {
@@ -42,6 +43,12 @@ export const TestList: TestConfig[] = [
     title: 'Custom Camera Test',
     enabled: true,
     testType: RmaTestType.CAMERA,
+    testArgument: null,
+  },
+  {
+    title: 'Custom Audio Test',
+    enabled: true,
+    testType: RmaTestType.AUDIO,
     testArgument: null,
   },
   {

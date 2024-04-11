@@ -8,6 +8,7 @@ import {
 import {LoggingService} from 'app/core/services/logging.service';
 import {TestOrchestratorService} from 'app/core/services/test-orchestrator.service';
 import {RmaTestType, TestConfig} from 'common/config/rma';
+import {AudioTestComponent} from './audio-test/audio-test.component';
 import {AuditPageComponent} from './audit-page/audit-page.component';
 import {BaseTestComponent} from './base-test/base-test.component';
 import {CameraTestComponent} from './camera-test/camera-test.component';
@@ -19,6 +20,7 @@ const componentMap = new Map<RmaTestType, any>([
   [RmaTestType.ROUTINE_V2, RoutineV2TestComponent],
   [RmaTestType.DIAGNOSTICS, RoutineV1TestComponent],
   [RmaTestType.CAMERA, CameraTestComponent],
+  [RmaTestType.AUDIO, AudioTestComponent],
 ]);
 
 @Component({

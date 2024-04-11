@@ -39,7 +39,19 @@ export interface CameraTestResult {
   passed: boolean;
 }
 
-export type TestResult = V2TestResult | V1TestResult | CameraTestResult | null;
+export interface AudioTestResult {
+  title: string;
+  testType: RmaTestType.AUDIO;
+  percentage: number;
+  passed: boolean;
+}
+
+export type TestResult =
+  | V2TestResult
+  | V1TestResult
+  | CameraTestResult
+  | AudioTestResult
+  | null;
 
 @Injectable({providedIn: 'root'})
 export class TestOrchestratorService {
@@ -121,6 +133,9 @@ export class TestOrchestratorService {
             supportStatus.status === RoutineSupportStatus.supported;
         }
         if (testConfig.testType === RmaTestType.CAMERA) {
+          testConfig.supported = true;
+        }
+        if (testConfig.testType === RmaTestType.AUDIO) {
           testConfig.supported = true;
         }
 

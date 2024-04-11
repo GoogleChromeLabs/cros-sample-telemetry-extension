@@ -1,0 +1,24 @@
+.test-operation-button {
+  font-size: 12px;
+  margin: 10px;
+  box-sizing: content-box;
+}
+
+.test-title {
+  line-height: normal;
+  font-size: 30px;
+  font-weight: bold;
+  flex: 0 0 auto;
+}
+
+.record-button {
+  margin: 20px;
+}
+
+.audio-container {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+}
