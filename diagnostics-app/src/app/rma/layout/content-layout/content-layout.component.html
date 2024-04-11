@@ -12,6 +12,7 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="true"
+    [disableClose]="true"
   >
     <mat-toolbar>RMA Tests</mat-toolbar>
     <app-rma-sidebar></app-rma-sidebar>
