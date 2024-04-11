@@ -1,0 +1,19 @@
+<div *ngIf="testRunning; then showTest; else showPreparation"></div>
+
+<ng-template #showPreparation> Press "Run this test only" to start the test </ng-template>
+
+<ng-template #showTest>
+  <div class="webcam-container">
+    <webcam [height]="200" [width]="200" (initError)="handleInitError($event)"></webcam>
+
+    <div class="prompt">
+      <p>Can you see yourself from the webcam?</p>
+      <button mat-raised-button class="test-operation-button" (click)="submitTestResult(true)">
+        Yes
+      </button>
+      <button mat-raised-button class="test-operation-button" (click)="submitTestResult(false)">
+        No
+      </button>
+    </div>
+  </div>
+</ng-template>

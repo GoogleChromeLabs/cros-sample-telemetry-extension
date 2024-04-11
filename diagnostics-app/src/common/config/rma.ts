@@ -7,7 +7,6 @@
 
 import {
   DiagnosticsParamsUnion,
-  RequestType,
   RoutineV2Argument,
   RoutineV2Category,
 } from '../message';
@@ -18,24 +17,37 @@ export interface RoutineV1TestArgument {
   argument: DiagnosticsParamsUnion;
 }
 
+export enum RmaTestType {
+  DIAGNOSTICS,
+  ROUTINE_V2,
+  CAMERA,
+}
+
 export interface TestConfig {
   // Name of the test to be displayed
   title: string;
   // Whether the test is enabled
   enabled: boolean;
   // Either calling the diagnostics API through telemetry extension, or a custom test that is written locally.
-  testType: RequestType.DIAGNOSTICS | RequestType.ROUTINE_V2 | 'custom';
-  // The argument needed to run the requested routine.
-  testArgument: RoutineV1TestArgument | RoutineV2Argument;
+  testType: RmaTestType;
+  // The argument needed to run the requested test. Argument may be null if
+  // not needed.
+  testArgument: RoutineV1TestArgument | RoutineV2Argument | null;
   // This field will be filled at runtime depending on device config.
   supported?: boolean | null;
 }
 
 export const TestList: TestConfig[] = [
   {
+    title: 'Custom Camera Test',
+    enabled: true,
+    testType: RmaTestType.CAMERA,
+    testArgument: null,
+  },
+  {
     title: 'Memory Test V2',
     enabled: true,
-    testType: RequestType.ROUTINE_V2,
+    testType: RmaTestType.ROUTINE_V2,
     testArgument: {
       category: RoutineV2Category.MEMORY,
       argument: {
@@ -46,7 +58,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'Fan Test V2',
     enabled: true,
-    testType: RequestType.ROUTINE_V2,
+    testType: RmaTestType.ROUTINE_V2,
     testArgument: {
       category: RoutineV2Category.FAN,
       argument: {},
@@ -55,7 +67,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'Volume Button Test V2',
     enabled: true,
-    testType: RequestType.ROUTINE_V2,
+    testType: RmaTestType.ROUTINE_V2,
     testArgument: {
       category: RoutineV2Category.VOLUME_BUTTON,
       argument: {
@@ -67,7 +79,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'CPU Stress Test V1',
     enabled: true,
-    testType: RequestType.DIAGNOSTICS,
+    testType: RmaTestType.DIAGNOSTICS,
     testArgument: {
       category: RoutineType.cpu_stress,
       argument: {
@@ -78,7 +90,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'CPU Cache Test V1',
     enabled: true,
-    testType: RequestType.DIAGNOSTICS,
+    testType: RmaTestType.DIAGNOSTICS,
     testArgument: {
       category: RoutineType.cpu_cache,
       argument: {
@@ -89,7 +101,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'Prime Search Test V1',
     enabled: true,
-    testType: RequestType.DIAGNOSTICS,
+    testType: RmaTestType.DIAGNOSTICS,
     testArgument: {
       category: RoutineType.cpu_prime_search,
       argument: {
@@ -100,7 +112,7 @@ export const TestList: TestConfig[] = [
   {
     title: 'Floating Point Test V1',
     enabled: true,
-    testType: RequestType.DIAGNOSTICS,
+    testType: RmaTestType.DIAGNOSTICS,
     testArgument: {
       category: RoutineType.cpu_floating_point_accuracy,
       argument: {
