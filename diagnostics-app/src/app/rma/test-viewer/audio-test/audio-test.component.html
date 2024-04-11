@@ -1,0 +1,27 @@
+<div class="test-title">{{ title }}</div>
+<div *ngIf="testRunning; then showTest; else showPreparation"></div>
+
+<ng-template #showPreparation> Press "Run this test only" to start the test </ng-template>
+
+<ng-template #showTest>
+  <div class="audio-container">
+    <button
+      mat-raised-button
+      class="record-button"
+      (click)="isRecording ? stopRecording() : startRecording()"
+    >
+      {{ isRecording ? "Stop Recording" : "Start Recording" }}
+    </button>
+    <audio [src]="recordedAudioUrl" controls></audio>
+  </div>
+
+  <div class="prompt">
+    <p>Can you hear yourself after recording from microphone?</p>
+    <button mat-raised-button class="test-operation-button" (click)="submitTestResult(true)">
+      Yes
+    </button>
+    <button mat-raised-button class="test-operation-button" (click)="submitTestResult(false)">
+      No
+    </button>
+  </div>
+</ng-template>

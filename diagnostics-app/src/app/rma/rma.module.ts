@@ -7,6 +7,7 @@ import {ContentLayoutComponent} from './layout/content-layout/content-layout.com
 import {LogViewerComponent} from './log-viewer/log-viewer.component';
 import {RmaRoutingModule} from './rma-routing.module';
 import {RmaSidebarComponent} from './rma-sidebar/rma-sidebar.component';
+import {AudioTestComponent} from './test-viewer/audio-test/audio-test.component';
 import {AuditPageComponent} from './test-viewer/audit-page/audit-page.component';
 import {CameraTestComponent} from './test-viewer/camera-test/camera-test.component';
 import {JsonViewerComponent} from './test-viewer/json-viewer/json-viewer.component';
@@ -25,6 +26,7 @@ import {TestViewerComponent} from './test-viewer/test-viewer.component';
     RoutineV1TestComponent,
     AuditPageComponent,
     CameraTestComponent,
+    AudioTestComponent,
   ],
   imports: [RmaRoutingModule, SharedModule, WebcamModule],
   exports: [ContentLayoutComponent],
