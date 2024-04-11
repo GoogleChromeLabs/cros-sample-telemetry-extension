@@ -3,3 +3,10 @@
   margin: 10px;
   box-sizing: content-box;
 }
+
+.test-title {
+  line-height: normal;
+  font-size: 30px;
+  font-weight: bold;
+  flex: 0 0 auto;
+}
