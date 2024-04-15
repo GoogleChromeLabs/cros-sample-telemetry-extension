@@ -1,5 +1,5 @@
-import {KeyValue} from '@angular/common';
 import {Component, Input} from '@angular/core';
+import {isPrimitiveType, originalOrder} from 'app/core/app-utils';
 
 @Component({
   selector: 'app-json-viewer',
@@ -11,18 +11,7 @@ export class JsonViewerComponent {
   @Input({required: true}) output!: any;
   @Input({required: true}) level!: number;
 
-  // This function is used for maintaining the attributes' original order.
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  public originalOrder(
-    a: KeyValue<number, string>,
-    b: KeyValue<number, string>,
-  ): number {
-    return 0;
-  }
-  /* eslint-enable @typescript-eslint/no-unused-vars */
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public isPrimitiveType(a: any) {
-    return typeof a !== 'object';
-  }
+  // Used in HTML template.
+  public originalOrder = originalOrder;
+  public isPrimitiveType = isPrimitiveType;
 }
