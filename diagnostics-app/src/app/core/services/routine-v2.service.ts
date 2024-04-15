@@ -33,7 +33,7 @@ import {
   CreateRoutineResponse,
   RoutineSupportStatus,
   RoutineSupportStatusInfo,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/routines';
 import {environment} from 'environments/environment';
 
 export interface GetSubjectResponse {

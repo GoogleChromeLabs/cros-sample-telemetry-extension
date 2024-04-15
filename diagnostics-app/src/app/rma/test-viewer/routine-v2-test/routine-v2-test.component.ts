@@ -21,7 +21,7 @@ import {
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineWaitingInfo,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/routines';
 import {BaseTestComponent} from '../base-test/base-test.component';
 
 enum RoutineV2State {

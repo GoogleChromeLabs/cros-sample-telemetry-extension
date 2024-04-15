@@ -7,14 +7,14 @@ import {
   RoutineV2Category,
   TelemetryInfoType,
 } from '../message';
+import {EventCategory} from '../telemetry-extension-types/events';
+import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
 import {
-  EventCategory,
-  RoutineType,
   RunFanRoutineArguments,
   RunMemoryRoutineArguments,
   RunVolumeButtonRoutineArguments,
   VolumeButtonType,
-} from '../telemetry-extension-types';
+} from '../telemetry-extension-types/routines';
 
 export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.AUDIO,

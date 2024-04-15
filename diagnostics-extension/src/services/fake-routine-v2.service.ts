@@ -34,7 +34,7 @@ import {
   RoutineWaitingInfo,
   RoutineWaitingReason,
   StartRoutineRequest,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/routines';
 import {PortService} from './port.service';
 
 // Fake data to return result of running each routine.

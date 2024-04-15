@@ -24,7 +24,7 @@ import {
   CreateRoutineResponse,
   RoutineSupportStatusInfo,
   StartRoutineRequest,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/routines';
 import {environment} from '../environments/environment';
 import * as fakeRoutineV2 from './fake-routine-v2.service';
 import {PortService} from './port.service';

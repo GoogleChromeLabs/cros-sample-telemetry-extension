@@ -15,7 +15,7 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/events';
 
 @Component({
   selector: 'app-events-dashboard',

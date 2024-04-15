@@ -25,7 +25,7 @@ import {
   GetRoutineUpdateResponse,
   RoutineStatus,
   RoutineType,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/legacy-diagnostics';
 
 enum DiagnosticsCardState {
   READY = 'ready',

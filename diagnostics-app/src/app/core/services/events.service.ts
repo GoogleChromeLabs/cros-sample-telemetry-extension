@@ -27,7 +27,7 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/events';
 import {environment} from 'environments/environment';
 
 export interface getSubjectResponse {

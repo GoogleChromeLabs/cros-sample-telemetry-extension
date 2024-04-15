@@ -21,7 +21,7 @@ import {
   RoutineType,
   RunRoutineResponse,
   UserMessageType,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/legacy-diagnostics';
 
 let idCount = 1;
 

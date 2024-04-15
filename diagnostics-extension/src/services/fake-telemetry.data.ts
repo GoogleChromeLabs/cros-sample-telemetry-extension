@@ -29,7 +29,7 @@ import {
   TpmInfo,
   UsbBusDevices,
   VpdInfo,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/telemetry';
 
 export const audioInfo: AudioInfo = {
   outputNodes: [{}],
