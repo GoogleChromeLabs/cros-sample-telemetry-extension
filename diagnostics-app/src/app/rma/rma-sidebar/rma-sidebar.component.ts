@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {LoggingService} from 'app/core/services/logging.service';
 import {TestOrchestratorService} from 'app/core/services/test-orchestrator.service';
 import {TestConfig} from 'common/config/rma';
@@ -18,7 +18,6 @@ export class RmaSidebarComponent {
   constructor(
     private testOrchestrator: TestOrchestratorService,
     private loggingService: LoggingService,
-    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -27,7 +26,6 @@ export class RmaSidebarComponent {
     });
     this.testOrchestrator.getIsRunning$().subscribe((isRunning) => {
       this.isRunning = isRunning;
-      this.cdr.detectChanges();
     });
     this.testOrchestrator.getTestList$().subscribe((testList: TestConfig[]) => {
       this.testList = testList;

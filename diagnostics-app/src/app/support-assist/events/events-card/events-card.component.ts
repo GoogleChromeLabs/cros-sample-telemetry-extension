@@ -7,7 +7,7 @@
  * Imported by events.module.ts
  */
 
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from 'app/core/services/events.service';
 import {EventCategory} from 'common/telemetry-extension-types/events';
 
@@ -33,10 +33,7 @@ export class EventsCardComponent implements OnInit {
   public error?: string;
   public state? = EventsCardState.NOT_LISTENING;
 
-  public constructor(
-    private eventsService: EventsService,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {}
+  public constructor(private eventsService: EventsService) {}
 
   ngOnInit(): void {
     this.eventsService
@@ -47,10 +44,6 @@ export class EventsCardComponent implements OnInit {
             next: (event) => {
               this.error = undefined;
               this.eventList.push(event);
-              // Angular does not detect changes outside of its detection zone.
-              // Since these updates are asynchronous via event notification
-              // from extension, manually trigger change detection.
-              this.changeDetectorRef.detectChanges();
             },
           });
         } else {

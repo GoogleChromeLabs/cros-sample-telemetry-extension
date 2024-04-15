@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, NgZone, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {
   defaultDiagnosticsRefreshInterval,
   refreshIntervals,
@@ -64,7 +64,6 @@ export class RoutineV1TestComponent implements BaseTestComponent {
     private diagnosticsService: DiagnosticsService,
     private loggingService: LoggingService,
     private testOrchestrator: TestOrchestratorService,
-    private ngZone: NgZone,
   ) {}
 
   ngOnInit() {

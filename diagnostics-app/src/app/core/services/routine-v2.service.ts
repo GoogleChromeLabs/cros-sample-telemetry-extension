@@ -7,7 +7,7 @@
  * capturing events from Chrome extension.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {VISIBLE_ROUTINE_V2_CARDS} from 'common/config/support-assist';
@@ -69,6 +69,8 @@ export class RoutineV2Service {
     Promise<RoutineSupportStatusInfo>
   >();
 
+  constructor(private ngZone: NgZone) {}
+
   private constructRoutineV2Request(payload: RoutineV2Request): Request {
     return {type: RequestType.ROUTINE_V2, routineV2: payload};
   }
@@ -99,23 +101,28 @@ export class RoutineV2Service {
           name: PortName.ROUTINE_V2_PORT,
         });
         this.port.onMessage.addListener((msg: RoutineV2Event) => {
-          if (
-            'uuid' in msg.event &&
-            this.uuidToRoutineArgument.has(msg.event.uuid!)
-          ) {
-            const routineArg: CreateRoutineArgumentsUnion =
-              this.uuidToRoutineArgument.get(msg.event.uuid!)!;
-            if (this.subjects.has(routineArg)) {
-              this.subjects.get(routineArg)!.next(msg);
+          // Port messages are asynchronous and inherently outside of angular
+          // detection zone. Wrap listener in `ngZone.run()` to ensure all
+          // components are updated.
+          this.ngZone.run(() => {
+            if (
+              'uuid' in msg.event &&
+              this.uuidToRoutineArgument.has(msg.event.uuid!)
+            ) {
+              const routineArg: CreateRoutineArgumentsUnion =
+                this.uuidToRoutineArgument.get(msg.event.uuid!)!;
+              if (this.subjects.has(routineArg)) {
+                this.subjects.get(routineArg)!.next(msg);
+              } else {
+                console.error(
+                  'Error finding subject from UUID: ',
+                  msg.event.uuid,
+                );
+              }
             } else {
-              console.error(
-                'Error finding subject from UUID: ',
-                msg.event.uuid,
-              );
+              console.error('Missing UUID from message: ', msg);
             }
-          } else {
-            console.error('Missing UUID from message: ', msg);
-          }
+          });
         });
         for (const argument of VISIBLE_ROUTINE_V2_CARDS) {
           this.isRoutineArgumentSupported(argument);

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, NgZone, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LoggingService} from 'app/core/services/logging.service';
 import {
   GetSubjectResponse,
@@ -61,7 +61,6 @@ export class RoutineV2TestComponent implements BaseTestComponent {
     private testOrchestrator: TestOrchestratorService,
     private loggingService: LoggingService,
     private routineV2Service: RoutineV2Service,
-    private ngZone: NgZone,
   ) {}
 
   ngOnDestroy() {
@@ -86,7 +85,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
       if (getSubjectResponse.success && getSubjectResponse.subject) {
         getSubjectResponse.subject.subscribe({
           next: (event: RoutineV2Event) => {
-            this.ngZone.run(() => this.handleEventResponse(event));
+            this.handleEventResponse(event);
           },
         });
       } else {

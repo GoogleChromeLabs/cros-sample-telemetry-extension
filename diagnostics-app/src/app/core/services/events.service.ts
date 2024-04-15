@@ -7,7 +7,7 @@
  * capturing events from Chrome extension.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {Subject} from 'rxjs';
 
 import {VISIBLE_EVENT_CARDS} from 'common/config/support-assist';
@@ -51,6 +51,8 @@ export class EventsService {
   private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> =
     new Map<EventCategory, Promise<EventsResponse>>();
 
+  constructor(private ngZone: NgZone) {}
+
   private constructEventsRequest(payload: EventsRequest): Request {
     return {type: RequestType.EVENTS, events: payload};
   }
@@ -84,11 +86,18 @@ export class EventsService {
           name: PortName.EVENTS_PORT,
         });
         this.port.onMessage.addListener((msg: EventMessage) => {
-          if (this.subjects.has(msg.type)) {
-            this.subjects.get(msg.type)!.next(msg.info);
-          } else {
-            console.error(ResponseErrorInfoMessage.MISSING_EVENTS_TYPE_SUBJECT);
-          }
+          // Port messages are asynchronous and inherently outside of angular
+          // detection zone. Wrap listener in `ngZone.run()` to ensure all
+          // components are updated.
+          this.ngZone.run(() => {
+            if (this.subjects.has(msg.type)) {
+              this.subjects.get(msg.type)!.next(msg.info);
+            } else {
+              console.error(
+                ResponseErrorInfoMessage.MISSING_EVENTS_TYPE_SUBJECT,
+              );
+            }
+          });
         });
         for (const category of VISIBLE_EVENT_CARDS) {
           this.isEventSupported(category);
