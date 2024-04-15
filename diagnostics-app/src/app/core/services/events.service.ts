@@ -29,6 +29,7 @@ import {
   EventSupportStatusInfo,
 } from 'common/telemetry-extension-types/events';
 import {environment} from 'environments/environment';
+import {LoggingService} from './logging.service';
 
 export interface getSubjectResponse {
   success: Boolean;
@@ -51,7 +52,10 @@ export class EventsService {
   private supportabilityCache: Map<EventCategory, Promise<EventsResponse>> =
     new Map<EventCategory, Promise<EventsResponse>>();
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private loggingService: LoggingService,
+    private ngZone: NgZone,
+  ) {}
 
   private constructEventsRequest(payload: EventsRequest): Request {
     return {type: RequestType.EVENTS, events: payload};
@@ -90,13 +94,13 @@ export class EventsService {
           // detection zone. Wrap listener in `ngZone.run()` to ensure all
           // components are updated.
           this.ngZone.run(() => {
-            if (this.subjects.has(msg.type)) {
-              this.subjects.get(msg.type)!.next(msg.info);
-            } else {
-              console.error(
+            if (!this.subjects.has(msg.type)) {
+              this.loggingService.error(
                 ResponseErrorInfoMessage.MISSING_EVENTS_TYPE_SUBJECT,
               );
+              return;
             }
+            this.subjects.get(msg.type)!.next(msg.info);
           });
         });
         for (const category of VISIBLE_EVENT_CARDS) {
@@ -104,7 +108,7 @@ export class EventsService {
         }
         return resolve();
       } catch (err) {
-        console.error(
+        this.loggingService.error(
           ResponseErrorInfoMessage.FAILED_PORT_CONNECTION_SERVICE_CONSTRUCTOR,
         );
         return reject();
@@ -116,7 +120,7 @@ export class EventsService {
     category: EventCategory,
   ): Promise<getSubjectResponse> {
     if (!this.isEventSupported(category)) {
-      console.error(
+      this.loggingService.error(
         'A getSubject request is called on unsupported event: ',
         category,
       );

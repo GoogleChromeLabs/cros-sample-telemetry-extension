@@ -122,9 +122,6 @@ export class RoutineV1TestComponent implements BaseTestComponent {
   }
 
   private handleResponse() {
-    this.loggingService.info(
-      'handling response' + JSON.stringify(this.routineInfo),
-    );
     if (!this.routineInfo) {
       this.loggingService.error(
         ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_INFO,
@@ -165,7 +162,7 @@ export class RoutineV1TestComponent implements BaseTestComponent {
 
       this.handleResponse();
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Failed to start routine: ', err);
     }
   }
 
@@ -187,7 +184,7 @@ export class RoutineV1TestComponent implements BaseTestComponent {
       }
       await this.diagnosticsService.stopRoutine(this.routineId);
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Failed to stop routine: ', err);
     }
 
     this.routineId = undefined;
@@ -203,7 +200,7 @@ export class RoutineV1TestComponent implements BaseTestComponent {
       this.routineInfo = res.info;
       this.handleResponse();
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Failed to resume routine: ', err);
     }
   }
 
@@ -214,7 +211,7 @@ export class RoutineV1TestComponent implements BaseTestComponent {
       this.routineInfo = res.info;
       this.handleResponse();
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Failed to get routine status: ', err);
     }
   }
 }

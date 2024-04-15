@@ -100,7 +100,7 @@ export class TestViewerComponent {
         this.testCompleted(),
       );
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Error loading test component: ', err);
     }
   }
 

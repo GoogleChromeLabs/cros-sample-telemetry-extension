@@ -39,7 +39,10 @@ export class CameraTestComponent implements BaseTestComponent {
   }
 
   public handleInitError(error: WebcamInitError): void {
-    this.loggingService.error(error.message);
+    this.loggingService.error(
+      'Failed to initialize Web Camera: ',
+      error.message,
+    );
   }
 
   submitTestResult(passed: boolean) {

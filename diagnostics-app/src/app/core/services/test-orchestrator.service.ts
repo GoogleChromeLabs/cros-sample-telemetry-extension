@@ -222,7 +222,7 @@ export class TestOrchestratorService {
   startTests() {
     if (this.isRunning.value) return;
     this.setCurrentTestIndex(TestOrchestratorService.AUDIT_PAGE_INDEX);
-    this.loggingService.info('started running tests');
+    this.loggingService.info('Start running tests');
     this.clearResultCache();
     this.setIsRunning(true);
     this.runNextTest();
@@ -239,15 +239,15 @@ export class TestOrchestratorService {
         }
         nextAvailableIndex++;
       }
-      // All tests have finished running. Return to audit page.
-      this.setCurrentTestIndex(TestOrchestratorService.AUDIT_PAGE_INDEX);
-      this.setIsRunning(false);
+      // All tests have finished running.
+      this.stopTests();
     }
   }
 
   stopTests() {
     if (this.isRunning.value) {
       // Force testViewer to stop running all tests and return to audit page.
+      this.loggingService.info('Stop running tests');
       this.setCurrentTestIndex(TestOrchestratorService.AUDIT_PAGE_INDEX);
       this.setIsRunning(false);
     }
