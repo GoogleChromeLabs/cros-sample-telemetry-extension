@@ -7,13 +7,7 @@
  * Imported by routine-v2.module.ts
  */
 
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
 import {originalOrder} from 'app/core/app-utils';
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
@@ -84,10 +78,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     return validateUnion(this.routineArgument);
   }
 
-  public constructor(
-    private routineV2Service: RoutineV2Service,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {}
+  public constructor(private routineV2Service: RoutineV2Service) {}
 
   ngOnInit(): void {
     this.routineV2Service
@@ -184,10 +175,6 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         break;
       }
     }
-    // Angular does not detect changes outside of its detection zone. Since
-    // these updates are asynchronous via event notification from extension,
-    // manually trigger change detection.
-    this.changeDetectorRef.detectChanges();
   }
 
   public async createAndStartRoutine() {

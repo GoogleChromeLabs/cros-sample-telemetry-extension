@@ -1,4 +1,4 @@
-import {Component, NgZone} from '@angular/core';
+import {Component} from '@angular/core';
 import {
   TestOrchestratorService,
   TestResult,
@@ -25,32 +25,30 @@ export class AuditPageComponent extends BaseTestComponent {
   testStatistics = new TestStatistics();
 
   UpdateTestStatistics() {
-    this.ngZone.run(() => {
-      this.testStatistics = new TestStatistics();
-      for (const [index, testConfig] of this.testList.entries()) {
-        if (!testConfig.enabled) {
-          this.testStatistics.disabledTests.push(index);
-          continue;
-        }
-        this.testStatistics.enabledTests.push(index);
-        const testInfo = this.testResults[index];
-        if (!testInfo) {
-          this.testStatistics.unranTests.push(index);
-        }
-        if (testInfo && !testInfo.passed) {
-          this.testStatistics.failedTests.push(index);
-        }
-        if (testInfo && testInfo.passed) {
-          this.testStatistics.passedTests.push(index);
-        }
+    this.testStatistics = new TestStatistics();
+    for (const [index, testConfig] of this.testList.entries()) {
+      if (!testConfig.enabled) {
+        this.testStatistics.disabledTests.push(index);
+        continue;
       }
-    });
+      this.testStatistics.enabledTests.push(index);
+      const testInfo = this.testResults[index];
+      if (!testInfo) {
+        this.testStatistics.unranTests.push(index);
+        continue;
+      }
+      if (testInfo.passed) {
+        this.testStatistics.passedTests.push(index);
+        continue;
+      }
+      if (!testInfo.passed) {
+        this.testStatistics.failedTests.push(index);
+        continue;
+      }
+    }
   }
 
-  public constructor(
-    private testOrchestrator: TestOrchestratorService,
-    private ngZone: NgZone,
-  ) {
+  public constructor(private testOrchestrator: TestOrchestratorService) {
     super();
   }
 

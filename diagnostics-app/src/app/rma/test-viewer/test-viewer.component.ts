@@ -1,7 +1,6 @@
 import {
   Component,
   ComponentRef,
-  NgZone,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -40,7 +39,6 @@ export class TestViewerComponent {
   constructor(
     private testOrchestrator: TestOrchestratorService,
     private loggingService: LoggingService,
-    private ngZone: NgZone,
   ) {}
 
   ngOnInit() {
@@ -54,6 +52,18 @@ export class TestViewerComponent {
 
     this.testOrchestrator.getCurrentTestIndex$().subscribe((index) => {
       this.currentTestIndex = index;
+      this.loadComponent(this.currentTestIndex);
+    });
+  }
+
+  // We must wait until angular finish loading HTML views before attempting to
+  // inject child component into the TestComponentContainer. Before the view is
+  // initialized, the TestComponentContainer is invalid and cannot be accessed.
+  ngAfterViewInit() {
+    // Loading child component in `ngAfterViewInit` should be done in a new
+    // change detection cycle, which can be manually triggered via `setTimeout`
+    // function.
+    setTimeout(() => {
       this.loadComponent(this.currentTestIndex);
     });
   }
