@@ -7,9 +7,9 @@
  * Imported by diagnostics.module.ts
  */
 
-import {KeyValue} from '@angular/common';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 
+import {originalOrder} from 'app/core/app-utils';
 import {
   defaultDiagnosticsRefreshInterval,
   refreshIntervals,
@@ -66,6 +66,9 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
   // The routine id of the running routine, undefined if no routine is running.
   private routineId?: number;
 
+  // Used in HTML template.
+  public originalOrder = originalOrder;
+
   // Contains all states considered terminal states of RoutineStatus.
   readonly terminalStates = new Set<RoutineStatus>([
     RoutineStatus.passed,
@@ -115,16 +118,6 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
       this.stopRoutine();
     }
   }
-
-  // This function is used for maintaining the attributes' original order.
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  public originalOrder(
-    a: KeyValue<number, string>,
-    b: KeyValue<number, string>,
-  ): number {
-    return 0;
-  }
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   public canResume() {
     return ResumableRoutines.includes(this.routine);

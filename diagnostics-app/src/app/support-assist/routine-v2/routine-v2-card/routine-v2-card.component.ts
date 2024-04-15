@@ -7,7 +7,6 @@
  * Imported by routine-v2.module.ts
  */
 
-import {KeyValue} from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
@@ -16,6 +15,7 @@ import {
   OnInit,
 } from '@angular/core';
 
+import {originalOrder} from 'app/core/app-utils';
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
 import {RoutineV2Event, RoutineV2EventCategory} from 'common/message';
 import {
@@ -61,6 +61,9 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
 
   // The routine id associated with the card, possibly null if no routine is running.
   private uuid?: string;
+
+  // Used in HTML template.
+  public originalOrder = originalOrder;
 
   get passedColor() {
     if (this.hasPassed) {
@@ -110,16 +113,6 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       this.routineV2Service.CancelRoutine(this.uuid);
     }
   }
-
-  // This function is used for maintaining the attributes' original order.
-  /* eslint-disable @typescript-eslint/no-unused-vars */
-  public originalOrder(
-    a: KeyValue<number, string>,
-    b: KeyValue<number, string>,
-  ): number {
-    return 0;
-  }
-  /* eslint-enable @typescript-eslint/no-unused-vars */
 
   // Checks whether the UUID received is the same as the UUID of the running
   // routine.
