@@ -9,6 +9,7 @@
 
 import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from 'app/core/services/events.service';
+import {LoggingService} from 'app/core/services/logging.service';
 import {EventCategory} from 'common/telemetry-extension-types/events';
 
 enum EventsCardState {
@@ -33,7 +34,10 @@ export class EventsCardComponent implements OnInit {
   public error?: string;
   public state? = EventsCardState.NOT_LISTENING;
 
-  public constructor(private eventsService: EventsService) {}
+  public constructor(
+    private eventsService: EventsService,
+    private loggingService: LoggingService,
+  ) {}
 
   ngOnInit(): void {
     this.eventsService
@@ -57,7 +61,7 @@ export class EventsCardComponent implements OnInit {
 
   startCapturingEvents = async () => {
     if (this.state === EventsCardState.LISTENING) {
-      console.error('Event is already being captured');
+      this.loggingService.error('Event is already being captured');
       return;
     }
 
@@ -75,7 +79,7 @@ export class EventsCardComponent implements OnInit {
 
   stopCapturingEvents = async () => {
     if (this.state === EventsCardState.NOT_LISTENING) {
-      console.error('Event has already stopped captured');
+      this.loggingService.error('Event has already stopped captured');
       return;
     }
 

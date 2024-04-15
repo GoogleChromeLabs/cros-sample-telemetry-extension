@@ -34,7 +34,9 @@ import {
   RoutineSupportStatus,
   RoutineSupportStatusInfo,
 } from 'common/telemetry-extension-types/routines';
+import {validateUnion} from 'common/util';
 import {environment} from 'environments/environment';
+import {LoggingService} from './logging.service';
 
 export interface GetSubjectResponse {
   success: Boolean;
@@ -69,7 +71,10 @@ export class RoutineV2Service {
     Promise<RoutineSupportStatusInfo>
   >();
 
-  constructor(private ngZone: NgZone) {}
+  constructor(
+    private ngZone: NgZone,
+    private loggingService: LoggingService,
+  ) {}
 
   private constructRoutineV2Request(payload: RoutineV2Request): Request {
     return {type: RequestType.ROUTINE_V2, routineV2: payload};
@@ -105,23 +110,29 @@ export class RoutineV2Service {
           // detection zone. Wrap listener in `ngZone.run()` to ensure all
           // components are updated.
           this.ngZone.run(() => {
-            if (
-              'uuid' in msg.event &&
-              this.uuidToRoutineArgument.has(msg.event.uuid!)
-            ) {
-              const routineArg: CreateRoutineArgumentsUnion =
-                this.uuidToRoutineArgument.get(msg.event.uuid!)!;
-              if (this.subjects.has(routineArg)) {
-                this.subjects.get(routineArg)!.next(msg);
-              } else {
-                console.error(
-                  'Error finding subject from UUID: ',
-                  msg.event.uuid,
-                );
-              }
-            } else {
-              console.error('Missing UUID from message: ', msg);
+            if (!('uuid' in msg.event)) {
+              this.loggingService.error('Missing UUID in message: ', msg);
+              return;
             }
+
+            if (!this.uuidToRoutineArgument.has(msg.event.uuid!)) {
+              this.loggingService.error(
+                'Error finding routine argument from uuid: ',
+                msg.event.uuid,
+              );
+              return;
+            }
+
+            const routineArg: CreateRoutineArgumentsUnion =
+              this.uuidToRoutineArgument.get(msg.event.uuid!)!;
+            if (this.subjects.has(routineArg)) {
+              this.subjects.get(routineArg)!.next(msg);
+              return;
+            }
+            this.loggingService.error(
+              'Error finding subject from UUID: ',
+              msg.event.uuid,
+            );
           });
         });
         for (const argument of VISIBLE_ROUTINE_V2_CARDS) {
@@ -129,7 +140,7 @@ export class RoutineV2Service {
         }
         return resolve();
       } catch (err) {
-        console.error(
+        this.loggingService.error(
           ResponseErrorInfoMessage.FAILED_PORT_CONNECTION_SERVICE_CONSTRUCTOR,
         );
         return reject();
@@ -160,6 +171,10 @@ export class RoutineV2Service {
   public isRoutineArgumentSupported(
     routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo> {
+    if (validateUnion(routineArgument) === null) {
+      this.loggingService.error('Invalid routine argument: ', routineArgument);
+      return Promise.reject('invalid routine argument');
+    }
     if (!this.supportabilityCache.has(routineArgument)) {
       const promise =
         this.sendIsRoutineArgumentSupportedRequest(routineArgument);
@@ -172,7 +187,7 @@ export class RoutineV2Service {
     routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<GetSubjectResponse> {
     if (!this.isRoutineArgumentSupported(routineArgument)) {
-      console.error(
+      this.loggingService.error(
         'A getSubject request is called on unsupported routine argument: ',
         routineArgument,
       );
@@ -219,6 +234,10 @@ export class RoutineV2Service {
   public CreateRoutine(
     routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse> {
+    if (validateUnion(routineArgument) === null) {
+      this.loggingService.error('Invalid routine argument: ', routineArgument);
+      return Promise.reject('invalid routine argument');
+    }
     const promise = this.sendCreateRoutineRequest(routineArgument);
     promise.then((response: CreateRoutineResponse) => {
       if (response.uuid !== undefined)

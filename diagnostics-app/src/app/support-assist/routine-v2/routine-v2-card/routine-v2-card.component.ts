@@ -8,6 +8,7 @@
  */
 
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {LoggingService} from 'app/core/services/logging.service';
 
 import {originalOrder} from 'app/core/app-utils';
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
@@ -77,8 +78,10 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   get routineCategory() {
     return validateUnion(this.routineArgument);
   }
-
-  public constructor(private routineV2Service: RoutineV2Service) {}
+  public constructor(
+    private routineV2Service: RoutineV2Service,
+    private loggingService: LoggingService,
+  ) {}
 
   ngOnInit(): void {
     this.routineV2Service
@@ -110,7 +113,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   // TODO(b/317946517): Add UI/UX for error handling when UUID is not matched.
   private _checkUUID(uuid: string | undefined): boolean {
     if (this.uuid !== uuid) {
-      console.error('UUID not matched');
+      this.loggingService.error('UUID not matched');
       this.error = 'ERROR: uuid not matched';
       return false;
     }
@@ -192,7 +195,10 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       await this.routineV2Service.StartRoutine(this.uuid);
       this.percentage = 0;
     } catch (err) {
-      console.log('an error was found: ', err);
+      this.loggingService.error(
+        'Failed to get create and start V2 routine: ',
+        err,
+      );
       this.error = String(err);
     }
   }
@@ -210,6 +216,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       this.output = 'routine cancelled';
       this.percentage = 0;
     } catch (err) {
+      this.loggingService.error('Failed to get cancel V2 routine: ', err);
       this.error = String(err);
     }
   }

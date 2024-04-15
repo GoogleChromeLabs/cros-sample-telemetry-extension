@@ -50,9 +50,7 @@ export class AudioTestComponent implements BaseTestComponent {
     }
 
     try {
-      this.loggingService.info('before stream');
       const stream = await navigator.mediaDevices.getUserMedia({audio: true});
-      this.loggingService.info('after await stream');
 
       // Start recording
       this.mediaRecorder = new MediaRecorder(stream);
@@ -60,24 +58,19 @@ export class AudioTestComponent implements BaseTestComponent {
 
       const audioChunks: Blob[] = [];
       this.mediaRecorder.ondataavailable = (event) => {
-        this.loggingService.info('data avail');
         audioChunks.push(event.data);
       };
 
       this.mediaRecorder.onstop = () => {
         this.ngZone.run(() => {
-          this.loggingService.info('stop');
           const audioBlob = new Blob(audioChunks);
           this.recordedAudioUrl = URL.createObjectURL(audioBlob);
-          this.loggingService.info('updated url');
         });
       };
 
       this.isRecording = true;
     } catch (error) {
-      this.loggingService.error(
-        'Failed to record audio: ' + JSON.stringify(error),
-      );
+      this.loggingService.error('Failed to record audio: ', error);
     }
   }
 

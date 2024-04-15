@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {isPrimitiveType} from '../app-utils';
 
 enum LogLevel {
   Debug = 'DEBUG',
@@ -20,8 +22,20 @@ export class LoggingService {
 
   constructor(private ngZone: NgZone) {}
 
-  log(level: LogLevel, message: string) {
+  log(level: LogLevel, ...args: any[]) {
     this.ngZone.run(() => {
+      const formattedArgs = args.map((arg) => {
+        if (isPrimitiveType(arg)) {
+          return String(arg);
+        }
+        // In certain error types (e.g. DOMException), the error has a message
+        // but is not JSON serializable.
+        if (arg && arg.message) {
+          return arg.message;
+        }
+        return JSON.stringify(arg);
+      });
+      const message = formattedArgs.join('');
       this.logs$.next([
         ...this.logs$.value,
         {timestamp: new Date(), level, message},
@@ -29,17 +43,19 @@ export class LoggingService {
     });
   }
 
-  debug(message: string) {
-    this.log(LogLevel.Debug, message);
+  debug(...args: any[]) {
+    this.log(LogLevel.Debug, ...args);
   }
-  info(message: string) {
-    this.log(LogLevel.Info, message);
+  info(...args: any[]) {
+    this.log(LogLevel.Info, ...args);
   }
-  warn(message: string) {
-    this.log(LogLevel.Warn, message);
+  warn(...args: any[]) {
+    this.log(LogLevel.Warn, ...args);
   }
-  error(message: string) {
-    this.log(LogLevel.Error, message);
+  error(...args: any[]) {
+    // For error logs, logging service should also log to console.
+    console.error(...args);
+    this.log(LogLevel.Error, ...args);
   }
 
   getLogs(): Observable<LogEntry[]> {

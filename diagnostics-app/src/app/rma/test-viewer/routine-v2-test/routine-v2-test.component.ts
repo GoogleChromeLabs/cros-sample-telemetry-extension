@@ -89,7 +89,10 @@ export class RoutineV2TestComponent implements BaseTestComponent {
           },
         });
       } else {
-        this.loggingService.error(JSON.stringify(getSubjectResponse.error));
+        this.loggingService.error(
+          'Failed to get routine V2 subject: ',
+          getSubjectResponse.error,
+        );
       }
 
       // If test-orchestrator is doing a full run, start the routine directly.
@@ -108,7 +111,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
         this.percentage = cache.percentage;
       }
     } catch (err) {
-      this.loggingService.error(JSON.stringify(err));
+      this.loggingService.error('Failed to initialize routine v2 test: ', err);
     }
   }
 
@@ -228,9 +231,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
       await this.routineV2Service.StartRoutine(this.uuid);
       this.percentage = 0;
     } catch (err) {
-      this.loggingService.error(
-        'Error running v2 routine: ' + JSON.stringify(err),
-      );
+      this.loggingService.error('Failed to start v2 routine: ', err);
     }
   }
 
@@ -247,9 +248,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
       this.output = 'routine cancelled';
       this.percentage = 0;
     } catch (err) {
-      this.loggingService.error(
-        'Error cancelling v2 routine: ' + JSON.stringify(err),
-      );
+      this.loggingService.error('Failed to cancel V2 routine: ', err);
     }
   }
 }
