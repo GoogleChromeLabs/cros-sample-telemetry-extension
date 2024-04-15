@@ -12,7 +12,7 @@ import {RoutineV2Argument} from 'common/message';
 
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
 import {VISIBLE_ROUTINE_V2_CARDS} from 'common/config/support-assist';
-import {RoutineSupportStatus} from 'common/telemetry-extension-types';
+import {RoutineSupportStatus} from 'common/telemetry-extension-types/routines';
 
 @Component({
   selector: 'app-routine-v2-dashboard',

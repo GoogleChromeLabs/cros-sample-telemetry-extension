@@ -15,7 +15,7 @@ import {ResponseErrorInfoMessage, RoutineUpdateResponse} from 'common/message';
 import {
   GetRoutineUpdateResponse,
   RoutineStatus,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/legacy-diagnostics';
 import {BaseTestComponent} from '../base-test/base-test.component';
 
 enum DiagnosticsCardState {

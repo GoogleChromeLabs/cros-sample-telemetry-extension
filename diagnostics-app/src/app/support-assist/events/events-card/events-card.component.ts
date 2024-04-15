@@ -9,7 +9,7 @@
 
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {EventsService} from 'app/core/services/events.service';
-import {EventCategory} from 'common/telemetry-extension-types';
+import {EventCategory} from 'common/telemetry-extension-types/events';
 
 enum EventsCardState {
   LISTENING = 'listening',

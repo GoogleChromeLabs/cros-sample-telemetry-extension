@@ -15,7 +15,7 @@ import {VISIBLE_DIAGNOSTICS_CARDS} from 'common/config/support-assist';
 import {
   GetAvailableRoutinesResponse,
   RoutineType,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/legacy-diagnostics';
 
 @Component({
   selector: 'app-diagnostics-dashboard',

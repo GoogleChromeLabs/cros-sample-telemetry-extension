@@ -21,7 +21,7 @@ import {
   RoutineCommandType,
   RoutineType,
   RunRoutineResponse,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/legacy-diagnostics';
 import {environment} from '../environments/environment';
 import * as fakeDiagnostics from './fake-diagnostics.service';
 

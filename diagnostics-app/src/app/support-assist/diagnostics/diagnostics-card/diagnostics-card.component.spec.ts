@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {DiagnosticsCardComponent} from './diagnostics-card.component';
 
-import {RoutineType} from 'common/telemetry-extension-types';
+import {RoutineType} from 'common/telemetry-extension-types/legacy-diagnostics';
 
 describe('DiagnosticsCardComponent', () => {
   let component: DiagnosticsCardComponent;

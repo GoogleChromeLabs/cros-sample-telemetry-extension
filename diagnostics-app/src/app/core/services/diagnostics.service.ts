@@ -17,7 +17,7 @@ import {
   RequestType,
   Response,
 } from 'common/message';
-import {RoutineType} from 'common/telemetry-extension-types';
+import {RoutineType} from 'common/telemetry-extension-types/legacy-diagnostics';
 import {environment} from 'environments/environment';
 
 export interface DiagnosticsInterface {

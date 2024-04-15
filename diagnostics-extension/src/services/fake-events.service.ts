@@ -14,7 +14,7 @@ import {
   EventCategory,
   EventSupportStatus,
   EventSupportStatusInfo,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/events';
 import {PortService} from './port.service';
 
 const categoryToIntervalId: Map<

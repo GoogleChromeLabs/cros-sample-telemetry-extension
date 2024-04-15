@@ -10,7 +10,8 @@ import {
   RoutineV2Argument,
   RoutineV2Category,
 } from '../message';
-import {RoutineType, VolumeButtonType} from '../telemetry-extension-types';
+import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
+import {VolumeButtonType} from '../telemetry-extension-types/routines';
 
 export interface RoutineV1TestArgument {
   category: RoutineType;

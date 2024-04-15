@@ -28,7 +28,7 @@ import {
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineWaitingInfo,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/routines';
 
 enum RoutineV2State {
   // Either finished or haven't been ran yet.

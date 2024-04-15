@@ -1,3 +1,4 @@
+import {DiagnosticsParamsUnion} from 'common/message';
 import {
   AcPowerStatus,
   DiskReadRoutineType,
@@ -14,9 +15,7 @@ import {
   RunNvmeWearLevelRequest,
   RunPowerButtonRequest,
   RunSmartctlCheckRequest,
-} from 'common/telemetry-extension-types';
-
-import {DiagnosticsParamsUnion} from 'common/message';
+} from 'common/telemetry-extension-types/legacy-diagnostics';
 
 // Telemetry extension API types may not be camelCase.
 /* eslint-disable camelcase */

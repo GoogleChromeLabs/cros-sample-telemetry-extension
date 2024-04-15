@@ -19,7 +19,7 @@ import {
   RoutineStatus,
   RoutineType,
   RunRoutineResponse,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/legacy-diagnostics';
 import {DiagnosticsServiceProvider} from '../services/diagnostics.service';
 import {
   generateDiagnosticsSuccessResponse,

@@ -12,7 +12,7 @@ import {
   Response,
   ResponseErrorInfoMessage,
 } from '../common/message';
-import {EventCategory} from '../common/telemetry-extension-types';
+import {EventCategory} from '../common/telemetry-extension-types/events';
 import {EventsServiceProvider} from '../services/events.service';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 

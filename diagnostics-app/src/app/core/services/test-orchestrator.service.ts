@@ -1,13 +1,16 @@
 import {Injectable, NgZone} from '@angular/core';
 import {RmaTestType, TestConfig, TestList} from 'common/config/rma';
 import {RoutineV2Argument} from 'common/message';
+
 import {
   GetAvailableRoutinesResponse,
   GetRoutineUpdateResponse,
+  RoutineType,
+} from 'common/telemetry-extension-types/legacy-diagnostics';
+import {
   RoutineSupportStatus,
   RoutineSupportStatusInfo,
-  RoutineType,
-} from 'common/telemetry-extension-types';
+} from 'common/telemetry-extension-types/routines';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DiagnosticsService} from './diagnostics.service';
 import {LoggingService} from './logging.service';

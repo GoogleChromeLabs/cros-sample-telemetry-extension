@@ -14,7 +14,7 @@ import {PortName, Response} from '../common/message';
 import {
   EventCategory,
   EventSupportStatusInfo,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/events';
 import {environment} from '../environments/environment';
 import {generateErrorResponse, generateEventsSuccessResponse} from '../utils';
 import * as fakeEvents from './fake-events.service';

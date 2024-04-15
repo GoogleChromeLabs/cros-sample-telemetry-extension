@@ -25,7 +25,7 @@ import {
   TpmInfo,
   UsbBusDevices,
   VpdInfo,
-} from '../common/telemetry-extension-types';
+} from '../common/telemetry-extension-types/telemetry';
 import {environment} from '../environments/environment';
 import * as fakeTelemetry from './fake-telemetry.data';
 
