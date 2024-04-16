@@ -23,13 +23,13 @@ import {
   Response,
   ResponseErrorInfoMessage,
   RoutineV2Action,
-  RoutineV2Argument,
   RoutineV2Event,
   RoutineV2Request,
   RoutineV2Response,
   StartRoutineMessage,
 } from 'common/message';
 import {
+  CreateRoutineArgumentsUnion,
   CreateRoutineResponse,
   RoutineSupportStatus,
   RoutineSupportStatusInfo,
@@ -50,16 +50,22 @@ export class RoutineV2Service {
   private extensionId: string = environment.extensionId;
   // A map storing subjects to forward the runtime responses from running
   // routine V2 to.
-  private subjects = new Map<RoutineV2Argument, Subject<RoutineV2Event>>();
+  private subjects = new Map<
+    CreateRoutineArgumentsUnion,
+    Subject<RoutineV2Event>
+  >();
   // The port for connecting with the extension to receive runtime responses.
   private port?: chrome.runtime.Port;
   // Since we use routine argument as the source of truth for each routine type,
   // we store a map which maps between the uuid and its corresponding routine
   // argument.
-  private uuidToRoutineArgument = new Map<string, RoutineV2Argument>();
+  private uuidToRoutineArgument = new Map<
+    string,
+    CreateRoutineArgumentsUnion
+  >();
   // A cache to preload the supported routines.
   private supportabilityCache = new Map<
-    RoutineV2Argument,
+    CreateRoutineArgumentsUnion,
     Promise<RoutineSupportStatusInfo>
   >();
 
@@ -97,7 +103,7 @@ export class RoutineV2Service {
             'uuid' in msg.event &&
             this.uuidToRoutineArgument.has(msg.event.uuid!)
           ) {
-            const routineArg: RoutineV2Argument =
+            const routineArg: CreateRoutineArgumentsUnion =
               this.uuidToRoutineArgument.get(msg.event.uuid!)!;
             if (this.subjects.has(routineArg)) {
               this.subjects.get(routineArg)!.next(msg);
@@ -125,7 +131,7 @@ export class RoutineV2Service {
   }
 
   private sendIsRoutineArgumentSupportedRequest(
-    routineArg: RoutineV2Argument,
+    routineArg: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo> {
     const routineV2Request: IsRoutineArgumentSupportedMessage = {
       type: RoutineV2Action.IS_ROUTINE_ARGUMENT_SUPPORTED,
@@ -145,7 +151,7 @@ export class RoutineV2Service {
   }
 
   public isRoutineArgumentSupported(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo> {
     if (!this.supportabilityCache.has(routineArgument)) {
       const promise =
@@ -156,7 +162,7 @@ export class RoutineV2Service {
   }
 
   public async getSubject(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<GetSubjectResponse> {
     if (!this.isRoutineArgumentSupported(routineArgument)) {
       console.error(
@@ -184,7 +190,7 @@ export class RoutineV2Service {
   }
 
   private sendCreateRoutineRequest(
-    routineArg: RoutineV2Argument,
+    routineArg: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse> {
     const routineV2Request: CreateRoutineMessage = {
       type: RoutineV2Action.CREATE_ROUTINE,
@@ -204,7 +210,7 @@ export class RoutineV2Service {
   }
 
   public CreateRoutine(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse> {
     const promise = this.sendCreateRoutineRequest(routineArgument);
     promise.then((response: CreateRoutineResponse) => {

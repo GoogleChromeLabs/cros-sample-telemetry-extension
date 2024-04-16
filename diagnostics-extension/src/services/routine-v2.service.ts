@@ -12,15 +12,13 @@
 
 import {
   PortName,
-  RoutineV2Argument,
-  RoutineV2ArgumentUnion,
-  RoutineV2Category,
   RoutineV2Event,
   RoutineV2EventCategory,
   RoutineV2EventUnion,
 } from '../common/message';
 import {
   CancelRoutineRequest,
+  CreateRoutineArgumentsUnion,
   CreateRoutineResponse,
   RoutineSupportStatusInfo,
   StartRoutineRequest,
@@ -36,10 +34,10 @@ import {PortService} from './port.service';
 export abstract class RoutineV2Service {
   abstract registerRoutineV2EventHandlers(): void;
   abstract isRoutineArgumentSupported(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo>;
   abstract createRoutine(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse>;
   abstract startRoutine(
     startRoutineRequest: StartRoutineRequest,
@@ -58,44 +56,6 @@ export abstract class RoutineV2Service {
  * @extends RoutineV2Service
  */
 export class RoutineV2ServiceImpl extends RoutineV2Service {
-  private routineCategoryToMethods = new Map<
-    RoutineV2Category,
-    {
-      createRoutineFunc: (
-        runRoutineArgument: RoutineV2ArgumentUnion,
-      ) => Promise<CreateRoutineResponse>;
-      isRoutineArgumentSupportedFunc: (
-        runRoutineArgument: RoutineV2ArgumentUnion,
-      ) => Promise<RoutineSupportStatusInfo>;
-    }
-  >([
-    [
-      RoutineV2Category.FAN,
-      {
-        createRoutineFunc: (chrome as any).os.diagnostics.createFanRoutine,
-        isRoutineArgumentSupportedFunc: (chrome as any).os.diagnostics
-          .isFanRoutineArgumentSupported,
-      },
-    ],
-    [
-      RoutineV2Category.MEMORY,
-      {
-        createRoutineFunc: (chrome as any).os.diagnostics.createMemoryRoutine,
-        isRoutineArgumentSupportedFunc: (chrome as any).os.diagnostics
-          .isMemoryRoutineArgumentSupported,
-      },
-    ],
-    [
-      RoutineV2Category.VOLUME_BUTTON,
-      {
-        createRoutineFunc: (chrome as any).os.diagnostics
-          .createVolumeButtonRoutine,
-        isRoutineArgumentSupportedFunc: (chrome as any).os.diagnostics
-          .isVolumeButtonRoutineArgumentSupported,
-      },
-    ],
-  ]);
-
   private routineEventListeners = new Map<RoutineV2EventCategory, any>([
     [
       RoutineV2EventCategory.INITIALIZED,
@@ -110,16 +70,8 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
       (chrome as any).os.diagnostics.onRoutineWaiting,
     ],
     [
-      RoutineV2EventCategory.MEMORY_FINISHED,
-      (chrome as any).os.diagnostics.onMemoryRoutineFinished,
-    ],
-    [
-      RoutineV2EventCategory.VOLUME_BUTTON_FINISHED,
-      (chrome as any).os.diagnostics.onVolumeButtonRoutineFinished,
-    ],
-    [
-      RoutineV2EventCategory.FAN_FINISHED,
-      (chrome as any).os.diagnostics.onFanRoutineFinished,
+      RoutineV2EventCategory.FINISHED,
+      (chrome as any).os.diagnostics.onRoutineFinished,
     ],
     [
       RoutineV2EventCategory.EXCEPTION,
@@ -165,25 +117,17 @@ export class RoutineV2ServiceImpl extends RoutineV2Service {
   }
 
   public isRoutineArgumentSupported(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo> {
-    if (!this.routineCategoryToMethods.has(routineArgument.category)) {
-      return Promise.reject('invalid routine category');
-    }
-    return this.routineCategoryToMethods
-      .get(routineArgument.category)!
-      .isRoutineArgumentSupportedFunc(routineArgument.argument);
+    return (chrome as any).os.diagnostics.isRoutineArgumentSupported(
+      routineArgument,
+    );
   }
 
   public async createRoutine(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse> {
-    if (!this.routineCategoryToMethods.has(routineArgument.category)) {
-      return Promise.reject('invalid routine category');
-    }
-    return this.routineCategoryToMethods
-      .get(routineArgument.category)!
-      .createRoutineFunc(routineArgument.argument);
+    return (chrome as any).os.diagnostics.createRoutine(routineArgument);
   }
 
   public async startRoutine(
@@ -209,13 +153,13 @@ export class FakeRoutineV2Service extends RoutineV2Service {
   }
 
   public isRoutineArgumentSupported(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<RoutineSupportStatusInfo> {
     return fakeRoutineV2.isRoutineArgumentSupported(routineArgument);
   }
 
   public createRoutine(
-    routineArgument: RoutineV2Argument,
+    routineArgument: CreateRoutineArgumentsUnion,
   ): Promise<CreateRoutineResponse> {
     return fakeRoutineV2.createRoutine(routineArgument);
   }

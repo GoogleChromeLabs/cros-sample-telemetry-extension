@@ -1,7 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
-import {RoutineV2Argument, RoutineV2Category} from 'common/message';
+import {RoutineV2Category} from 'common/message';
+import {CreateRoutineArgumentsUnion} from 'common/telemetry-extension-types/routines';
 import {RoutineV2CardComponent} from './routine-v2-card.component';
 
 describe('RoutineV2CardComponent', () => {
@@ -15,9 +16,8 @@ describe('RoutineV2CardComponent', () => {
     });
     fixture = TestBed.createComponent(RoutineV2CardComponent);
     component = fixture.componentInstance;
-    const testRoutineArgument: RoutineV2Argument = {
-      category: RoutineV2Category.MEMORY,
-      argument: {},
+    const testRoutineArgument: CreateRoutineArgumentsUnion = {
+      [RoutineV2Category.MEMORY]: {},
     };
     component.routineArgument = testRoutineArgument;
     fixture.detectChanges();

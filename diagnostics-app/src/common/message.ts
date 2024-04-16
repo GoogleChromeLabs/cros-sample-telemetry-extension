@@ -39,18 +39,14 @@ import {
 } from './telemetry-extension-types/legacy-diagnostics';
 import {
   CancelRoutineRequest,
+  CreateRoutineArgumentsUnion,
   CreateRoutineResponse,
-  FanRoutineFinishedInfo,
-  MemoryRoutineFinishedInfo,
+  RoutineFinishedInfo,
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineSupportStatusInfo,
   RoutineWaitingInfo,
-  RunFanRoutineArguments,
-  RunMemoryRoutineArguments,
-  RunVolumeButtonRoutineArguments,
   StartRoutineRequest,
-  VolumeButtonRoutineFinishedInfo,
 } from './telemetry-extension-types/routines';
 import {
   AudioInfo,
@@ -258,12 +254,12 @@ export interface CancelRoutineMessage {
 
 export interface IsRoutineArgumentSupportedMessage {
   type: RoutineV2Action.IS_ROUTINE_ARGUMENT_SUPPORTED;
-  request: RoutineV2Argument;
+  request: CreateRoutineArgumentsUnion;
 }
 
 export interface CreateRoutineMessage {
   type: RoutineV2Action.CREATE_ROUTINE;
-  request: RoutineV2Argument;
+  request: CreateRoutineArgumentsUnion;
 }
 
 export enum RoutineV2Action {
@@ -273,26 +269,13 @@ export enum RoutineV2Action {
   CANCEL_ROUTINE = 'cancel-routine',
 }
 
+// This enum should correspond to the name of fields used in passing around
+// various routines.
 export enum RoutineV2Category {
   FAN = 'fan',
   MEMORY = 'memory',
-  VOLUME_BUTTON = 'volume-button',
+  VOLUME_BUTTON = 'volumeButton',
 }
-
-export interface RoutineV2Argument {
-  category: RoutineV2Category;
-  argument: RoutineV2ArgumentUnion;
-}
-
-export type RoutineV2ArgumentUnion =
-  | RunFanRoutineArguments
-  | RunMemoryRoutineArguments
-  | RunVolumeButtonRoutineArguments;
-
-export type RoutineV2FinishedInfoUnion =
-  | FanRoutineFinishedInfo
-  | MemoryRoutineFinishedInfo
-  | VolumeButtonRoutineFinishedInfo;
 
 export type RoutineV2Response =
   | CreateRoutineResponse
@@ -315,18 +298,14 @@ export type RoutineV2EventUnion =
   | RoutineInitializedInfo
   | RoutineRunningInfo
   | RoutineWaitingInfo
-  | FanRoutineFinishedInfo
-  | MemoryRoutineFinishedInfo
-  | VolumeButtonRoutineFinishedInfo;
+  | RoutineFinishedInfo;
 
 export enum RoutineV2EventCategory {
   INITIALIZED = 'initialized',
   RUNNING = 'running',
   WAITING = 'waiting',
   EXCEPTION = 'exception',
-  FAN_FINISHED = 'fan-finished',
-  MEMORY_FINISHED = 'memory-finished',
-  VOLUME_BUTTON_FINISHED = 'volume-button-finished',
+  FINISHED = 'finished',
 }
 
 export interface RoutineV2Event {
