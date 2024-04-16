@@ -5,13 +5,12 @@
 // Some V1 APIs does not have camelCase naming. Disable the linter check.
 /* eslint-disable camelcase */
 
-import {
-  DiagnosticsParamsUnion,
-  RoutineV2Argument,
-  RoutineV2Category,
-} from '../message';
+import {DiagnosticsParamsUnion, RoutineV2Category} from '../message';
 import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
-import {VolumeButtonType} from '../telemetry-extension-types/routines';
+import {
+  CreateRoutineArgumentsUnion,
+  VolumeButtonType,
+} from '../telemetry-extension-types/routines';
 
 export interface RoutineV1TestArgument {
   category: RoutineType;
@@ -34,7 +33,7 @@ export interface TestConfig {
   testType: RmaTestType;
   // The argument needed to run the requested test. Argument may be null if
   // not needed.
-  testArgument: RoutineV1TestArgument | RoutineV2Argument | null;
+  testArgument: RoutineV1TestArgument | CreateRoutineArgumentsUnion | null;
   // This field will be filled at runtime depending on device config.
   supported?: boolean | null;
 }
@@ -57,8 +56,7 @@ export const TestList: TestConfig[] = [
     enabled: true,
     testType: RmaTestType.ROUTINE_V2,
     testArgument: {
-      category: RoutineV2Category.MEMORY,
-      argument: {
+      [RoutineV2Category.MEMORY]: {
         maxTestingMemKib: 10000,
       },
     },
@@ -68,8 +66,7 @@ export const TestList: TestConfig[] = [
     enabled: true,
     testType: RmaTestType.ROUTINE_V2,
     testArgument: {
-      category: RoutineV2Category.FAN,
-      argument: {},
+      [RoutineV2Category.FAN]: {},
     },
   },
   {
@@ -77,10 +74,9 @@ export const TestList: TestConfig[] = [
     enabled: true,
     testType: RmaTestType.ROUTINE_V2,
     testArgument: {
-      category: RoutineV2Category.VOLUME_BUTTON,
-      argument: {
-        button_type: VolumeButtonType.volume_up,
-        timeout_seconds: 10,
+      [RoutineV2Category.VOLUME_BUTTON]: {
+        buttonType: VolumeButtonType.volume_up,
+        timeoutSeconds: 10,
       },
     },
   },

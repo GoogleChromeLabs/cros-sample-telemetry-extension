@@ -105,20 +105,18 @@ export enum MemtesterTestItemEnum {
 }
 
 export interface MemtesterResult {
-  passed_items: MemtesterTestItemEnum[];
-  failed_items: MemtesterTestItemEnum[];
+  passedItems: MemtesterTestItemEnum[];
+  failedItems: MemtesterTestItemEnum[];
 }
 
-export interface MemoryRoutineFinishedInfo {
-  uuid?: string;
-  has_passed?: boolean;
+export interface MemoryRoutineFinishedDetail {
   // Number of bytes tested in the memory routine.
   bytesTested?: number;
   // Contains the memtester test results.
   result?: MemtesterResult;
 }
 
-export interface RunMemoryRoutineArguments {
+export interface CreateMemoryRoutineArguments {
   // An optional field to indicate how much memory should be tested. If the
   // value is null, memory test will run with as much memory as possible.
   maxTestingMemKib?: number;
@@ -131,17 +129,12 @@ export enum VolumeButtonType {
   volume_down = 'volume_down',
 }
 
-export interface VolumeButtonRoutineFinishedInfo {
-  uuid?: string;
-  has_passed?: boolean;
-}
-
-export interface RunVolumeButtonRoutineArguments {
+export interface CreateVolumeButtonRoutineArguments {
   // The volume button to be tested.
-  button_type: VolumeButtonType;
+  buttonType: VolumeButtonType;
   // Length of time to listen to the volume button events. The value should be
   // positive and less or equal to 600 seconds.
-  timeout_seconds: number;
+  timeoutSeconds: number;
 }
 
 export enum HardwarePresenceStatus {
@@ -153,19 +146,17 @@ export enum HardwarePresenceStatus {
   not_configured = 'not_configured',
 }
 
-export interface FanRoutineFinishedInfo {
-  uuid?: string;
-  has_passed?: boolean;
+export interface FanRoutineFinishedDetail {
   // The ids of fans that can be controlled.
-  passed_fan_ids?: number[];
+  passedFanIds?: number[];
   // The ids of fans that cannot be controlled.
-  failed_fan_ids?: number[];
+  failedFanIds?: number[];
   // Whether the number of fan probed is matched.
-  fan_count_status?: HardwarePresenceStatus;
+  fanCountStatus?: HardwarePresenceStatus;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface RunFanRoutineArguments {}
+export interface CreateFanRoutineArguments {}
 
 export interface CreateRoutineResponse {
   uuid?: string;
@@ -186,4 +177,23 @@ export interface StartRoutineRequest {
 
 export interface CancelRoutineRequest {
   uuid: string;
+}
+
+// This is a union type. Exactly one field should be set.
+export interface CreateRoutineArgumentsUnion {
+  memory?: CreateMemoryRoutineArguments;
+  volumeButton?: CreateVolumeButtonRoutineArguments;
+  fan?: CreateFanRoutineArguments;
+}
+
+// This is a union type. Exactly one field should be set.
+export interface RoutineFinishedDetailUnion {
+  memory?: MemoryRoutineFinishedDetail;
+  fan?: FanRoutineFinishedDetail;
+}
+
+export interface RoutineFinishedInfo {
+  uuid?: string;
+  hasPassed?: boolean;
+  detail?: RoutineFinishedDetailUnion;
 }

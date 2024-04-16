@@ -2,17 +2,14 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import {
-  RoutineV2Argument,
-  RoutineV2Category,
-  TelemetryInfoType,
-} from '../message';
+import {RoutineV2Category, TelemetryInfoType} from '../message';
 import {EventCategory} from '../telemetry-extension-types/events';
 import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
 import {
-  RunFanRoutineArguments,
-  RunMemoryRoutineArguments,
-  RunVolumeButtonRoutineArguments,
+  CreateFanRoutineArguments,
+  CreateMemoryRoutineArguments,
+  CreateRoutineArgumentsUnion,
+  CreateVolumeButtonRoutineArguments,
   VolumeButtonType,
 } from '../telemetry-extension-types/routines';
 
@@ -86,22 +83,21 @@ export const VISIBLE_DIAGNOSTICS_CARDS: RoutineType[] = [
 
 // Routine V2 types must have an associated argument for supportability check
 // and initialization.
-export const FanRoutineArgument: RunFanRoutineArguments = {};
-export const MemoryRoutineArgument: RunMemoryRoutineArguments = {
+export const FanRoutineArgument: CreateFanRoutineArguments = {};
+export const MemoryRoutineArgument: CreateMemoryRoutineArguments = {
   maxTestingMemKib: 10000,
 };
 /* eslint-disable camelcase*/
-export const VolumeButtonRoutineArgument: RunVolumeButtonRoutineArguments = {
-  button_type: VolumeButtonType.volume_up,
-  timeout_seconds: 10,
+export const VolumeButtonRoutineArgument: CreateVolumeButtonRoutineArguments = {
+  buttonType: VolumeButtonType.volume_up,
+  timeoutSeconds: 10,
 };
 /* eslint-enable camelcase*/
 
-export const VISIBLE_ROUTINE_V2_CARDS: RoutineV2Argument[] = [
-  {category: RoutineV2Category.FAN, argument: FanRoutineArgument},
-  {category: RoutineV2Category.MEMORY, argument: MemoryRoutineArgument},
+export const VISIBLE_ROUTINE_V2_CARDS: CreateRoutineArgumentsUnion[] = [
+  {[RoutineV2Category.FAN]: FanRoutineArgument},
+  {[RoutineV2Category.MEMORY]: MemoryRoutineArgument},
   {
-    category: RoutineV2Category.VOLUME_BUTTON,
-    argument: VolumeButtonRoutineArgument,
+    [RoutineV2Category.VOLUME_BUTTON]: VolumeButtonRoutineArgument,
   },
 ];

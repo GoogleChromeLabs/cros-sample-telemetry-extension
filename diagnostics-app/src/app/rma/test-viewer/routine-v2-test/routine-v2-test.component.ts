@@ -10,14 +10,11 @@ import {
   V2TestResult,
 } from 'app/core/services/test-orchestrator.service';
 import {RmaTestType} from 'common/config/rma';
+import {RoutineV2Event, RoutineV2EventCategory} from 'common/message';
 import {
-  RoutineV2Argument,
-  RoutineV2Event,
-  RoutineV2EventCategory,
-  RoutineV2FinishedInfoUnion,
-} from 'common/message';
-import {
+  CreateRoutineArgumentsUnion,
   ExceptionInfo,
+  RoutineFinishedInfo,
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineWaitingInfo,
@@ -42,7 +39,7 @@ enum RoutineV2State {
 export class RoutineV2TestComponent implements BaseTestComponent {
   @Input() index!: number;
   @Input() title!: string;
-  @Input() argument!: RoutineV2Argument;
+  @Input() argument!: CreateRoutineArgumentsUnion;
   @Output() testCompleted = new EventEmitter<void>();
 
   public RoutineV2State = RoutineV2State;
@@ -162,21 +159,19 @@ export class RoutineV2TestComponent implements BaseTestComponent {
         this.onTestComplete();
         break;
       }
-      case RoutineV2EventCategory.FAN_FINISHED:
-      case RoutineV2EventCategory.MEMORY_FINISHED:
-      case RoutineV2EventCategory.VOLUME_BUTTON_FINISHED: {
+      case RoutineV2EventCategory.FINISHED: {
         this.routineState = RoutineV2State.FINISHED;
-        const routineFinishedInfo = event.event as RoutineV2FinishedInfoUnion;
+        const routineFinishedInfo = event.event as RoutineFinishedInfo;
         if (!this.checkUUID(routineFinishedInfo.uuid)) {
           break;
         }
         this.percentage = 100;
-        this.hasPassed = routineFinishedInfo.has_passed
-          ? routineFinishedInfo.has_passed
+        this.hasPassed = routineFinishedInfo.hasPassed
+          ? routineFinishedInfo.hasPassed
           : false;
         delete routineFinishedInfo.uuid;
-        delete routineFinishedInfo.has_passed;
-        this.output = routineFinishedInfo;
+        delete routineFinishedInfo.hasPassed;
+        this.output = routineFinishedInfo.detail;
         this.onTestComplete();
         break;
       }

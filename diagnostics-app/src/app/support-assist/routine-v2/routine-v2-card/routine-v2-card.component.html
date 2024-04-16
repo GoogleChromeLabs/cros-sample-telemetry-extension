@@ -9,13 +9,15 @@
 <div class="routine-v2-card">
   <div class="header-bar">
     <div class="header-and-params">
-      <header>{{ routineArgument.category.toUpperCase() }}</header>
-      <div class="params-info" *ngIf="routineArgument.argument">
-        <div
-          class="param-info"
-          *ngFor="let param of $any(routineArgument.argument) | keyvalue: originalOrder"
-        >
-          {{ param.key }}: {{ param.value }}
+      <header>{{ routineCategory !== null ? routineCategory.toUpperCase() : "error" }}</header>
+      <div class="params-info" *ngIf="routineArgument">
+        <div *ngFor="let routineArgumentDetail of $any(routineArgument) | keyvalue: originalOrder">
+          <div
+            class="param-info"
+            *ngFor="let param of $any(routineArgumentDetail.value) | keyvalue: originalOrder"
+          >
+            {{ param.key }}: {{ param.value }}
+          </div>
         </div>
       </div>
     </div>

@@ -17,18 +17,16 @@ import {
 } from '@angular/core';
 
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
+import {RoutineV2Event, RoutineV2EventCategory} from 'common/message';
 import {
-  RoutineV2Argument,
-  RoutineV2Event,
-  RoutineV2EventCategory,
-  RoutineV2FinishedInfoUnion,
-} from 'common/message';
-import {
+  CreateRoutineArgumentsUnion,
   ExceptionInfo,
+  RoutineFinishedInfo,
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineWaitingInfo,
 } from 'common/telemetry-extension-types/routines';
+import {validateUnion} from 'common/util';
 
 enum RoutineV2State {
   // Either finished or haven't been ran yet.
@@ -46,7 +44,7 @@ enum RoutineV2State {
   styleUrls: ['./routine-v2-card.component.css'],
 })
 export class RoutineV2CardComponent implements OnInit, OnDestroy {
-  @Input({required: true}) routineArgument!: RoutineV2Argument;
+  @Input({required: true}) routineArgument!: CreateRoutineArgumentsUnion;
 
   public RoutineV2State = RoutineV2State;
 
@@ -78,6 +76,9 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       return 'yellow';
     }
     return 'white';
+  }
+  get routineCategory() {
+    return validateUnion(this.routineArgument);
   }
 
   public constructor(
@@ -176,20 +177,17 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         this.output = 'Exception: ' + routineExceptionInfo.debugMessage;
         break;
       }
-      case RoutineV2EventCategory.FAN_FINISHED:
-      case RoutineV2EventCategory.MEMORY_FINISHED:
-      case RoutineV2EventCategory.VOLUME_BUTTON_FINISHED: {
+      case RoutineV2EventCategory.FINISHED: {
         this.routineState = RoutineV2State.FINISHED;
-        const routineFinishedInfo = event.event as RoutineV2FinishedInfoUnion;
+        const routineFinishedInfo = event.event as RoutineFinishedInfo;
         if (!this._checkUUID(routineFinishedInfo.uuid)) {
           break;
         }
         this.percentage = 100;
-        this.hasPassed = routineFinishedInfo.has_passed;
+        this.hasPassed = routineFinishedInfo.hasPassed;
         delete routineFinishedInfo.uuid;
-        delete routineFinishedInfo.has_passed;
-        this.output = routineFinishedInfo;
-
+        delete routineFinishedInfo.hasPassed;
+        this.output = routineFinishedInfo.detail;
         break;
       }
     }

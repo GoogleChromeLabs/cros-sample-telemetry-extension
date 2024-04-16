@@ -1,6 +1,10 @@
 import {Injectable, NgZone} from '@angular/core';
-import {RmaTestType, TestConfig, TestList} from 'common/config/rma';
-import {RoutineV2Argument} from 'common/message';
+import {
+  RmaTestType,
+  RoutineV1TestArgument,
+  TestConfig,
+  TestList,
+} from 'common/config/rma';
 
 import {
   GetAvailableRoutinesResponse,
@@ -8,6 +12,7 @@ import {
   RoutineType,
 } from 'common/telemetry-extension-types/legacy-diagnostics';
 import {
+  CreateRoutineArgumentsUnion,
   RoutineSupportStatus,
   RoutineSupportStatusInfo,
 } from 'common/telemetry-extension-types/routines';
@@ -102,7 +107,7 @@ export class TestOrchestratorService {
         if (testConfig.testType === RmaTestType.ROUTINE_V2) {
           v2SupportedRoutinesPromise.push(
             this.routineV2Service.isRoutineArgumentSupported(
-              testConfig.testArgument as RoutineV2Argument,
+              testConfig.testArgument as CreateRoutineArgumentsUnion,
             ),
           );
         }
@@ -122,7 +127,8 @@ export class TestOrchestratorService {
       for (const testConfig of testList) {
         if (testConfig.testType === RmaTestType.DIAGNOSTICS) {
           testConfig.supported = v1AvailableRoutines.includes(
-            testConfig.testArgument!.category as RoutineType,
+            (testConfig.testArgument as RoutineV1TestArgument)!
+              .category as RoutineType,
           );
         }
         if (testConfig.testType === RmaTestType.ROUTINE_V2) {
@@ -130,7 +136,7 @@ export class TestOrchestratorService {
           // costly to await.
           const supportStatus: RoutineSupportStatusInfo =
             await this.routineV2Service.isRoutineArgumentSupported(
-              testConfig.testArgument as RoutineV2Argument,
+              testConfig.testArgument as CreateRoutineArgumentsUnion,
             );
           testConfig.supported =
             supportStatus.status === RoutineSupportStatus.supported;

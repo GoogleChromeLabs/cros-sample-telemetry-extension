@@ -17,16 +17,16 @@ import {
 } from '../common/config/support-assist';
 import {
   PortName,
-  RoutineV2Argument,
   RoutineV2Category,
   RoutineV2EventCategory,
   RoutineV2EventUnion,
-  RoutineV2FinishedInfoUnion,
 } from '../common/message';
 import {
   CancelRoutineRequest,
+  CreateRoutineArgumentsUnion,
   CreateRoutineResponse,
   MemtesterTestItemEnum,
+  RoutineFinishedInfo,
   RoutineInitializedInfo,
   RoutineRunningInfo,
   RoutineSupportStatus,
@@ -41,44 +41,38 @@ import {PortService} from './port.service';
 // Maps compare reference of objects. Thus we use the JSON stringify notation to
 // compare its keys.
 /* eslint-disable camelcase */
-const fakeRoutineData = new Map<
-  string,
-  {
-    category: RoutineV2EventCategory;
-    info: RoutineV2FinishedInfoUnion;
-  }
->([
+const fakeRoutineData = new Map<string, RoutineFinishedInfo>([
   // Fake fan routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.FAN,
-      argument: FanRoutineArgument,
+      [RoutineV2Category.FAN]: FanRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.FAN_FINISHED,
-      info: {
-        uuid: '',
-        has_passed: true,
-        passed_fan_ids: [0, 1],
-        failed_fan_ids: [],
+      uuid: '',
+      hasPassed: true,
+      detail: {
+        [RoutineV2Category.FAN]: {
+          passedFanIds: [0, 1],
+          failedFanIds: [],
+        },
       },
     },
   ],
   // Fake memory routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.MEMORY,
-      argument: MemoryRoutineArgument,
+      [RoutineV2Category.MEMORY]: MemoryRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.MEMORY_FINISHED,
-      info: {
-        uuid: '',
-        has_passed: true,
-        bytesTested: 1000,
-        result: {
-          passed_items: [MemtesterTestItemEnum.stuck_address],
-          failed_items: [],
+      uuid: '',
+      hasPassed: true,
+      detail: {
+        [RoutineV2Category.MEMORY]: {
+          bytesTested: 1000,
+          result: {
+            passedItems: [MemtesterTestItemEnum.stuck_address],
+            failedItems: [],
+          },
         },
       },
     },
@@ -86,15 +80,11 @@ const fakeRoutineData = new Map<
   // Fake volume button routine data.
   [
     JSON.stringify({
-      category: RoutineV2Category.VOLUME_BUTTON,
-      argument: VolumeButtonRoutineArgument,
+      [RoutineV2Category.VOLUME_BUTTON]: VolumeButtonRoutineArgument,
     }),
     {
-      category: RoutineV2EventCategory.MEMORY_FINISHED,
-      info: {
-        uuid: '',
-        has_passed: true,
-      },
+      uuid: '',
+      hasPassed: true,
     },
   ],
 ]);
@@ -122,21 +112,18 @@ class FakeGenericRoutine {
   routineState: RoutineState;
   percentage: number;
   uuid: string;
-  routineArgument: RoutineV2Argument;
-  routineFinishedEventCategory: RoutineV2EventCategory;
-  routineFinishedInfo: RoutineV2FinishedInfoUnion;
+  routineArgument: CreateRoutineArgumentsUnion;
+  routineFinishedInfo: RoutineFinishedInfo;
   pendingTimeout?: ReturnType<typeof setTimeout>;
 
   public constructor(
     uuid: string,
-    routineArgument: RoutineV2Argument,
-    routineFinishedEventCategory: RoutineV2EventCategory,
-    routineFinishedInfo: RoutineV2FinishedInfoUnion,
+    routineArgument: CreateRoutineArgumentsUnion,
+    routineFinishedInfo: RoutineFinishedInfo,
   ) {
     this.uuid = uuid;
     this.routineArgument = routineArgument;
     this.routineFinishedInfo = routineFinishedInfo;
-    this.routineFinishedEventCategory = routineFinishedEventCategory;
     this.routineState = RoutineState.initialized;
     this.percentage = 0;
 
@@ -184,7 +171,7 @@ class FakeGenericRoutine {
   }
 
   private sendFinished() {
-    notifyPort(this.routineFinishedEventCategory, this.routineFinishedInfo);
+    notifyPort(RoutineV2EventCategory.FINISHED, this.routineFinishedInfo);
   }
 
   public cancelRoutine() {
@@ -213,29 +200,24 @@ function notifyPort(
 }
 
 function getFakeData(
-  argument: RoutineV2Argument,
+  argument: CreateRoutineArgumentsUnion,
   uuid: string,
-): {
-  category: RoutineV2EventCategory;
-  info: RoutineV2FinishedInfoUnion;
-} {
+): RoutineFinishedInfo {
   const argumentStr: string = JSON.stringify(argument);
   if (fakeRoutineData.has(argumentStr)) {
-    const fakeCategory = fakeRoutineData.get(argumentStr)!.category;
-    const fakeFinishedInfo = fakeRoutineData.get(argumentStr)!.info;
+    const fakeFinishedInfo = fakeRoutineData.get(argumentStr)!;
     fakeFinishedInfo.uuid = uuid;
-    return {category: fakeCategory, info: fakeFinishedInfo};
+    return fakeFinishedInfo;
   }
   return {
-    category: RoutineV2EventCategory.FAN_FINISHED,
-    // eslint-disable-next-line camelcase
-    info: {uuid: uuid, has_passed: true},
+    uuid: uuid,
+    hasPassed: true,
   };
 }
 
 // Default to support all routines in fake data.
 export async function isRoutineArgumentSupported(
-  routineArgument: RoutineV2Argument,
+  routineArgument: CreateRoutineArgumentsUnion,
 ): Promise<RoutineSupportStatusInfo> {
   const res: RoutineSupportStatusInfo = {
     status: RoutineSupportStatus.supported,
@@ -244,14 +226,13 @@ export async function isRoutineArgumentSupported(
 }
 
 export async function createRoutine(
-  routineArgument: RoutineV2Argument,
+  routineArgument: CreateRoutineArgumentsUnion,
 ): Promise<CreateRoutineResponse> {
   const uuid = uuidv4();
   const fakeRoutine = new FakeGenericRoutine(
     uuid,
     routineArgument,
-    getFakeData(routineArgument, uuid).category,
-    getFakeData(routineArgument, uuid).info,
+    getFakeData(routineArgument, uuid),
   );
   uuidToFakeRoutine.set(uuid, fakeRoutine);
   return {uuid: uuid};

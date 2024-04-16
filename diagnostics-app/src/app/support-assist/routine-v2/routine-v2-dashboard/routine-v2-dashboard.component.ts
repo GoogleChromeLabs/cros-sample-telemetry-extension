@@ -8,11 +8,13 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {RoutineV2Argument} from 'common/message';
 
 import {RoutineV2Service} from 'app/core/services/routine-v2.service';
 import {VISIBLE_ROUTINE_V2_CARDS} from 'common/config/support-assist';
-import {RoutineSupportStatus} from 'common/telemetry-extension-types/routines';
+import {
+  CreateRoutineArgumentsUnion,
+  RoutineSupportStatus,
+} from 'common/telemetry-extension-types/routines';
 
 @Component({
   selector: 'app-routine-v2-dashboard',
@@ -24,9 +26,11 @@ export class RoutineV2DashboardComponent implements OnInit {
   public error?: string;
 
   // Array of routine-v2 arguments that will actually be displayed
-  public supportedRoutines: RoutineV2Argument[] = [];
+  public supportedRoutines: CreateRoutineArgumentsUnion[] = [];
 
-  public async isRoutineArgumentSupported(argument: RoutineV2Argument) {
+  public async isRoutineArgumentSupported(
+    argument: CreateRoutineArgumentsUnion,
+  ) {
     try {
       const supportStatusInfo =
         await this.RoutineV2Service.isRoutineArgumentSupported(argument);
