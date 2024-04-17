@@ -14,11 +14,7 @@ import {
   refreshIntervals,
 } from 'app/core/config/data-refresh-intervals';
 import {TelemetryService} from 'app/core/services/telemetry.service';
-import {
-  ResponseErrorInfoMessage,
-  TelemetryInfoType,
-  TelemetryInfoUnion,
-} from 'common/message';
+import {TelemetryInfoType, TelemetryInfoUnion} from 'common/message';
 
 @Component({
   selector: 'app-telemetry-card',
@@ -29,26 +25,23 @@ export class TelemetryCardComponent implements OnInit, OnDestroy {
   @Input({required: true}) type!: TelemetryInfoType;
 
   // The error message, undefined if no error occurs.
-  public error?: ResponseErrorInfoMessage;
+  public error?: string;
   // The telemetry info received by calling telemetry service.
   public info?: TelemetryInfoUnion;
 
   // The interval id used for polling changes from healthd API.
   private intervalId!: number;
 
-  private updateData(type: TelemetryInfoType) {
-    const promise = <Promise<TelemetryInfoUnion>>(
-      this.telemetryService.fetchTelemetryData(type)
-    );
-    promise
-      .then((value: TelemetryInfoUnion) => {
-        this.error = undefined;
-        this.info = value;
-      })
-      .catch((e) => {
-        this.error = e.message;
-        this.info = undefined;
-      });
+  private async updateData(type: TelemetryInfoType) {
+    try {
+      const response: TelemetryInfoUnion =
+        await this.telemetryService.fetchTelemetryData(type);
+      this.info = response;
+      this.error = undefined;
+    } catch (err) {
+      this.error = (err as Error).message;
+      this.info = undefined;
+    }
   }
 
   public constructor(private telemetryService: TelemetryService) {}

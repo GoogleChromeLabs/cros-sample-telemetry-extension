@@ -77,36 +77,33 @@ export class EventsCardComponent implements OnInit {
   }
 
   startCapturingEvents = async () => {
-    if (this.state === EventsCardState.LISTENING) {
-      this.loggingService.error('Event is already being captured');
-      return;
+    try {
+      if (this.state === EventsCardState.LISTENING) {
+        this.loggingService.error('Event has already stopped captured');
+        return;
+      }
+      this.state = EventsCardState.LISTENING;
+      this.state = EventsCardState.LISTENING;
+      this.eventList = [];
+      this.error = undefined;
+      this.eventsService.startCapturingEvents(this.category);
+    } catch (err) {
+      this.loggingService.error('Failed to stop capturing event: ', err);
+      this.error = (err as Error).message;
     }
-
-    this.state = EventsCardState.LISTENING;
-    this.eventList = [];
-    this.error = undefined;
-
-    this.eventsService
-      .startCapturingEvents(this.category)
-      .then()
-      .catch((err) => {
-        this.error = err.message;
-      });
   };
 
   stopCapturingEvents = async () => {
-    if (this.state === EventsCardState.NOT_LISTENING) {
-      this.loggingService.error('Event has already stopped captured');
-      return;
+    try {
+      if (this.state === EventsCardState.NOT_LISTENING) {
+        this.loggingService.error('Event has already stopped captured');
+        return;
+      }
+      this.state = EventsCardState.NOT_LISTENING;
+      this.eventsService.stopCapturingEvents(this.category);
+    } catch (err) {
+      this.loggingService.error('Failed to stop capturing event: ', err);
+      this.error = (err as Error).message;
     }
-
-    this.state = EventsCardState.NOT_LISTENING;
-
-    this.eventsService
-      .stopCapturingEvents(this.category)
-      .then()
-      .catch((err) => {
-        this.error = err.message;
-      });
   };
 }
