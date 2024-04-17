@@ -171,9 +171,8 @@ export class RoutineV2TestComponent implements BaseTestComponent {
         this.hasPassed = routineFinishedInfo.hasPassed
           ? routineFinishedInfo.hasPassed
           : false;
-        delete routineFinishedInfo.uuid;
-        delete routineFinishedInfo.hasPassed;
         this.output = routineFinishedInfo.detail;
+        this.uuid = undefined;
         this.onTestComplete();
         break;
       }
