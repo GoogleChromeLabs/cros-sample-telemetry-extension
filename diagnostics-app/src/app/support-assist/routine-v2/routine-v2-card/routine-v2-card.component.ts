@@ -86,25 +86,35 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     private loggingService: LoggingService,
   ) {}
 
-  ngOnInit(): void {
-    this.routineV2Service
-      .getSubject(this.routineArgument)
-      .then((res) => {
-        if (res.success && res.subject) {
-          this.subscriptions.push(
-            res.subject.subscribe({
-              next: (event: RoutineV2Event) => {
-                this.handleEventResponse(event);
-              },
-            }),
-          );
-        } else {
-          this.error = res.error;
-        }
-      })
-      .catch((err) => {
-        this.error = err.message;
-      });
+  async ngOnInit(): Promise<void> {
+    try {
+      const res = await this.routineV2Service.getSubject(this.routineArgument);
+      if (!res.success) {
+        this.loggingService.error(
+          'Failed to get routine v2 subject: ',
+          res.error,
+        );
+        this.error = res.error;
+        return;
+      }
+
+      if (!res.subject) {
+        this.loggingService.error('Unexpected routine v2 subject: ', res);
+        this.error = 'Unexpected routine v2 subject';
+        return;
+      }
+
+      this.subscriptions.push(
+        res.subject.subscribe({
+          next: (event: RoutineV2Event) => {
+            this.handleEventResponse(event);
+          },
+        }),
+      );
+    } catch (err) {
+      this.loggingService.error('Failed to get routine v2 subject: ', err);
+      this.error = (err as Error).message;
+    }
   }
 
   ngOnDestroy(): void {

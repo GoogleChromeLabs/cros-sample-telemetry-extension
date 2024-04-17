@@ -43,26 +43,33 @@ export class EventsCardComponent implements OnInit {
     private loggingService: LoggingService,
   ) {}
 
-  ngOnInit(): void {
-    this.eventsService
-      .getSubject(this.category)
-      .then((res) => {
-        if (res.success && res.subject) {
-          this.subscriptions.push(
-            res.subject.subscribe({
-              next: (event) => {
-                this.error = undefined;
-                this.eventList.push(event);
-              },
-            }),
-          );
-        } else {
-          this.error = res.error;
-        }
-      })
-      .catch((err) => {
-        this.error = err.message;
-      });
+  async ngOnInit(): Promise<void> {
+    try {
+      const res = await this.eventsService.getSubject(this.category);
+      if (!res.success) {
+        this.loggingService.error('Failed to get event subject: ', res.error);
+        this.error = res.error;
+        return;
+      }
+
+      if (!res.subject) {
+        this.loggingService.error('Unexpected event subject: ', res);
+        this.error = 'Unexpected event subject';
+        return;
+      }
+
+      this.subscriptions.push(
+        res.subject.subscribe({
+          next: (event) => {
+            this.error = undefined;
+            this.eventList.push(event);
+          },
+        }),
+      );
+    } catch (err) {
+      this.loggingService.error('Failed to get event subject: ', err);
+      this.error = (err as Error).message;
+    }
   }
 
   ngOnDestroy() {

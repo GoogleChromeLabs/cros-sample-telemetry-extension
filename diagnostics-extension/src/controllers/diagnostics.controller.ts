@@ -62,13 +62,13 @@ async function handleStartRoutine(
       response.status === RoutineStatus.passed
     ) {
       return handleRoutineOperation(response.id, DiagnosticsAction.STATUS, res);
-    } else {
-      return res(
-        generateErrorResponse(
-          ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_STATUS,
-        ),
-      );
     }
+
+    return res(
+      generateErrorResponse(
+        ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_ROUTINE_STATUS,
+      ),
+    );
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }

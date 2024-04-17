@@ -29,18 +29,12 @@ export class DiagnosticsDashboardComponent implements OnInit {
   // The error message, undefined if no error occurs.
   public error?: string;
   // Array of available routines returned by healthd API.
-  private availableRoutines?: RoutineType[];
+  private availableRoutines: RoutineType[] = [];
 
   get visibleRoutines() {
-    let routines;
-    if (!this.availableRoutines) {
-      this.getAvailableRoutines();
-    } else {
-      routines = this.allVisibleRoutines.filter((routine) =>
-        this.availableRoutines!.includes(routine),
-      );
-    }
-    return routines;
+    return this.allVisibleRoutines.filter((routine) =>
+      this.availableRoutines!.includes(routine),
+    );
   }
 
   public async getAvailableRoutines() {
@@ -49,7 +43,6 @@ export class DiagnosticsDashboardComponent implements OnInit {
       this.availableRoutines = (
         response as GetAvailableRoutinesResponse
       ).routines;
-      this.error = undefined;
     } catch (err) {
       this.error = String(err);
     }

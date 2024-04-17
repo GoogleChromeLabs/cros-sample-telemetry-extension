@@ -63,23 +63,29 @@ export class EventsService {
 
   private sendRequest(request: Request): Promise<EventsResponse> {
     return new Promise((resolve, reject) => {
-      try {
-        window.chrome.runtime.sendMessage(
-          this.extensionId,
-          request,
-          (response: Response) => {
-            if (!response.success) {
-              return reject(response.error);
-            } else if (!response.events) {
-              throw 'Invalid response';
-            } else {
-              return resolve(response.events);
-            }
-          },
-        );
-      } catch (err) {
-        return reject(err);
-      }
+      window.chrome.runtime.sendMessage(
+        this.extensionId,
+        request,
+        (response: Response) => {
+          if (!response.success) {
+            this.loggingService.error(
+              'Failed to send events request: ',
+              response.error,
+            );
+            return reject(response.error);
+          }
+
+          if (!response.events) {
+            this.loggingService.error(
+              'Response does not contain events field: ',
+              response,
+            );
+            return reject('Response does not contain events field');
+          }
+
+          return resolve(response.events);
+        },
+      );
     });
   }
 

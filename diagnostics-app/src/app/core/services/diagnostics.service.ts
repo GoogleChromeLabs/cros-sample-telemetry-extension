@@ -19,6 +19,7 @@ import {
 } from 'common/message';
 import {RoutineType} from 'common/telemetry-extension-types/legacy-diagnostics';
 import {environment} from 'environments/environment';
+import {LoggingService} from './logging.service';
 
 export interface DiagnosticsInterface {
   startRoutine(
@@ -37,29 +38,39 @@ export interface DiagnosticsInterface {
 export class DiagnosticsService implements DiagnosticsInterface {
   private extensionId!: string;
 
+  public constructor(private loggingService: LoggingService) {
+    this.extensionId = environment.extensionId;
+  }
+
   private constructDiagnosticsRequest(payload: DiagnosticsRequest): Request {
     return {type: RequestType.DIAGNOSTICS, diagnostics: payload};
   }
 
   private sendRequest(request: Request): Promise<DiagnosticsResponse> {
     return new Promise((resolve, reject) => {
-      try {
-        window.chrome.runtime.sendMessage(
-          this.extensionId,
-          request,
-          (response: Response) => {
-            if (!response.success) {
-              return reject(response.error);
-            } else if (!response.diagnostics) {
-              throw 'Invalid response';
-            } else {
-              return resolve(response.diagnostics);
-            }
-          },
-        );
-      } catch (err) {
-        return reject(err);
-      }
+      window.chrome.runtime.sendMessage(
+        this.extensionId,
+        request,
+        (response: Response) => {
+          if (!response.success) {
+            this.loggingService.error(
+              'Failed to send diagnostics request: ',
+              response.error,
+            );
+            return reject(response.error);
+          }
+
+          if (!response.diagnostics) {
+            this.loggingService.error(
+              'Response does not contain diagnostics field: ',
+              response,
+            );
+            return reject('Response does not contain diagnostics field');
+          }
+
+          return resolve(response.diagnostics);
+        },
+      );
     });
   }
 
@@ -73,10 +84,6 @@ export class DiagnosticsService implements DiagnosticsInterface {
     };
     const request = this.constructDiagnosticsRequest(payload);
     return this.sendRequest(request);
-  }
-
-  public constructor() {
-    this.extensionId = environment.extensionId;
   }
 
   public startRoutine(
