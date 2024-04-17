@@ -22,6 +22,7 @@ import {
   RoutineWaitingInfo,
 } from 'common/telemetry-extension-types/routines';
 import {validateUnion} from 'common/util';
+import {Subscription} from 'rxjs';
 
 enum RoutineV2State {
   // Either finished or haven't been ran yet.
@@ -53,9 +54,11 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
   public percentage = 0;
   // The state of the underlying routine.
   public routineState: RoutineV2State = RoutineV2State.FINISHED;
-
   // The routine id associated with the card, possibly null if no routine is running.
   private uuid?: string;
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   // Used in HTML template.
   public originalOrder = originalOrder;
@@ -88,11 +91,13 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
       .getSubject(this.routineArgument)
       .then((res) => {
         if (res.success && res.subject) {
-          res.subject.subscribe({
-            next: (event: RoutineV2Event) => {
-              this.handleEventResponse(event);
-            },
-          });
+          this.subscriptions.push(
+            res.subject.subscribe({
+              next: (event: RoutineV2Event) => {
+                this.handleEventResponse(event);
+              },
+            }),
+          );
         } else {
           this.error = res.error;
         }
@@ -106,6 +111,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
     if (this.uuid) {
       this.routineV2Service.CancelRoutine(this.uuid);
     }
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   // Checks whether the UUID received is the same as the UUID of the running

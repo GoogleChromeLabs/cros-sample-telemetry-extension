@@ -4,6 +4,7 @@ import {
   TestResult,
 } from 'app/core/services/test-orchestrator.service';
 import {TestConfig} from 'common/config/rma';
+import {Subscription} from 'rxjs';
 import {BaseTestComponent} from '../base-test/base-test.component';
 
 class TestStatistics {
@@ -23,6 +24,9 @@ export class AuditPageComponent extends BaseTestComponent {
   private testList: TestConfig[] = [];
   private testResults: TestResult[] = [];
   testStatistics = new TestStatistics();
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   UpdateTestStatistics() {
     this.testStatistics = new TestStatistics();
@@ -53,16 +57,24 @@ export class AuditPageComponent extends BaseTestComponent {
   }
 
   ngOnInit() {
-    this.testOrchestrator.getTestList$().subscribe((testList: TestConfig[]) => {
-      this.testList = testList;
-      this.UpdateTestStatistics();
-    });
-    this.testOrchestrator
-      .getTestResults$()
-      .subscribe((testResults: TestResult[]) => {
-        this.testResults = testResults;
-        this.UpdateTestStatistics();
-      });
+    this.subscriptions.push(
+      this.testOrchestrator
+        .getTestList$()
+        .subscribe((testList: TestConfig[]) => {
+          this.testList = testList;
+          this.UpdateTestStatistics();
+        }),
+      this.testOrchestrator
+        .getTestResults$()
+        .subscribe((testResults: TestResult[]) => {
+          this.testResults = testResults;
+          this.UpdateTestStatistics();
+        }),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   // For compatibility with the base test component interface.

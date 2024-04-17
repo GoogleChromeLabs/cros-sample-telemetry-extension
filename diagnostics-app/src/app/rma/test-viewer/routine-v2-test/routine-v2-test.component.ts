@@ -19,6 +19,7 @@ import {
   RoutineRunningInfo,
   RoutineWaitingInfo,
 } from 'common/telemetry-extension-types/routines';
+import {Subscription} from 'rxjs';
 import {BaseTestComponent} from '../base-test/base-test.component';
 
 enum RoutineV2State {
@@ -52,10 +53,12 @@ export class RoutineV2TestComponent implements BaseTestComponent {
   public percentage = 0;
   // The state of the underlying routine.
   public routineState: RoutineV2State = RoutineV2State.FINISHED;
-
   // The routine id associated with the card, possibly null if no routine is
   // running.
   public uuid?: string;
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private testOrchestrator: TestOrchestratorService,
@@ -68,6 +71,7 @@ export class RoutineV2TestComponent implements BaseTestComponent {
       this.cancelRoutine();
     }
     this.saveResultToCache();
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   async ngOnInit() {
@@ -83,11 +87,13 @@ export class RoutineV2TestComponent implements BaseTestComponent {
         await this.routineV2Service.getSubject(this.argument);
 
       if (getSubjectResponse.success && getSubjectResponse.subject) {
-        getSubjectResponse.subject.subscribe({
-          next: (event: RoutineV2Event) => {
-            this.handleEventResponse(event);
-          },
-        });
+        this.subscriptions.push(
+          getSubjectResponse.subject.subscribe({
+            next: (event: RoutineV2Event) => {
+              this.handleEventResponse(event);
+            },
+          }),
+        );
       } else {
         this.loggingService.error(
           'Failed to get routine V2 subject: ',

@@ -11,6 +11,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {EventsService} from 'app/core/services/events.service';
 import {LoggingService} from 'app/core/services/logging.service';
 import {EventCategory} from 'common/telemetry-extension-types/events';
+import {Subscription} from 'rxjs';
 
 enum EventsCardState {
   LISTENING = 'listening',
@@ -33,6 +34,9 @@ export class EventsCardComponent implements OnInit {
   // The error message, undefined if no error occurs.
   public error?: string;
   public state? = EventsCardState.NOT_LISTENING;
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   public constructor(
     private eventsService: EventsService,
@@ -44,12 +48,14 @@ export class EventsCardComponent implements OnInit {
       .getSubject(this.category)
       .then((res) => {
         if (res.success && res.subject) {
-          res.subject.subscribe({
-            next: (event) => {
-              this.error = undefined;
-              this.eventList.push(event);
-            },
-          });
+          this.subscriptions.push(
+            res.subject.subscribe({
+              next: (event) => {
+                this.error = undefined;
+                this.eventList.push(event);
+              },
+            }),
+          );
         } else {
           this.error = res.error;
         }
@@ -57,6 +63,10 @@ export class EventsCardComponent implements OnInit {
       .catch((err) => {
         this.error = err.message;
       });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   startCapturingEvents = async () => {
