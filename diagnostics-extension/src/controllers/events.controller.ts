@@ -56,16 +56,14 @@ async function stopCapturingEvents(
 }
 
 export async function registerEventHandlers() {
-  eventsService
-    .registerEventHandlers()
-    .then((response) => {
-      if (!response.success) {
-        console.error(response.error?.message);
-      }
-    })
-    .catch((err) => {
-      console.error(err.message);
-    });
+  try {
+    const response = await eventsService.registerEventHandlers();
+    if (!response.success) {
+      console.error(response.error?.message);
+    }
+  } catch (err) {
+    console.error((err as Error).message);
+  }
 }
 
 export async function handleEvents(

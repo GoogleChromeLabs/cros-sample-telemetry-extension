@@ -33,7 +33,7 @@ export class TelemetryService {
 
   public fetchTelemetryData(
     infoType: TelemetryInfoType,
-  ): Promise<TelemetryInfoUnion> | undefined {
+  ): Promise<TelemetryInfoUnion> {
     return new Promise((resolve, reject) => {
       const request = this.constructTelemetryRequest(infoType);
       window.chrome.runtime.sendMessage(
