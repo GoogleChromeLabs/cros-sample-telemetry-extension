@@ -172,8 +172,7 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         }
         this.percentage = 100;
         this.hasPassed = routineFinishedInfo.hasPassed;
-        delete routineFinishedInfo.uuid;
-        delete routineFinishedInfo.hasPassed;
+        this.uuid = undefined;
         this.output = routineFinishedInfo.detail;
         break;
       }
