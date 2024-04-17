@@ -81,25 +81,33 @@ export class RoutineV2TestComponent implements BaseTestComponent {
       this.output = 'Routine unsupported';
       return;
     }
-
     try {
       const getSubjectResponse: GetSubjectResponse =
         await this.routineV2Service.getSubject(this.argument);
 
-      if (getSubjectResponse.success && getSubjectResponse.subject) {
-        this.subscriptions.push(
-          getSubjectResponse.subject.subscribe({
-            next: (event: RoutineV2Event) => {
-              this.handleEventResponse(event);
-            },
-          }),
-        );
-      } else {
+      if (!getSubjectResponse.success) {
         this.loggingService.error(
           'Failed to get routine V2 subject: ',
           getSubjectResponse.error,
         );
+        return;
       }
+
+      if (!getSubjectResponse.subject) {
+        this.loggingService.error(
+          'Invalid routine V2 subject: ',
+          getSubjectResponse,
+        );
+        return;
+      }
+
+      this.subscriptions.push(
+        getSubjectResponse.subject.subscribe({
+          next: (event: RoutineV2Event) => {
+            this.handleEventResponse(event);
+          },
+        }),
+      );
 
       // If test-orchestrator is doing a full run, start the routine directly.
       if (this.testOrchestrator.getIsRunningValue()) {

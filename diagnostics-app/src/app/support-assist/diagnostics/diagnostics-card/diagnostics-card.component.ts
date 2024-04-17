@@ -114,8 +114,12 @@ export class DiagnosticsCardComponent implements OnInit, OnDestroy {
 
     if (this.routineInfo.status === RoutineStatus.waiting_user_action) {
       this.state = DiagnosticsCardState.WAITING_FOR_USER_ACTION;
-    } else if (this.terminalStates.has(this.routineInfo.status)) {
+      return;
+    }
+
+    if (this.terminalStates.has(this.routineInfo.status)) {
       this.stopRoutine();
+      return;
     }
   }
 

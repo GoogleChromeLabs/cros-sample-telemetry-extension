@@ -61,7 +61,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else return (chrome as any).os.diagnostics.runAcPowerRoutine(params);
+        return (chrome as any).os.diagnostics.runAcPowerRoutine(params);
       case RoutineType.audio_driver:
         return (chrome as any).os.diagnostics.runAudioDriverRoutine();
       case RoutineType.battery_capacity:
@@ -71,17 +71,15 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runBatteryChargeRoutine(params);
+        return (chrome as any).os.diagnostics.runBatteryChargeRoutine(params);
       case RoutineType.battery_discharge:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runBatteryDischargeRoutine(
-            params,
-          );
+        return (chrome as any).os.diagnostics.runBatteryDischargeRoutine(
+          params,
+        );
       case RoutineType.battery_health:
         return (chrome as any).os.diagnostics.runBatteryHealthRoutine();
       case RoutineType.bluetooth_discovery:
@@ -91,10 +89,9 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runBluetoothPairingRoutine(
-            params,
-          );
+        return (chrome as any).os.diagnostics.runBluetoothPairingRoutine(
+          params,
+        );
       case RoutineType.bluetooth_power:
         return (chrome as any).os.diagnostics.runBluetoothPowerRoutine();
       case RoutineType.bluetooth_scanning:
@@ -102,46 +99,41 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runBluetoothScanningRoutine(
-            params,
-          );
+        return (chrome as any).os.diagnostics.runBluetoothScanningRoutine(
+          params,
+        );
       case RoutineType.cpu_cache:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else return (chrome as any).os.diagnostics.runCpuCacheRoutine(params);
+        return (chrome as any).os.diagnostics.runCpuCacheRoutine(params);
       case RoutineType.cpu_floating_point_accuracy:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (
-            chrome as any
-          ).os.diagnostics.runCpuFloatingPointAccuracyRoutine(params);
+        return (
+          chrome as any
+        ).os.diagnostics.runCpuFloatingPointAccuracyRoutine(params);
       case RoutineType.cpu_prime_search:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runCpuPrimeSearchRoutine(
-            params,
-          );
+        return (chrome as any).os.diagnostics.runCpuPrimeSearchRoutine(params);
       case RoutineType.cpu_stress:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else return (chrome as any).os.diagnostics.runCpuStressRoutine(params);
+        return (chrome as any).os.diagnostics.runCpuStressRoutine(params);
       case RoutineType.disk_read:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else return (chrome as any).os.diagnostics.runDiskReadRoutine(params);
+        return (chrome as any).os.diagnostics.runDiskReadRoutine(params);
       case RoutineType.dns_resolution:
         return (chrome as any).os.diagnostics.runDnsResolutionRoutine();
       case RoutineType.dns_resolver_present:
@@ -161,22 +153,19 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runNvmeSelfTestRoutine(params);
+        return (chrome as any).os.diagnostics.runNvmeSelfTestRoutine(params);
       case RoutineType.nvme_wear_level:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runNvmeWearLevelRoutine(params);
+        return (chrome as any).os.diagnostics.runNvmeWearLevelRoutine(params);
       case RoutineType.power_button:
         if (!params)
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runPowerButtonRoutine(params);
+        return (chrome as any).os.diagnostics.runPowerButtonRoutine(params);
       case RoutineType.sensitive_sensor:
         return (chrome as any).os.diagnostics.runSensitiveSensorRoutine();
       case RoutineType.signal_strength:
@@ -186,8 +175,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
           return Promise.reject(
             ResponseErrorInfoMessage.INVALID_DIAGNOSTICS_PARAMS,
           );
-        else
-          return (chrome as any).os.diagnostics.runSmartctlCheckRoutine(params);
+        return (chrome as any).os.diagnostics.runSmartctlCheckRoutine(params);
       case RoutineType.ufs_lifetime:
         return (chrome as any).os.diagnostics.runUfsLifetimeRoutine();
       default:

@@ -131,9 +131,13 @@ export class RoutineV1TestComponent implements BaseTestComponent {
 
     if (this.routineInfo.status === RoutineStatus.waiting_user_action) {
       this.state = DiagnosticsCardState.WAITING_FOR_USER_ACTION;
-    } else if (this.terminalStates.has(this.routineInfo.status)) {
+      return;
+    }
+
+    if (this.terminalStates.has(this.routineInfo.status)) {
       this.saveResultToCache();
       this.stopRoutine();
+      return;
     }
   }
 
