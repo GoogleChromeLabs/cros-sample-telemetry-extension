@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {LoggingService} from 'app/core/services/logging.service';
 import {TestOrchestratorService} from 'app/core/services/test-orchestrator.service';
 import {TestConfig} from 'common/config/rma';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-rma-sidebar',
@@ -14,6 +15,9 @@ export class RmaSidebarComponent {
   // We will only allow for modification of enable/disable, and to switch to
   // different test view when the orchestrator is not running.
   isRunning!: boolean;
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private testOrchestrator: TestOrchestratorService,
@@ -21,15 +25,23 @@ export class RmaSidebarComponent {
   ) {}
 
   ngOnInit() {
-    this.testOrchestrator.getCurrentTestIndex$().subscribe((testIndex) => {
-      this.testIndex = testIndex;
-    });
-    this.testOrchestrator.getIsRunning$().subscribe((isRunning) => {
-      this.isRunning = isRunning;
-    });
-    this.testOrchestrator.getTestList$().subscribe((testList: TestConfig[]) => {
-      this.testList = testList;
-    });
+    this.subscriptions.push(
+      this.testOrchestrator.getCurrentTestIndex$().subscribe((testIndex) => {
+        this.testIndex = testIndex;
+      }),
+      this.testOrchestrator.getIsRunning$().subscribe((isRunning) => {
+        this.isRunning = isRunning;
+      }),
+      this.testOrchestrator
+        .getTestList$()
+        .subscribe((testList: TestConfig[]) => {
+          this.testList = testList;
+        }),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   handleTestNavigation(event: MouseEvent, index: number) {

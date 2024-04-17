@@ -7,6 +7,7 @@ import {
 import {LoggingService} from 'app/core/services/logging.service';
 import {TestOrchestratorService} from 'app/core/services/test-orchestrator.service';
 import {RmaTestType, TestConfig} from 'common/config/rma';
+import {Subscription} from 'rxjs';
 import {AudioTestComponent} from './audio-test/audio-test.component';
 import {AuditPageComponent} from './audit-page/audit-page.component';
 import {BaseTestComponent} from './base-test/base-test.component';
@@ -35,6 +36,9 @@ export class TestViewerComponent {
   AUDIT_PAGE_INDEX = TestOrchestratorService.AUDIT_PAGE_INDEX;
   isRunning = false;
   currentTestIndex: number = this.AUDIT_PAGE_INDEX;
+  // Stores all the rxjs subscriptions made by the component, needs to be
+  // unsubscribed during component destruction.
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private testOrchestrator: TestOrchestratorService,
@@ -42,18 +46,18 @@ export class TestViewerComponent {
   ) {}
 
   ngOnInit() {
-    this.testOrchestrator.getTestList$().subscribe((testList) => {
-      this.testList = testList;
-    });
-
-    this.testOrchestrator.getIsRunning$().subscribe((isRunning) => {
-      this.isRunning = isRunning;
-    });
-
-    this.testOrchestrator.getCurrentTestIndex$().subscribe((index) => {
-      this.currentTestIndex = index;
-      this.loadComponent(this.currentTestIndex);
-    });
+    this.subscriptions.push(
+      this.testOrchestrator.getTestList$().subscribe((testList) => {
+        this.testList = testList;
+      }),
+      this.testOrchestrator.getIsRunning$().subscribe((isRunning) => {
+        this.isRunning = isRunning;
+      }),
+      this.testOrchestrator.getCurrentTestIndex$().subscribe((index) => {
+        this.currentTestIndex = index;
+        this.loadComponent(this.currentTestIndex);
+      }),
+    );
   }
 
   // We must wait until angular finish loading HTML views before attempting to
@@ -66,6 +70,10 @@ export class TestViewerComponent {
     setTimeout(() => {
       this.loadComponent(this.currentTestIndex);
     });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   loadComponent(index: number) {
