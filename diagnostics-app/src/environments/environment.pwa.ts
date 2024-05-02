@@ -4,6 +4,6 @@
 
 export const environment = {
   production: true,
-  extensionId: 'jmalcmbicpnakfkncbgbcmlmgpfkhdca',
+  extensionId: 'gogonhoemckpdpadfnjnpgbjpbjnodgc',
   serviceWorker: true,
 };
