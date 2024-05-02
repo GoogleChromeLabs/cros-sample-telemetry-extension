@@ -1,11 +1,9 @@
 # ChromeOS reference Diagnostics app
 
-This is the reference implementation for [ChromeOS Extension API platform](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/) which enables 3rd party to build their own app on the top of it. 
+This is the reference implementation for [ChromeOS Telemetry Extension API platform](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/).
 
-<!---
-TODO: Give rough idea about PWA + extension and IWA + extension and overview?
-TODO: Do we have public doc about how to run PWA + extension and IWA + extension? The following is focusing on building code.
--->
+
+The reference app act as a guidance on how to build and utilize the telemetry extension service. 
 
 ## Source Code Headers
 Every file containing source code must include copyright and license information. This includes any JS/CSS files that you might be serving out to browsers. (This is to help well-intentioned people avoid accidental copying that doesn't comply with the license.)
@@ -17,9 +15,15 @@ header:
 // found in the LICENSE file.
 ```
 
-# Instructions to set up project
+# Background
 
-### Prerequisite Configuration for code contribution (optional)
+The Telemetry Extension API provides a set of APIs that allows for telemetry, diagnostics and event detection. These APIs can only be utilized in production by allowlisted OEMs who have signed formal legal agreements. This project allows developers to test the API **in developer mode**.
+
+# Installation
+
+Visit the [wiki page](https://github.com/GoogleChromeLabs/cros-sample-telemetry-extension/wiki) to see various tutorials on setting up and running the project. 
+
+# Code Contribution
 
 - In the repository root, run
 1. ```git config --unset-all core.hooksPath```
@@ -32,48 +36,3 @@ header:
 
 To run the code formatter on either the Diagnostics App or the Diagnostics extension project, Run:
 ```npm run format```
-
-### Diagnostics App PWA
-
-1. ```cd diagnostics-app```
-2. ```npm ci```
-3. ```npm run build```
-
-At this point, you should be able to see a folder with all the resources in `diagnostics-app/dist/diagnostics-app` directory. You can now open a server to serve these resources to the client.
-
-To develop against a real extension, you should make sure the URL is allowlisted and the url-scheme is secure (HTTPS).
-
-See the link below for more information on how to configure the PWA.
-https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
-
-### Diagnostics App IWA
-
-1. ```cd diagnostics-app```
-2. ```npm ci```
-3. ```npm run build```
-
-At this point, you should be able to see a `sample-iwa.swbn` file. This file is directly installable as an IWA image.
-
-
-### Diagnostics Extension
-
-1. ```cd diagnostics-extension```
-2. ```npm ci```
-3. ```npm run build```
-
-At this point, all the resources needed for the extension will be in `diagnostics-extension/build`.
-
-Copy the files into your chromeOS device, and try to load an unpacked extension from the `chrome://extensions` page.
-
-See the link below for more information on how to configure the extension.
-https://chromium.googlesource.com/chromium/src/+/HEAD/docs/telemetry_extension/README.md
-
-### Common Issues
-If you are having trouble installing or accessing the correct API, below are some common issues.
-
-Check that each item is configured correctly.
-1. The extension ID is an allowlisted ID. You can view the extension ID on the `chrome://extensions` page.
-2. The PWA/IWA origin is an allowlisted origin.
-3. The PWA origin is using a secure protocol (HTTPS).
-4. The file permissions are set to be `r+x` for the `chronos` user for all the build folders and files.
-5. The `externally_connectable` attribute matches the PWA/IWA origin.
