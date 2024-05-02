@@ -1,5 +1,3 @@
-// Copyright 2023 The Chromium Authors. All rights reserved.
-
 export class PortService {
   private static instance: PortService | null = null;
 

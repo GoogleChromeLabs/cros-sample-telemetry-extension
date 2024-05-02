@@ -1,7 +1,3 @@
-// Copyright 2023 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 /**
  * @fileoverview Defines the Dashboard Component in Diagnostics.
  * This is the root layout component which holds the diagnostics dashboard.
