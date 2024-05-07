@@ -150,6 +150,9 @@ export class RoutineV2TestComponent implements BaseTestComponent {
         if (routineRunningInfo.percentage) {
           this.percentage = routineRunningInfo.percentage;
         }
+        if (routineRunningInfo.info) {
+          this.output = routineRunningInfo.info;
+        }
         break;
       }
       case RoutineV2EventCategory.WAITING: {

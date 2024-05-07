@@ -156,6 +156,9 @@ export class RoutineV2CardComponent implements OnInit, OnDestroy {
         if (routineRunningInfo.percentage) {
           this.percentage = routineRunningInfo.percentage;
         }
+        if (routineRunningInfo.info) {
+          this.output = routineRunningInfo.info;
+        }
         break;
       }
       case RoutineV2EventCategory.WAITING: {

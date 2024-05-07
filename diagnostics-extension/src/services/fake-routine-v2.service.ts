@@ -13,6 +13,7 @@ import {v4 as uuidv4} from 'uuid';
 import {
   FanRoutineArgument,
   MemoryRoutineArgument,
+  NetworkBandwidthRoutineArgument,
   VolumeButtonRoutineArgument,
 } from '../common/config/support-assist';
 import {
@@ -73,6 +74,22 @@ const fakeRoutineData = new Map<string, RoutineFinishedInfo>([
             passedItems: [MemtesterTestItemEnum.stuck_address],
             failedItems: [],
           },
+        },
+      },
+    },
+  ],
+  // Fake network bandwidth routine data.
+  [
+    JSON.stringify({
+      [RoutineV2Category.NETWORK_BANDWIDTH]: NetworkBandwidthRoutineArgument,
+    }),
+    {
+      uuid: '',
+      hasPassed: true,
+      detail: {
+        [RoutineV2Category.NETWORK_BANDWIDTH]: {
+          downloadSpeedKbps: 20000.0,
+          uploadSpeedKbps: 20000.0,
         },
       },
     },
