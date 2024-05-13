@@ -8,6 +8,7 @@ import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
 import {
   CreateFanRoutineArguments,
   CreateMemoryRoutineArguments,
+  CreateNetworkBandwidthRoutineArguments,
   CreateRoutineArgumentsUnion,
   CreateVolumeButtonRoutineArguments,
   VolumeButtonType,
@@ -87,6 +88,8 @@ export const FanRoutineArgument: CreateFanRoutineArguments = {};
 export const MemoryRoutineArgument: CreateMemoryRoutineArguments = {
   maxTestingMemKib: 10000,
 };
+export const NetworkBandwidthRoutineArgument: CreateNetworkBandwidthRoutineArguments =
+  {};
 /* eslint-disable camelcase*/
 export const VolumeButtonRoutineArgument: CreateVolumeButtonRoutineArguments = {
   buttonType: VolumeButtonType.volume_up,
@@ -97,6 +100,9 @@ export const VolumeButtonRoutineArgument: CreateVolumeButtonRoutineArguments = {
 export const VISIBLE_ROUTINE_V2_CARDS: CreateRoutineArgumentsUnion[] = [
   {[RoutineV2Category.FAN]: FanRoutineArgument},
   {[RoutineV2Category.MEMORY]: MemoryRoutineArgument},
+  {
+    [RoutineV2Category.NETWORK_BANDWIDTH]: NetworkBandwidthRoutineArgument,
+  },
   {
     [RoutineV2Category.VOLUME_BUTTON]: VolumeButtonRoutineArgument,
   },

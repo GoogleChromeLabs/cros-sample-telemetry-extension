@@ -11,9 +11,27 @@ export interface RoutineInitializedInfo {
   uuid?: string;
 }
 
+export enum NetworkBandwidthRoutineRunningInfoType {
+  download = 'download',
+  upload = 'upload',
+}
+
+export interface NetworkBandwidthRoutineRunningInfo {
+  // The type of test that routine is running.
+  type: NetworkBandwidthRoutineRunningInfoType;
+  // The current network speed in kbit/s.
+  speedKbps: number;
+}
+
+// This is a union type. Exactly one field should be set.
+export interface RoutineRunningInfoUnion {
+  networkBandwidth?: NetworkBandwidthRoutineRunningInfo;
+}
+
 export interface RoutineRunningInfo {
   uuid?: string;
   percentage?: number;
+  info?: RoutineRunningInfoUnion;
 }
 
 export enum RoutineWaitingReason {
@@ -158,6 +176,16 @@ export interface FanRoutineFinishedDetail {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CreateFanRoutineArguments {}
 
+export interface NetworkBandwidthRoutineFinishedDetail {
+  // Average download speed in kbit/s.
+  downloadSpeedKbps: number;
+  // Average upload speed in kbit/s.
+  uploadSpeedKbps: number;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface CreateNetworkBandwidthRoutineArguments {}
+
 export interface CreateRoutineResponse {
   uuid?: string;
 }
@@ -184,12 +212,14 @@ export interface CreateRoutineArgumentsUnion {
   memory?: CreateMemoryRoutineArguments;
   volumeButton?: CreateVolumeButtonRoutineArguments;
   fan?: CreateFanRoutineArguments;
+  networkBandwidth?: CreateNetworkBandwidthRoutineArguments;
 }
 
 // This is a union type. Exactly one field should be set.
 export interface RoutineFinishedDetailUnion {
   memory?: MemoryRoutineFinishedDetail;
   fan?: FanRoutineFinishedDetail;
+  networkBandwidth?: NetworkBandwidthRoutineFinishedDetail;
 }
 
 export interface RoutineFinishedInfo {

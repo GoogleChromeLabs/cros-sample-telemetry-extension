@@ -274,6 +274,7 @@ export enum RoutineV2Action {
 export enum RoutineV2Category {
   FAN = 'fan',
   MEMORY = 'memory',
+  NETWORK_BANDWIDTH = 'networkBandwidth',
   VOLUME_BUTTON = 'volumeButton',
 }
 
