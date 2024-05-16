@@ -1,3 +1,11 @@
+/**
+ * Copyright 2024 Google LLC
+ *
+ * Use of this source code is governed by a BSD-style
+ * license that can be found in the LICENSE file or at
+ * https://developers.google.com/open-source/licenses/bsd
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
