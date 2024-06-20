@@ -17,6 +17,9 @@
   </button>
   <span>{{ appName }}</span>
   <span class="nav-spacer"></span>
+  <button id="btnRequestPermission" mat-icon-button (click)="onRequestPermission()">
+    <span>Request Permission</span>
+  </button>
 
   <span class="app-label"> RMA Mode </span>
   <mat-slide-toggle

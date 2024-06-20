@@ -34,3 +34,8 @@
   font-size: 60%;
   vertical-align: -6px;
 }
+
+#btnRequestPermission {
+  width: 500px;
+  background-color: red;
+}

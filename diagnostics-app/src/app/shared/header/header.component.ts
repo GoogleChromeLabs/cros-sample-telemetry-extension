@@ -17,6 +17,8 @@ import {Router} from '@angular/router';
 import {Theme} from 'app/core/enums/global.enums';
 import {ThemeService} from 'app/core/services/theme.service';
 import {APP_NAME} from 'common/config/common';
+import {Request, RequestType} from 'common/message';
+import {environment} from 'environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -43,6 +45,25 @@ export class HeaderComponent {
 
   public onToggleDrawer() {
     this.toggleDrawer.emit();
+  }
+
+  public onRequestPermission() {
+    const message: Request = {
+      type: RequestType.TELEMETRY,
+      requestPermission: true,
+    };
+    const id = environment.extensionId;
+
+    chrome.runtime.sendMessage(id, message, (response) => {
+      if (chrome.runtime.lastError) {
+        console.error(
+          'Error sending message to extension:',
+          chrome.runtime.lastError,
+        );
+      } else {
+        console.log('Response from extension:', response);
+      }
+    });
   }
 
   public onToggleModeChange(event: MatSlideToggleChange) {

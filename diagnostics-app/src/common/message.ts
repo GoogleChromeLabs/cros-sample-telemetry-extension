@@ -159,6 +159,7 @@ export interface Request {
   diagnostics?: DiagnosticsRequest;
   events?: EventsRequest;
   routineV2?: RoutineV2Request;
+  requestPermission?: boolean;
 }
 
 export interface Error {

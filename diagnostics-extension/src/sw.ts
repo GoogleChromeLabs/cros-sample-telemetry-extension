@@ -39,6 +39,31 @@ chrome.runtime.onConnectExternal.addListener((port: chrome.runtime.Port) => {
 });
 
 chrome.runtime.onMessageExternal.addListener((req: Request, sender, res) => {
+  if (req.requestPermission) {
+    chrome.permissions.getAll((permissions: chrome.permissions.Permissions) => {
+      console.log('Permission before request:', permissions);
+      chrome.permissions.request(
+        {
+          permissions: [
+            // Define your optional permissions here.
+            'os.telemetry.serial_number',
+            'os.telemetry.network_info',
+          ],
+        },
+        (granted) => {
+          console.log('permission granted: ', granted);
+          chrome.permissions.getAll(
+            (permissions: chrome.permissions.Permissions) => {
+              console.log('Permission after request:', permissions);
+            },
+          );
+        },
+      );
+    });
+
+    return res('request permission done. Check log to see result');
+  }
+  
   switch (req.type) {
     case RequestType.TELEMETRY:
       return handleTelemetry(req, res);
