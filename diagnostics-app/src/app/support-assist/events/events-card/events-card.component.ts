@@ -87,7 +87,6 @@ export class EventsCardComponent implements OnInit {
         return;
       }
       this.state = EventsCardState.LISTENING;
-      this.state = EventsCardState.LISTENING;
       this.eventList = [];
       this.error = undefined;
       this.eventsService.startCapturingEvents(this.category);

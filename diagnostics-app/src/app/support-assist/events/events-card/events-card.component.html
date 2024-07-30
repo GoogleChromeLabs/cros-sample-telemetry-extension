@@ -38,11 +38,11 @@
         </div>
       </ng-template>
       <ng-template #showContent>
+        <div class="events-card-content-container" *ngFor="let event of eventList">
+          Get event:
+          <app-events-card-content [event]="event!"></app-events-card-content>
+        </div>
         <ng-container *ngIf="state === 'listening'">
-          <div class="events-card-content-container" *ngFor="let event of eventList">
-            Get event:
-            <app-events-card-content [event]="event!"></app-events-card-content>
-          </div>
           <div class="listening-text">listening {{ category }} event ...</div>
         </ng-container>
       </ng-template>
