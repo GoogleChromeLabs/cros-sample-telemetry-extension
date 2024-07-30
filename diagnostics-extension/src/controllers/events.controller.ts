@@ -27,8 +27,8 @@ async function isEventSupported(
   res: (data: Response) => void,
 ) {
   try {
-    const paylaod = await eventsService.isEventSupported(eventType);
-    return res(generateEventsSuccessResponse(paylaod));
+    const payload = await eventsService.isEventSupported(eventType);
+    return res(generateEventsSuccessResponse(payload));
   } catch (err) {
     return res(generateErrorResponse(String(err)));
   }
