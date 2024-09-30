@@ -1,0 +1,21 @@
+{
+  "name": "Diagnostics App IWA",
+  "id": "/",
+  "scope": "/",
+  "start_url": "/",
+  "version": "0.1.0",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "permissions_policy": {
+    "camera": ["self"],
+    "microphone": ["self"],
+    "fullscreen": ["self"]
+  }
+}
