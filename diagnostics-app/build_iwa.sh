@@ -16,7 +16,7 @@ web_bundle=$(mktemp)
 
 # Copy the files into the temporary folders
 cp -r dist/diagnostics-app/* ${iwa_src}
-cp -r iwa/public/* ${iwa_src}
+cp -r iwa/public/. ${iwa_src}
 
 # Create the bundle
 wbn --dir ${iwa_src} --output ${web_bundle} --formatVersion b2
