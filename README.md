@@ -5,6 +5,8 @@ This is the reference implementation for [ChromeOS Telemetry Extension API platf
 
 The reference app act as a guidance on how to build and utilize the telemetry extension service. 
 
+The project was started during Google Summer of Code 2021 by Aayush Joglekar ([@zerefwayne](https://github.com/zerefwayne)) and Mahmoud Gawad ([@MahmoudAGawad](https://github.com/MahmoudAGawad)) [here](https://github.com/MahmoudAGawad/cros-diag-app) as part of an initiative to develop a reference implementation for ChromeOS diagnostics and telemetry.
+
 ## Source Code Headers
 Every file containing source code must include copyright and license information. This includes any JS/CSS files that you might be serving out to browsers. (This is to help well-intentioned people avoid accidental copying that doesn't comply with the license.)
 
