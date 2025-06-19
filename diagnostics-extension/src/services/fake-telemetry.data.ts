@@ -30,6 +30,8 @@ import {
   OemData,
   OsVersionInfo,
   StatefulPartitionInfo,
+  ThermalInfo,
+  ThermalSensorSource,
   TpmInfo,
   UsbBusDevices,
   VpdInfo,
@@ -528,4 +530,17 @@ export const tpmInfo: TpmInfo = {
 };
 export async function getTpmInfo(): Promise<TpmInfo> {
   return tpmInfo;
+}
+
+export const thermalInfo: ThermalInfo = {
+  thermalSensors: [
+    {
+      name: 'thermal_name',
+      temperatureCelsius: 50,
+      source: ThermalSensorSource.ec,
+    },
+  ],
+};
+export async function getThermalInfo(): Promise<ThermalInfo> {
+  return thermalInfo;
 }

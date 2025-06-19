@@ -33,6 +33,7 @@ export const VISIBLE_TELEMETRY_CARDS: TelemetryInfoType[] = [
   TelemetryInfoType.VPD,
   TelemetryInfoType.STATEFUL_PARTITION,
   TelemetryInfoType.TPM,
+  TelemetryInfoType.THERMAL,
 ];
 
 export const VISIBLE_EVENT_CARDS: EventCategory[] = [

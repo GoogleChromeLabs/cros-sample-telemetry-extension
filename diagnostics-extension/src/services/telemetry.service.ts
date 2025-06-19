@@ -26,6 +26,7 @@ import {
   OemData,
   OsVersionInfo,
   StatefulPartitionInfo,
+  ThermalInfo,
   TpmInfo,
   UsbBusDevices,
   VpdInfo,
@@ -52,6 +53,7 @@ export abstract class TelemetryService {
   abstract getVpdInfo(): Promise<VpdInfo>;
   abstract getStatefulPartitionInfo(): Promise<StatefulPartitionInfo>;
   abstract getTpmInfo(): Promise<TpmInfo>;
+  abstract getThermalInfo(): Promise<ThermalInfo>;
 }
 
 /**
@@ -101,6 +103,9 @@ export class TelemetryServiceImpl extends TelemetryService {
   public async getTpmInfo(): Promise<TpmInfo> {
     return (chrome as any).os.telemetry.getTpmInfo();
   }
+  public async getThermalInfo(): Promise<ThermalInfo> {
+    return (chrome as any).os.telemetry.getThermalInfo();
+  }
 }
 
 /**
@@ -149,6 +154,9 @@ export class FakeTelemetryService extends TelemetryService {
   }
   public async getTpmInfo(): Promise<TpmInfo> {
     return fakeTelemetry.getTpmInfo();
+  }
+  public async getThermalInfo(): Promise<ThermalInfo> {
+    return fakeTelemetry.getThermalInfo();
   }
 }
 
