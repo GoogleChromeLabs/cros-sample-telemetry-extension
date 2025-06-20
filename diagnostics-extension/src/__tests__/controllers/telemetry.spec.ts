@@ -153,6 +153,11 @@ describe('should return correct telemetry data', () => {
       infoType: TelemetryInfoType.TPM,
       expectedResult: fakeData.tpmInfo,
     },
+    {
+      name: 'thermal',
+      infoType: TelemetryInfoType.THERMAL,
+      expectedResult: fakeData.thermalInfo,
+    },
   ];
 
   testCases.forEach((testCase) => {

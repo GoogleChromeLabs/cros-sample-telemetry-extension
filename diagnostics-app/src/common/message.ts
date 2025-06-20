@@ -64,6 +64,7 @@ import {
   OemData,
   OsVersionInfo,
   StatefulPartitionInfo,
+  ThermalInfo,
   TpmInfo,
   UsbBusDevices,
   VpdInfo,
@@ -96,6 +97,7 @@ export enum TelemetryInfoType {
   VPD = 'vpd',
   STATEFUL_PARTITION = 'stateful_partition',
   TPM = 'tpm',
+  THERMAL = 'thermal',
 }
 
 export enum ResponseErrorInfoMessage {
@@ -208,7 +210,8 @@ export type TelemetryInfoUnion =
   | UsbBusDevices
   | VpdInfo
   | StatefulPartitionInfo
-  | TpmInfo;
+  | TpmInfo
+  | ThermalInfo;
 
 export type DiagnosticsParamsUnion =
   | RunAcPowerRoutineRequest

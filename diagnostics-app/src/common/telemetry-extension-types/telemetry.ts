@@ -408,3 +408,28 @@ export interface TpmInfo {
   status: TpmStatus;
   dictionaryAttack: TpmDictionaryAttack;
 }
+
+/**
+ * Where the thermal sensor is detected from
+ */
+export enum ThermalSensorSource {
+  unknown = 'unknown',
+  ec = 'ec',
+  sysFs = 'sysFs',
+}
+
+/**
+ * An array containing all the information retrieved for thermal sensors
+ */
+export interface ThermalSensorInfo {
+  name: string;
+  temperatureCelsius: number;
+  source: ThermalSensorSource;
+}
+
+/**
+ * Response message containing thermal Info
+ */
+export interface ThermalInfo {
+  thermalSensors: ThermalSensorInfo[];
+}

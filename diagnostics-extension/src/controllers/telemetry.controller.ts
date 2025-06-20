@@ -58,6 +58,8 @@ function mapInfoTypeToMethod(
       return telemetryService.getStatefulPartitionInfo;
     case TelemetryInfoType.TPM:
       return telemetryService.getTpmInfo;
+    case TelemetryInfoType.THERMAL:
+      return telemetryService.getThermalInfo;
     default:
       return () =>
         Promise.reject(ResponseErrorInfoMessage.INVALID_TELEMETRY_INFO_TYPE);
