@@ -57,7 +57,7 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
     name: RoutineType,
     params?: DiagnosticsParamsUnion,
   ): Promise<RunRoutineResponse> {
-    params && console.log('Recieved params', params);
+    params && console.log('Received params', params);
 
     switch (name) {
       case RoutineType.ac_power:
@@ -241,7 +241,7 @@ export class FakeDiagnosticsService implements DiagnosticsService {
     name: RoutineType,
     params?: DiagnosticsParamsUnion,
   ): Promise<RunRoutineResponse> {
-    params && console.log('Recieved params', params);
+    params && console.log('Received params', params);
 
     switch (name) {
       // These routines should have a parameter
