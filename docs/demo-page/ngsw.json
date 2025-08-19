@@ -1,0 +1,83 @@
+{
+  "configVersion": 1,
+  "timestamp": 1750384541038,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/740.78cf86b65bdcd227.js",
+        "/919.38e036ae85b11440.js",
+        "/common.0d1c8fd9373c29ab.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main.f566478e64d79a71.js",
+        "/manifest.webmanifest",
+        "/polyfills.964cf8a9f11c8c5c.js",
+        "/runtime.729e998e18bb3e08.js",
+        "/styles.3bba89a79ba0d512.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/fonts/material-icon.css",
+        "/assets/fonts/material-icons-v140-latin-regular.woff2",
+        "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-300.woff2",
+        "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-500.woff2",
+        "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-regular.woff2",
+        "/assets/fonts/roboto.css"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/740.78cf86b65bdcd227.js": "00c7dec118ab044a491ea21082c14163f5e57b09",
+    "/919.38e036ae85b11440.js": "e341a4691dd6e9b25df7888c3f5da3ae9bfb04b6",
+    "/assets/fonts/material-icon.css": "9a0e4e0acf07bda423b3d7e0a8c7684817bfef66",
+    "/assets/fonts/material-icons-v140-latin-regular.woff2": "0bc0c675480d94ec7e8609dda6227f88c5d08d2c",
+    "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-300.woff2": "5f22bfd8ff7dab62ac11b76dee4ef04b419d59b5",
+    "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-500.woff2": "9430880adc2841ca12c163de1c1b3bf9f18c4375",
+    "/assets/fonts/roboto-v30-cyrillic_cyrillic-ext_greek_greek-ext_latin_latin-ext_vietnamese-regular.woff2": "8efbc8a10d568444120cc0adf001b2d74c3a2910",
+    "/assets/fonts/roboto.css": "ff40e18deae5ef2546cb4fb44455b85f1a82569a",
+    "/common.0d1c8fd9373c29ab.js": "6e8cefd6383b41f7ab5dfaf168515fb975a3871e",
+    "/favicon.ico": "929a2082d641c9231a976411647351e9fa4b4031",
+    "/index.html": "65dcd58100700a6e073c4b2ea5514bd854cf08d0",
+    "/main.f566478e64d79a71.js": "eaf9f594e1651cb6830e4c32b389328071a33982",
+    "/manifest.webmanifest": "2c2a29a12534bca19af6e792f4d4e72a57a79d64",
+    "/polyfills.964cf8a9f11c8c5c.js": "5e2a4e1dcdc5550b4f029ce9e3c4cd9597a8d1ee",
+    "/runtime.729e998e18bb3e08.js": "d57cc61214d614ac431f95096196895e2a94e8fd",
+    "/styles.3bba89a79ba0d512.css": "b5bc97122c1c824e1f4dec664bfacd0eb56cba91"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
