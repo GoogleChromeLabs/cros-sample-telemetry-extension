@@ -34,6 +34,7 @@ export enum RoutineType {
   dns_resolution = 'dns_resolution',
   dns_resolver_present = 'dns_resolver_present',
   emmc_lifetime = 'emmc_lifetime',
+  fan = 'fan',
   fingerprint_alive = 'fingerprint_alive',
   gateway_can_be_pinged = 'gateway_can_be_pinged',
   lan_connectivity = 'lan_connectivity',

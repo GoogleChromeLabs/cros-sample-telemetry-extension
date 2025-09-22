@@ -144,6 +144,8 @@ export class DiagnosticsServiceImpl extends DiagnosticsService {
         return (chrome as any).os.diagnostics.runDnsResolverPresentRoutine();
       case RoutineType.emmc_lifetime:
         return (chrome as any).os.diagnostics.runEmmcLifetimeRoutine();
+      case RoutineType.fan:
+        return (chrome as any).os.diagnostics.runFanRoutine();
       case RoutineType.fingerprint_alive:
         return (chrome as any).os.diagnostics.runFingerprintAliveRoutine();
       case RoutineType.gateway_can_be_pinged:
