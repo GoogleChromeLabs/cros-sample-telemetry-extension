@@ -54,6 +54,7 @@ export async function fakeAvailableRoutines(): Promise<GetAvailableRoutinesRespo
       RoutineType.dns_resolution,
       RoutineType.dns_resolver_present,
       RoutineType.emmc_lifetime,
+      RoutineType.fan,
       RoutineType.fingerprint_alive,
       RoutineType.gateway_can_be_pinged,
       RoutineType.lan_connectivity,
