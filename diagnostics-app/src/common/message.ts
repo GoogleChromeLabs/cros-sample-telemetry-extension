@@ -283,6 +283,9 @@ export enum RoutineV2Category {
   MEMORY = 'memory',
   NETWORK_BANDWIDTH = 'networkBandwidth',
   VOLUME_BUTTON = 'volumeButton',
+  LED_LIT_UP = 'ledLitUp',
+  CAMERA_FRAME_ANALYSIS = 'cameraFrameAnalysis',
+  KEYBOARD_BACKLIGHT = 'keyboardBacklight',
 }
 
 export type RoutineV2Response =

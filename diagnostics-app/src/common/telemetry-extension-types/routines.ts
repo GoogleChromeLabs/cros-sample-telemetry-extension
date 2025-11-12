@@ -190,6 +190,60 @@ export interface NetworkBandwidthRoutineFinishedDetail {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CreateNetworkBandwidthRoutineArguments {}
 
+export enum LedName {
+  battery = 'battery',
+  power = 'power',
+  adapter = 'adapter',
+  left = 'left',
+  right = 'right',
+}
+
+export enum LedColor {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+  yellow = 'yellow',
+  white = 'white',
+  amber = 'amber',
+}
+
+export interface CreateLedLitUpRoutineArguments {
+  name: LedName;
+  color: LedColor;
+}
+
+export enum CameraFrameAnalysisIssue {
+  no_issue = 'no_issue',
+  camera_service_not_available = 'camera_service_not_available',
+  blocked_by_privacy_shutter = 'blocked_by_privacy_shutter',
+  lens_are_dirty = 'lens_are_dirty',
+}
+
+export enum CameraSubtestResult {
+  not_run = 'not_run',
+  passed = 'passed',
+  failed = 'failed',
+}
+
+export interface CameraFrameAnalysisRoutineFinishedDetail {
+  // The issue caught by the routine. See the fields for each subtest for their
+  // details.
+  issue: CameraFrameAnalysisIssue;
+  // The result is failed if the len is blocked by the privacy shutter. To
+  // mitigate the issue, users are suggested to open the privacy shutter to
+  // unveil the len.
+  privacyShutterOpenTest: CameraSubtestResult;
+  // The result is failed if the frames are blurred. To mitigate the issue,
+  // users are suggested to clean the lens.
+  lensNotDirtyTest: CameraSubtestResult;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface CreateCameraFrameAnalysisRoutineArguments {}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface CreateKeyboardBacklightRoutineArguments {}
+
 export interface CreateRoutineResponse {
   uuid?: string;
 }
@@ -217,6 +271,9 @@ export interface CreateRoutineArgumentsUnion {
   volumeButton?: CreateVolumeButtonRoutineArguments;
   fan?: CreateFanRoutineArguments;
   networkBandwidth?: CreateNetworkBandwidthRoutineArguments;
+  ledLitUp?: CreateLedLitUpRoutineArguments;
+  cameraFrameAnalysis?: CreateCameraFrameAnalysisRoutineArguments;
+  keyboardBacklight?: CreateKeyboardBacklightRoutineArguments;
 }
 
 // This is a union type. Exactly one field should be set.
@@ -224,6 +281,7 @@ export interface RoutineFinishedDetailUnion {
   memory?: MemoryRoutineFinishedDetail;
   fan?: FanRoutineFinishedDetail;
   networkBandwidth?: NetworkBandwidthRoutineFinishedDetail;
+  cameraFrameAnalysis?: CameraFrameAnalysisRoutineFinishedDetail;
 }
 
 export interface RoutineFinishedInfo {

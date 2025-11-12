@@ -10,11 +10,16 @@ import {RoutineV2Category, TelemetryInfoType} from '../message';
 import {EventCategory} from '../telemetry-extension-types/events';
 import {RoutineType} from '../telemetry-extension-types/legacy-diagnostics';
 import {
+  CreateCameraFrameAnalysisRoutineArguments,
   CreateFanRoutineArguments,
+  CreateKeyboardBacklightRoutineArguments,
+  CreateLedLitUpRoutineArguments,
   CreateMemoryRoutineArguments,
   CreateNetworkBandwidthRoutineArguments,
   CreateRoutineArgumentsUnion,
   CreateVolumeButtonRoutineArguments,
+  LedColor,
+  LedName,
   VolumeButtonType,
 } from '../telemetry-extension-types/routines';
 
@@ -102,6 +107,14 @@ export const VolumeButtonRoutineArgument: CreateVolumeButtonRoutineArguments = {
   timeoutSeconds: 10,
 };
 /* eslint-enable camelcase*/
+export const LedLitUpRoutineArgument: CreateLedLitUpRoutineArguments = {
+  name: LedName.power,
+  color: LedColor.amber,
+};
+export const CameraFrameAnalysisRoutineArguments: CreateCameraFrameAnalysisRoutineArguments =
+  {};
+export const KeyboardBacklightRoutineArguments: CreateKeyboardBacklightRoutineArguments =
+  {};
 
 export const VISIBLE_ROUTINE_V2_CARDS: CreateRoutineArgumentsUnion[] = [
   {[RoutineV2Category.FAN]: FanRoutineArgument},
@@ -111,5 +124,15 @@ export const VISIBLE_ROUTINE_V2_CARDS: CreateRoutineArgumentsUnion[] = [
   },
   {
     [RoutineV2Category.VOLUME_BUTTON]: VolumeButtonRoutineArgument,
+  },
+  {
+    [RoutineV2Category.LED_LIT_UP]: LedLitUpRoutineArgument,
+  },
+  {
+    [RoutineV2Category.CAMERA_FRAME_ANALYSIS]:
+      CameraFrameAnalysisRoutineArguments,
+  },
+  {
+    [RoutineV2Category.KEYBOARD_BACKLIGHT]: KeyboardBacklightRoutineArguments,
   },
 ];
