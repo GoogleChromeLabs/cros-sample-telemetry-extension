@@ -15,7 +15,10 @@
 
 import {v4 as uuidv4} from 'uuid';
 import {
+  CameraFrameAnalysisRoutineArguments,
   FanRoutineArgument,
+  KeyboardBacklightRoutineArguments,
+  LedLitUpRoutineArgument,
   MemoryRoutineArgument,
   NetworkBandwidthRoutineArgument,
   VolumeButtonRoutineArgument,
@@ -27,6 +30,8 @@ import {
   RoutineV2EventUnion,
 } from '../common/message';
 import {
+  CameraFrameAnalysisIssue,
+  CameraSubtestResult,
   CancelRoutineRequest,
   CreateRoutineArgumentsUnion,
   CreateRoutineResponse,
@@ -102,6 +107,44 @@ const fakeRoutineData = new Map<string, RoutineFinishedInfo>([
   [
     JSON.stringify({
       [RoutineV2Category.VOLUME_BUTTON]: VolumeButtonRoutineArgument,
+    }),
+    {
+      uuid: '',
+      hasPassed: true,
+    },
+  ],
+  // Fake volume button routine data.
+  [
+    JSON.stringify({
+      [RoutineV2Category.LED_LIT_UP]: LedLitUpRoutineArgument,
+    }),
+    {
+      uuid: '',
+      hasPassed: true,
+    },
+  ],
+  // Fake volume button routine data.
+  [
+    JSON.stringify({
+      [RoutineV2Category.CAMERA_FRAME_ANALYSIS]:
+        CameraFrameAnalysisRoutineArguments,
+    }),
+    {
+      uuid: '',
+      hasPassed: true,
+      detail: {
+        [RoutineV2Category.CAMERA_FRAME_ANALYSIS]: {
+          issue: CameraFrameAnalysisIssue.no_issue,
+          privacyShutterOpenTest: CameraSubtestResult.passed,
+          lensNotDirtyTest: CameraSubtestResult.passed,
+        },
+      },
+    },
+  ],
+  // Fake volume button routine data.
+  [
+    JSON.stringify({
+      [RoutineV2Category.KEYBOARD_BACKLIGHT]: KeyboardBacklightRoutineArguments,
     }),
     {
       uuid: '',
