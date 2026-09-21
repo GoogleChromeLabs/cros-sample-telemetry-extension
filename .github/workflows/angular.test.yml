@@ -8,6 +8,8 @@ on:
     branches: [ main ]
     paths:
       - "diagnostics-app/**"
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -18,12 +20,12 @@ jobs:
       matrix:
         node-version: [18.14]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run script:ci
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4
